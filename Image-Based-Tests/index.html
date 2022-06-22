@@ -9,7 +9,7 @@
     <body>
         <a-scene>
             <a-camera>
-                <a-image id="im1" src="patterns/FDA-Logo.jpg" position="0 0 -1"></a-image>
+                <a-image id="im1" src="patterns/FDA-Logo-BW.jpg" position="0 0 -1"></a-image>
             </a-camera>
             
         </a-scene>
@@ -17,8 +17,6 @@
         <div id="info">
             <!-- Text input to determine size of each step -->
             <p>Select desired test pattern: <select name="patterns" id="patterns" onchange="drawPattern()">
-                <option value="calibration">Calibration</option>
-                <option value="contrast">Contrast</option>
               </select></p>
               <script>
                 var fileNames = new Array();
@@ -28,7 +26,7 @@
                         $(data).find("a:contains(.jpg)").each(function(){
                             // will loop through 
                             let images = $(this).attr("href");
-                            let regex = new RegExp("/TexturedOptions/patterns/(.+).jpg");
+                            let regex = new RegExp("/Image-Based-Tests/patterns/(.+).jpg");
                             let match = regex.exec(images)
                             var x = document.getElementById("patterns");
                             var option = document.createElement("option");
