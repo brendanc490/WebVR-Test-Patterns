@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <link href="../style.css" rel="stylesheet">
+    <script src="../lib/jquery-3.6.0.min.js" type="text/javascript"> </script>
+    <script src="../lib/aframe.min.js" type="text/javascript"> </script>
+    <script>
+        /* Code to register the orthographic camera as parent camera and remove original camera */
+        AFRAME.registerComponent('ortho', {
+            init: function () {
+                /* Save original camera */
+                var sceneEl = this.el.sceneEl;
+                this.originalCamera = sceneEl.camera;
+                this.cameraParent = sceneEl.camera.parent;
+                /* Create orthographic camera using three.js */
+                this.orthoCamera = new THREE.OrthographicCamera(-1, 1, 1, -1);
+                /* Makes this the parent camera and add it to scene */
+                this.cameraParent.add(this.orthoCamera);
+                sceneEl.camera = this.orthoCamera;
+            },
+            /* Removes orthographic camera and replaces it with original camera upon termination */
+            remove: function () {
+            this.cameraParent.remove(this.orthoCamera);
+            sceneEl.camera = this.originalCamera;
+            }
+        });
+        /* Code to register thumbstick behavior for left hand */
+        AFRAME.registerComponent('thumbstick-logging-right',{
+            init: function () {
+                this.el.addEventListener('thumbstickmoved', this.logThumbstickRight);
+            },
+            logThumbstickRight: function (evt) {
+                /* calls movement function with key that corresponds */
+                /*if (evt.detail.y > 0.95) { movement(new KeyboardEvent("keydown", {key : "w"})); }
+                if (evt.detail.y < -0.95) { movement(new KeyboardEvent("keydown", {key : "s"})); }
+                if (evt.detail.y > 0.95) { movement(new KeyboardEvent("keydown", {key : "ArrowUp"})); }
+                if (evt.detail.y < -0.95) { movement(new KeyboardEvent("keydown", {key : "ArrowDown"})); }
+                if (evt.detail.x < -0.95) { movement(new KeyboardEvent("keydown", {key : "a"})); }
+                if (evt.detail.x > 0.95) { movement(new KeyboardEvent("keydown", {key : "d"})); }*/
+            }
+        });
+
+        /* code to register thumbstick behavior for right hand */
+        AFRAME.registerComponent('thumbstick-logging-left',{
+            init: function () {
+                this.el.addEventListener('thumbstickmoved', this.logThumbstickLeft);
+            },
+            logThumbstickLeft: function (evt) {
+                /* calls movement function with key that corresponds */
+                if (evt.detail.y > 0.95) { movement(new KeyboardEvent("keydown", {key : "ArrowUp"})); }
+                if (evt.detail.y < -0.95) { movement(new KeyboardEvent("keydown", {key : "ArrowDown"})); }
+            }
+        }); 
+
+        AFRAME.registerComponent('button-listener', {
+            init: function () {
+                var el = this.el;
+
+                el.addEventListener('abuttondown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "a"}));
+                });
+
+                el.addEventListener('bbuttondown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "d"}));
+                });
+
+                el.addEventListener('xbuttondown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "ArrowDown"}));
+                });
+
+                el.addEventListener('ybuttondown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "ArrowUp"}));
+                });
+
+                el.addEventListener('gripdown', function (evt) {
+                    document.querySelector('a-scene').exitVR();
+                    location.reload();
+                });
+            }
+        });
+    </script>
+  </head>
+  <body>
+    <!-- Includes orthographic camera in scene -->
+    
+    <a-scene ortho>
+        <!-- Oculus controls -->
+        <a-entity oculus-touch-controls="hand: left" thumbstick-logging-left button-listener></a-entity>
+        <a-entity oculus-touch-controls="hand: right" thumbstick-logging-right button-listener></a-entity>
+        <a-camera wasd-controls-enabled="false">-->
+            <!-- Sphere entity to signify the position of the camera -->
+            <a-sphere position="0 0 0" radius=".2"></a-sphere>
+            <!-- Creates 3 bars to be used in test, positioning done in script -->
+            <a-entity id="redBar" geometry="primitive: box;  width: .3, height: 1" material="color: #FF0000"></a-entity>
+            <a-entity id="greenBar" geometry="primitive: box;  width: .3, height: 1" material="color: #00FF00"></a-entity>
+            <a-entity id="blueBar" geometry="primitive: box;  width: .3, height: 1" material="color: #0000FF"></a-entity>
+        </a-camera>
+        <!-- Creates black background -->
+        <a-sky color="black"></a-sky>
+
+    </a-scene>
+
+    <!-- Fixed settings area -->
+    <div id="info">
+        <!-- Text input to determine size of each step -->
+        <p>Size of step (degrees): <input type="text" class="input" id="step-size" value="0.1"></p>
+        <!-- Checkbox input to determine desired orientation of bars -->
+        <p>Vertical              <input type="checkbox" id="orientation"
+            class="checkbox" onclick="drawNewBars()"/>
+            <label for="orientation" class="toggle"> </label>                  Horizontal</p>
+        <!-- Slider/text input to determine the height of bars -->
+        <p>Height of bars (m): <div class="slidecontainer">
+        <input type="range" min="0" max=".5" value=".20" class="slider" id="heightRange"step=".001">
+        <p>Height: <input type="text" class="input" id="height" value=".20"></p>
+        </div></p>
+        <!-- Slider/text input to determine the width of bars -->
+        <p>Width of bars (m): <div class="slidecontainer">
+        <input type="range" min="0" max=".5" value=".02" class="slider2" id="widthRange" step=".001">
+        <p>Width: <input type="text" class="input" id="width" value=".02"></p>
+        </div></p>
+    </div>
+    <!-- Script that handles movement, positioning, and drawing of bars -->
+    <script src="movement.js"></script>
+  </body>
+</html>
