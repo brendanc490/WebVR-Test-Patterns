@@ -28,7 +28,7 @@
                                 const fov = cam.sceneEl.camera.fov * (Math.PI / 180);
                                 newDistance = Math.abs((height / 2) / Math.tan(fov / 2));
                             }
-                            cam.sceneEl.camera.zoom = distance / newDistance;
+                            cam.sceneEl.camera.zoom = (distance / newDistance)-0.18;
                             console.log("done");
                         }
                 </script>
