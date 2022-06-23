@@ -27,6 +27,7 @@
                         $(data).find("a:contains(.jpg)").each(function(){
                             // will loop through 
                             let images = $(this).attr("href");
+                            console.log(images);
                             let regex = new RegExp("/Image-Based-Tests/patterns/(.+).jpg");
                             let match = regex.exec(images)
                             var x = document.getElementById("patterns");
