@@ -3,6 +3,7 @@
         <link href="../style.css" rel="stylesheet">
         <script src="../lib/jquery-3.6.0.min.js" type="text/javascript"> </script>
         <script src="../lib/aframe.min.js" type="text/javascript"></script>
+        <script src="..\lib\FileSaver.js-2.0.4\src\FileSaver.js" type="text/javascript"></script>
         <script>
             AFRAME.registerComponent('thumbstick-logging-right',{
             init: function () {
@@ -21,46 +22,68 @@
 
                 el.addEventListener('gripdown', function (evt) {
                     document.querySelector('a-scene').exitVR();
-                    location.reload();
                 });
             }
         });
+
+        AFRAME.registerComponent("click-checker", {
+            init: function() {
+                this.el.addEventListener("click", (e)=>{
+                    selectNew(this.el);
+                    });
+                }
+            });
         </script>
     </head>
 
     <body>
-        <a-scene>
+        <a-scene cursor="rayOrigin: mouse">
             <a-entity oculus-touch-controls="hand: left"></a-entity>
             <a-entity oculus-touch-controls="hand: right" thumbstick-logging-right button-listener></a-entity>
+            <!--<a-entity vive-controls="hand: left"></a-entity>
+            <a-entity vive-controls="hand: right"></a-entity>-->
             <a-camera>
                 <a-entity id="entityCanvas" visible="true"></a-entity>
             </a-camera>
         </a-scene>
 
         <div id="info">
-            <p>Add Entity              <input type="checkbox" id="utility"
+            <p style="text-align:center;">Add Entity              <input type="checkbox" id="utility"
                 class="checkbox" onclick="toggleAddEdit(true)"/>
                 <label for="utility" class="toggle"> </label>                  Edit Entity</p>
+            <form onclick="window.location.reload()" id="reset" style="text-align:center;">
+                    <button class="button reset">Reset Scene</button>
+                </form>
             <p id="add1">Type of entity: 
-                <select name="entity" id="entity">
+                <select class="select" name="entity" id="entity">
                     <option value="circle">circle</option>
                     <option value="plane">plane</option>
                    <!-- <option value="triangle">triangle</option> -->
                 </select>
             </p>
-            <form id="add2" onclick="addEntity()">
-                <input type="button" value="Add entity to scene" />
-            </form>
-            <p id="editSelector">Current entity: <select name="entityId" id="entityId"  onchange="selectNew()">
+            <p style="text-align:center;" id="add2">
+                <button class="button add" onclick="addEntity()">Add to Scene</button>
+            </p>
+            <p id="editSelector">Current entity: <select name="entityId" id="entityId"  onchange="selectNew(null)">
             </select></p>
-            <p id="edit1">Position: <input type="text" class="input" id="z" value="-1"> <input type="text" class="input" id="y" value="0"> <input type="text" class="input" id="x" value="0"></p>
-            <p id="edit2">Color: <input type="text" class="input" id="color" value="#FFFFFF"></p>
-            <p id="edit3">Height: <input type="text" class="input" id="height" value=".5"></p>
-            <p id="edit4">Width: <input type="text" class="input" id="width" value=".25"></p>
-            <p id="edit5">Radius: <input type="text" class="input" id="radius" value=".25"></p>
-            <form onclick="editEntity()" id="edit6">
-                <input type="button" value="Edit Selected Entity" />
-            </form>
+            <p id="edit1">Position: <input type="text" class="input" id="y" value="0"> <input type="text" class="input" id="x" value="0"></p>
+            <p id="edit8">Rotation (deg):  <input type="text" class="input" id="rotation" value="0"></p>
+            <p id="edit2">Color (#HEXCODE): <input type="text" class="input" id="color" value="#FFFFFF"></p>
+            <p id="edit3">Height (m): <input type="text" class="input" id="height" value=".5"></p>
+            <p id="edit4">Width (m): <input type="text" class="input" id="width" value=".25"></p>
+            <p id="edit5">Radius (m): <input type="text" class="input" id="radius" value=".25"></p>
+            <p style="text-align:center;" id="edit7">
+                <button class="button add" onclick="sendBack(true)">Send back</button><button class="button add" onclick="sendBack(false)">Send forward</button>
+            </p>
+            <p style="text-align:center;" id="edit6">
+                <button class="button add" onclick="editEntity()">Edit Selected</button>
+            </p>
+            <p style="text-align:center;" id="edit9">
+                <button class="button add" onclick="saveScene()">Save Scene</button>
+            </p>
+            <p style="text-align:center;" id="add3">
+                Upload your scene here: <input type="file" id="scene-input" accept="text/JSON">
+            </p>
         </div>
         <script src="script.js" type="text/javascript"></script>
     </body>
