@@ -114,13 +114,13 @@ function addEntity(){
     if($("#entity :selected").text() == "circle"){
         el.setAttribute("id","circle"+circleNum++);
         el.setAttribute("geometry",{primitive: "circle", radius: 0.25});
-        el.setAttribute("position",{x: 0, y: 0, z: -1+(0.0000015*numAdded++)});
+        el.setAttribute("position",{x: 0, y: 0, z: -1+(0.00001*numAdded++)});
         el.setAttribute("material", {color: "#FFFFFF"});
         el.setAttribute("rotation", {x: 0, y: 0, z: 0});
     } else if ($("#entity :selected").text() == "plane"){
         el.setAttribute("id","plane"+planeNum++);
         el.setAttribute("geometry",{primitive: "plane", width: .25, height: 0.5});
-        el.setAttribute("position",{x: 0, y: 0, z: -1+(0.000015*numAdded++)});
+        el.setAttribute("position",{x: 0, y: 0, z: -1+(0.00001*numAdded++)});
         el.setAttribute("material", {color: "#FFFFFF"});
         el.setAttribute("rotation", {x: 0, y: 0, z: 0});
     }/* else if ($("#entity :selected").text() == "triangle"){
@@ -235,7 +235,7 @@ function entityLoader(){
             el.setAttribute("id","plane"+planeNum++);
         }
         el.setAttribute("geometry", fileContent[key].geometry);
-        el.setAttribute("position", {x: fileContent[key].position.x, y: fileContent[key].position.y, z: -1+(0.0000015*numAdded++)});
+        el.setAttribute("position", {x: fileContent[key].position.x, y: fileContent[key].position.y, z: -1+(0.00001*numAdded++)});
         el.setAttribute("material", {color: fileContent[key].material.color, shader: "flat"});
         el.setAttribute("rotation", fileContent[key].rotation);
         el.setAttribute("click-checker","");
