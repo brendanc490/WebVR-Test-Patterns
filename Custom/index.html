@@ -54,34 +54,37 @@
             <form onclick="window.location.reload()" id="reset" style="text-align:center;">
                     <button class="button reset">Reset Scene</button>
                 </form>
-            <p id="add1">Type of entity: 
+            <p id="addChoice">Type of entity: 
                 <select class="select" name="entity" id="entity">
                     <option value="circle">circle</option>
                     <option value="plane">plane</option>
-                   <!-- <option value="triangle">triangle</option> -->
+                   <option value="triangle">triangle</option>
                 </select>
             </p>
-            <p style="text-align:center;" id="add2">
+            <p style="text-align:center;" id="addButton">
                 <button class="button add" onclick="addEntity()">Add to Scene</button>
             </p>
             <p id="editSelector">Current entity: <select name="entityId" id="entityId"  onchange="selectNew(null)">
             </select></p>
-            <p id="edit1">Position: <input type="text" class="input" id="y" value="0"> <input type="text" class="input" id="x" value="0"></p>
-            <p id="edit8">Rotation (deg):  <input type="text" class="input" id="rotation" value="0"></p>
-            <p id="edit2">Color (#HEXCODE): <input type="text" class="input" id="color" value="#FFFFFF"></p>
-            <p id="edit3">Height (m): <input type="text" class="input" id="height" value=".5"></p>
-            <p id="edit4">Width (m): <input type="text" class="input" id="width" value=".25"></p>
-            <p id="edit5">Radius (m): <input type="text" class="input" id="radius" value=".25"></p>
-            <p style="text-align:center;" id="edit7">
+            <p id="posIn">Position: <input type="text" class="input" id="y" value="0"> <input type="text" class="input" id="x" value="0"></p>
+            <p id="rotIn">Rotation (deg):  <input type="text" class="input" id="rotation" value="0"></p>
+            <p id="colIn">Color (#HEXCODE): <input type="text" class="input" id="color" value="#FFFFFF"></p>
+            <p id="heightIn">Height (m): <input type="text" class="input" id="height" value=".5"></p>
+            <p id="widthIn">Width (m): <input type="text" class="input" id="width" value=".25"></p>
+            <p id="radiusIn">Radius (m): <input type="text" class="input" id="radius" value=".25"></p>
+            <p id="va">Vertex A: <input type="text" class="input" id="vay" value="0.25"> <input type="text" class="input" id="vax" value="0"></p>
+            <p id="vb">Vertex B: <input type="text" class="input" id="vby" value="-0.25"> <input type="text" class="input" id="vbx" value="-0.25"></p>
+            <p id="vc">Vertex C: <input type="text" class="input" id="vcy" value="-0.25"> <input type="text" class="input" id="vcx" value="0.25"></p>
+            <p style="text-align:center;" id="sendButton">
                 <button class="button add" onclick="sendBack(true)">Send back</button><button class="button add" onclick="sendBack(false)">Send forward</button>
             </p>
-            <p style="text-align:center;" id="edit6">
+            <p style="text-align:center;" id="editButton">
                 <button class="button add" onclick="editEntity()">Edit Selected</button>
             </p>
-            <p style="text-align:center;" id="edit9">
+            <p style="text-align:center;" id="saveButton">
                 <button class="button add" onclick="saveScene()">Save Scene</button>
             </p>
-            <p style="text-align:center;" id="add3">
+            <p style="text-align:center;" id="upload">
                 Upload your scene here: <input type="file" id="scene-input" accept="text/JSON">
             </p>
         </div>
