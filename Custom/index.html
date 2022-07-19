@@ -38,6 +38,16 @@
 
     <body>
         <a-scene cursor="rayOrigin: mouse">
+            <a-assets>
+                <img id="QC" src="patterns/TG18-QC.2k_12b.png">
+                <img id="CH" src="patterns/TG18-CH.2k.png">
+                <img id="MM1" src="patterns/TG18-MM1.2k.png">
+                <img id="MM2" src="patterns/TG18-MM2.2k.png">
+                <img id="sQC" src="patterns/TG270sQC.png">
+                <img id="PQC" src="patterns/TG18-PQC.2k_12b.png">
+                <img id="BR" src="patterns/TG18-BR.2k_12b.png">
+                <img id="transparent" src="patterns/transparent.jpg">
+            </a-assets>
             <a-entity oculus-touch-controls="hand: left"></a-entity>
             <a-entity oculus-touch-controls="hand: right" thumbstick-logging-right button-listener></a-entity>
             <a-sky id="sky" color="#000000"></a-sky>
@@ -47,8 +57,10 @@
                 <a-entity id="entityCanvas" visible="true"></a-entity>
             </a-camera>
         </a-scene>
-
+       
         <div id="info">
+            <button type="button" class="collapsible" id="collapse">Hide Settings</button>
+            <div id="content">
             <p style="text-align:center;">Add Entity              <input type="checkbox" id="utility"
                 class="checkbox" onclick="toggleAddEdit(true)"/>
                 <label for="utility" class="toggle"> </label>                  Edit Entity</p>
@@ -59,9 +71,10 @@
                 <select class="select" name="entity" id="entity">
                     <option value="circle">circle</option>
                     <option value="plane">plane</option>
-                   <option value="triangle">triangle</option>
-                   <option value="gradient">gradient</option>
-                   <option value="gradient">checkerboard</option>
+                    <option value="triangle">triangle</option>
+                    <option value="gradient">gradient</option>
+                    <option value="gradient">checkerboard</option>
+                    <!--<option value="hollow-plane">hollow plane</option>-->
                 </select>
             </p>
             <p style="text-align:center;" id="addButton">
@@ -75,6 +88,17 @@
             <p id="posIn">Position: <input type="text" class="input" id="y" value="0"> <input type="text" class="input" id="x" value="0"></p>
             <p id="rotIn">Rotation (deg):  <input type="text" class="input" id="rotation" value="0"></p>
             <p id="colIn">Color (#HEXCODE): <input type="text" class="input" id="color" value="#FFFFFF"></p>
+            <p id="textureIn">Texture:                 <select class="select" name="texture" id="texture">
+                <option value="none">none</option>
+                <option value="QC">TG18-QC.2k_12b</option>
+                <option value="CH">TG18-CH.2k</option>
+                <option value="MM1">TG18-MM1.2k</option>
+                <option value="MM2">TG18-MM2.2k</option>
+                <option value="sQC">TG270sQC</option>
+                <option value="PQC">TG18-PQC.2k_12b</option>
+                <option value="BR">TG18-BR.2k_12b</option>
+            </select></p>
+            <p id="fillIn">Percentage Filled (0-100): <input type="text" class="input" id="fill" value="100"></p>
             <p id="heightIn">Bar Height (m): <input type="text" class="input" id="height" value=".5"></p>
             <p id="widthIn">Bar Width (m): <input type="text" class="input" id="width" value=".25"></p>
             <p id="radiusIn">Radius (m): <input type="text" class="input" id="radius" value=".25"></p>
@@ -97,8 +121,21 @@
             <p style="text-align:center;" id="upload">
                 Upload your scene here: <input type="file" id="scene-input" accept="text/JSON">
             </p>
+            </div>
+        </div>
+        <div id="directions">
+        <button type="button" class="collapsible" id="directionsCollapse">Directions</button>
+        <div id="contentDir">
+            <p>Start by adding entities from the dropdown to the scene.</p>
+            <p>Once you have added one or more entities, </p>
+            <p>you can begin to edit the entities and scene in general.</p>
+            
+        </div>
         </div>
         <script src="script.js" type="text/javascript"></script>
+        <script src="drawing.js" type="text/javascript"></script>
+        <script src="saving.js" type="text/javascript"></script>
+        
     </body>
 
 </html>

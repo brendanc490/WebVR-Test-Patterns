@@ -3,10 +3,36 @@
 const scene = document.querySelector("a-scene");
 const entityCanvas = scene.querySelector("#entityCanvas");
 
+const directions = document.getElementById("directionsCollapse");
+const contentDir = document.getElementById("contentDir");
+directions.addEventListener("click", function() {
+    this.classList.toggle("active");
+    if (contentDir.style.display === "block") {
+        directions.innerHTML = "Show Directions";
+        contentDir.style.display = "none";
+    } else {
+        directions.innerHTML = "Hide Directions";
+        contentDir.style.display = "block";
+    }
+  });
+
 /* Edit Related */
 /* Headers */
 const background = document.getElementById("backgroundSettings"); /* header for background settings */
 const ent = document.getElementById("entitySettings"); /* header for entity settings */
+const utility = document.getElementById("utility");
+const collapse = document.getElementById("collapse");
+const content = document.getElementById("content");
+collapse.addEventListener("click", function() {
+    this.classList.toggle("active");
+    if (content.style.display === "block") {
+        collapse.innerHTML = "Show Settings";
+        content.style.display = "none";
+    } else {
+        collapse.innerHTML = "Hide Settings";
+        content.style.display = "block";
+    }
+  });
 
 /* Selection of entity */
 const entitySelectorText = document.getElementById("editSelector"); /* current entity container paragraph */
@@ -29,6 +55,14 @@ const rotIn = document.getElementById("rotIn"); /* rotation input */
 /* Color related */
 const color = document.getElementById("color"); /* color container paragraph */
 const colIn = document.getElementById("colIn"); /* color input */
+
+/* Texture related */
+const textureIn = document.getElementById("textureIn");
+const texture = document.getElementById("texture");
+
+/* Fill related */
+const fillIn = document.getElementById("fillIn");
+const fill = document.getElementById("fill");
 
 /* Circle only attributes */
 /* Radius related */
@@ -101,6 +135,7 @@ var planeNum = 0; /* number of planes created */
 var triangleNum = 0; /* number of triangles created */
 var gradientNum = 0; /* number of gradients created */
 var checkerboardNum = 0; /* number of checkerboards created */
+var textureNum = 0;
 var numAdded = 0; /* total entities added */
 
 var boolAddEdit = false; /* toggle for add or edit element */
@@ -108,6 +143,8 @@ var boolAddEdit = false; /* toggle for add or edit element */
 var fileContent = null; /* contents of uploaded JSON file */
 
 /* Initial webpage layout hides all edit related containers */
+content.style.display = "block";
+contentDir.style.display = "none";
 toggleAddEdit(null);
 
 /* selects a new entity for editing*/
@@ -147,6 +184,8 @@ function hideEditStats(){
     rows.style.display = "none";
     cols.style.display = "none";
     tileSize.style.display = "none";
+    textureIn.style.display = "none";
+    fillIn.style.display = "none";
 }
 
 /* updates values in edit section */
@@ -158,12 +197,24 @@ function updateStats(){
     yIn.value = entity.components.position.attrValue.y;
     rotation.value = entity.components.rotation.attrValue.z;
     color.value = entity.components.material.attrValue.color;
+    let test = 0;
+    if (entity.components.material.attrValue.src == "" || entity.components.material.attrValue.src == null){
+        texture.selectedIndex = 0;
+        texture.options[0].selected = true;
+    } else {
+        $(texture.options).each(function() {
+            if((entity.components.material.attrValue.src).includes(this.value))
+                this.selected = true;
+        });
+    }
 
     if(selectedEntity.getAttribute("id").includes("plane")){ /* plane exclusives */
-        width.value = selectedEntity.components.geometry.attrValue.width;
-        height.value = selectedEntity.components.geometry.attrValue.height;
-    } else if(selectedEntity.getAttribute("id").includes("circle")){ /* circle exclusives */
-        radius.value = selectedEntity.components.geometry.attrValue.radius;
+        width.value = selectedEntity.children[2].components.geometry.attrValue.width;
+        height.value = selectedEntity.children[0].components.geometry.attrValue.height;
+        fill.value = ((selectedEntity.children[0].components.geometry.attrValue.width*2)/selectedEntity.children[2].components.geometry.attrValue.width)*((selectedEntity.children[0].components.geometry.attrValue.width*2)/selectedEntity.children[2].components.geometry.attrValue.width)*100;
+    } else if(selectedEntity.getAttribute("id").includes("ring")){ /* circle exclusives */
+        radius.value = selectedEntity.components.geometry.attrValue.radiusOuter;
+        fill.value = (selectedEntity.components.geometry.attrValue.radiusInner*selectedEntity.components.geometry.attrValue.radiusInner)/(selectedEntity.components.geometry.attrValue.radiusOuter*selectedEntity.components.geometry.attrValue.radiusOuter);
     } else if(selectedEntity.getAttribute("id").includes("triangle")){ /* triangle exclusives */
         vax.value = selectedEntity.components.geometry.attrValue.vertexA.x;
         vay.value = selectedEntity.components.geometry.attrValue.vertexA.y;
@@ -186,6 +237,11 @@ function updateStats(){
 function toggleAddEdit(swap){
     /* check if swapping modes or refreshing display */
     if(swap){ /* if the button to swap was pressed */
+        if(numAdded == 0){
+            alert("You must add an entity before editing the scene");
+            utility.checked = false;
+            return;
+        }
         boolAddEdit = !boolAddEdit; /* change current mode */
         selectedEntity = scene.querySelector("#"+$("#entityId :selected").text()); /* set selected entity to be first entity created */
         updateStats(); /* update stats */
@@ -202,6 +258,7 @@ function toggleAddEdit(swap){
         saveButton.style.display = "block";
         posIn.style.display = "block";
         colIn.style.display = "block";
+        textureIn.style.display = "block";
         /*editButton.style.display = "block";*/
 
         /* add related containers hidden */
@@ -213,12 +270,17 @@ function toggleAddEdit(swap){
         if (selectedEntity.getAttribute("id").includes("plane")){ /* plane exclusive containers shown */
             heightIn.style.display = "block";
             widthIn.style.display = "block";
+            if(entity.components.material.attrValue.src == null){
+                fillIn.style.display = "block";
+            }
         } else if (selectedEntity.getAttribute("id").includes("circle")){ /* circle exclusive containers shown */
             radiusIn.style.display = "block"; 
+            fillIn.style.display = "block";
         } else if (selectedEntity.getAttribute("id").includes("triangle")) { /* triangle exlcusive containers shown */
             va.style.display = "block";
             vb.style.display = "block";
             vc.style.display = "block";
+            fillIn.style.display = "block";
         } else if (selectedEntity.getAttribute("id").includes("gradient")) { /* gradient exlcusive containers shown */
             heightIn.style.display = "block";
             widthIn.style.display = "block";
@@ -238,85 +300,12 @@ function toggleAddEdit(swap){
     }
 }
 
-/* adds entity to scene */
-function addEntity(){
-    el = document.createElement('a-entity'); /* creates entity */
-
-    /* check desired type of entity */
-    if($("#entity :selected").text() == "circle"){ /* if circle */
-        el.setAttribute("id","circle"+circleNum++);
-        el.setAttribute("geometry",{primitive: "circle", radius: 0.25});
-    } else if ($("#entity :selected").text() == "plane"){ /* if plane */
-        el.setAttribute("id","plane"+planeNum++);
-        el.setAttribute("geometry",{primitive: "plane", width: .25, height: 0.5});
-    } else if ($("#entity :selected").text() == "triangle"){ /* if triangle */
-        el.setAttribute("id","triangle"+triangleNum++);
-        el.setAttribute("geometry",{primitive: "triangle", vertexA: {x: 0, y: 0.1875, z: 0}, vertexB: {x: -0.25, y: -0.25, z: 0}, vertexC: {x: 0.25, y: -0.25, z: 0}});
-    } else if ($("#entity :selected").text() == "gradient"){
-        el.setAttribute("id","gradient"+gradientNum++);
-        drawGradient(.05,.15,32,{r: 255, g: 255, b: 255},el);
-    } else if ($("#entity :selected").text() == "checkerboard"){
-        el.setAttribute("id","checkerboard"+checkerboardNum++);
-        drawCheckerboard(16,16,.1,{r: 255, g: 255, b: 255},el);
-    }
-    /* Set default universal stats */
-    el.setAttribute("position",{x: 0, y: 0, z: -1+(0.00005*numAdded++)});
-    el.setAttribute("material", {color: "#FFFFFF"});
-    el.setAttribute("rotation", {x: 0, y: 0, z: 0});
-    el.setAttribute("click-checker","");
-
-    entityCanvas.appendChild(el); /* add entity to scene */
-
-    /* add entity to potential selections */
-    var option = document.createElement("option"); 
-    option.text = el.getAttribute("id");
-    entitySelector.add(option);
-
-    els.push(el);/* add entity to list of created entities */
-}
-
-function drawGradient(width,height,numBars,color,parent){
-    var j = 0;
-    while(j < numBars){
-        let elChild = document.createElement('a-entity');
-        elChild.setAttribute("id",parent.id+(numBars-j).toString());
-        elChild.setAttribute("geometry",{primitive: "plane", width: width, height: height});
-        elChild.setAttribute("position",{x: width*numBars/2-(width*j)-(width/2), y: 0, z: 0});
-        elChild.setAttribute("material",{shader: "flat", color: "rgb("+Math.ceil(color.r-((color.r/numBars)*j)).toString()+","+Math.ceil(color.g-((color.g/numBars)*j)).toString()+","+Math.ceil(color.b-((color.b/numBars)*j)).toString()+")"});
-        parent.appendChild(elChild);
-        j++;
-    }
-}
-
-function drawCheckerboard(rows,cols,size,color,parent){
-    var r = 0;
-    var isBlack = false;
-    while (r < rows){
-        let elChildRow = document.createElement("a-entity");
-        elChildRow.setAttribute("id",parent.id+"row"+r);
-        var c = 0;
-        while (c < cols){
-            let elChildCol = document.createElement("a-entity");
-            elChildCol.setAttribute("id",parent.id+"col"+c);
-            elChildCol.setAttribute("geometry",{primitive: "plane", width: size, height: size});
-            elChildCol.setAttribute("position",{x: size*cols/2-(size*c)-(size/2), y: size*rows/2-(size*r)-(size/2), z: 0});
-            if(isBlack){
-                elChildCol.setAttribute("material",{shader: "flat", color: "rgb(0,0,0)"});
-            } else {
-                elChildCol.setAttribute("material",{shader: "flat", color: "rgb("+color.r.toString()+","+color.g.toString()+","+color.b.toString()+")"});
-            }
-            isBlack = !isBlack;
-            elChildRow.appendChild(elChildCol)
-            c++;
-        }
-        if (cols % 2 == 0) {isBlack = !isBlack};
-        r++;
-        parent.appendChild(elChildRow);
-    }
-}
-
 /* If the textbox for sky color is changed */
 $("#skyCol").change(function() {
+    if(hexToRgb($("#skyCol").val()) == null){
+        alert("Invalid color (check that the color was entered in hexadecimal format)");
+        return;
+    }
     sky.setAttribute("material",{color: $("#skyCol").val()});
   });
 
@@ -337,6 +326,21 @@ $("#z").change(function() {
 
 /* If the textbox for color value is changed */
 $("#color").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for x value is changed */
+$("#texture").change(function() {
+    if(texture.value == "none"){
+        fillIn.style.display = "block";
+    } else {
+        fillIn.style.display = "none";
+    }
+    editEntity();
+  });
+
+/* If the textbox for x value is changed */
+$("#fill").change(function() {
     editEntity();
   });
 
@@ -410,48 +414,6 @@ $("#tileSizeIn").change(function() {
     editEntity();
   });
 
-
-/* edits selected entity */
-function editEntity(){
-    /* universal changes */
-    selectedEntity.setAttribute("position",{x: parseFloat($("#x").val()), y: parseFloat($("#y").val()), z: selectedEntity.getAttribute("position").z});
-    selectedEntity.setAttribute("material",{color: $("#color").val(), shader: "flat"});
-    selectedEntity.setAttribute("rotation",{x: 0, y: 0, z: parseFloat($("#rotation").val())});
-
-    if(selectedEntity.getAttribute("id").includes("circle")){  /* circle only changes */
-        selectedEntity.setAttribute("geometry",{primitive: "circle", radius: parseFloat($("#radius").val())});
-    } else if (selectedEntity.getAttribute("id").includes("plane")){ /* plane only changes */
-        selectedEntity.setAttribute("geometry",{primitive: "plane", width: parseFloat($("#width").val()), height: parseFloat($("#height").val())});
-    } else if (selectedEntity.getAttribute("id").includes("triangle")){ /* triangle only changes */
-        selectedEntity.setAttribute("geometry",{primitive: "triangle", vertexA: {x: parseFloat($("#vax").val()), y: parseFloat($("#vay").val()), z: 0},
-         vertexB: {x: parseFloat($("#vbx").val()), y: parseFloat($("#vby").val()), z: 0}, vertexC: {x: parseFloat($("#vcx").val()), y: parseFloat($("#vcy").val()), z: 0}});
-    } else if (selectedEntity.getAttribute("id").includes("gradient")){ /* gradient only changes */
-        let i = selectedEntity.children.length-1;
-        while (i >= 0) {
-            selectedEntity.children[i].parentNode.removeChild(selectedEntity.children[i]);
-            i--;
-        }
-        drawGradient(parseFloat($("#width").val()),parseFloat($("#height").val()),parseFloat($("#numBarsIn").val()),hexToRgb($("#color").val()),selectedEntity);
-    } else if (selectedEntity.getAttribute("id").includes("checkerboard")){ /* checkerboard only changes */
-        let i = selectedEntity.children.length-1;
-        while (i >= 0) {
-            selectedEntity.children[i].parentNode.removeChild(selectedEntity.children[i]);
-            i--;
-        }
-        drawCheckerboard(parseFloat($("#rowsIn").val()),parseFloat($("#colsIn").val()),parseFloat($("#tileSizeIn").val()),hexToRgb($("#color").val()),selectedEntity);
-    }
-
-}
-
-function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
-    } : null;
-  }
-
 /* sends entity back or forward one layer */
 function sendBack(isback){
     let tmp = null;
@@ -484,75 +446,3 @@ function sendBack(isback){
     }
 }
 
-/* saves scene in JSON format */
-function saveScene(){
-    const jsonData = {};
-    jsonData["sky"] = {skyColor: sky.getAttribute("material").color};
-    els.forEach(element => { 
-        if(element.id.includes("gradient")){
-            jsonData[element.id] = {numBars: element.children.length, childGeometry: element.children[0].components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
-        } else if(element.id.includes("checkerboard")){
-            jsonData[element.id] = {rows: element.children.length, cols: element.children[0].children.length, tileSize: element.children[0].children[0].components.geometry.attrValue.width, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
-        } else {
-            jsonData[element.id]={geometry: element.components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
-        }});
-            
-        var blob = new Blob([JSON.stringify(jsonData)],
-        { type: "text/plain;charset=utf-8" });
-        saveAs(blob, "scene.JSON");
-}
-
-/* if JSON is uploaded */
-scene_input.addEventListener("change", function() {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-        fileContent = JSON.parse(reader.result);
-        entityLoader(); /* loads all entities to scene */
-    });
-    reader.readAsText(this.files[0]);
-    
-});
-
-/* loads entities from JSON to scene */
-function entityLoader(){
-    /* for each entity desired */
-    Object.keys(fileContent).forEach(key => {
-        if(key.includes("sky")){
-            sky.setAttribute("material",{color: fileContent[key].skyColor});
-        } else {
-            el = document.createElement("a-entity"); /* create entity */
-            if(key.includes("circle")){ /* circle exclusive */
-                el.setAttribute("id","circle"+circleNum++);
-                el.setAttribute("geometry", fileContent[key].geometry);
-            } else if(key.includes("plane")){ /* plane exclusive */
-                el.setAttribute("id","plane"+planeNum++);
-                el.setAttribute("geometry", fileContent[key].geometry);
-            } else if(key.includes("triangle")){ /* triangle exclusive */
-                el.setAttribute("id","triangle"+triangleNum++);
-                el.setAttribute("geometry", fileContent[key].geometry);
-            } else if (key.includes("gradient")){
-                el.setAttribute("id", "gradient"+gradientNum++);
-                drawGradient(fileContent[key].childGeometry.width,fileContent[key].childGeometry.height,fileContent[key].numBars,hexToRgb(fileContent[key].material.color),el);
-            } else if (key.includes("checkerboard")){
-                el.setAttribute("id", "checkerboard"+checkerboardNum++);
-                console.log()
-                drawCheckerboard(fileContent[key].rows,fileContent[key].cols,fileContent[key].tileSize,hexToRgb(fileContent[key].material.color),el);
-            }
-            /* sets stats */
-            
-            el.setAttribute("position", {x: fileContent[key].position.x, y: fileContent[key].position.y, z: -1+(0.00005*numAdded++)});
-            el.setAttribute("material", {color: fileContent[key].material.color, shader: "flat"});
-            el.setAttribute("rotation", fileContent[key].rotation);
-            el.setAttribute("click-checker","");
-
-            entityCanvas.appendChild(el); /* adds entity to scene */
-
-            /* adds option to dropdown */
-            var option = document.createElement("option");
-            option.text = el.getAttribute("id");
-            entitySelector.add(option);
-
-            els.push(el);/* adds entity to list of created entities */
-        }
-      });
-}
