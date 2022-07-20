@@ -7,6 +7,7 @@ var blueBar = scene.querySelector("#blueBar");
 var redBar2 = scene.querySelector("#redBar2");
 var greenBar2 = scene.querySelector("#greenBar2");
 var blueBar2 = scene.querySelector("#blueBar2");
+var centerDot = scene.querySelector("#centerDot");
 /* Input Information */
 
 /* Height and width inputs */
@@ -106,6 +107,8 @@ var currbarNum2 = 0;
 /* Variable that will store step */
 var step = 0.1;
 
+var left = false;
+
 /* Positions the bars in desired location and sets them to desired size */
 
 redBar.setAttribute("geometry",{primitive: "box", depth: 0, height: .05, width: .005});
@@ -152,7 +155,7 @@ function updateCoordsHorizontal(angle, bar, isLeft){
     bar.setAttribute("position",{x: newX.toPrecision(5), y: bar.getAttribute("position").y , z: newZ.toPrecision(5)});
     if (isLeft){
         text[currbarNum2].value = (parseFloat(text[currbarNum2].value) + angle).toPrecision(3);
-    } else {
+    } else if(isLeft === false){
         text2[currbarNum].value = (parseFloat(text2[currbarNum].value) + angle).toPrecision(3);
     }
     /* Rotates the bar to keep it facing the camera (negated in orthographic mode)*/
@@ -171,6 +174,7 @@ function updateCoordsVertical(angle, bar){
     /*bar.setAttribute("rotation",{x: bar.getAttribute("rotation").x + angle, y: bar.getAttribute("rotation").y, z: bar.getAttribute("rotation").z});*/
 
 }
+shift = .5;
 
 /* Input listener to determine if movement or bar switch is desired */
 document.addEventListener("keydown", movement);
@@ -192,19 +196,19 @@ function movement(event) {
             break;
         case "w":
             /* Calls vertical translation */
-            updateCoordsVertical((parseFloat($("#step-size").val())), currbar[currbarNum], false);
+            updateCoordsVertical((parseFloat($("#step-size").val())), left ? currbar2[currbarNum2] : currbar[currbarNum], left);
             break;
         case "s":
             /* Calls vertical translation */
-            updateCoordsVertical((-parseFloat($("#step-size").val())), currbar[currbarNum], false);
+            updateCoordsVertical((-parseFloat($("#step-size").val())), left ? currbar2[currbarNum2] : currbar[currbarNum], left);
             break;
         case "a":
             /* Calls horizontal translation */
-            updateCoordsHorizontal((-parseFloat($("#step-size").val())), currbar[currbarNum], false);
+            updateCoordsHorizontal((-parseFloat($("#step-size").val())), left ? currbar2[currbarNum2] : currbar[currbarNum], left);
             break;
         case "d":
             /* Calls horizontal translation */
-            updateCoordsHorizontal((parseFloat($("#step-size").val())), currbar[currbarNum], false);
+            updateCoordsHorizontal((parseFloat($("#step-size").val())), left ? currbar2[currbarNum2] : currbar[currbarNum], left);
             break;
 
         case "ArrowLeft":
@@ -235,5 +239,95 @@ function movement(event) {
             /* Calls horizontal translation */
             updateCoordsHorizontal((parseFloat($("#step-size").val())), currbar2[currbarNum2], true);
             break;
+        case "n":
+            /* Calls horizontal translation */
+            recenter(true);
+            break;
+        case "m":
+            /* Calls horizontal translation */
+            recenter(false);
+            break;
+        case "x":
+            /* Calls horizontal translation */
+            left = !left;
+            break;
+        case "z":
+            /* Calls horizontal translation */
+            shift -= .02;
+            break;
+        case "c":
+            /* Calls horizontal translation */
+            shift += .02;
+            break;
+        case "p":
+            /* Calls horizontal translation */
+            document.querySelector('a-scene').exitVR();
+            location.reload(true);
     }
 }
+
+function recenter(left){
+    tempCurr = currbarNum;
+    tempCurr2 = currbarNum2;
+    if(left){
+        currbarNum = 0;
+        updateCoordsHorizontal(-shift, currbar[0], false);
+        currbarNum = 1;
+        updateCoordsHorizontal(-shift, currbar[1], false);
+        currbarNum = 2;
+        updateCoordsHorizontal(-shift, currbar[2], false);
+        currbarNum2 = 0;
+        updateCoordsHorizontal(-shift, currbar2[0], true);
+        currbarNum2 = 1;
+        updateCoordsHorizontal(-shift, currbar2[1], true);
+        currbarNum2 = 2;
+        updateCoordsHorizontal(-shift, currbar2[2], true);
+        updateCoordsHorizontal(-shift, centerDot, null);
+    } else {
+        currbarNum = 0;
+        updateCoordsHorizontal(shift, currbar[0], false);
+        currbarNum = 1;
+        updateCoordsHorizontal(shift, currbar[1], false);
+        currbarNum = 2;
+        updateCoordsHorizontal(shift, currbar[2], false);
+        currbarNum2 = 0;
+        updateCoordsHorizontal(shift, currbar2[0], true);
+        currbarNum2 = 1;
+        updateCoordsHorizontal(shift, currbar2[1], true);
+        currbarNum2 = 2;
+        updateCoordsHorizontal(shift, currbar2[2], true);
+        updateCoordsHorizontal(shift, centerDot, null);
+    }
+    currbarNum = tempCurr;
+    currbarNum2 = tempCurr2;
+}
+
+    /*window.addEventListener('resize', resizeFrustum);
+
+    function resizeFrustum() {
+        scene.camera.left = (window.innerWidth*-1)/1000
+        scene.camera.right = window.innerWidth/1000
+        scene.camera.top = window.innerHeight/1000
+        scene.camera.bottom = (window.innerHeight*-1)/1000;
+        console.log(scene.camera.left + " " + scene.camera.bottom);
+    }*/
+
+    
+      scene.addEventListener('enter-vr',function(){
+            scene.camera.left = (screen.width*-1)/1000
+            scene.camera.right = screen.width/1000
+            scene.camera.top = screen.height/1000
+            scene.camera.bottom = (screen.height*-1)/1000;
+
+            console.log("Clock in");
+      });
+
+      scene.addEventListener('exit-vr',function(){
+            scene.camera.left = (window.innerWidth*-1)/1000;
+            scene.camera.right = (window.innerWidth)/1000;
+            scene.camera.top = (window.innerHeight)/1000;
+            scene.camera.bottom = (window.innerHeight*-1)/1000;
+
+            console.log("Clock Out");
+      });
+  

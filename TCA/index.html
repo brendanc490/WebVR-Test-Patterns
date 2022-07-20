@@ -12,7 +12,7 @@
                 this.originalCamera = sceneEl.camera;
                 this.cameraParent = sceneEl.camera.parent;
                 /* Create orthographic camera using three.js */
-                this.orthoCamera = new THREE.OrthographicCamera(-2, 2, 1, -1);
+                this.orthoCamera = new THREE.OrthographicCamera((window.innerWidth*-1)/1000, window.innerWidth/1000, window.innerHeight/1000, (window.innerHeight*-1)/1000);
                 /* Makes this the parent camera and add it to scene */
                 this.cameraParent.add(this.orthoCamera);
                 sceneEl.camera = this.orthoCamera;
@@ -79,7 +79,7 @@
             }
         });
 
-        AFRAME.registerComponent('button-listener-l-quest', {
+        /*AFRAME.registerComponent('button-listener-l-quest', {
             init: function () {
                 var el = this.el;
 
@@ -102,6 +102,40 @@
                 el.addEventListener('gripdown', function (evt) {
                     document.querySelector('a-scene').exitVR();
                     location.reload();
+                });
+
+
+            }
+        });*/
+
+        AFRAME.registerComponent('button-listener-l-quest', {
+            init: function () {
+                var el = this.el;
+
+                el.addEventListener('thumbstickdown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "x"}));
+                });
+
+                el.addEventListener('triggerdown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "c"}));
+                });
+
+                el.addEventListener('xbuttondown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "n"}));
+                });
+
+                el.addEventListener('ybuttondown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "m"}));
+                });
+
+                el.addEventListener('menudown', function (evt) {
+                    document.querySelector('a-scene').exitVR();
+                    location.reload();
+                    return false;
+                });
+
+                el.addEventListener('gripdown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key: "z"}));
                 });
 
 
@@ -162,7 +196,7 @@
 
                 el.addEventListener('gripdown', function (evt) {
                     document.querySelector('a-scene').exitVR();
-                    location.reload();
+                    location.reload(true);
                 });
 
 
@@ -175,8 +209,8 @@
     
     <a-scene ortho>
         <!-- Oculus controls -->
-        <!--<a-entity oculus-touch-controls="hand: left" button-listener-l-quest></a-entity>
-        <a-entity oculus-touch-controls="hand: right" button-listener-r-quest></a-entity>-->
+        <a-entity oculus-touch-controls="hand: left" button-listener-l-quest></a-entity>
+        <a-entity oculus-touch-controls="hand: right" button-listener-r-quest></a-entity>
         <!-- Reverb controls -->
         <a-entity windows-motion-controls="hand: left" reverb-buttons-l></a-entity>
         <a-entity windows-motion-controls="hand: right" reverb-buttons-r></a-entity>
@@ -188,6 +222,8 @@
             <a-entity id="redBar" geometry="primitive: box;  width: .3, height: 1" material="color: #FF0000"></a-entity>
             <a-entity id="greenBar" geometry="primitive: box;  width: .3, height: 1" material="color: #00FF00"></a-entity>
             <a-entity id="blueBar" geometry="primitive: box;  width: .3, height: 1" material="color: #0000FF"></a-entity>
+
+            <a-entity id="centerDot" geometry="primitive: circle; radius: .01" position="0 0 -1" material="color: #FFFFFF"></a-entity>
 
             <a-entity id="redBar2" geometry="primitive: box;  width: .3, height: 1" material="color: #FF0000"></a-entity>
             <a-entity id="greenBar2" geometry="primitive: box;  width: .3, height: 1" material="color: #00FF00"></a-entity>
