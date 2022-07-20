@@ -55,7 +55,7 @@
             init: function () {
                 var el = this.el;
 
-                el.addEventListener('thumbstickdown', function (evt) {
+                el.addEventListener('gripdown', function (evt) {
                     movement(new KeyboardEvent("keydown", {key : "ArrowDown"}));
                 });
 
@@ -71,8 +71,12 @@
                     movement(new KeyboardEvent("keydown", {key : "d"}));
                 });
 
-                el.addEventListener('gripdown', function (evt) {
+                el.addEventListener('menudown', function (evt) {
                     document.querySelector('a-scene').exitVR();
+                });
+
+                el.addEventListener('thumbstickdown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key: " "}));
                 });
 
 
@@ -130,8 +134,6 @@
 
                 el.addEventListener('menudown', function (evt) {
                     document.querySelector('a-scene').exitVR();
-                    location.reload();
-                    return false;
                 });
 
                 el.addEventListener('gripdown', function (evt) {
@@ -238,6 +240,10 @@
     <div id="info">
         <!-- Text input to determine size of each step -->
         <p>Size of step (degrees): <input type="text" class="input" id="step-size" value="0.1"></p>
+
+        <p>Position of center (deg): <input type="text" class="input" id="centerPos" value="0"> <div class="slidecontainer">
+            <input type="range" min="-80" max="80" value="0" class="slider" id="centerRange"step=".1">
+        </div></p>
         <!-- Text input to determine size of each step -->
         <p>Offset from center (deg): <input type="text" class="input" id="offset" value="20"> <div class="slidecontainer">
             <input type="range" min="0" max="80" value="20" class="slider" id="offsetRange"step=".1">

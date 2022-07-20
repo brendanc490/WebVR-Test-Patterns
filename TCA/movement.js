@@ -15,6 +15,8 @@ var heightSlider = document.getElementById("heightRange");
 var heightText = document.getElementById("height");
 var widthText = document.getElementById("width");
 var widthSlider = document.getElementById("widthRange");
+var centerText = document.getElementById("centerPos");
+var centerSlider = document.getElementById("centerRange");
 var offsetText = document.getElementById("offset");
 var offsetSlider = document.getElementById("offsetRange");
 
@@ -29,6 +31,89 @@ const xBlue2 = document.getElementById("xBlue2");
 var width = widthSlider.value;
 var height = heightSlider.value;
 var offset = 20;
+var center = 0;
+
+centerSlider.oninput = function() {
+    tempCurr = currbarNum;
+    tempCurr2 = currbarNum2;
+    currbarNum = 0;
+    updateCoordsHorizontal(-center, currbar[0], null);
+    currbarNum = 1;
+    updateCoordsHorizontal(-center, currbar[1], null);
+    currbarNum = 2;
+    updateCoordsHorizontal(-center, currbar[2], null);
+    currbarNum2 = 0;
+    updateCoordsHorizontal(-center, currbar2[0], null);
+    currbarNum2 = 1;
+    updateCoordsHorizontal(-center, currbar2[1], null);
+    currbarNum2 = 2;
+    updateCoordsHorizontal(-center, currbar2[2], null);
+    updateCoordsHorizontal(-center, centerDot, null);
+    currbarNum = tempCurr;
+    currbarNum2 = tempCurr2;
+    /* Update value in textbox */
+    centerText.value = this.value;
+    /* Set height to be new height */
+    center = this.value;
+    /* Redraw bars */
+    tempCurr = currbarNum;
+    tempCurr2 = currbarNum2;
+    currbarNum = 0;
+    updateCoordsHorizontal(center, currbar[0], null);
+    currbarNum = 1;
+    updateCoordsHorizontal(center, currbar[1], null);
+    currbarNum = 2;
+    updateCoordsHorizontal(center, currbar[2], null);
+    currbarNum2 = 0;
+    updateCoordsHorizontal(center, currbar2[0], null);
+    currbarNum2 = 1;
+    updateCoordsHorizontal(center, currbar2[1], null);
+    currbarNum2 = 2;
+    updateCoordsHorizontal(center, currbar2[2], null);
+    updateCoordsHorizontal(center, centerDot, null);
+    currbarNum = tempCurr;
+    currbarNum2 = tempCurr2;
+}
+
+$("#centerPos").change(function() {
+    tempCurr = currbarNum;
+    tempCurr2 = currbarNum2;
+    currbarNum = 0;
+    updateCoordsHorizontal(-center, currbar[0], null);
+    currbarNum = 1;
+    updateCoordsHorizontal(-center, currbar[1], null);
+    currbarNum = 2;
+    updateCoordsHorizontal(-center, currbar[2], null);
+    currbarNum2 = 0;
+    updateCoordsHorizontal(-center, currbar2[0], null);
+    currbarNum2 = 1;
+    updateCoordsHorizontal(-center, currbar2[1], null);
+    currbarNum2 = 2;
+    updateCoordsHorizontal(-center, currbar2[2], null);
+    updateCoordsHorizontal(-center, centerDot, null);
+    currbarNum = tempCurr;
+    currbarNum2 = tempCurr2;
+    /* Change height slider to correct height, this will call the slider change function */
+    center = centerText.value;
+    centerSlider.value = center;
+    tempCurr = currbarNum;
+    tempCurr2 = currbarNum2;
+    currbarNum = 0;
+    updateCoordsHorizontal(center, currbar[0], null);
+    currbarNum = 1;
+    updateCoordsHorizontal(center, currbar[1], null);
+    currbarNum = 2;
+    updateCoordsHorizontal(center, currbar[2], null);
+    currbarNum2 = 0;
+    updateCoordsHorizontal(center, currbar2[0], null);
+    currbarNum2 = 1;
+    updateCoordsHorizontal(center, currbar2[1], null);
+    currbarNum2 = 2;
+    updateCoordsHorizontal(center, currbar2[2], null);
+    updateCoordsHorizontal(center, centerDot, null);
+    currbarNum = tempCurr;
+    currbarNum2 = tempCurr2;
+  });
 
 offsetSlider.oninput = function() {
     /* Update value in textbox */
@@ -154,9 +239,9 @@ function updateCoordsHorizontal(angle, bar, isLeft){
     /* Updates position to new coordinates */
     bar.setAttribute("position",{x: newX.toPrecision(5), y: bar.getAttribute("position").y , z: newZ.toPrecision(5)});
     if (isLeft){
-        text[currbarNum2].value = (parseFloat(text[currbarNum2].value) + angle).toPrecision(3);
+        text[currbarNum2].value = (parseFloat(text[currbarNum2].value) + angle);
     } else if(isLeft === false){
-        text2[currbarNum].value = (parseFloat(text2[currbarNum].value) + angle).toPrecision(3);
+        text2[currbarNum].value = (parseFloat(text2[currbarNum].value) + angle);
     }
     /* Rotates the bar to keep it facing the camera (negated in orthographic mode)*/
     /*bar.setAttribute("rotation",{x: bar.getAttribute("rotation").x, y: bar.getAttribute("rotation").y - angle, z: bar.getAttribute("rotation").z});*/
@@ -174,7 +259,90 @@ function updateCoordsVertical(angle, bar){
     /*bar.setAttribute("rotation",{x: bar.getAttribute("rotation").x + angle, y: bar.getAttribute("rotation").y, z: bar.getAttribute("rotation").z});*/
 
 }
-shift = .5;
+shift = .1;
+visible = true;
+centering = true;
+leftBar= true;
+
+function recenter(left){
+    tempCurr = currbarNum;
+    tempCurr2 = currbarNum2;
+    if(left){
+        center = center - shift;
+        currbarNum = 0;
+        updateCoordsHorizontal(-shift, currbar[0], null);
+        currbarNum = 1;
+        updateCoordsHorizontal(-shift, currbar[1], null);
+        currbarNum = 2;
+        updateCoordsHorizontal(-shift, currbar[2], null);
+        currbarNum2 = 0;
+        updateCoordsHorizontal(-shift, currbar2[0], null);
+        currbarNum2 = 1;
+        updateCoordsHorizontal(-shift, currbar2[1], null);
+        currbarNum2 = 2;
+        updateCoordsHorizontal(-shift, currbar2[2], null);
+        updateCoordsHorizontal(-shift, centerDot, null);
+    } else {
+        center = Number((center + shift).toPrecision(5));
+        currbarNum = 0;
+        updateCoordsHorizontal(shift, currbar[0], null);
+        currbarNum = 1;
+        updateCoordsHorizontal(shift, currbar[1], null);
+        currbarNum = 2;
+        updateCoordsHorizontal(shift, currbar[2], null);
+        currbarNum2 = 0;
+        updateCoordsHorizontal(shift, currbar2[0], null);
+        currbarNum2 = 1;
+        updateCoordsHorizontal(shift, currbar2[1], null);
+        currbarNum2 = 2;
+        updateCoordsHorizontal(shift, currbar2[2], null);
+        updateCoordsHorizontal(shift, centerDot, null);
+    }
+    centerText.value = Number(center.toPrecision(5));
+    centerSlider.value = Number(center.toPrecision(5));
+    currbarNum = tempCurr;
+    currbarNum2 = tempCurr2;
+}
+
+function offsetChange(out){
+    
+    tempCurr = currbarNum;
+    tempCurr2 = currbarNum2;
+    if(out){
+        offset = offset + shift;
+        currbarNum = 0;
+        updateCoordsHorizontal(shift, currbar[0], null);
+        currbarNum = 1;
+        updateCoordsHorizontal(shift, currbar[1], null);
+        currbarNum = 2;
+        updateCoordsHorizontal(shift, currbar[2], null);
+        currbarNum2 = 0;
+        updateCoordsHorizontal(-shift, currbar2[0], null);
+        currbarNum2 = 1;
+        updateCoordsHorizontal(-shift, currbar2[1], null);
+        currbarNum2 = 2;
+        updateCoordsHorizontal(-shift, currbar2[2], null);
+    } else {
+        offset = Number((offset - shift).toPrecision(5));
+        currbarNum = 0;
+        updateCoordsHorizontal(-shift, currbar[0], null);
+        currbarNum = 1;
+        updateCoordsHorizontal(-shift, currbar[1], null);
+        currbarNum = 2;
+        updateCoordsHorizontal(-shift, currbar[2], null);
+        currbarNum2 = 0;
+        updateCoordsHorizontal(shift, currbar2[0], null);
+        currbarNum2 = 1;
+        updateCoordsHorizontal(shift, currbar2[1], null);
+        currbarNum2 = 2;
+        updateCoordsHorizontal(shift, currbar2[2], null);
+    }
+    currbarNum = tempCurr;
+    currbarNum2 = tempCurr2;
+
+    offsetText.value = Number(offset.toPrecision(5));
+    offsetSlider.value = Number(offset.toPrecision(5));
+}
 
 /* Input listener to determine if movement or bar switch is desired */
 document.addEventListener("keydown", movement);
@@ -184,24 +352,37 @@ function movement(event) {
     switch(key){
         case "ArrowUp":
             /* Changes selected bar to bar above current one, doesn't change for red bar */
-            if (currbarNum > 0){
-                currbarNum -= 1;
+            if(!left){
+                if (currbarNum > 0){
+                    currbarNum -= 1;
+                }
+            } else {
+                if (currbarNum2 > 0){
+                    currbarNum2 -= 1;
+                }
             }
+
             break;
         case "ArrowDown":
             /* Changes selected bar to bar below current one, doesn't change for blue bar */
-            if (currbarNum < 2){
-                currbarNum += 1;
+            if(!left){
+                if (currbarNum < 2){
+                    currbarNum += 1;
+                }
+            } else {
+                if (currbarNum2 < 2){
+                    currbarNum2 += 1;
+                }
             }
             break;
-        case "w":
+        /*case "w":*/
             /* Calls vertical translation */
-            updateCoordsVertical((parseFloat($("#step-size").val())), left ? currbar2[currbarNum2] : currbar[currbarNum], left);
+            /*updateCoordsVertical((parseFloat($("#step-size").val())), left ? currbar2[currbarNum2] : currbar[currbarNum], left);
             break;
-        case "s":
+        case "s":*/
             /* Calls vertical translation */
-            updateCoordsVertical((-parseFloat($("#step-size").val())), left ? currbar2[currbarNum2] : currbar[currbarNum], left);
-            break;
+            /*updateCoordsVertical((-parseFloat($("#step-size").val())), left ? currbar2[currbarNum2] : currbar[currbarNum], left);
+            break;*/
         case "a":
             /* Calls horizontal translation */
             updateCoordsHorizontal((-parseFloat($("#step-size").val())), left ? currbar2[currbarNum2] : currbar[currbarNum], left);
@@ -211,96 +392,76 @@ function movement(event) {
             updateCoordsHorizontal((parseFloat($("#step-size").val())), left ? currbar2[currbarNum2] : currbar[currbarNum], left);
             break;
 
-        case "ArrowLeft":
+        /*case "ArrowLeft":*/
             /* Changes selected bar to bar above current one, doesn't change for red bar */
-            if (currbarNum2 > 0){
+            /*if (currbarNum2 > 0){
                 currbarNum2 -= 1;
             }
             break;
-        case "ArrowRight":
+        case "ArrowRight":*/
             /* Changes selected bar to bar below current one, doesn't change for blue bar */
-            if (currbarNum2 < 2){
+           /* if (currbarNum2 < 2){
                 currbarNum2 += 1;
             }
-            break;
-        case "i":
+            break;*/
+        /*case "i":*/
             /* Calls vertical translation */
-            updateCoordsVertical((parseFloat($("#step-size").val())), currbar2[currbarNum2], true);
+            /*updateCoordsVertical((parseFloat($("#step-size").val())), currbar2[currbarNum2], true);
             break;
-        case "k":
+        case "k":*/
             /* Calls vertical translation */
-            updateCoordsVertical((-parseFloat($("#step-size").val())), currbar2[currbarNum2], true);
+            /*updateCoordsVertical((-parseFloat($("#step-size").val())), currbar2[currbarNum2], true);
             break;
-        case "j":
+        case "j":*/
             /* Calls horizontal translation */
-            updateCoordsHorizontal((-parseFloat($("#step-size").val())), currbar2[currbarNum2], true);
+            /*updateCoordsHorizontal((-parseFloat($("#step-size").val())), currbar2[currbarNum2], true);
             break;
-        case "l":
+        case "l":*/
             /* Calls horizontal translation */
-            updateCoordsHorizontal((parseFloat($("#step-size").val())), currbar2[currbarNum2], true);
-            break;
+            /*updateCoordsHorizontal((parseFloat($("#step-size").val())), currbar2[currbarNum2], true);
+            break;*/
         case "n":
             /* Calls horizontal translation */
-            recenter(true);
+            if(centering){
+                recenter(true); 
+            } else {
+                offsetChange(true);
+            }
             break;
         case "m":
             /* Calls horizontal translation */
-            recenter(false);
+            if(centering){
+                recenter(false); 
+            } else {
+                offsetChange(false);
+            }
             break;
-        case "x":
+        case "t":
             /* Calls horizontal translation */
             left = !left;
             break;
+        case "x":
+            centering = !centering;
+            break;
         case "z":
             /* Calls horizontal translation */
-            shift -= .02;
+            shift -= .01;
             break;
         case "c":
             /* Calls horizontal translation */
-            shift += .02;
+            shift += .01;
             break;
         case "p":
             /* Calls horizontal translation */
             document.querySelector('a-scene').exitVR();
             location.reload(true);
+        case " ":
+            visible ? centerDot.setAttribute("visible","false") : centerDot.setAttribute("visible","true");
+            visible = !visible;
     }
 }
 
-function recenter(left){
-    tempCurr = currbarNum;
-    tempCurr2 = currbarNum2;
-    if(left){
-        currbarNum = 0;
-        updateCoordsHorizontal(-shift, currbar[0], false);
-        currbarNum = 1;
-        updateCoordsHorizontal(-shift, currbar[1], false);
-        currbarNum = 2;
-        updateCoordsHorizontal(-shift, currbar[2], false);
-        currbarNum2 = 0;
-        updateCoordsHorizontal(-shift, currbar2[0], true);
-        currbarNum2 = 1;
-        updateCoordsHorizontal(-shift, currbar2[1], true);
-        currbarNum2 = 2;
-        updateCoordsHorizontal(-shift, currbar2[2], true);
-        updateCoordsHorizontal(-shift, centerDot, null);
-    } else {
-        currbarNum = 0;
-        updateCoordsHorizontal(shift, currbar[0], false);
-        currbarNum = 1;
-        updateCoordsHorizontal(shift, currbar[1], false);
-        currbarNum = 2;
-        updateCoordsHorizontal(shift, currbar[2], false);
-        currbarNum2 = 0;
-        updateCoordsHorizontal(shift, currbar2[0], true);
-        currbarNum2 = 1;
-        updateCoordsHorizontal(shift, currbar2[1], true);
-        currbarNum2 = 2;
-        updateCoordsHorizontal(shift, currbar2[2], true);
-        updateCoordsHorizontal(shift, centerDot, null);
-    }
-    currbarNum = tempCurr;
-    currbarNum2 = tempCurr2;
-}
+
 
     /*window.addEventListener('resize', resizeFrustum);
 
