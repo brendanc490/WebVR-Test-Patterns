@@ -22,9 +22,9 @@ function addEntity(){
     } else if ($("#entity :selected").text() == "checkerboard"){
         el.setAttribute("id","checkerboard"+checkerboardNum++);
         drawCheckerboard(16,16,.1,{r: 255, g: 255, b: 255},el);
-    } else if ($("#entity :selected").text() == "hollow plane"){
-        el.setAttribute("id","hollow"+planeNum++);
-        drawPlaneBorder(.25,.5,100,{r: 255, g: 255, b: 255},el);
+    } else if ($("#entity :selected").text() == "grille"){
+        el.setAttribute("id","grille"+grilleNum++);
+        drawGrille(.05,.5,32,{r: 255, g: 255, b: 255},el);
     }
     /* Set default universal stats */
     el.setAttribute("position",{x: 0, y: 0, z: -1+(0.00005*numAdded++)});
@@ -80,6 +80,25 @@ function drawGradient(width,height,numBars,color,parent){
         elChild.setAttribute("geometry",{primitive: "plane", width: width, height: height});
         elChild.setAttribute("position",{x: width*numBars/2-(width*j)-(width/2), y: 0, z: 0});
         elChild.setAttribute("material",{shader: "flat", color: "rgb("+Math.ceil(color.r-((color.r/numBars)*j)).toString()+","+Math.ceil(color.g-((color.g/numBars)*j)).toString()+","+Math.ceil(color.b-((color.b/numBars)*j)).toString()+")"});
+        parent.appendChild(elChild);
+        j++;
+    }
+}
+
+function drawGrille(width,height,numBars,color,parent){
+    var j = 0;
+    var isBlack = false;
+    while(j < numBars){
+        let elChild = document.createElement('a-entity');
+        elChild.setAttribute("id",parent.id+(numBars-j).toString());
+        elChild.setAttribute("geometry",{primitive: "plane", width: width, height: height});
+        elChild.setAttribute("position",{x: width*numBars/2-(width*j)-(width/2), y: 0, z: 0});
+        if(isBlack){
+            elChild.setAttribute("material",{shader: "flat", color: "rgb(0,0,0)"});
+        } else {
+            elChild.setAttribute("material",{shader: "flat", color: "rgb("+color.r.toString()+","+color.g.toString()+","+color.b.toString()+")"});
+        }
+        isBlack = !isBlack;
         parent.appendChild(elChild);
         j++;
     }
@@ -170,18 +189,6 @@ function editEntity(){
                 i--;
             }
             drawPlaneBorder(parseFloat($("#width").val()),parseFloat($("#height").val()),parseFloat($("#fill").val()),hexToRgb($("#color").val()),selectedEntity);
-            /*let newWidth = (parseFloat($("#width").val())/2)*Math.sqrt((parseFloat($("#fill").val()))/100);
-            let newHeight = (parseFloat($("#height").val())/2)*Math.sqrt((parseFloat($("#fill").val()))/100);
-
-            selectedEntity.children[0].setAttribute("geometry",{primitive: "plane", width: (parseFloat($("#width").val())/2)*Math.sqrt((parseFloat($("#fill").val()))/100), height: parseFloat($("#height").val())});
-            selectedEntity.children[1].setAttribute("geometry",{primitive: "plane", width: (parseFloat($("#width").val())/2)*Math.sqrt((parseFloat($("#fill").val()))/100), height: parseFloat($("#height").val())});
-            selectedEntity.children[2].setAttribute("geometry",{primitive: "plane", width: parseFloat($("#width").val()), height: (parseFloat($("#height").val())/2)*Math.sqrt((parseFloat($("#fill").val()))/100)});
-            selectedEntity.children[3].setAttribute("geometry",{primitive: "plane", width: parseFloat($("#width").val()), height: (parseFloat($("#height").val())/2)*Math.sqrt((parseFloat($("#fill").val()))/100)});
-            
-            selectedEntity.children[0].setAttribute("position",{x: (-1*(parseFloat($("#width").val())/2))+(newWidth/2), y: 0, z: 0});
-            selectedEntity.children[1].setAttribute("position",{x: (parseFloat($("#width").val())/2)-(newWidth/2), y: 0, z: 0});
-            selectedEntity.children[2].setAttribute("position",{x: 0, y: (parseFloat($("#height").val())/2)-(newHeight/2), z: 0});
-            selectedEntity.children[3].setAttribute("position",{x: 0, y: (-1*(parseFloat($("#height").val())/2))+(newHeight/2), z: 0});*/
         } else {
             selectedEntity.setAttribute("geometry",{primitive: "plane", width: parseFloat($("#width").val()), height: parseFloat($("#height").val())});
         }
@@ -214,7 +221,7 @@ function editEntity(){
     }
         selectedEntity.setAttribute("geometry",{primitive: "triangle", vertexA: {x: parseFloat($("#vax").val()), y: parseFloat($("#vay").val()), z: 0},
          vertexB: {x: parseFloat($("#vbx").val()), y: parseFloat($("#vby").val()), z: 0}, vertexC: {x: parseFloat($("#vcx").val()), y: parseFloat($("#vcy").val()), z: 0}});
-    } else if (selectedEntity.getAttribute("id").includes("gradient")){ /* gradient only changes */
+    } else if (selectedEntity.getAttribute("id").includes("gradient") || selectedEntity.getAttribute("id").includes("grille")){ /* gradient only changes */
         if(isNaN(parseFloat($("#width").val()))){
             alert("Please enter a valid width");
             return;
@@ -243,7 +250,12 @@ function editEntity(){
             selectedEntity.children[i].parentNode.removeChild(selectedEntity.children[i]);
             i--;
         }
-        drawGradient(parseFloat($("#width").val()),parseFloat($("#height").val()),parseFloat($("#numBarsIn").val()),hexToRgb($("#color").val()),selectedEntity);
+        if (selectedEntity.getAttribute("id").includes("gradient")){
+            drawGradient(parseFloat($("#width").val()),parseFloat($("#height").val()),parseFloat($("#numBarsIn").val()),hexToRgb($("#color").val()),selectedEntity);
+        } else {
+            drawGrille(parseFloat($("#width").val()),parseFloat($("#height").val()),parseFloat($("#numBarsIn").val()),hexToRgb($("#color").val()),selectedEntity);
+        }
+        
     } else if (selectedEntity.getAttribute("id").includes("checkerboard")){ /* checkerboard only changes */
         if(isNaN(parseFloat($("#rowsIn").val()))){
             alert("Please enter a valid number of rows");

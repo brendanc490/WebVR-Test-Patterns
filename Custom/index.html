@@ -5,6 +5,25 @@
         <script src="../lib/aframe.min.js" type="text/javascript"></script>
         <script src="../lib/FileSaver.js" type="text/javascript"></script>
         <script>
+        /* Code to register the orthographic camera as parent camera and remove original camera */
+        AFRAME.registerComponent('ortho', {
+            init: function () {
+                /* Save original camera */
+                var sceneEl = this.el.sceneEl;
+                this.originalCamera = sceneEl.camera;
+                this.cameraParent = sceneEl.camera.parent;
+                /* Create orthographic camera using three.js */
+                this.orthoCamera = new THREE.OrthographicCamera(-2, 2, 1, -1);
+                /* Makes this the parent camera and add it to scene */
+                this.cameraParent.add(this.orthoCamera);
+                sceneEl.camera = this.orthoCamera;
+            },
+            /* Removes orthographic camera and replaces it with original camera upon termination */
+            remove: function () {
+            this.cameraParent.remove(this.orthoCamera);
+            sceneEl.camera = this.originalCamera;
+            }
+        });
             AFRAME.registerComponent('thumbstick-logging-right',{
             init: function () {
                 this.el.addEventListener('thumbstickmoved', this.logThumbstickRight);
@@ -37,7 +56,7 @@
     </head>
 
     <body>
-        <a-scene cursor="rayOrigin: mouse">
+        <a-scene cursor="rayOrigin: mouse" ortho>
             <a-assets>
                 <img id="QC" src="patterns/TG18-QC.2k_12b.png">
                 <img id="CH" src="patterns/TG18-CH.2k.png">
@@ -73,7 +92,8 @@
                     <option value="plane">plane</option>
                     <option value="triangle">triangle</option>
                     <option value="gradient">gradient</option>
-                    <option value="gradient">checkerboard</option>
+                    <option value="checkerboard">checkerboard</option>
+                    <option value="grille">grille</option>
                     <!--<option value="hollow-plane">hollow plane</option>-->
                 </select>
             </p>

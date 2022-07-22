@@ -3,12 +3,12 @@ function saveScene(){
     const jsonData = {};
     jsonData["sky"] = {skyColor: sky.getAttribute("material").color};
     els.forEach(element => { 
-        if(element.id.includes("gradient")){
+        if(element.id.includes("gradient") || element.id.includes("grille")){
             jsonData[element.id] = {numBars: element.children.length, childGeometry: element.children[0].components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         } else if(element.id.includes("checkerboard")){
             jsonData[element.id] = {rows: element.children.length, cols: element.children[0].children.length, tileSize: element.children[0].children[0].components.geometry.attrValue.width, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         } else if(element.id.includes("plane")){
-            jsonData[element.id] = {widthReal: element.children[2].components.geometry.attrValue.width ,fill: ((element.children[0].components.geometry.attrValue.width*2)/element.children[2].components.geometry.attrValue.width)*((element.children[0].components.geometry.attrValue.width*2)/element.children[2].components.geometry.attrValue.width)*100, geometry: element.components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+            jsonData[element.id] = {widthReal: element.components.geometry.attrValue.width ,fill: ((element.children[0].components.geometry.attrValue.width*2)/element.children[2].components.geometry.attrValue.width)*((element.children[0].components.geometry.attrValue.width*2)/element.children[2].components.geometry.attrValue.width)*100, geometry: element.components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         } else {
             jsonData[element.id]={geometry: element.components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         }});
@@ -43,7 +43,7 @@ function getExtension(filename) {
 function entityLoader(){
     let skip = false;
     Object.keys(fileContent).forEach(key => {
-        if (!key.includes("sky") && !key.includes("circle") && !key.includes("plane") && !key.includes("triangle") && !key.includes("gradient") && !key.includes("checkerboard")){
+        if (!key.includes("sky") && !key.includes("circle") && !key.includes("plane") && !key.includes("triangle") && !key.includes("gradient") && !key.includes("checkerboard") && !key.includes("grille")){
             alert("Cannot parse file");
             scene_input.value = "";
             skip = true;
@@ -70,9 +70,11 @@ function entityLoader(){
                     el.setAttribute("id","triangle"+triangleNum++);
                     el.setAttribute("geometry", fileContent[key].geometry);
                 } else if (key.includes("gradient")){
-                    console.log(fileContent[key].childGeometry);
                     el.setAttribute("id", "gradient"+gradientNum++);
                     drawGradient(fileContent[key].childGeometry.width,fileContent[key].childGeometry.height,fileContent[key].numBars,hexToRgb(fileContent[key].material.color),el);
+                } else if (key.includes("grille")){
+                    el.setAttribute("id", "grille"+grilleNum++);
+                    drawGrille(fileContent[key].childGeometry.width,fileContent[key].childGeometry.height,fileContent[key].numBars,hexToRgb(fileContent[key].material.color),el);
                 } else if (key.includes("checkerboard")){
                     el.setAttribute("id", "checkerboard"+checkerboardNum++);
                     drawCheckerboard(fileContent[key].rows,fileContent[key].cols,fileContent[key].tileSize,hexToRgb(fileContent[key].material.color),el);

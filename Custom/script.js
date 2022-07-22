@@ -135,6 +135,7 @@ var planeNum = 0; /* number of planes created */
 var triangleNum = 0; /* number of triangles created */
 var gradientNum = 0; /* number of gradients created */
 var checkerboardNum = 0; /* number of checkerboards created */
+var grilleNum = 0;
 var textureNum = 0;
 var numAdded = 0; /* total entities added */
 
@@ -197,7 +198,6 @@ function updateStats(){
     yIn.value = entity.components.position.attrValue.y;
     rotation.value = entity.components.rotation.attrValue.z;
     color.value = entity.components.material.attrValue.color;
-    let test = 0;
     if (entity.components.material.attrValue.src == "" || entity.components.material.attrValue.src == null){
         texture.selectedIndex = 0;
         texture.options[0].selected = true;
@@ -230,6 +230,10 @@ function updateStats(){
         rowsIn.style.value = selectedEntity.children.length;
         cols.style.value = selectedEntity.children[0].length;
         tileSize.style.value = selectedEntity.children[0].children[0].components.geometry.attrValue.width;
+    } else if(selectedEntity.getAttribute("id").includes("grille")){
+        width.value = selectedEntity.children[0].components.geometry.attrValue.width;
+        height.value = selectedEntity.children[0].components.geometry.attrValue.height;
+        numBarsIn.value = selectedEntity.children.length;
     }
 }
 
@@ -281,7 +285,7 @@ function toggleAddEdit(swap){
             vb.style.display = "block";
             vc.style.display = "block";
             fillIn.style.display = "block";
-        } else if (selectedEntity.getAttribute("id").includes("gradient")) { /* gradient exlcusive containers shown */
+        } else if (selectedEntity.getAttribute("id").includes("gradient") || selectedEntity.getAttribute("id").includes("grille")) { /* gradient exlcusive containers shown */
             heightIn.style.display = "block";
             widthIn.style.display = "block";
             numBars.style.display = "block";
