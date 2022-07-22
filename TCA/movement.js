@@ -276,19 +276,18 @@ blueBar2.setAttribute("position", {x: 0 * Math.cos((-20*Math.PI)/180) - -1 * Mat
 function drawBars(widthIn,heightIn){
 
     redBar.setAttribute("geometry",{primitive: "box", depth: 0, height: heightIn, width: widthIn});
-    redBar.setAttribute("position", {x: 0 * Math.cos((offset*Math.PI)/180) - -1 * Math.sin((offset*Math.PI)/180), y: heightIn, z: -1 * Math.cos((offset*Math.PI)/180) + 0 * Math.sin((offset*Math.PI)/180)});
+    redBar.setAttribute("position", {x: redBar.getAttribute("position").x, y: heightIn, z: redBar.getAttribute("position").z});
     greenBar.setAttribute("geometry",{primitive: "box", depth: 0, height: heightIn, width: widthIn});
-    greenBar.setAttribute("position", {x: 0 * Math.cos((offset*Math.PI)/180) - -1 * Math.sin((offset*Math.PI)/180), y: 0, z: -1 * Math.cos((offset*Math.PI)/180) + 0 * Math.sin((offset*Math.PI)/180)});
+    greenBar.setAttribute("position", {x: greenBar.getAttribute("position").x, y: 0, z: greenBar.getAttribute("position").z});
     blueBar.setAttribute("geometry",{primitive: "box", depth: 0, height: heightIn, width: widthIn});
-    blueBar.setAttribute("position", {x: 0 * Math.cos((offset*Math.PI)/180) - -1 * Math.sin((offset*Math.PI)/180), y: -heightIn, z: -1 * Math.cos((offset*Math.PI)/180) + 0 * Math.sin((offset*Math.PI)/180)});
-    
+    blueBar.setAttribute("position", {x: blueBar.getAttribute("position").x, y: -heightIn, z: blueBar.getAttribute("position").z});
+
     redBar2.setAttribute("geometry",{primitive: "box", depth: 0, height: heightIn, width: widthIn});
-    redBar2.setAttribute("position", {x: 0 * Math.cos((-offset*Math.PI)/180) - -1 * Math.sin((-offset*Math.PI)/180), y: heightIn, z: -1 * Math.cos((-offset*Math.PI)/180) + 0 * Math.sin((-offset*Math.PI)/180)});
+    redBar2.setAttribute("position", {x: redBar2.getAttribute("position").x, y: heightIn, z: redBar2.getAttribute("position").z});
     greenBar2.setAttribute("geometry",{primitive: "box", depth: 0, height: heightIn, width: widthIn});
-    greenBar2.setAttribute("position", {x: 0 * Math.cos((-offset*Math.PI)/180) - -1 * Math.sin((-offset*Math.PI)/180), y: 0, z: -1 * Math.cos((-offset*Math.PI)/180) + 0 * Math.sin((-offset*Math.PI)/180)});
+    greenBar2.setAttribute("position", {x: greenBar2.getAttribute("position").x, y: 0, z: greenBar2.getAttribute("position").z});
     blueBar2.setAttribute("geometry",{primitive: "box", depth: 0, height: heightIn, width: widthIn});
-    blueBar2.setAttribute("position", {x: 0 * Math.cos((-offset*Math.PI)/180) - -1 * Math.sin((-offset*Math.PI)/180), y: -heightIn, z: -1 * Math.cos((-offset*Math.PI)/180) + 0 * Math.sin((-offset*Math.PI)/180)});
-    
+    blueBar2.setAttribute("position", {x: blueBar2.getAttribute("position").x, y: -heightIn, z: blueBar2.getAttribute("position").z});
 
 }
 
