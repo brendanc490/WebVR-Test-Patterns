@@ -238,6 +238,7 @@
 
     <!-- Fixed settings area -->
     <div id="info">
+        <b>Settings</b>
         <!-- Text input to determine size of each step -->
         <p>Size of step (degrees): <input type="text" class="input" id="step-size" value="0.1"></p>
 
@@ -255,11 +256,12 @@
         <!-- Slider/text input to determine the width of bars -->
         <p>Width of bars (m): <input type="text" class="input" id="width" value=".005"> <div class="slidecontainer">
         <input type="range" min="0" max=".02" value=".005" class="slider2" id="widthRange" step=".001">
+        </div></p>
+        <b>Results</b>
         <p id="edit1">Degrees Translated Left Bar (RGB):<input type="text" class="input" id="xBlue1" value="0"><input type="text" class="input" id="xGreen1" value="0"><input type="text" class="input" id="xRed1" value="0"></p>
             
         <p id="edit1">Degrees Translated Right Bar (RGB):<input type="text" class="input" id="xBlue2" value="0"><input type="text" class="input" id="xGreen2" value="0"><input type="text" class="input" id="xRed2" value="0"></p>
             
-        </div></p>
     </div>
     <!-- Script that handles movement, positioning, and drawing of bars -->
     <script src="movement.js"></script>
