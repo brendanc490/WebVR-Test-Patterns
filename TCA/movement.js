@@ -116,19 +116,81 @@ $("#centerPos").change(function() {
   });
 
 offsetSlider.oninput = function() {
+    tempCurr = currbarNum;
+    tempCurr2 = currbarNum2;
+    currbarNum = 0;
+    updateCoordsHorizontal(-offset, currbar[0], null);
+    currbarNum = 1;
+    updateCoordsHorizontal(-offset, currbar[1], null);
+    currbarNum = 2;
+    updateCoordsHorizontal(-offset, currbar[2], null);
+    currbarNum2 = 0;
+    updateCoordsHorizontal(offset, currbar2[0], null);
+    currbarNum2 = 1;
+    updateCoordsHorizontal(offset, currbar2[1], null);
+    currbarNum2 = 2;
+    updateCoordsHorizontal(offset, currbar2[2], null);
+    currbarNum = tempCurr;
+    currbarNum2 = tempCurr2;
     /* Update value in textbox */
     offsetText.value = this.value;
     /* Set height to be new height */
     offset = this.value;
     /* Redraw bars */
-    drawBars(width,height);
+    tempCurr = currbarNum;
+    tempCurr2 = currbarNum2;
+    currbarNum = 0;
+    updateCoordsHorizontal(offset, currbar[0], null);
+    currbarNum = 1;
+    updateCoordsHorizontal(offset, currbar[1], null);
+    currbarNum = 2;
+    updateCoordsHorizontal(offset, currbar[2], null);
+    currbarNum2 = 0;
+    updateCoordsHorizontal(-offset, currbar2[0], null);
+    currbarNum2 = 1;
+    updateCoordsHorizontal(-offset, currbar2[1], null);
+    currbarNum2 = 2;
+    updateCoordsHorizontal(-offset, currbar2[2], null);
+    currbarNum = tempCurr;
+    currbarNum2 = tempCurr2;
 }
 
 $("#offset").change(function() {
+    tempCurr = currbarNum;
+    tempCurr2 = currbarNum2;
+    currbarNum = 0;
+    updateCoordsHorizontal(-offset, currbar[0], null);
+    currbarNum = 1;
+    updateCoordsHorizontal(-offset, currbar[1], null);
+    currbarNum = 2;
+    updateCoordsHorizontal(-offset, currbar[2], null);
+    currbarNum2 = 0;
+    updateCoordsHorizontal(offset, currbar2[0], null);
+    currbarNum2 = 1;
+    updateCoordsHorizontal(offset, currbar2[1], null);
+    currbarNum2 = 2;
+    updateCoordsHorizontal(offset, currbar2[2], null);
+    currbarNum = tempCurr;
+    currbarNum2 = tempCurr2;
     /* Change height slider to correct height, this will call the slider change function */
     offset = offsetText.value;
     offsetSlider.value = offset;
-    drawBars(width,height);
+    tempCurr = currbarNum;
+    tempCurr2 = currbarNum2;
+    currbarNum = 0;
+    updateCoordsHorizontal(offset, currbar[0], null);
+    currbarNum = 1;
+    updateCoordsHorizontal(offset, currbar[1], null);
+    currbarNum = 2;
+    updateCoordsHorizontal(offset, currbar[2], null);
+    currbarNum2 = 0;
+    updateCoordsHorizontal(-offset, currbar2[0], null);
+    currbarNum2 = 1;
+    updateCoordsHorizontal(-offset, currbar2[1], null);
+    currbarNum2 = 2;
+    updateCoordsHorizontal(-offset, currbar2[2], null);
+    currbarNum = tempCurr;
+    currbarNum2 = tempCurr2;
   });
 
 /* If the height slider is changed */
