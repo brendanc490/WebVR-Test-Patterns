@@ -1,6 +1,9 @@
 # Directions For Use: #
 ![plot](../Images/editor.PNG)
 
+## Displaying the Scene
+To display the scene, hit the ***VR*** button in the bottom right hand corner.
+
 ## Adding Entities
 To add an entity, make sure the slider at the top left of the webpage is set to ***Add Entity***.  
 
@@ -17,13 +20,22 @@ Entities will spawn at a random position within the editor camera field of view 
 - Grille
 
 ## Editing Entities
-**In order to access the editor one or more entities must be added to the scene**.
+**In order to access the editor one or more entities must be added to the scene**. The editing bar can be hidden by pressing the ***Hide Settings*** button.
+
 Once entities have been added to the scene, change the slider to ***Edit Entity***.
 
 To change the entity being edited, either click on the entity or select the desired entity from the dropdown labeled ***Current Entity***.
 Entity ID's are automatically generated with the format **\<name of entity\>\<number of entities of this type previously created\>**.  
 
-Examples: circle0, checkerboard4, plane20
+Examples: circle0, checkerboard4, plane20.
+
+The current entity can be removed by hitting the ***Remove from Scene***. The entire scene can be reset by hitting the ***Reset Scene*** button.
+
+### Layering Entities
+Entities are layered by default in the order they are added to the scene. This layering can be altered with the ***Send back*** and ***Send forward*** buttons.
+
+### Saving the Scene
+To save the scene, press the ***Save Scene*** button located at the bottom of the editor tab. The scene is saved as an editable JSON file. Uploaded textures are preserved without image compression.
 
 ## Background Color
 To change the background color, select a new color or enter the hexadecimal code of the desired color.
@@ -67,10 +79,10 @@ Select a color using the color slider or input the desired color in hexadecimal 
 - Texture: 
    - There are some textures built into the site. [They can be found here.](https://github.com/brendanc490/WebVR-Test-Patterns/tree/main/Custom/patterns) Textures can also be uploaded as JPGS or PNGS and added to the list of available textures in the scene. 
    - Applying a texture will automatically scale the plane to fit the aspect ratio.
-- Width (m): 
-   - The unit for width is world units where 1 world unit is equal to 1 meter in 3D space.
 - Height (m): 
    - The unit for height is world units where 1 world unit is equal to 1 meter in 3D space.
+- Width (m): 
+   - The unit for width is world units where 1 world unit is equal to 1 meter in 3D space.
 - Border Size: 
    - The unit for border size is world units where 1 world unit is equal to 1 meter in 3D space. By default, the border size is set to be equal to the radius to the smallest dimension present of the plane, meaning the entity is entirely filled in.
 
@@ -82,3 +94,28 @@ Select a color using the color slider or input the desired color in hexadecimal 
    - Position of vertex B in relation to the center point of. The units for is position are world units where 1 world unit is equal to 1 meter in 3D space.
 - Vertex B (x m,y m):
    - Position of vertex C in relation to the center point of. The units for is position are world units where 1 world unit is equal to 1 meter in 3D space.
+
+#### Gradient
+- Individual Bar Height (m): 
+   - The unit for height is world units where 1 world unit is equal to 1 meter in 3D space.
+- Indivdual Bar Width (m): 
+   - The unit for width is world units where 1 world unit is equal to 1 meter in 3D space.
+- Number of Bars:
+   - The number of bars in the gradient, the default is 32.
+   - The color is divided by the number of bars to determine the color of each bar.
+
+#### Checkerboard
+- Tile size (m): 
+   - The unit for width and height of tiles is world units where 1 world unit is equal to 1 meter in 3D space.
+- Number of Rows: 
+   - The number of rows in the checkerboard, the default is 16.
+- Number of Columns:
+   - The number of columns in the checkerboard, the default is 16.
+
+#### Grille
+- Individual Bar Height (m): 
+   - The unit for height is world units where 1 world unit is equal to 1 meter in 3D space.
+- Indivdual Bar Width (m): 
+   - The unit for width is world units where 1 world unit is equal to 1 meter in 3D space.
+- Number of Bars:
+   - The number of bars in the grille, the default is 32.
