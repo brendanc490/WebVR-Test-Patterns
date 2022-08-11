@@ -29,6 +29,8 @@ To edit the position, locate the position text boxes under **Universal Settings*
 The position of an entity refers to where its center point is located. The editor interfaces the three axis in different manners. 
 Positional data is calculated based on a cylinder that encompasses the camera. The radius of this cylinder cannot be changed, however the cylinder has an infinite height. The x and z axes are responsible for horizontal positioning. The y axis controls the vertical position. 
 
+![plot](./Images/cylinderRadius.PNG)
+
    - x-axis: This axis is in terms of **degrees** where 1 degree references 1 degree of clockwise rotation away from the fixed camera center on the cylinder.
    - y-axis: This axis is in terms of **world units** where 1 world unit is equal to 1 meter in 3D space. 
    - z-axis: **The z-axis is NOT editable by users.** The location on the z-axis is automatically calculated based on the x-axis angle.
