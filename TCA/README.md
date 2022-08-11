@@ -27,12 +27,19 @@ The program allows you to control the red, green, or blue segments in both of th
 - esc: Exit immersive mode
 
 ### Controllers
-**Currently, the only controllers that are supported are the Oculus Rift, Rift S, Oculus Quest 1 and 2.** If you would like to add new controllers, [check here to see if the controllers are supported.](https://aframe.io/docs/1.3.0/introduction/interactions-and-controllers.html) If the controllers are supported replace the following code with whatever controller you would like to use. 
+**Currently, the only controllers that are supported are the Oculus Rift, Rift S, Oculus Quest 1 and 2.** If you would like to add new controllers, [check here to see if the controllers are supported.](https://aframe.io/docs/1.3.0/introduction/interactions-and-controllers.html) If the controllers are supported replace the following code with whatever controller you would like to use. **Make sure to take note of what buttons are available on this controller.** 
 
 
 ![plot](../Images/tcaControllerAdd.PNG)
 
-**Note: Some controllers have different button layouts which may result in needing to rebind controls.**
+**Note: Some controllers have different button layouts which may result in needing to rebind controls. This can be done by adding in button listeners like the one below tailored to the new constraints. Each action on the controller is mapped to a key on the keyboard, so to change the button mapping for controllers, replace which key event is created on a button press.**
+
+![plot](../Images/tcaControllerR.PNG)
+
+
+![plot](../Images/tcaControllerL.PNG)
+
+
 
 #### Right Controller: 
 - a: Move current segment left
