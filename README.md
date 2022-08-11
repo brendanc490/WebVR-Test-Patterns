@@ -19,8 +19,8 @@ Then, select the type of entity you would like to add using the **Type of entity
 Once entities have been added to the scene, change the slider to **Edit Entity.**
 
 ### Background Settings
-Background color
-  To change the background color, select a new color or enter the hexadecimal code of the desired color.
+Background color:  
+To change the background color, select a new color or enter the hexadecimal code of the desired color.
 ### Entity Settings
 #### Universal Settings
 Position:
