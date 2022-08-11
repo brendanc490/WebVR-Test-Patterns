@@ -32,7 +32,7 @@ The program allows you to control the red, green, or blue segments in both of th
 
 ![plot](../Images/tcaControllerAdd.PNG)
 
-**Note: Some controllers have different button layouts which may result in needing to rebind controls. This can be done by adding in button listeners like the one below tailored to the new constraints. Each action on the controller is mapped to a key on the keyboard, so to change the button mapping for controllers, replace which key event is created on a button press.**
+***Note: Some controllers have different button layouts which may result in needing to rebind controls. This can be done by adding in button listeners like the one below tailored to the new constraints. Each action on the controller is mapped to a key on the keyboard, so to change the button mapping for controllers, replace which key event is created on a button press.***
 
 #### Left Controller Bindings
 ![plot](../Images/tcaControllerL.PNG)
