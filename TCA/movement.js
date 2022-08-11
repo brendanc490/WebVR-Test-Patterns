@@ -260,18 +260,23 @@ var left = false;
 
 redBar.setAttribute("geometry",{primitive: "box", depth: 0, height: .05, width: .005});
 redBar.setAttribute("position", {x: 0 * Math.cos((20*Math.PI)/180) - -1 * Math.sin((20*Math.PI)/180), y: .05, z: -1 * Math.cos((20*Math.PI)/180) + 0 * Math.sin((20*Math.PI)/180)});
+redBar.setAttribute("rotation", {x: 0, y: 20, z: 0});
 greenBar.setAttribute("geometry",{primitive: "box", depth: 0, height: .05, width: .005});
 greenBar.setAttribute("position", {x: 0 * Math.cos((20*Math.PI)/180) - -1 * Math.sin((20*Math.PI)/180), y: 0, z: -1 * Math.cos((20*Math.PI)/180) + 0 * Math.sin((20*Math.PI)/180)});
+greenBar.setAttribute("rotation", {x: 0, y: 20, z: 0});
 blueBar.setAttribute("geometry",{primitive: "box", depth: 0, height: .05, width: .005});
 blueBar.setAttribute("position", {x: 0 * Math.cos((20*Math.PI)/180) - -1 * Math.sin((20*Math.PI)/180), y: -.05, z: -1 * Math.cos((20*Math.PI)/180) + 0 * Math.sin((20*Math.PI)/180)});
+blueBar.setAttribute("rotation", {x: 0, y: 20, z: 0});
 
 redBar2.setAttribute("geometry",{primitive: "box", depth: 0, height: .05, width: .005});
 redBar2.setAttribute("position", {x: 0 * Math.cos((-20*Math.PI)/180) - -1 * Math.sin((-20*Math.PI)/180), y: .05, z: -1 * Math.cos((-20*Math.PI)/180) + 0 * Math.sin((-20*Math.PI)/180)});
+redBar2.setAttribute("rotation", {x: 0, y: -20, z: 0});
 greenBar2.setAttribute("geometry",{primitive: "box", depth: 0, height: .05, width: .005});
 greenBar2.setAttribute("position", {x: 0 * Math.cos((-20*Math.PI)/180) - -1 * Math.sin((-20*Math.PI)/180), y: 0, z: -1 * Math.cos((-20*Math.PI)/180) + 0 * Math.sin((-20*Math.PI)/180)});
+greenBar2.setAttribute("rotation", {x: 0, y: -20, z: 0});
 blueBar2.setAttribute("geometry",{primitive: "box", depth: 0, height: .05, width: .005});
 blueBar2.setAttribute("position", {x: 0 * Math.cos((-20*Math.PI)/180) - -1 * Math.sin((-20*Math.PI)/180), y: -.05, z: -1 * Math.cos((-20*Math.PI)/180) + 0 * Math.sin((-20*Math.PI)/180)});
-
+blueBar2.setAttribute("rotation", {x: 0, y: -20, z: 0});
 /* Draws bars with given width, height at default position */
 function drawBars(widthIn,heightIn){
 
@@ -299,6 +304,7 @@ function updateCoordsHorizontal(angle, bar, isLeft){
     newZ = bar.getAttribute("position").z * Math.cos((angle*Math.PI)/180) + bar.getAttribute("position").x * Math.sin((angle*Math.PI)/180);
     /* Updates position to new coordinates */
     bar.setAttribute("position",{x: newX.toPrecision(5), y: bar.getAttribute("position").y , z: newZ.toPrecision(5)});
+    bar.setAttribute("rotation",{x: 0, y: -angle, z: 0});
     if (isLeft){
         text[currbarNum2].value = (parseFloat(text[currbarNum2].value) + angle);
     } else if(isLeft === false){
@@ -540,6 +546,7 @@ function movement(event) {
             scene.camera.right = screen.width/1000
             scene.camera.top = screen.height/1000
             scene.camera.bottom = (screen.height*-1)/1000;
+            scene.camera.updateProjectionMatrix();
 
             console.log("Clock in");
       });
@@ -549,6 +556,7 @@ function movement(event) {
             scene.camera.right = (window.innerWidth)/1000;
             scene.camera.top = (window.innerHeight)/1000;
             scene.camera.bottom = (window.innerHeight*-1)/1000;
+            scene.camera.updateProjectionMatrix();
 
             console.log("Clock Out");
       });

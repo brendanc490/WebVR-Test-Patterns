@@ -12,7 +12,9 @@
                 this.originalCamera = sceneEl.camera;
                 this.cameraParent = sceneEl.camera.parent;
                 /* Create orthographic camera using three.js */
-                this.orthoCamera = new THREE.OrthographicCamera((window.innerWidth*-1)/1000, window.innerWidth/1000, window.innerHeight/1000, (window.innerHeight*-1)/1000);
+                /*this.orthoCamera = new THREE.OrthographicCamera((window.innerWidth*-1)/1000, window.innerWidth/1000, window.innerHeight/1000, (window.innerHeight*-1)/1000*/
+
+                this.orthoCamera = new THREE.OrthographicCamera(-2, 2, 1, -1);
                 /* Makes this the parent camera and add it to scene */
                 this.cameraParent.add(this.orthoCamera);
                 sceneEl.camera = this.orthoCamera;
@@ -209,7 +211,7 @@
   <body>
     <!-- Includes orthographic camera in scene -->
     
-    <a-scene ortho>
+    <a-scene>
         <!-- Oculus controls -->
         <a-entity oculus-touch-controls="hand: left" button-listener-l-quest></a-entity>
         <a-entity oculus-touch-controls="hand: right" button-listener-r-quest></a-entity>
@@ -219,7 +221,6 @@
 
         <a-camera wasd-controls-enabled="false">-->
             <!-- Sphere entity to signify the position of the camera -->
-            <a-sphere position="0 0 0" radius=".2"></a-sphere>
             <!-- Creates 3 bars to be used in test, positioning done in script -->
             <a-entity id="redBar" geometry="primitive: box;  width: .3, height: 1" material="color: #FF0000"></a-entity>
             <a-entity id="greenBar" geometry="primitive: box;  width: .3, height: 1" material="color: #00FF00"></a-entity>
@@ -258,7 +259,7 @@
         <input type="range" min="0" max=".02" value=".005" class="slider2" id="widthRange" step=".001">
         </div></p>
         <b>Results</b>
-        <p id="edit1">Degrees Translated Left Bar (RGB):<input type="text" class="input" id="xBlue1" value="0"><input type="text" class="input" id="xGreen1" value="0"><input type="text" class="input" id="xRed1" value="0"></p>
+        <p id="edit1">Deg Translated Left Bar (RGB):<input type="text" class="input" id="xBlue1" value="0"><input type="text" class="input" id="xGreen1" value="0"><input type="text" class="input" id="xRed1" value="0"></p>
             
         <p id="edit1">Degrees Translated Right Bar (RGB):<input type="text" class="input" id="xBlue2" value="0"><input type="text" class="input" id="xGreen2" value="0"><input type="text" class="input" id="xRed2" value="0"></p>
             
