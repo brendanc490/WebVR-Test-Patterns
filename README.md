@@ -2,9 +2,9 @@
 ![plot](./Images/editor.PNG)
 
 ## Adding Entities
-To add an entity, make sure the slider at the top left of the webpage is set to **Add Entity**.  
+To add an entity, make sure the slider at the top left of the webpage is set to ***Add Entity***.  
 
-Then, select the type of entity you would like to add using the **Type of entity** dropdown and hit the **Add to Scene** button.
+Then, select the type of entity you would like to add using the ***Type of entity*** dropdown and hit the ***Add to Scene*** button.
 
 ### Types of Entities
 - Circle
@@ -15,8 +15,12 @@ Then, select the type of entity you would like to add using the **Type of entity
 - Grille
 
 ## Editing Entities
-**In order to access the editor one or more entities must be added to the scene.**
-Once entities have been added to the scene, change the slider to **Edit Entity.**
+**In order to access the editor one or more entities must be added to the scene**.
+Once entities have been added to the scene, change the slider to ***Edit Entity***.
+
+To change the entity being edited, either click on the entity or select the desired entity from the dropdown labeled ***Current Entity***.
+Entity ID's are automatically generated with the format <name of entity><number of entities of this type previously created>.
+   exs. circle0, checkerboard4, plane20
 
 ### Background Settings
 #### Background color:  
