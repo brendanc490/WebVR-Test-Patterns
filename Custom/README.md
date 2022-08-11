@@ -59,17 +59,25 @@ Select a color using the color slider or input the desired color in hexadecimal 
 ### Entity Specific Settings
 #### Circle 
 - Radius (m): 
-   - The unit for radius is world meters where 1 world unit is equal to 1 meter in 3D space.
+   - The unit for radius is world units where 1 world unit is equal to 1 meter in 3D space.
 - Border Size: 
-   - The unit for border size is world meters where 1 world unit is equal to 1 meter in 3D space. By default, the border size is set to be equal to the radius of the circle, meaning the entity is entirely filled in.
+   - The unit for border size is world units where 1 world unit is equal to 1 meter in 3D space. By default, the border size is set to be equal to the radius of the circle, meaning the entity is entirely filled in.
 
 #### Plane
 - Texture: 
    - There are some textures built into the site. [They can be found here.](https://github.com/brendanc490/WebVR-Test-Patterns/tree/main/Custom/patterns) Textures can also be uploaded as JPGS or PNGS and added to the list of available textures in the scene. 
    - Applying a texture will automatically scale the plane to fit the aspect ratio.
 - Width (m): 
-   - The unit for width is world meters where 1 world unit is equal to 1 meter in 3D space.
+   - The unit for width is world units where 1 world unit is equal to 1 meter in 3D space.
 - Height (m): 
-   - The unit for height is world meters where 1 world unit is equal to 1 meter in 3D space.
+   - The unit for height is world units where 1 world unit is equal to 1 meter in 3D space.
 - Border Size: 
-   - The unit for border size is world meters where 1 world unit is equal to 1 meter in 3D space. By default, the border size is set to be equal to the radius to the smallest dimension present of the plane, meaning the entity is entirely filled in.
+   - The unit for border size is world units where 1 world unit is equal to 1 meter in 3D space. By default, the border size is set to be equal to the radius to the smallest dimension present of the plane, meaning the entity is entirely filled in.
+
+#### Triangle
+- Vertex A (x m,y m):
+   - Position of vertex A in relation to the center point of. The units for is position are world units where 1 world unit is equal to 1 meter in 3D space.
+- Vertex B (x m,y m):
+   - Position of vertex B in relation to the center point of. The units for is position are world units where 1 world unit is equal to 1 meter in 3D space.
+- Vertex B (x m,y m):
+   - Position of vertex C in relation to the center point of. The units for is position are world units where 1 world unit is equal to 1 meter in 3D space.
