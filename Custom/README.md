@@ -59,4 +59,4 @@ Select a color using the color slider or input the desired color in hexadecimal 
 - Border Size: The unit for border size is world meters where 1 world unit is equal to 1 meter in 3D space. By default, the border size is set to be equal to the radius of the circle, meaning the entity is entirely filled in.
 
 #### Plane
-- Texture: There are some textures built into the site. [They can be found here](https://github.com/brendanc490/WebVR-Test-Patterns/tree/main/Custom/patterns)
+- Texture: There are some textures built into the site. [They can be found here.](https://github.com/brendanc490/WebVR-Test-Patterns/tree/main/Custom/patterns) Textures can also be uploaded as JPGS or PNGS and added to the list of available textures in the scene. Applying a texture will automatically scale the plane to fit the aspect ratio.
