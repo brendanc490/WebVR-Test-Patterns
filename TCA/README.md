@@ -27,7 +27,8 @@ The program allows you to control the red, green, or blue segments in both of th
 - esc: Exit immersive mode
 
 ### Controllers
-**Currently, the only controllers that are supported are the Oculus Rift, Rift S, Oculus Quest 1 and 2.** To add more controllers, [follow the directions here](https://aframe.io/docs/1.3.0/introduction/interactions-and-controllers.html)
+**Currently, the only controllers that are supported are the Oculus Rift, Rift S, Oculus Quest 1 and 2.** If you would like to add new controllers, [check here to see if the controllers are supported.](https://aframe.io/docs/1.3.0/introduction/interactions-and-controllers.html) If the controllers are supported replace the following code with whatever controller you would like to use. **Note: Some controllers have different button layouts which may result in needing to rebind controls.**
+
 #### Right Controller: 
 - a: Move current segment left
 - b: Move current segment right
