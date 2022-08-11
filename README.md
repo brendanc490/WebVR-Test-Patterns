@@ -2,3 +2,4 @@
 
 The Editor
 -----------
+![plot](./images/editor.png)
