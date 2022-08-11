@@ -10,3 +10,9 @@ To add an entity, make sure the slider at the top of the editor is set to **Add 
 Then, select the type of entity you would like to add using the **Type of entity** dropdown and hit the **Add to Scene** button.
 
 #### Types of Entities
+- Circle
+- Plane
+- Triangle
+- Gradient
+- Checkerboard
+- Grille
