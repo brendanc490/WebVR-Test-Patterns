@@ -78,7 +78,8 @@
 
         AFRAME.registerComponent('fill', {
             schema: {
-                val: {type: 'float', default: 100}
+                val: {type: 'float', default: 100},
+                isFull: {type: "boolean", default: true}
             },
         });
         AFRAME.registerComponent('angle', {

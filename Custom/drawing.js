@@ -6,7 +6,7 @@ function addEntity(){
     if($("#entity :selected").text() == "circle"){ /* if circle */
         el.setAttribute("id","circle"+circleNum++);
         el.setAttribute("geometry",{primitive: "ring", radiusOuter: 0.125*250, radiusInner: 0});
-        el.setAttribute("fill",{val: .125*250});
+        el.setAttribute("fill",{val: .125*250, isFull: true});
         /*let X = Math.random() * 3 - 1.5;
         let Y = Math.random() * 1.5 - .75;*/
         /*el.setAttribute("position",{x: X, y: Y, z: -1+(0.00005*numAdded++)});*/
@@ -19,7 +19,7 @@ function addEntity(){
         el.setAttribute("id","plane"+planeNum++);
         /*drawPlaneBorder(.25,1,100,{r: 255, g: 255, b: 255},el);*/
         el.setAttribute("geometry",{primitive: "plane", width: .125*250, height: .25*250});
-        el.setAttribute("fill",{val: .125*250});
+        el.setAttribute("fill",{val: .125*250, isFull: true});
         /*let X = Math.random() * 3 - 1.5;
         let Y = Math.random() * 1.5 - .75;
         el.setAttribute("position",{x: X, y: Y, z: -1+(0.00005*numAdded++)});*/

@@ -490,6 +490,11 @@ $("#texture-input").change(function() {
 
 /* If the textbox for x value is changed */
 $("#fill").change(function() {
+    if(parseFloat($("#fill").val()) == parseFloat($("#radius").val())){
+        selectedEntity.setAttribute("fill",{val: selectedEntity.getAttribute("fill").val, isFull: true});
+    } else {
+        selectedEntity.setAttribute("fill",{val: selectedEntity.getAttribute("fill").val, isFull: false});
+    }
     editEntity();
   });
 
@@ -500,25 +505,28 @@ $("#rotation").change(function() {
 
 /* If the textbox for radius value is changed */
 $("#radius").change(function() {
-    if(parseFloat($("#fill").val()) == parseFloat($("#radius").val())){
+    if(parseFloat($("#fill").val()) > parseFloat($("#radius").val()) || selectedEntity.getAttribute("fill").isFull){
         fill.value = parseFloat($("#radius").val());
+        selectedEntity.setAttribute("fill",{val: selectedEntity.getAttribute("fill").val, isFull: true});
     }
     editEntity();
   });
 
 /* If the textbox for width value is changed */
 $("#width").change(function() {
-    if(parseFloat($("#fill").val()) > parseFloat($("#width").val()) && parseFloat($("#height").val()) > parseFloat($("#width").val())){
+    if((parseFloat($("#fill").val()) > parseFloat($("#width").val()) && parseFloat($("#height").val()) > parseFloat($("#width").val())) || (parseFloat($("#height").val()) > parseFloat($("#width").val()) && selectedEntity.getAttribute("fill").isFull)){
         fill.value = parseFloat($("#width").val());
+        selectedEntity.setAttribute("fill",{val: selectedEntity.getAttribute("fill").val, isFull: true});
     }
     editEntity();
   });
 
 /* If the textbox for height value is changed */
 $("#height").change(function() {
-    /*if(parseFloat($("#fill").val()) > parseFloat($("#height").val()) && parseFloat($("#height").val()) < parseFloat($("#width").val())){
+    if((parseFloat($("#fill").val()) > parseFloat($("#height").val()) && parseFloat($("#height").val()) < parseFloat($("#width").val())) || (parseFloat($("#height").val()) < parseFloat($("#width").val()) && selectedEntity.getAttribute("fill").isFull)){
         fill.value = parseFloat($("#height").val());
-    }*/
+        selectedEntity.setAttribute("fill",{val: selectedEntity.getAttribute("fill").val, isFull: true});
+    }
     editEntity();
   });
 
