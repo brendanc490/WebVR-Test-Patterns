@@ -16,4 +16,13 @@ Then, select the type of entity you would like to add using the **Type of entity
 
 ## Editing Entities
 **In order to access the editor one or more entities must be added to the scene.**
+Once entities have been added to the scene, change the slider to **Edit Entity.**
 
+### Background Settings
+Background color
+  To change the background color, select a new color or enter the hexadecimal code of the desired color.
+### Entity Settings
+#### Universal Settings
+Position:
+The editor interfaces the three axis in different manners. Positional data is calculated based on a cylinder that encompasses the camera
+   - x-axis:
