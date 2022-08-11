@@ -19,7 +19,9 @@ directions.addEventListener("click", function() {
 /* Edit Related */
 /* Headers */
 const background = document.getElementById("backgroundSettings"); /* header for background settings */
-const ent = document.getElementById("entitySettings"); /* header for entity settings */
+const ent = document.getElementById("entitySettings");
+const uni = document.getElementById("universalSettings");
+const nonUni = document.getElementById("nonUniversalSettings");
 const utility = document.getElementById("utility");
 const collapse = document.getElementById("collapse");
 const content = document.getElementById("content");
@@ -41,6 +43,7 @@ const entitySelector = document.getElementById("entityId"); /* selector */
 /* Sky related */
 const skyIn = document.getElementById("skyIn"); /* sky color container */
 const skyColor = document.getElementById("skyCol"); /* sky color input */
+skyIn.style.width = "75%";
 
 /* Universal attributes */
 /* Position related */
@@ -55,10 +58,13 @@ const rotIn = document.getElementById("rotIn"); /* rotation input */
 /* Color related */
 const color = document.getElementById("color"); /* color container paragraph */
 const colIn = document.getElementById("colIn"); /* color input */
+colIn.style.width = "75%";
 
 /* Texture related */
 const textureIn = document.getElementById("textureIn");
 const texture = document.getElementById("texture");
+const uploadTextureIn = document.querySelector("#uploadTextureIn");
+const texture_input = document.querySelector("#texture-input");
 
 /* Fill related */
 const fillIn = document.getElementById("fillIn");
@@ -103,7 +109,7 @@ const numBarsIn = document.getElementById("numBarsIn"); /* number of bars input 
 const rows = document.getElementById("rows"); /* rows container paragraph */
 const rowsIn = document.getElementById("rowsIn"); /* rows input */
 const cols = document.getElementById("cols"); /* columns container paragraph */
-const colsIn = document.getElementById("xolsIn"); /* columns input */
+const colsIn = document.getElementById("colsIn"); /* columns input */
 const tileSize = document.getElementById("tileSize"); /* tile size container paragraph */
 const tileSizeIn = document.getElementById("tileSizeIn"); /* tile size input */
 
@@ -122,9 +128,12 @@ const addButton = document.getElementById("addButton"); /* add button */
 const upload = document.getElementById("upload"); /* upload button container paragraph*/
 const scene_input = document.querySelector("#scene-input"); /* upload button */
 
+const removeButton = document.getElementById("removeButton"); /* remove button container paragraph */
+
 /* Local Variables */
 var el = null; /* recently created entity */
 var els = new Array(); /* array of all created entities */
+var pool = new Array();
 
 var sky = scene.querySelector("#sky"); /* sky */
 
@@ -143,6 +152,8 @@ var boolAddEdit = false; /* toggle for add or edit element */
 
 var fileContent = null; /* contents of uploaded JSON file */
 
+var uploadedTextureFormat = {};
+
 /* Initial webpage layout hides all edit related containers */
 content.style.display = "block";
 contentDir.style.display = "none";
@@ -155,6 +166,7 @@ function selectNew(clickedEntity){
         selectedEntity = clickedEntity; /* updated selected entity */
         entitySelector.value = clickedEntity.getAttribute("id"); /* update dropdown */
     } else { /* if selected via dropdown */
+    console.log($("#entityId :selected").text())
         selectedEntity = scene.querySelector("#"+$("#entityId :selected").text()); /* update selected entity */
     }
     /* Update stats in edit section */
@@ -165,8 +177,11 @@ function selectNew(clickedEntity){
 
 /* hides edit section */
 function hideEditStats(){
+    removeButton.style.display = "none";
     background.style.display = "none";
     ent.style.display = "none";
+    uni.style.display = "none";
+    nonUni.style.display = "none";
     skyIn.style.display = "none";
     entitySelectorText.style.display = "none";
     posIn.style.display = "none";
@@ -186,15 +201,17 @@ function hideEditStats(){
     cols.style.display = "none";
     tileSize.style.display = "none";
     textureIn.style.display = "none";
+    uploadTextureIn.style.display = "none";
     fillIn.style.display = "none";
 }
 
 /* updates values in edit section */
 function updateStats(){
     /* universal values */
+    console.log(selectedEntity.getAttribute("id"))
     skyColor.value = sky.components.material.attrValue.color;
     entity = selectedEntity;
-    xIn.value = entity.components.position.attrValue.x;
+    xIn.value = -entity.components.angle.attrValue.x;
     yIn.value = entity.components.position.attrValue.y;
     rotation.value = entity.components.rotation.attrValue.z;
     color.value = entity.components.material.attrValue.color;
@@ -209,12 +226,17 @@ function updateStats(){
     }
 
     if(selectedEntity.getAttribute("id").includes("plane")){ /* plane exclusives */
-        width.value = selectedEntity.children[2].components.geometry.attrValue.width;
-        height.value = selectedEntity.children[0].components.geometry.attrValue.height;
-        fill.value = ((selectedEntity.children[0].components.geometry.attrValue.width*2)/selectedEntity.children[2].components.geometry.attrValue.width)*((selectedEntity.children[0].components.geometry.attrValue.width*2)/selectedEntity.children[2].components.geometry.attrValue.width)*100;
-    } else if(selectedEntity.getAttribute("id").includes("ring")){ /* circle exclusives */
+        if(selectedEntity.children.length == 0){
+            width.value = selectedEntity.components.geometry.attrValue.width;
+            
+        } else {
+            width.value = selectedEntity.children[2].components.geometry.attrValue.width;
+        }
+        height.value = selectedEntity.components.geometry.attrValue.height;
+        fill.value = selectedEntity.components.fill.attrValue.val;
+    } else if(selectedEntity.getAttribute("id").includes("circle")){ /* circle exclusives */
         radius.value = selectedEntity.components.geometry.attrValue.radiusOuter;
-        fill.value = (selectedEntity.components.geometry.attrValue.radiusInner*selectedEntity.components.geometry.attrValue.radiusInner)/(selectedEntity.components.geometry.attrValue.radiusOuter*selectedEntity.components.geometry.attrValue.radiusOuter);
+        fill.value = selectedEntity.components.fill.attrValue.val;
     } else if(selectedEntity.getAttribute("id").includes("triangle")){ /* triangle exclusives */
         vax.value = selectedEntity.components.geometry.attrValue.vertexA.x;
         vay.value = selectedEntity.components.geometry.attrValue.vertexA.y;
@@ -227,9 +249,9 @@ function updateStats(){
         height.value = selectedEntity.children[0].components.geometry.attrValue.height;
         numBarsIn.value = selectedEntity.children.length;
     } else if(selectedEntity.getAttribute("id").includes("checkerboard")){
-        rowsIn.style.value = selectedEntity.children.length;
-        cols.style.value = selectedEntity.children[0].length;
-        tileSize.style.value = selectedEntity.children[0].children[0].components.geometry.attrValue.width;
+        rowsIn.value = selectedEntity.children.length;
+        colsIn.value = selectedEntity.children[0].children.length;
+        tileSizeIn.value = selectedEntity.children[0].children[0].components.geometry.attrValue.width;
     } else if(selectedEntity.getAttribute("id").includes("grille")){
         width.value = selectedEntity.children[0].components.geometry.attrValue.width;
         height.value = selectedEntity.children[0].components.geometry.attrValue.height;
@@ -247,14 +269,19 @@ function toggleAddEdit(swap){
             return;
         }
         boolAddEdit = !boolAddEdit; /* change current mode */
-        selectedEntity = scene.querySelector("#"+$("#entityId :selected").text()); /* set selected entity to be first entity created */
-        updateStats(); /* update stats */
+        if(boolAddEdit){
+            selectedEntity = scene.querySelector("#"+$("#entityId :selected").text()); /* set selected entity to be first entity created */
+            updateStats();
+         } /* update stats */
     } 
     /* check if current mode is add or edit */
     if(boolAddEdit){ /* if edit */
+        removeButton.style.display = "block";
         /* universal containers shown */
         background.style.display = "block";
         ent.style.display = "block";
+        uni.style.display = "block";
+        nonUni.style.display = "block";
         skyIn.style.display = "block";
         entitySelectorText.style.display = "block";
         rotIn.style.display = "block";
@@ -262,7 +289,6 @@ function toggleAddEdit(swap){
         saveButton.style.display = "block";
         posIn.style.display = "block";
         colIn.style.display = "block";
-        textureIn.style.display = "block";
         /*editButton.style.display = "block";*/
 
         /* add related containers hidden */
@@ -274,17 +300,22 @@ function toggleAddEdit(swap){
         if (selectedEntity.getAttribute("id").includes("plane")){ /* plane exclusive containers shown */
             heightIn.style.display = "block";
             widthIn.style.display = "block";
-            if(entity.components.material.attrValue.src == null){
+            if(selectedEntity.components.material.attrValue.src == null || selectedEntity.components.material.attrValue.src == ""){
                 fillIn.style.display = "block";
             }
+            textureIn.style.display = "block";
+            uploadTextureIn.style.display = "block";
         } else if (selectedEntity.getAttribute("id").includes("circle")){ /* circle exclusive containers shown */
             radiusIn.style.display = "block"; 
             fillIn.style.display = "block";
+           /* textureIn.style.display = "block";
+            uploadTextureIn.style.display = "block"; */
         } else if (selectedEntity.getAttribute("id").includes("triangle")) { /* triangle exlcusive containers shown */
             va.style.display = "block";
             vb.style.display = "block";
             vc.style.display = "block";
-            fillIn.style.display = "block";
+           /* textureIn.style.display = "block";
+            uploadTextureIn.style.display = "block"; */
         } else if (selectedEntity.getAttribute("id").includes("gradient") || selectedEntity.getAttribute("id").includes("grille")) { /* gradient exlcusive containers shown */
             heightIn.style.display = "block";
             widthIn.style.display = "block";
@@ -297,7 +328,7 @@ function toggleAddEdit(swap){
     } else { /* if add */
         hideEditStats(); /* hide edit containers */
 
-        /* show add containers */
+        /* show add containers */;
         addChoice.style.display = "block"; 
         addButton.style.display = "block";
         upload.style.display = "block";
@@ -305,13 +336,20 @@ function toggleAddEdit(swap){
 }
 
 /* If the textbox for sky color is changed */
-$("#skyCol").change(function() {
+/*$("#skyCol").change(function() {
     if(hexToRgb($("#skyCol").val()) == null){
         alert("Invalid color (check that the color was entered in hexadecimal format)");
         return;
     }
-    sky.setAttribute("material",{color: $("#skyCol").val()});
-  });
+    
+  });*/
+
+  $('#skyCol').minicolors({
+    control: 'hue',
+    change: function () {
+        sky.setAttribute("material",{color: $("#skyCol").val()});
+    },
+});
 
 /* If the textbox for x value is changed */
 $("#x").change(function() {
@@ -329,18 +367,125 @@ $("#z").change(function() {
   });
 
 /* If the textbox for color value is changed */
-$("#color").change(function() {
+/*$("#color").change(function() {
     editEntity();
-  });
+  });*/
+
+$('#color').minicolors({
+    control: 'hue',
+    change: function () {
+        editEntity();
+    },
+});
 
 /* If the textbox for x value is changed */
 $("#texture").change(function() {
     if(texture.value == "none"){
+        selectedEntity.setAttribute("material",{color: selectedEntity.getAttribute("material").color, shader: "flat", src: ""});
         fillIn.style.display = "block";
     } else {
+        selectedEntity.setAttribute("material",{color: selectedEntity.getAttribute("material").color, shader: "flat", src: "#"+texture.value});
+        let i = selectedEntity.children.length-1;
+        while (i >= 0) {
+            selectedEntity.children[i].parentNode.removeChild(selectedEntity.children[i]);
+            i--;
+        }
+        if(typeof selectedEntity.getAttribute("material").src == "object"){
+            selectedEntity.setAttribute("geometry",{primitive: "plane", width: .5*(selectedEntity.getAttribute("material").src.naturalWidth/selectedEntity.getAttribute("material").src.naturalHeight)*250, height: .5*250});
+        } else {
+            selectedEntity.setAttribute("geometry",{primitive: "plane", width: .5*(uploadedTextureFormat[texture.options[texture.selectedIndex].text].width/uploadedTextureFormat[texture.options[texture.selectedIndex].text].height)*250, height: .5*250});
+        }
+        width.value = selectedEntity.getAttribute("geometry").width;
+        height.value = selectedEntity.getAttribute("geometry").height;
         fillIn.style.display = "none";
     }
-    editEntity();
+    /*editEntity();*/
+  });
+  
+
+/* If the textbox for x value is changed */
+$("#texture-input").change(function() {
+    /*var option = document.createElement("option"); 
+    option.text = el.getAttribute("id");
+    entitySelector.add(option);*/
+
+    /*$("#texture").empty();
+
+    var option1 = document.createElement("option"); 
+    option1.text = "none";
+    option1.value = "none";
+    texture.add(option1);
+    var option2 = document.createElement("option"); 
+    option2.text = "TG18-QC.2k_12b";
+    option2.value = "QC";
+    texture.add(option2);
+    var option3 = document.createElement("option"); 
+    option3.text = "TG18-CH.2k";
+    option3.value = "CH";
+    texture.add(option3);
+    var option4 = document.createElement("option"); 
+    option4.text = "TG18-MM1.2k";
+    option4.value = "MM1";
+    texture.add(option4);
+    var option5 = document.createElement("option"); 
+    option5.text = "TG18-MM2.2k";
+    option5.value = "MM2";
+    texture.add(option5);
+    var option6 = document.createElement("option"); 
+    option6.text = "TG270sQC";
+    option6.value = "sQC";
+    texture.add(option6);
+    var option7 = document.createElement("option"); 
+    option7.text = "TG18-PQC.2k_12b";
+    option7.value = "PQC";
+    texture.add(option7);
+    var option8 = document.createElement("option"); 
+    option8.text = "TG18-BR.2k_12b";
+    option8.value = "BR";
+    texture.add(option8);*/
+
+    let i = 0;
+    var j = 0;
+    while(i < texture_input.files.length){
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+            uploaded_image = reader.result;
+        });
+        
+        var name = this.files[i].name;
+        reader.readAsDataURL(this.files[i]);
+        reader.onload = function (e) {
+            //Initiate the JavaScript Image object.
+            var image = new Image();
+    
+            //Set the Base64 string return from FileReader as source.
+            image.src = e.target.result;
+            
+            //Validate the File Height and Width.
+            image.onload = function () {
+                let k = 0;
+                let skip = false;
+                while(k < texture.options.length){
+                    if(texture.options[k].text == texture_input.files[j].name){
+                        skip = true;
+                    }
+                    k++;
+                }
+                if(!skip){
+                    var height = this.height;
+                    var width = this.width;
+                    uploadedTextureFormat[texture_input.files[j].name] = {width: width, height: height};
+                    var option = document.createElement("option"); 
+                    option.text = texture_input.files[j++].name;
+                    option.value = `url(${uploaded_image})`;
+                    texture.add(option);
+                }
+            };
+        }
+        i++;
+    }
+
+    /*editEntity();*/
   });
 
 /* If the textbox for x value is changed */
@@ -355,16 +500,25 @@ $("#rotation").change(function() {
 
 /* If the textbox for radius value is changed */
 $("#radius").change(function() {
+    if(parseFloat($("#fill").val()) == parseFloat($("#radius").val())){
+        fill.value = parseFloat($("#radius").val());
+    }
     editEntity();
   });
 
 /* If the textbox for width value is changed */
 $("#width").change(function() {
+    if(parseFloat($("#fill").val()) > parseFloat($("#width").val()) && parseFloat($("#height").val()) > parseFloat($("#width").val())){
+        fill.value = parseFloat($("#width").val());
+    }
     editEntity();
   });
 
 /* If the textbox for height value is changed */
 $("#height").change(function() {
+    /*if(parseFloat($("#fill").val()) > parseFloat($("#height").val()) && parseFloat($("#height").val()) < parseFloat($("#width").val())){
+        fill.value = parseFloat($("#height").val());
+    }*/
     editEntity();
   });
 
@@ -450,3 +604,64 @@ function sendBack(isback){
     }
 }
 
+
+var raycaster = new THREE.Raycaster();
+raycaster.layers.set(0);
+window.addEventListener("pointerup", function(e) {
+    var screenPos = new THREE.Vector2();
+    
+    screenPos.x = (e.clientX / window.innerWidth) * 2 - 1;
+    screenPos.y = - (e.clientY / window.innerHeight) * 2 + 1;
+    
+    raycaster.setFromCamera(screenPos, scene.camera);
+
+    var rays = raycaster.intersectObjects(pool, true);
+    let i = rays.length;
+    if(i > 0){
+        currMin = rays[0].distance;
+        selected = rays[0].object.el;
+        while (i > 0) {
+            i--;
+            if(rays[i].distance < currMin){
+                currMin = rays[i].distance;
+                selected = rays[i].object.el;
+            }
+        }
+        selected = document.getElementById(selected.id.split("-")[0]);
+        console.log(selected);
+        selectNew(selected);
+    }
+});
+
+function removeEntity(){
+    console.log(els.indexOf(selectedEntity))
+    els.splice(els.indexOf(selectedEntity),1);
+    console.log(pool.indexOf(selectedEntity.object3D));
+    pool.splice(pool.indexOf(selectedEntity.object3D),1);
+    if(selectedEntity.id.includes("plane")){
+        planeNum--;
+    } else if(selectedEntity.id.includes("circle")){
+        circleNum--;
+    } else if(selectedEntity.id.includes("triangle")){
+        triangleNum--;
+    } else if(selectedEntity.id.includes("checkerboard")){
+        checkerboardNum--;
+    } else if(selectedEntity.id.includes("gradient")){
+        gradientNum--;
+    } else if(selectedEntity.id.includes("grille")){
+        grilleNum--;
+    }
+    entityCanvas.removeChild(selectedEntity);
+    for (var i=0; i<entitySelector.length; i++) {
+        if (entitySelector.options[i].value == selectedEntity.id)
+            entitySelector.remove(i);
+    }
+    if(els.length == 0){
+        utility.checked = false;
+        toggleAddEdit(true);
+        
+    } else {
+        selectNew(null);
+    }
+    numAdded--;
+}
