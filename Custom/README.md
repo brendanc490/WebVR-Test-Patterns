@@ -1,5 +1,5 @@
 # Directions For Use: #
-![plot](./Images/editor.PNG)
+![plot](../Images/editor.PNG)
 
 ## Adding Entities
 To add an entity, make sure the slider at the top left of the webpage is set to ***Add Entity***.  
