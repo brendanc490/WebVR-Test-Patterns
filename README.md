@@ -2,4 +2,4 @@
 
 The Editor
 -----------
-![plot](./Images/editor.png)
+![plot](./Images/editor.PNG)
