@@ -1,5 +1,7 @@
 # TCA Test Instructions
 
+![plot](../Images/tca.PNG)
+
 ## Setup
 You can move the centering and change the offset of the bars from the center point while in VR mode also.  
 In addition, you can control the size of the step for these. The step starts at 1 degree by default and can be changed by +- 0.1 degree.
