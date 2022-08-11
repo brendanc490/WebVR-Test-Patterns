@@ -1,10 +1,10 @@
 # Directions For Use: #
-![plot](../Images/editor.PNG)
 
 ## Displaying the Scene
 To display the scene, hit the ***VR*** button in the bottom right hand corner.
 
 ## Adding Entities
+![plot](../Images/editor.PNG)
 To add an entity, make sure the slider at the top left of the webpage is set to ***Add Entity***.  
 
 Then, select the type of entity you would like to add using the ***Type of entity*** dropdown and hit the ***Add to Scene*** button.
@@ -20,6 +20,7 @@ Entities will spawn at a random position within the editor camera field of view 
 - Grille
 
 ## Editing Entities
+![plot](../Images/editorExample.PNG)
 **In order to access the editor one or more entities must be added to the scene**. The editing bar can be hidden by pressing the ***Hide Settings*** button.
 
 Once entities have been added to the scene, change the slider to ***Edit Entity***.
