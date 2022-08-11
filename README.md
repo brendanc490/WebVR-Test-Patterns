@@ -19,7 +19,7 @@ Then, select the type of entity you would like to add using the ***Type of entit
 Once entities have been added to the scene, change the slider to ***Edit Entity***.
 
 To change the entity being edited, either click on the entity or select the desired entity from the dropdown labeled ***Current Entity***.
-Entity ID's are automatically generated with the format <name of entity><number of entities of this type previously created>.
+Entity ID's are automatically generated with the format \<name of entity\>\<number of entities of this type previously created\>.
    exs. circle0, checkerboard4, plane20
 
 ### Background Settings
