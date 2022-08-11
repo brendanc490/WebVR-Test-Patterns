@@ -37,9 +37,12 @@ Positional data is calculated based on a cylinder that encompasses the camera. T
 
 ![plot](../Images/cylinderRadius.PNG)
 
-   - x-axis: This axis is in terms of **degrees** where 1 degree references 1 degree of clockwise rotation away from the fixed camera center on the cylinder.
-   - y-axis: This axis is in terms of **world units** where 1 world unit is equal to 1 meter in 3D space. 
-   - z-axis: **The z-axis is NOT editable by users.** The location on the z-axis is automatically calculated based on the x-axis angle.
+- x-axis: 
+   - This axis is in terms of **degrees** where 1 degree references 1 degree of clockwise rotation away from the fixed camera center on the cylinder.
+- y-axis: 
+   - This axis is in terms of **world units** where 1 world unit is equal to 1 meter in 3D space. 
+- z-axis: 
+   - **The z-axis is NOT editable by users.** The location on the z-axis is automatically calculated based on the x-axis angle.
 
 The reason that the radius of the cylinder is not editable is due to the fact that all entities are 2-dimensional. Changing their depth would essentially have the same effect as making entities smaller or larger.
 
@@ -55,8 +58,18 @@ Select a color using the color slider or input the desired color in hexadecimal 
 
 ### Entity Specific Settings
 #### Circle 
-- Radius: The unit for radius is world meters where 1 world unit is equal to 1 meter in 3D space.
-- Border Size: The unit for border size is world meters where 1 world unit is equal to 1 meter in 3D space. By default, the border size is set to be equal to the radius of the circle, meaning the entity is entirely filled in.
+- Radius (m): 
+   - The unit for radius is world meters where 1 world unit is equal to 1 meter in 3D space.
+- Border Size: 
+   - The unit for border size is world meters where 1 world unit is equal to 1 meter in 3D space. By default, the border size is set to be equal to the radius of the circle, meaning the entity is entirely filled in.
 
 #### Plane
-- Texture: There are some textures built into the site. [They can be found here.](https://github.com/brendanc490/WebVR-Test-Patterns/tree/main/Custom/patterns) Textures can also be uploaded as JPGS or PNGS and added to the list of available textures in the scene. Applying a texture will automatically scale the plane to fit the aspect ratio.
+- Texture: 
+   - There are some textures built into the site. [They can be found here.](https://github.com/brendanc490/WebVR-Test-Patterns/tree/main/Custom/patterns) Textures can also be uploaded as JPGS or PNGS and added to the list of available textures in the scene. 
+   - Applying a texture will automatically scale the plane to fit the aspect ratio.
+- Width (m): 
+   - The unit for width is world meters where 1 world unit is equal to 1 meter in 3D space.
+- Height (m): 
+   - The unit for height is world meters where 1 world unit is equal to 1 meter in 3D space.
+- Border Size: 
+   - The unit for border size is world meters where 1 world unit is equal to 1 meter in 3D space. By default, the border size is set to be equal to the radius to the smallest dimension present of the plane, meaning the entity is entirely filled in.
