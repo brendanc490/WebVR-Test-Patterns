@@ -21,9 +21,9 @@ Once entities have been added to the scene, change the slider to **Edit Entity.*
 ### Background Settings
 #### Background color:  
 To change the background color, select a new color or enter the hexadecimal code of the desired color.
-### Entity Settings
-#### Universal Settings
-##### Position: (x deg, y world units)
+
+### Universal Entity Settings
+#### Position: (x deg, y world units)
 To edit the position, locate the position text boxes under **Universal Settings**. The left box refers to the x position and the y position.  
 
 The position of an entity refers to where its center point is located. The editor interfaces the three axis in different manners. 
@@ -35,9 +35,9 @@ Positional data is calculated based on a cylinder that encompasses the camera. T
 
 The reason that the radius of the cylinder is not editable is due to the fact that all entities are 2-dimensional. Changing their depth would essentially have the same effect as making entities smaller or larger.
 
-##### Rotation: θ deg
+#### Rotation: θ deg
 To edit the rotation, locate the rotation text box under **Universal Settings**.
 
 For this program, the rotation of an entity refers to rotation around the **z-axis only**. The axis of rotation is located at the center point of entity. The unit for rotation is **degrees** where 1 degree refers to one degree of rotation about the axis of rotation.
 
-##### Color: #HEXCODE
+#### Color: #HEXCODE
