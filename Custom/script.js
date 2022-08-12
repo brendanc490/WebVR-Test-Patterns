@@ -346,6 +346,7 @@ function toggleAddEdit(swap){
 
   $('#skyCol').minicolors({
     control: 'hue',
+    position:'top',
     change: function () {
         sky.setAttribute("material",{color: $("#skyCol").val()});
     },
@@ -373,6 +374,7 @@ $("#z").change(function() {
 
 $('#color').minicolors({
     control: 'hue',
+    position:'top',
     change: function () {
         editEntity();
     },
