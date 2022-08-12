@@ -289,7 +289,6 @@ function toggleAddEdit(swap){
         saveButton.style.display = "block";
         posIn.style.display = "block";
         colIn.style.display = "block";
-        /*editButton.style.display = "block";*/
 
         /* add related containers hidden */
         addChoice.style.display = "none";
@@ -308,14 +307,10 @@ function toggleAddEdit(swap){
         } else if (selectedEntity.getAttribute("id").includes("circle")){ /* circle exclusive containers shown */
             radiusIn.style.display = "block"; 
             fillIn.style.display = "block";
-           /* textureIn.style.display = "block";
-            uploadTextureIn.style.display = "block"; */
         } else if (selectedEntity.getAttribute("id").includes("triangle")) { /* triangle exlcusive containers shown */
             va.style.display = "block";
             vb.style.display = "block";
             vc.style.display = "block";
-           /* textureIn.style.display = "block";
-            uploadTextureIn.style.display = "block"; */
         } else if (selectedEntity.getAttribute("id").includes("gradient") || selectedEntity.getAttribute("id").includes("grille")) { /* gradient exlcusive containers shown */
             heightIn.style.display = "block";
             widthIn.style.display = "block";
@@ -336,14 +331,6 @@ function toggleAddEdit(swap){
 }
 
 /* If the textbox for sky color is changed */
-/*$("#skyCol").change(function() {
-    if(hexToRgb($("#skyCol").val()) == null){
-        alert("Invalid color (check that the color was entered in hexadecimal format)");
-        return;
-    }
-    
-  });*/
-
   $('#skyCol').minicolors({
     control: 'hue',
     position:'top',
@@ -368,10 +355,6 @@ $("#z").change(function() {
   });
 
 /* If the textbox for color value is changed */
-/*$("#color").change(function() {
-    editEntity();
-  });*/
-
 $('#color').minicolors({
     control: 'hue',
     position:'top',
@@ -401,51 +384,11 @@ $("#texture").change(function() {
         height.value = selectedEntity.getAttribute("geometry").height;
         fillIn.style.display = "none";
     }
-    /*editEntity();*/
   });
   
 
 /* If the textbox for x value is changed */
 $("#texture-input").change(function() {
-    /*var option = document.createElement("option"); 
-    option.text = el.getAttribute("id");
-    entitySelector.add(option);*/
-
-    /*$("#texture").empty();
-
-    var option1 = document.createElement("option"); 
-    option1.text = "none";
-    option1.value = "none";
-    texture.add(option1);
-    var option2 = document.createElement("option"); 
-    option2.text = "TG18-QC.2k_12b";
-    option2.value = "QC";
-    texture.add(option2);
-    var option3 = document.createElement("option"); 
-    option3.text = "TG18-CH.2k";
-    option3.value = "CH";
-    texture.add(option3);
-    var option4 = document.createElement("option"); 
-    option4.text = "TG18-MM1.2k";
-    option4.value = "MM1";
-    texture.add(option4);
-    var option5 = document.createElement("option"); 
-    option5.text = "TG18-MM2.2k";
-    option5.value = "MM2";
-    texture.add(option5);
-    var option6 = document.createElement("option"); 
-    option6.text = "TG270sQC";
-    option6.value = "sQC";
-    texture.add(option6);
-    var option7 = document.createElement("option"); 
-    option7.text = "TG18-PQC.2k_12b";
-    option7.value = "PQC";
-    texture.add(option7);
-    var option8 = document.createElement("option"); 
-    option8.text = "TG18-BR.2k_12b";
-    option8.value = "BR";
-    texture.add(option8);*/
-
     let i = 0;
     var j = 0;
     while(i < texture_input.files.length){
@@ -614,8 +557,8 @@ function sendBack(isback){
     }
 }
 
-
-var raycaster = new THREE.Raycaster();
+/* Raycasting with orthographic camera */
+/*var raycaster = new THREE.Raycaster();
 raycaster.layers.set(0);
 window.addEventListener("pointerup", function(e) {
     var screenPos = new THREE.Vector2();
@@ -641,7 +584,7 @@ window.addEventListener("pointerup", function(e) {
         console.log(selected);
         selectNew(selected);
     }
-});
+});*/
 
 function removeEntity(){
     console.log(els.indexOf(selectedEntity))
