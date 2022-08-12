@@ -32,9 +32,6 @@ Examples: circle0, checkerboard4, plane20.
 
 The current entity can be removed by hitting the ***Remove from Scene***. The entire scene can be reset by hitting the ***Reset Scene*** button.
 
-### Layering Entities
-Entities are layered by default in the order they are added to the scene. This layering can be altered with the ***Send back*** and ***Send forward*** buttons.
-
 ### Saving the Scene
 To save the scene, press the ***Save Scene*** button located at the bottom of the editor tab. The scene is saved as an editable JSON file. Uploaded textures are preserved without image compression.
 
