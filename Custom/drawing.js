@@ -7,34 +7,21 @@ function addEntity(){
         el.setAttribute("id","circle"+circleNum++);
         el.setAttribute("geometry",{primitive: "ring", radiusOuter: 0.125*250, radiusInner: 0});
         el.setAttribute("fill",{val: .125*250, isFull: true});
-        /*let X = Math.random() * 3 - 1.5;
-        let Y = Math.random() * 1.5 - .75;*/
-        /*el.setAttribute("position",{x: X, y: Y, z: -1+(0.00005*numAdded++)});*/
-        
         let R = ((Math.floor(Math.random()*255).toString(16)).toUpperCase()).padStart(2, '0');
         let G = ((Math.floor(Math.random()*255).toString(16)).toUpperCase()).padStart(2, '0');
         let B = ((Math.floor(Math.random()*255).toString(16)).toUpperCase()).padStart(2, '0');
         el.setAttribute("material", {shader: "flat", color: "#"+R+G+B});
     } else if ($("#entity :selected").text() == "plane"){ /* if plane */
         el.setAttribute("id","plane"+planeNum++);
-        /*drawPlaneBorder(.25,1,100,{r: 255, g: 255, b: 255},el);*/
         el.setAttribute("geometry",{primitive: "plane", width: .125*250, height: .25*250});
         el.setAttribute("fill",{val: .125*250, isFull: true});
-        /*let X = Math.random() * 3 - 1.5;
-        let Y = Math.random() * 1.5 - .75;
-        el.setAttribute("position",{x: X, y: Y, z: -1+(0.00005*numAdded++)});*/
         let R = ((Math.floor(Math.random()*255).toString(16)).toUpperCase()).padStart(2, '0');
         let G = ((Math.floor(Math.random()*255).toString(16)).toUpperCase()).padStart(2, '0');
         let B = ((Math.floor(Math.random()*255).toString(16)).toUpperCase()).padStart(2, '0');
         el.setAttribute("material", {shader: "flat", color: "#"+R+G+B});
-        /*
-        el.setAttribute("geometry",{primitive: "plane", width: .25, height: 0.5});*/
     } else if ($("#entity :selected").text() == "triangle"){ /* if triangle */
         el.setAttribute("id","triangle"+triangleNum++);
         el.setAttribute("geometry",{primitive: "triangle", vertexA: {x: 0, y: 0.1875*125, z: 0}, vertexB: {x: -0.25*125, y: -0.25*125, z: 0}, vertexC: {x: 0.25*125, y: -0.25*125, z: 0}});
-        /*let X = Math.random() * 3 - 1.5;
-        let Y = Math.random() * 1.5 - .75;
-        el.setAttribute("position",{x: X, y: Y, z: -1+(0.00005*numAdded++)});*/
         let R = ((Math.floor(Math.random()*255).toString(16)).toUpperCase()).padStart(2, '0');
         let G = ((Math.floor(Math.random()*255).toString(16)).toUpperCase()).padStart(2, '0');
         let B = ((Math.floor(Math.random()*255).toString(16)).toUpperCase()).padStart(2, '0');
@@ -42,26 +29,23 @@ function addEntity(){
     } else if ($("#entity :selected").text() == "gradient"){
         el.setAttribute("id","gradient"+gradientNum++);
         drawGradient(.025*250,.075*250,32,{r: 255, g: 255, b: 255},el);
-        /*el.setAttribute("position",{x: 0, y: 0, z: -1+(0.00005*numAdded++)});*/
         el.setAttribute("material",{shader: "flat", color: "#FFFFFF"});
     } else if ($("#entity :selected").text() == "checkerboard"){
         el.setAttribute("id","checkerboard"+checkerboardNum++);
         drawCheckerboard(16,16,.02*250,{r: 255, g: 255, b: 255},el);
-        /*el.setAttribute("position",{x: 0, y: 0, z: -1+(0.00005*numAdded++)});*/
         el.setAttribute("material",{shader: "flat", color: "#FFFFFF"});
     } else if ($("#entity :selected").text() == "grille"){
         el.setAttribute("id","grille"+grilleNum++);
         drawGrille(.025*250,.125*250,32,{r: 255, g: 255, b: 255},el);
-        /*el.setAttribute("position",{x: 0, y: 0, z: -1+(0.00005*numAdded++)});*/
         el.setAttribute("material",{shader: "flat", color: "#FFFFFF"});
     }
     /* Set default universal stats */
 
-    
+    numAdded++;
     el.setAttribute("click-checker","");
     let THETAX = Math.random() * 110 -55;
     let Y = Math.random() * 30 - 15;
-    el.setAttribute("position",{x: -250 * Math.sin((THETAX*Math.PI)/180), y: Y, z: -250 * Math.cos((THETAX*Math.PI)/180)+(0.0001*numAdded++)});
+    el.setAttribute("position",{x: -250 * Math.sin((THETAX*Math.PI)/180), y: Y, z: -250 * Math.cos((THETAX*Math.PI)/180)});
     el.setAttribute("rotation", {x: 0, y: THETAX, z: 0});
     
     el.setAttribute("angle",{x: THETAX});
@@ -79,8 +63,6 @@ function addEntity(){
 }
 
 function drawPlaneBorder(width,height,fill,color,parent){
-        /*let newWidth = (width/2)*Math.sqrt(fill/100);
-        let newHeight = (height/2)*Math.sqrt(fill/100);*/
 
         let newWidth = fill/2;
         let newHeight = fill/2;

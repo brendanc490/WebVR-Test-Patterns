@@ -15,7 +15,6 @@
                 this.originalCamera = sceneEl.camera;
                 this.cameraParent = sceneEl.camera.parent;
                 /* Create orthographic camera using three.js */
-                /*this.orthoCamera = new THREE.OrthographicCamera(-1, 1, .5, -.5,.01, 2000);*/
                 this.orthoCamera = new THREE.OrthographicCamera(-500, 500, 250, -250,.01, 2000);
                 /* Makes this the parent camera and add it to scene */
                 this.cameraParent.add(this.orthoCamera);
@@ -106,9 +105,6 @@
             </a-assets>
             <a-entity oculus-touch-controls="hand: left"></a-entity>
             <a-entity oculus-touch-controls="hand: right" thumbstick-logging-right button-listener></a-entity>
-            
-            <!--<a-entity vive-controls="hand: left"></a-entity>
-            <a-entity vive-controls="hand: right"></a-entity>-->
             <a-camera>
                 <a-sky id="sky" color="#000000" radius="1000"></a-sky>
                 <a-entity id="entityCanvas" visible="true"></a-entity>
@@ -176,11 +172,8 @@
             <p id="tileSize">Width/Height of square: <input type="text" class="input" id="tileSizeIn" value=".1"></p>
             <p id="rows">Number of rows: <input type="text" class="input" id="rowsIn" value="16"></p>
             <p id="cols">Number of columns: <input type="text" class="input" id="colsIn" value="16"></p>
-            <p style="text-align:center;" id="sendButton">
+            <!--<p style="text-align:center;" id="sendButton">
                 <button class="button add" onclick="sendBack(true)">Send back</button><button class="button add" onclick="sendBack(false)">Send forward</button>
-            </p>
-            <!--<p style="text-align:center;" id="editButton">
-                <button class="button add" onclick="editEntity()">Edit Selected</button>
             </p>-->
             <p style="text-align:center;" id="saveButton">
                 <button class="button add" onclick="saveScene()">Save Scene</button>

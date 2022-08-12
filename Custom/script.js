@@ -114,7 +114,7 @@ const tileSize = document.getElementById("tileSize"); /* tile size container par
 const tileSizeIn = document.getElementById("tileSizeIn"); /* tile size input */
 
 /* Send back/forward */
-const sendButton = document.getElementById("sendButton");
+/*const sendButton = document.getElementById("sendButton");*/
 
 /* Save Edits Button */
 /*const editButton = document.getElementById("editButton");*/
@@ -190,7 +190,7 @@ function hideEditStats(){
     widthIn.style.display = "none";
     radiusIn.style.display = "none";
     /*editButton.style.display = "none";*/
-    sendButton.style.display = "none";
+    /*sendButton.style.display = "none";*/
     rotIn.style.display = "none";
     saveButton.style.display = "none";
     va.style.display = "none";
@@ -285,7 +285,7 @@ function toggleAddEdit(swap){
         skyIn.style.display = "block";
         entitySelectorText.style.display = "block";
         rotIn.style.display = "block";
-        sendButton.style.display = "block";
+        /*sendButton.style.display = "block";*/
         saveButton.style.display = "block";
         posIn.style.display = "block";
         colIn.style.display = "block";
@@ -459,18 +459,23 @@ $("#radius").change(function() {
 
 /* If the textbox for width value is changed */
 $("#width").change(function() {
-    if((parseFloat($("#fill").val()) > parseFloat($("#width").val()) && parseFloat($("#height").val()) > parseFloat($("#width").val())) || (parseFloat($("#height").val()) > parseFloat($("#width").val()) && selectedEntity.getAttribute("fill").isFull)){
-        fill.value = parseFloat($("#width").val());
-        selectedEntity.setAttribute("fill",{val: selectedEntity.getAttribute("fill").val, isFull: true});
+    if(selectedEntity.id.includes("plane")){
+        if((parseFloat($("#fill").val()) > parseFloat($("#width").val()) && parseFloat($("#height").val()) > parseFloat($("#width").val())) || (parseFloat($("#height").val()) > parseFloat($("#width").val()) && selectedEntity.getAttribute("fill").isFull)){
+            fill.value = parseFloat($("#width").val());
+            selectedEntity.setAttribute("fill",{val: selectedEntity.getAttribute("fill").val, isFull: true});
+        }
     }
+    
     editEntity();
   });
 
 /* If the textbox for height value is changed */
 $("#height").change(function() {
-    if((parseFloat($("#fill").val()) > parseFloat($("#height").val()) && parseFloat($("#height").val()) < parseFloat($("#width").val())) || (parseFloat($("#height").val()) < parseFloat($("#width").val()) && selectedEntity.getAttribute("fill").isFull)){
-        fill.value = parseFloat($("#height").val());
-        selectedEntity.setAttribute("fill",{val: selectedEntity.getAttribute("fill").val, isFull: true});
+    if(selectedEntity.id.includes("plane")){
+        if((parseFloat($("#fill").val()) > parseFloat($("#height").val()) && parseFloat($("#height").val()) < parseFloat($("#width").val())) || (parseFloat($("#height").val()) < parseFloat($("#width").val()) && selectedEntity.getAttribute("fill").isFull)){
+            fill.value = parseFloat($("#height").val());
+            selectedEntity.setAttribute("fill",{val: selectedEntity.getAttribute("fill").val, isFull: true});
+        }
     }
     editEntity();
   });
@@ -526,36 +531,36 @@ $("#tileSizeIn").change(function() {
   });
 
 /* sends entity back or forward one layer */
-function sendBack(isback){
+/*function sendBack(isback){
     let tmp = null;
     let selected = els.indexOf(selectedEntity); /* finds layer number of current entity */
     /* checks if back or forward */
-    if(isback){ /* if back */
-        if (selected != 0) { /* if it is not on layer 0 */
+    /*if(isback){*/ /* if back */
+        /*if (selected != 0) {*/ /* if it is not on layer 0 */
             /* swap z values */
-            tmp = els[selected].getAttribute("position").z;
+            /*tmp = els[selected].getAttribute("position").z;
             els[selected].getAttribute("position").z = els[selected-1].getAttribute("position").z;
-            els[selected-1].getAttribute("position").z = tmp;
+            els[selected-1].getAttribute("position").z = tmp;*/
 
             /* swap position in el arr (this preserves the layering order) */    
-            tmp = els[selected];
+            /*tmp = els[selected];
             els[selected] = els[selected-1];
             els[selected-1] = tmp;
-        }
-    } else { /* if forward */
-        if (selected != els.length-1) { /* if not the last layer */
+        }*/
+    /*} else {*/ /* if forward */
+        /*if (selected != els.length-1) {*/ /* if not the last layer */
             /* swap z values */
-            tmp = els[selected].getAttribute("position").z;
+            /*tmp = els[selected].getAttribute("position").z;
             els[selected].getAttribute("position").z = els[selected+1].getAttribute("position").z;
-            els[selected+1].getAttribute("position").z = tmp;
+            els[selected+1].getAttribute("position").z = tmp;*/
 
             /* swap position in el arr (this preserves the layering order) */
-            tmp = els[selected];
+            /*tmp = els[selected];
             els[selected] = els[selected+1];
             els[selected+1] = tmp;
         }
     }
-}
+}*/
 
 /* Raycasting with orthographic camera */
 /*var raycaster = new THREE.Raycaster();
