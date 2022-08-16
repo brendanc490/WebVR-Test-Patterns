@@ -3,7 +3,7 @@
 const scene = document.querySelector("a-scene");
 const entityCanvas = scene.querySelector("#entityCanvas");
 
-const directions = document.getElementById("directionsCollapse");
+/*const directions = document.getElementById("directionsCollapse");
 const contentDir = document.getElementById("contentDir");
 directions.addEventListener("click", function() {
     this.classList.toggle("active");
@@ -14,7 +14,7 @@ directions.addEventListener("click", function() {
         directions.innerHTML = "Hide Directions";
         contentDir.style.display = "block";
     }
-  });
+  });*/
 
 /* Edit Related */
 /* Headers */
@@ -155,8 +155,8 @@ var fileContent = null; /* contents of uploaded JSON file */
 var uploadedTextureFormat = {};
 
 /* Initial webpage layout hides all edit related containers */
-content.style.display = "block";
-contentDir.style.display = "none";
+/*content.style.display = "block";
+contentDir.style.display = "none";*/
 toggleAddEdit(null);
 
 /* selects a new entity for editing*/
