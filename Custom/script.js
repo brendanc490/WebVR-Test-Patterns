@@ -427,7 +427,7 @@ $("#texture-input").change(function() {
                     uploadedTextureFormat[texture_input.files[j].name] = {width: width, height: height};
                     var option = document.createElement("option"); 
                     option.text = texture_input.files[j++].name;
-                    option.value = `url(${uploaded_image})`;
+                    option.value = `url(${this.src})`;
                     texture.add(option);
                 }
             };
