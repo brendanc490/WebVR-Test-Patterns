@@ -123,8 +123,8 @@ Select a color using the color slider or input the desired color in hexadecimal 
 If you would like to inspect the HTML or JavaScript data of the selected entity:  
 - Open the inspector with Ctrl + Shift + i
 - Enter "selectedEntity" into the command prompt, this will bring up all associated HTML code
-- Enter "selectedEntity.getAttribute("<desired component>") to see the associated JavaScript data for the desired component
+- Enter "selectedEntity.getAttribute("\<desired component\>") to see the associated JavaScript data for the desired component
    - Ex: selectedEntity.getAttribute("position") to view position or selectedEntity.getAttribute("material") to view texture and color
-- Enter "selectedEntity.setAttribute("<desired component>",<desired value>) to set the associated JavaScript data for the desired component
+- Enter "selectedEntity.setAttribute("\<desired component\>",\<desired value\>) to set the associated JavaScript data for the desired component
    - Ex: selectedEntity.setAttribute("position",{x: 0, y: 0, z: -125}) to set position to 0,0 on the cylindrical plane
    - Ex: selectedEntity.setAttribute("material",{color: "#0000FF", shader: "flat", src: ""}) to set the color to red and remove the texture, ***make sure to include shader: "flat" to remove unnecessary lighting effects*** 
