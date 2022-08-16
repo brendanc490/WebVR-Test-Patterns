@@ -12,6 +12,8 @@ Then, select the type of entity you would like to add using the ***Type of entit
 
 Entities will spawn at a random position within the editor camera field of view with a random color.
 
+***Entities may appear skewed in the editor but this affect is corrected on the headset. Do not stack entities, it will result in [z-fighting](https://en.wikipedia.org/wiki/Z-fighting)***
+
 ### Types of Entities
 - Circle
 - Plane
