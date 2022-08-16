@@ -1,5 +1,5 @@
 .minicolors {
-  position: relative;
+  position: absolute;
 }
 
 .minicolors-sprite {
@@ -183,7 +183,7 @@
 
 .minicolors-grid .minicolors-picker > div {
   position: absolute;
-  top: 0;
+  top: 10%;
   left: 0;
   width: 8px;
   height: 8px;
