@@ -2,7 +2,7 @@
 
 ## Displaying the Scene
 To display the scene, hit the ***VR*** button in the bottom right hand corner.
-[**Check the demos folder for some basic editable scenes!**](https://github.com/brendanc490/WebVR-Test-Patterns/tree/main/Custom/demos)
+[**Check the demos folder for some basic editable scenes!**](./demos)
 
 ## Adding Entities
 ![plot](../Images/editor.PNG)
@@ -78,7 +78,7 @@ Select a color using the color slider or input the desired color in hexadecimal 
 
 #### Plane
 - Texture: 
-   - There are some textures built into the site. [They can be found here.](https://github.com/brendanc490/WebVR-Test-Patterns/tree/main/Custom/textures) Textures can also be uploaded as JPGS or PNGS and added to the list of available textures in the scene. 
+   - There are some textures built into the site. [They can be found here.](./textures) Textures can also be uploaded as JPGS or PNGS and added to the list of available textures in the scene. 
    - Applying a texture will automatically scale the plane to fit the aspect ratio.
 - Height (m): 
    - The unit for height is world units where 1 world unit is equal to 1 meter in 3D space.
