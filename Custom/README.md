@@ -88,11 +88,11 @@ Select a color using the color slider or input the desired color in hexadecimal 
 #### Triangle
 ![plot](../Images/triangle.PNG)
 - Vertex A (x m,y m):
-   - Position of vertex A in relation to the center point of. The units for is position are world units where 1 world unit is equal to 1 meter in 3D space.
+   - Position of vertex A in relation to the center point of the entity. The units for is position are world units where 1 world unit is equal to 1 meter in 3D space.
 - Vertex B (x m,y m):
-   - Position of vertex B in relation to the center point of. The units for is position are world units where 1 world unit is equal to 1 meter in 3D space.
+   - Position of vertex B in relation to the center point of the entity. The units for is position are world units where 1 world unit is equal to 1 meter in 3D space.
 - Vertex B (x m,y m):
-   - Position of vertex C in relation to the center point of. The units for is position are world units where 1 world unit is equal to 1 meter in 3D space.
+   - Position of vertex C in relation to the center point of the entity. The units for is position are world units where 1 world unit is equal to 1 meter in 3D space.
 
 #### Gradient
 - Individual Bar Height (m): 
