@@ -166,7 +166,7 @@ function selectNew(clickedEntity){
         selectedEntity = clickedEntity; /* updated selected entity */
         entitySelector.value = clickedEntity.getAttribute("id"); /* update dropdown */
     } else { /* if selected via dropdown */
-    console.log($("#entityId :selected").text())
+    
         selectedEntity = scene.querySelector("#"+$("#entityId :selected").text()); /* update selected entity */
     }
     /* Update stats in edit section */
@@ -204,17 +204,20 @@ function hideEditStats(){
     uploadTextureIn.style.display = "none";
     fillIn.style.display = "none";
 }
-
+ var flag = false;
 /* updates values in edit section */
 function updateStats(){
     /* universal values */
-    console.log(selectedEntity.getAttribute("id"))
     skyColor.value = sky.components.material.attrValue.color;
+    $('#skyCol').minicolors("value",sky.components.material.attrValue.color);
     entity = selectedEntity;
     xIn.value = -entity.components.angle.attrValue.x;
     yIn.value = entity.components.position.attrValue.y;
     rotation.value = entity.components.rotation.attrValue.z;
     color.value = entity.components.material.attrValue.color;
+    flag = true;
+    $('#color').minicolors("value",entity.components.material.attrValue.color);
+    flag = false;
     if (entity.components.material.attrValue.src == "" || entity.components.material.attrValue.src == null){
         texture.selectedIndex = 0;
         texture.options[0].selected = true;
@@ -359,7 +362,9 @@ $('#color').minicolors({
     control: 'hue',
     position:'top',
     change: function () {
-        editEntity();
+        if(!flag){
+            editEntity();
+        }
     },
 });
 
@@ -435,10 +440,34 @@ $("#texture-input").change(function() {
 
 /* If the textbox for x value is changed */
 $("#fill").change(function() {
-    if(parseFloat($("#fill").val()) == parseFloat($("#radius").val())){
-        selectedEntity.setAttribute("fill",{val: selectedEntity.getAttribute("fill").val, isFull: true});
+    if(selectedEntity.id.includes("plane")){
+        if(parseFloat($("#fill").val()) <= 0){
+            alert("Border too small (0 < border <= smallest dimension of entity)");
+            return;
+        } else if((parseFloat($("#width").val()) < parseFloat($("#fill").val())) && (parseFloat($("#width").val()) <= parseFloat($("#height").val())) || (parseFloat($("#height").val()) < parseFloat($("#fill").val())) && (parseFloat($("#width").val()) > parseFloat($("#height").val()))){
+            alert("Border too large, will change size of entity (0 < border <= smallest dimension of entity)");
+            return;
+        }
+        if(parseFloat($("#fill").val()) == parseFloat($("#width").val()) && parseFloat($("#height").val()) > parseFloat($("#width").val())){
+            selectedEntity.setAttribute("fill",{val: parseFloat($("#fill").val()), isFull: true});
+        } else if(parseFloat($("#fill").val()) == parseFloat($("#height").val()) && parseFloat($("#height").val()) < parseFloat($("#width").val())){
+            selectedEntity.setAttribute("fill",{val: parseFloat($("#fill").val()), isFull: true});
+        } else {
+            selectedEntity.setAttribute("fill",{val: parseFloat($("#fill").val()), isFull: false});
+        }
     } else {
-        selectedEntity.setAttribute("fill",{val: selectedEntity.getAttribute("fill").val, isFull: false});
+        if(parseFloat($("#fill").val()) <= 0){
+            alert("Border too small (0 < border <= smallest dimension of entity)");
+            return;
+        } else if(parseFloat($("#radius").val()) < parseFloat($("#fill").val())){
+            alert("Border too large, will change size of entity (0 < border <= radius)");
+            return;
+        }
+        if(parseFloat($("#fill").val()) == parseFloat($("#radius").val())){
+            selectedEntity.setAttribute("fill",{val: selectedEntity.getAttribute("fill").val, isFull: true});
+        } else {
+            selectedEntity.setAttribute("fill",{val: selectedEntity.getAttribute("fill").val, isFull: false});
+        }
     }
     editEntity();
   });
@@ -592,9 +621,7 @@ window.addEventListener("pointerup", function(e) {
 });*/
 
 function removeEntity(){
-    console.log(els.indexOf(selectedEntity))
     els.splice(els.indexOf(selectedEntity),1);
-    console.log(pool.indexOf(selectedEntity.object3D));
     pool.splice(pool.indexOf(selectedEntity.object3D),1);
     if(selectedEntity.id.includes("plane")){
         planeNum--;

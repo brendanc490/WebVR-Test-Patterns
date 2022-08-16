@@ -191,7 +191,7 @@ function editEntity(){
         } else if(parseFloat($("#radius").val()) < parseFloat($("#fill").val())){
             alert("Border too large, will change size of entity (0 < border <= radius)")
         }
-        selectedEntity.setAttribute("fill",{val: parseFloat($("#fill").val())});
+        /*selectedEntity.setAttribute("fill",{val: parseFloat($("#fill").val())});*/
         /*selectedEntity.setAttribute("geometry",{primitive: "ring", radiusOuter: parseFloat($("#radius").val()), radiusInner: parseFloat($("#radius").val())*Math.sqrt((100-parseFloat($("#fill").val()))/100)});*/
         selectedEntity.setAttribute("geometry",{primitive: "ring", radiusOuter: parseFloat($("#radius").val()), radiusInner: parseFloat($("#radius").val())-parseFloat($("#fill").val())});
         selectedEntity.setAttribute("material",{shader: "flat", src: selectedEntity.getAttribute("material").src, color: $("#color").val()});
@@ -213,10 +213,11 @@ function editEntity(){
         } else if(parseFloat($("#fill").val()) <= 0){
             alert("Border too small (0 < border <= smallest dimension of entity)");
             return;
-        } else if((parseFloat($("#width").val()) < parseFloat($("#fill").val())) && (parseFloat($("#width").val()) < parseFloat($("#height").val())) || (parseFloat($("#height").val()) < parseFloat($("#fill").val())) && (parseFloat($("#width").val()) > parseFloat($("#height").val()))){
-            alert("Border too large, will change size of entity (0 < border <= smallest dimension of entity)")
+        } else if((parseFloat($("#width").val()) < parseFloat($("#fill").val())) && (parseFloat($("#width").val()) <= parseFloat($("#height").val())) || (parseFloat($("#height").val()) < parseFloat($("#fill").val())) && (parseFloat($("#width").val()) > parseFloat($("#height").val()))){
+            alert("Border too large, will change size of entity (0 < border <= smallest dimension of entity)");
+            return;
         }
-        selectedEntity.setAttribute("fill",{val: parseFloat($("#fill").val())});
+        /*selectedEntity.setAttribute("fill",{val: parseFloat($("#fill").val())});*/
         if (texture.value == "none"){
             selectedEntity.setAttribute("geometry",{primitive: "plane", width: 0, height: parseFloat($("#height").val())});
             let i = selectedEntity.children.length-1;

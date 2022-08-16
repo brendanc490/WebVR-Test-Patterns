@@ -138,14 +138,14 @@
                 <button class="button reset" onclick="removeEntity()">Remove from Scene</button>
             </p>
             <p id="backgroundSettings"><b>Background Settings</b></p>
-            <div id="skyIn" position="absolute" width="45%" left="0">Sky Color (#HEXCODE): <input type="text" class="input" id="skyCol" value="#000000"></div>
+            <div id="skyIn" position="absolute" width="45%" left="0">Sky Color: <input type="text" class="input" id="skyCol" value="#000000"></div>
             <p id="entitySettings"><b>Entity Settings</b></p>
             <p id="editSelector">Current entity: <select name="entityId" id="entityId"  onchange="selectNew(null)">
             </select></p>
             <p id="universalSettings"><b>Universal Entity Settings</b></p>
             <p id="posIn">Position: (x: deg, y: m)<input type="text" class="input" id="y" value="0"> <input type="text" class="input" id="x" value="0"></p>
             <p id="rotIn">Rotation (deg):  <input type="text" class="input" id="rotation" value="0"></p>
-            <div id="colIn" position="absolute" width="75%" left="0">Color (#HEXCODE): <input type="text" class="input" id="color" value="#FFFFFF"></div>
+            <div id="colIn" position="absolute" width="75%" left="0">Color: <input type="text" class="input" id="color" value="#FFFFFF"></div>
             <p id="nonUniversalSettings"><b>Entity Specific Settings</b></p>
             <p id="textureIn">Texture:                 <select class="select" name="texture" id="texture">
                 <option value="none">none</option>
@@ -156,7 +156,8 @@
                 <option value="sQC">TG270sQC</option>
                 <option value="PQC">TG18-PQC.2k_12b</option>
                 <option value="BR">TG18-BR.2k_12b</option>
-                <option value="transparent">transparent</option>
+                <!-- Transparent textures don't work
+                    <option value="transparent">transparent</option>-->
             </select></p>
             <p style="text-align:center;" id="uploadTextureIn">
                 Upload your textures here: <input type="file" id="texture-input" accept="image/png, image/jpeg" multiple>
