@@ -67,6 +67,8 @@ To edit the color, locate the color selector labeled ***Color*** under **Univers
 
 Select a color using the color slider or input the desired color in hexadecimal format.
 
+***For checkerboards and grilles, the alternate color will always be black***
+
 ### Entity Specific Settings
 #### Circle 
 - Radius (m): 
