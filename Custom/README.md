@@ -2,8 +2,7 @@
 
 ## Displaying the Scene
 To display the scene, hit the ***VR*** button in the bottom right hand corner.
-
-## Check the Demos folder for some basic editable scenes
+**Check the Demos folder for some basic editable scenes!**
 
 ## Adding Entities
 ![plot](../Images/editor.PNG)
