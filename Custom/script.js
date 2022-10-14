@@ -373,6 +373,7 @@ $("#texture").change(function() {
     if(texture.value == "none"){
         selectedEntity.setAttribute("material",{color: selectedEntity.getAttribute("material").color, shader: "flat", src: ""});
         fillIn.style.display = "block";
+        editEntity()
     } else {
         selectedEntity.setAttribute("material",{color: selectedEntity.getAttribute("material").color, shader: "flat", src: "#"+texture.value});
         let i = selectedEntity.children.length-1;
@@ -385,8 +386,16 @@ $("#texture").change(function() {
         } else {
             selectedEntity.setAttribute("geometry",{primitive: "plane", width: .5*(uploadedTextureFormat[texture.options[texture.selectedIndex].text].width/uploadedTextureFormat[texture.options[texture.selectedIndex].text].height)*250, height: .5*250});
         }
+        if(selectedEntity.getAttribute("fill").isFull){
+            if(selectedEntity.getAttribute("geometry").width > selectedEntity.getAttribute("geometry").height){
+                selectedEntity.setAttribute("fill", { val: selectedEntity.getAttribute("geometry").height, isFull: true});
+            } else {
+                selectedEntity.setAttribute("fill", { val: selectedEntity.getAttribute("geometry").width, isFull: true});
+            }
+        }
         width.value = selectedEntity.getAttribute("geometry").width;
         height.value = selectedEntity.getAttribute("geometry").height;
+        fill.value = selectedEntity.getAttribute("fill").val;
         fillIn.style.display = "none";
     }
   });
