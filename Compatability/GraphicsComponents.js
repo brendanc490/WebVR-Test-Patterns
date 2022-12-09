@@ -8,7 +8,7 @@ AFRAME.registerComponent('button',{
         if (this.data.isPressed) {
             this.el.setAttribute("material","shader: flat; color: #FFFFFF; side:double")
         } else {
-            if(this.el.id.includes( "ThumbIndicator")){
+            if(this.el.id.includes( "Indicator")){
                 this.el.setAttribute("material","shader: flat; color: #222222; side:double")
             } else {
                 this.el.setAttribute("material","shader: flat; color: #797979; side:double")

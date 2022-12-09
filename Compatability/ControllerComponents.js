@@ -33,7 +33,7 @@ init: function () {
         }
         leftThumbInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
         
-        isLeft = !(ocLeft.getAttribute("position").x == 0 && ocLeft.getAttribute("position").y == 0 && ocLeft.getAttribute("position").z == 0);
+        isLeft = !(conLeft.getAttribute("position").x == 0 && conLeft.getAttribute("position").y == 0 && conLeft.getAttribute("position").z == 0);
         if(isLeft){
             left.setAttribute("value", "Left Controller Connected: Yes"); left.setAttribute("color","green")
         }
@@ -78,7 +78,7 @@ init: function () {
             
         }
         rightThumbInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
-        isRight = !(ocRight.getAttribute("position").x == 0 && ocRight.getAttribute("position").y == 0 && ocRight.getAttribute("position").z == 0);
+        isRight = !(conRight.getAttribute("position").x == 0 && conRight.getAttribute("position").y == 0 && conRight.getAttribute("position").z == 0);
         if(isRight){
             right.setAttribute("value", "Right Controller Connected: Yes"); right.setAttribute("color","green")
         }
@@ -93,33 +93,33 @@ AFRAME.registerComponent('trackpad-left',{
             if(queriesFound == false){
                 return
             }
-            if (evt.detail.y > 0.95) {
+            if (evt.detail.y > 0.2) {
                 //leftThumb.textContent = 'Yes'; 
                 isLeftTrack = true; 
-                leftTrackpad.setAttribute("value", "Left Axis: Yes"); 
+                leftTrackpad.setAttribute("value", "Left Trackpad: Yes"); 
                 leftTrackpad.setAttribute("color","green")
             }
-            if (evt.detail.y < -0.95) { 
+            if (evt.detail.y < -0.2) { 
                 //leftThumb.textContent = 'Yes'; 
                 isLeftTrack = true; 
-                leftTrackpad.setAttribute("value", "Left Axis: Yes"); 
+                leftTrackpad.setAttribute("value", "Left Trackpad: Yes"); 
                 leftTrackpad.setAttribute("color","green")
             }
-            if (evt.detail.x < -0.95) { 
+            if (evt.detail.x < -0.2) { 
                 //leftThumb.textContent = 'Yes'; 
                 isLeftTrack = true; 
-                leftTrackpad.setAttribute("value", "Left Axis: Yes"); 
+                leftTrackpad.setAttribute("value", "Left Trackpad: Yes"); 
                 leftTrackpad.setAttribute("color","green")
             }
-            if (evt.detail.x > 0.95) {
+            if (evt.detail.x > 0.2) {
                 //leftThumb.textContent = 'Yes'; 
                 isLeftTrack = true; 
-                leftTrackpad.setAttribute("value", "Left Axis: Yes"); 
+                leftTrackpad.setAttribute("value", "Left Trackpad: Yes"); 
                 leftTrackpad.setAttribute("color","green")
             }
             leftTrackInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
             
-            /*isLeft = !(ocLeft.getAttribute("position").x == 0 && ocLeft.getAttribute("position").y == 0 && ocLeft.getAttribute("position").z == 0);
+            /*isLeft = !(conLeft.getAttribute("position").x == 0 && conLeft.getAttribute("position").y == 0 && conLeft.getAttribute("position").z == 0);
             if(isLeft){
                 left.setAttribute("value", "Left Controller Connected: Yes"); left.setAttribute("color","green")
             }*/
@@ -129,45 +129,45 @@ AFRAME.registerComponent('trackpad-left',{
     /*  */
     AFRAME.registerComponent('trackpad-right',{
     init: function () {
-        this.el.addEventListener('thumbstickmoved', this.logThumbstick);
+        this.el.addEventListener('trackpadmoved', this.logTrackpad);
     },
-        logThumbstick: function (evt) {
+        logTrackpad: function (evt) {
             if(queriesFound == false){
                 return
             }
-            if (evt.detail.y > 0.95) {
+            if (evt.detail.y > 0.2) {
                 //rightThumb.textContent = 'Yes'; 
                 isRightTrack = true; 
-                rightTrackpad.setAttribute("value", "Right Axis: Yes"); 
+                rightTrackpad.setAttribute("value", "Right Trackpad: Yes"); 
                 rightTrackpad.setAttribute("color","green")
             }
-            if (evt.detail.y < -0.95) { 
+            if (evt.detail.y < -0.2) { 
                 //rightThumb.textContent = 'Yes'; 
                 isRightTrack = true; 
-                rightTrackpad.setAttribute("value", "Right Axis: Yes"); 
+                rightTrackpad.setAttribute("value", "Right Trackpad: Yes"); 
                 rightTrackpad.setAttribute("color","green")
             }
-            if (evt.detail.x < -0.95) { 
+            if (evt.detail.x < -0.2) { 
                 //rightThumb.textContent = 'Yes'; 
                 isRightTrack = true; 
-                rightTrackpad.setAttribute("value", "Right Axis: Yes"); 
+                rightTrackpad.setAttribute("value", "Right Trackpad: Yes"); 
                 rightTrackpad.setAttribute("color","green")
             }
-            if (evt.detail.x > 0.95) {
+            if (evt.detail.x > 0.2) {
                 //rightThumb.textContent = 'Yes'; 
                 isRightTrack = true; 
-                rightTrackpad.setAttribute("value", "Right Axis: Yes"); 
+                rightTrackpad.setAttribute("value", "Right Trackpad: Yes"); 
                 rightTrackpad.setAttribute("color","green")
             }
             rightTrackInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
-            /*isRight = !(ocRight.getAttribute("position").x == 0 && ocRight.getAttribute("position").y == 0 && ocRight.getAttribute("position").z == 0);
+            /*isRight = !(conRight.getAttribute("position").x == 0 && conRight.getAttribute("position").y == 0 && conRight.getAttribute("position").z == 0);
             if(isRight){
                 right.setAttribute("value", "Right Controller Connected: Yes"); right.setAttribute("color","green")
             }*/
         }
     });
 
-AFRAME.registerComponent('button-listener-r-quest', {
+AFRAME.registerComponent('button-listener-r', {
 init: function () {
     var el = this.el;
 
@@ -247,54 +247,86 @@ init: function () {
 
     el.addEventListener('trackpaddown', function (evt) {
         trackRightPressed = true
-        rightTrackPress.setAttribute("value", "Right Trackpad Pressed: Yes"); rightStickPress.setAttribute("color","green")
+        rightTrackPress.setAttribute("value", "Right Trackpad Pressed: Yes"); rightTrackPress.setAttribute("color","green")
         rightTrackInd.setAttribute("button", {isPressed: true})
     });
 
     el.addEventListener('trackpadup', function (evt) {
         rightTrackInd.setAttribute("button", {isPressed: false})
     });
+
+    el.addEventListener('trackpadtouchstart', function (evt) {
+        rightTrackInd.setAttribute("visible", true)
+    });
+
+    el.addEventListener('trackpadtouchend', function (evt) {
+        rightTrackInd.setAttribute("visible", false)
+    });
 }
 });
 
-AFRAME.registerComponent('button-listener-l-quest', {
+AFRAME.registerComponent('button-listener-l', {
 init: function () {
     var el = this.el;
 
     el.addEventListener('gripdown', function (evt) {
+        if(queriesFound == false){
+            return
+        }
         gripLeftPressed = true;
         leftGrip.setAttribute("value", "Left Grip: Yes"); leftGrip.setAttribute("color","green")
-        document.querySelector("#gripLeftButtonAnimation").setAttribute("button", {isPressed: true})
+        gripLeftButtonAnimation.setAttribute("button", {isPressed: true})
     });
     el.addEventListener('gripup', function (evt) {
-        document.querySelector("#gripLeftButtonAnimation").setAttribute("button", {isPressed: false})
+        if(queriesFound == false){
+            return
+        }
+        gripLeftButtonAnimation.setAttribute("button", {isPressed: false})
     });
 
     el.addEventListener('triggerdown', function (evt) {
+        if(queriesFound == false){
+            return
+        }
         triggerLeftPressed = true;
         leftTrigger.setAttribute("value", "Left Trigger: Yes"); leftTrigger.setAttribute("color","green")
-        document.querySelector("#triggerLeftButtonAnimation").setAttribute("button", {isPressed: true})
+        triggerLeftButtonAnimation.setAttribute("button", {isPressed: true})
     });
     el.addEventListener('triggerup', function (evt) {
-        document.querySelector("#triggerLeftButtonAnimation").setAttribute("button", {isPressed: false})
+        if(queriesFound == false){
+            return
+        }
+        triggerLeftButtonAnimation.setAttribute("button", {isPressed: false})
     });
 
-    el.addEventListener('xbuttondown', function (evt) {
+    el.addEventListener('abuttondown', function (evt) {
+        if(queriesFound == false){
+            return
+        }
         xPressed = true;
         x.setAttribute("value", "X Button: Yes"); x.setAttribute("color","green")
-        document.querySelector("#xButtonAnimation").setAttribute("button", {isPressed: true})
+        xButtonAnimation.setAttribute("button", {isPressed: true})
     });
-    el.addEventListener('xbuttonup', function (evt) {
-        document.querySelector("#xButtonAnimation").setAttribute("button", {isPressed: false})
+    el.addEventListener('abuttonup', function (evt) {
+        if(queriesFound == false){
+            return
+        }
+        xButtonAnimation.setAttribute("button", {isPressed: false})
     });
 
-    el.addEventListener('ybuttondown', function (evt) {
+    el.addEventListener('bbuttondown', function (evt) {
+        if(queriesFound == false){
+            return
+        }
         yPressed = true;
         y.setAttribute("value", "Y Button: Yes"); y.setAttribute("color","green")
-        document.querySelector("#yButtonAnimation").setAttribute("button", {isPressed: true})
+        xButtonAnimation.setAttribute("button", {isPressed: true})
     });
-    el.addEventListener('ybuttonup', function (evt) {
-        document.querySelector("#yButtonAnimation").setAttribute("button", {isPressed: false})
+    el.addEventListener('bbuttonup', function (evt) {
+        if(queriesFound == false){
+            return
+        }
+        yButtonAnimation.setAttribute("button", {isPressed: false})
     });
 
     /*el.addEventListener('menudown', function (evt) {
@@ -305,18 +337,28 @@ init: function () {
     el.addEventListener('thumbstickdown', function (evt) {
         thumbLeftPressed = true
         leftStickPress.setAttribute("value", "Left Thumbstick Pressed: Yes"); leftStickPress.setAttribute("color","green")
-        document.querySelector("#leftThumbIndicator").setAttribute("button", {isPressed: true})
+        leftThumbInd.setAttribute("button", {isPressed: true})
     });
     el.addEventListener('thumbstickup', function (evt) {
-        document.querySelector("#leftThumbIndicator").setAttribute("button", {isPressed: false})
+        leftThumbInd.setAttribute("button", {isPressed: false})
     });
 
-    /*el.addEventListener('trackpaddown', function (evt) {
-        console.log("thumbstick pressed")
+    el.addEventListener('trackpaddown', function (evt) {
+        trackLeftPressed = true
+        leftTrackPress.setAttribute("value", "Left Trackpad Pressed: Yes"); leftTrackPress.setAttribute("color","green")
+        leftTrackInd.setAttribute("button", {isPressed: true})
     });
 
     el.addEventListener('trackpadup', function (evt) {
-        console.log("thumbstick released")
-    });*/
+        leftTrackInd.setAttribute("button", {isPressed: false})
+    });
+
+    el.addEventListener('trackpadtouchstart', function (evt) {
+        leftTrackInd.setAttribute("visible", true)
+    });
+
+    el.addEventListener('trackpadtouchend', function (evt) {
+        leftTrackInd.setAttribute("visible", false)
+    });
 }
 });

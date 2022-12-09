@@ -7,72 +7,67 @@ const vive_focus = data[0]['vive_focus']
 // contains all possible buttons and axes
 const generic = data[0]['generic']
 
-
-
-
-
-
 conLeft.addEventListener('buttondown', function (evt) {
     if(scheme == 'windows-mixed-reality'){
-        conLeft.dispatchEvent(CustomEvent(windows['left'][evt.detail.id]+'down', {detail:{}}))
+        conLeft.dispatchEvent(new CustomEvent(windows['left'][evt.detail.id]+'down', {detail: true}))
     }  else if(scheme == 'oculus-touch' || scheme == 'oculus-touch-v2' || scheme == 'oculus-touch-v3' || scheme == 'meta-quest-touch-pro') {
-        conLeft.dispatchEvent(CustomEvent(oc_touch['left'][evt.detail.id]+'down', {detail:{}}))
+        conLeft.dispatchEvent(new CustomEvent(oc_touch['left'][evt.detail.id]+'down', {detail: true}))
     } else if (scheme = 'oculus-go'){
-        conLeft.dispatchEvent(CustomEvent(oc_go['left'][evt.detail.id]+'down', {detail:{}}))
+        conLeft.dispatchEvent(new CustomEvent(oc_go['left'][evt.detail.id]+'down', {detail: true}))
     } else if(scheme == 'htc-vive' || scheme == 'htc-vive-focus-plus') {
-        conLeft.dispatchEvent(CustomEvent(vive['left'][evt.detail.id]+'down', {detail:{}}))
+        conLeft.dispatchEvent(new CustomEvent(vive['left'][evt.detail.id]+'down', {detail: true}))
     } else if(scheme == 'htc-vive-focus') {
-        conLeft.dispatchEvent(CustomEvent(vive_focus['left'][evt.detail.id]+'down', {detail:{}}))
+        conLeft.dispatchEvent(new CustomEvent(vive_focus['left'][evt.detail.id]+'down', {detail: true}))
     } else {
-        conLeft.dispatchEvent(CustomEvent(generic['left'][evt.detail.id]+'down', {detail:{}}))
+        conLeft.dispatchEvent(new CustomEvent(generic['left'][evt.detail.id]+'down', {detail: true}))
     }
 });
 
 conRight.addEventListener('buttondown', function (evt) {
     if(scheme == 'windows-mixed-reality'){
-        conRight.dispatchEvent(CustomEvent(windows['right'][evt.detail.id]+'down', {detail:{}}))
+        conRight.dispatchEvent(new CustomEvent(windows['right'][evt.detail.id]+'down', {detail: true}))
     }  else if(scheme == 'oculus-touch' || scheme == 'oculus-touch-v2' || scheme == 'oculus-touch-v3' || scheme == 'meta-quest-touch-pro') {
-        conRight.dispatchEvent(CustomEvent(oc_touch['right'][evt.detail.id]+'down', {detail:{}}))
+        conRight.dispatchEvent(new CustomEvent(oc_touch['right'][evt.detail.id]+'down', {detail: true}))
     } else if (scheme = 'oculus-go'){
-        conRight.dispatchEvent(CustomEvent(oc_go['right'][evt.detail.id]+'down', {detail:{}}))
+        conRight.dispatchEvent(new CustomEvent(oc_go['right'][evt.detail.id]+'down', {detail: true}))
     } else if(scheme == 'htc-vive' || scheme == 'htc-vive-focus-plus') {
-        conRight.dispatchEvent(CustomEvent(vive['right'][evt.detail.id]+'down', {detail:{}}))
+        conRight.dispatchEvent(new CustomEvent(vive['right'][evt.detail.id]+'down', {detail: true}))
     } else if(scheme == 'htc-vive-focus') {
-        conRight.dispatchEvent(CustomEvent(vive_focus['right'][evt.detail.id]+'down', {detail:{}}))
+        conRight.dispatchEvent(new CustomEvent(vive_focus['right'][evt.detail.id]+'down', {detail: true}))
     } else {
-        conRight.dispatchEvent(CustomEvent(generic['right'][evt.detail.id]+'down', {detail:{}}))
+        conRight.dispatchEvent(new CustomEvent(generic['right'][evt.detail.id]+'down', {detail: true}))
     }
 });
 
 conLeft.addEventListener('buttonup', function (evt) {
     if(scheme == 'windows-mixed-reality'){
-        conLeft.dispatchEvent(CustomEvent(windows['left'][evt.detail.id]+'up', {detail:{}}))
+        conLeft.dispatchEvent(new CustomEvent(windows['left'][evt.detail.id]+'up', {detail: true}))
     }  else if(scheme == 'oculus-touch' || scheme == 'oculus-touch-v2' || scheme == 'oculus-touch-v3' || scheme == 'meta-quest-touch-pro') {
-        conLeft.dispatchEvent(CustomEvent(oc_touch['left'][evt.detail.id]+'up', {detail:{}}))
+        conLeft.dispatchEvent(new CustomEvent(oc_touch['left'][evt.detail.id]+'up', {detail: true}))
     } else if (scheme = 'oculus-go'){
-        conLeft.dispatchEvent(CustomEvent(oc_go['left'][evt.detail.id]+'up', {detail:{}}))
+        conLeft.dispatchEvent(new CustomEvent(oc_go['left'][evt.detail.id]+'up', {detail: true}))
     }   else if(scheme == 'htc-vive' || scheme == 'htc-vive-focus-plus') {
-        conLeft.dispatchEvent(CustomEvent(vive['left'][evt.detail.id]+'up', {detail:{}}))
+        conLeft.dispatchEvent(new CustomEvent(vive['left'][evt.detail.id]+'up', {detail: true}))
     } else if(scheme == 'htc-vive-focus') {
-        conLeft.dispatchEvent(CustomEvent(vive_focus['left'][evt.detail.id]+'up', {detail:{}}))
+        conLeft.dispatchEvent(new CustomEvent(vive_focus['left'][evt.detail.id]+'up', {detail: true}))
     } else {
-        conLeft.dispatchEvent(CustomEvent(generic['left'][evt.detail.id]+'up', {detail:{}}))
+        conLeft.dispatchEvent(new CustomEvent(generic['left'][evt.detail.id]+'up', {detail: true}))
     }
 });
 
 conRight.addEventListener('buttonup', function (evt) {
     if(scheme == 'windows-mixed-reality'){
-        conRight.dispatchEvent(CustomEvent(windows['right'][evt.detail.id]+'up', {detail:{}}))
+        conRight.dispatchEvent(new CustomEvent(windows['right'][evt.detail.id]+'up', {detail: true}))
     }  else if(scheme == 'oculus-touch' || scheme == 'oculus-touch-v2' || scheme == 'oculus-touch-v3' || scheme == 'meta-quest-touch-pro') {
-        conRight.dispatchEvent(CustomEvent(oc_touch['right'][evt.detail.id]+'up', {detail:{}}))
+        conRight.dispatchEvent(new CustomEvent(oc_touch['right'][evt.detail.id]+'up', {detail: true}))
     } else if (scheme = 'oculus-go'){
-        conRight.dispatchEvent(CustomEvent(oc_go['right'][evt.detail.id]+'up', {detail:{}}))
+        conRight.dispatchEvent(new CustomEvent(oc_go['right'][evt.detail.id]+'up', {detail: true}))
     }   else if(scheme == 'htc-vive' || scheme == 'htc-vive-focus-plus') {
-        conRight.dispatchEvent(CustomEvent(vive['right'][evt.detail.id]+'up', {detail:{}}))
+        conRight.dispatchEvent(new CustomEvent(vive['right'][evt.detail.id]+'up', {detail: true}))
     } else if(scheme == 'htc-vive-focus') {
-        conRight.dispatchEvent(CustomEvent(vive_focus['right'][evt.detail.id]+'up', {detail:{}}))
+        conRight.dispatchEvent(new CustomEvent(vive_focus['right'][evt.detail.id]+'up', {detail: true}))
     } else {
-        conRight.dispatchEvent(CustomEvent(generic['right'][evt.detail.id]+'up', {detail:{}}))
+        conRight.dispatchEvent(new CustomEvent(generic['right'][evt.detail.id]+'up', {detail: true}))
     }
 });
 
