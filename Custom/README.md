@@ -132,3 +132,18 @@ If you would like to inspect the HTML or JavaScript data of the selected entity:
 - Enter "selectedEntity.setAttribute("\<desired component\>",\<desired value\>) to set the associated JavaScript data for the desired component
    - Ex: selectedEntity.setAttribute("position",{x: 0, y: 0, z: -125}) to set position to 0,0 on the cylindrical plane
    - Ex: selectedEntity.setAttribute("material",{color: "#0000FF", shader: "flat", src: ""}) to set the color to red and remove the texture, ***make sure to include shader: "flat" to remove unnecessary lighting effects*** 
+   
+   
+## JSON File Format
+{
+   "scenes": {
+      /* map of scenes */
+   },
+   
+   "textures": [
+      /* list of textures associated with patterns being saved */
+   ],
+   
+   "date": "datetime of save"
+}
+   
