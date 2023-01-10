@@ -25,8 +25,13 @@ const nonUni = document.getElementById("nonUniversalSettings");
 const utility = document.getElementById("utility");
 const collapse = document.getElementById("collapse");
 const content = document.getElementById("content");
+const addEditContent = document.getElementById("addEditContent")
+const displayEditContent = document.getElementById("displayEditContent")
+const nameIn = document.getElementById('name');
+const displayUtility = document.getElementById('displayUtility');
+
 collapse.addEventListener("click", function() {
-    this.classList.toggle("active");
+    //this.classList.toggle("active");
     if (content.style.display === "block") {
         collapse.innerHTML = "Show Settings";
         content.style.display = "none";
@@ -35,6 +40,12 @@ collapse.addEventListener("click", function() {
         content.style.display = "block";
     }
   });
+
+/* Display scenes */
+const pattern = document.getElementById("pattern");
+const patternList = document.getElementById("patternList");
+const patternDisplay = document.getElementById("patternDisplay");
+const scene_display_input = document.getElementById("scene-disp-input");
 
 /* Selection of entity */
 const entitySelectorText = document.getElementById("editSelector"); /* current entity container paragraph */
@@ -148,7 +159,8 @@ var grilleNum = 0;
 var textureNum = 0;
 var numAdded = 0; /* total entities added */
 
-var boolAddEdit = false; /* toggle for add or edit element */
+var boolAddEdit = false;
+var boolDisplayEdit = true; /* toggle for add or edit element */
 
 var fileContent = null; /* contents of uploaded JSON file */
 
@@ -157,6 +169,7 @@ var uploadedTextureFormat = {};
 /* Initial webpage layout hides all edit related containers */
 /*content.style.display = "block";
 contentDir.style.display = "none";*/
+toggleDisplayEdit(null);
 toggleAddEdit(null);
 
 /* selects a new entity for editing*/
@@ -263,6 +276,28 @@ function updateStats(){
 }
 
 /* switches between add or edit mode or refreshes current mode display */
+function toggleDisplayEdit(swap){
+    /* check if swapping modes or refreshing display */
+    if(swap){ /* if the button to swap was pressed */
+        boolDisplayEdit = !boolDisplayEdit; /* change current mode */
+    } 
+    /* check if current mode is add or edit */
+    if(boolDisplayEdit){ /* if display */
+        addEditContent.style.display = "none"
+        displayEditContent.style.display = "block"
+    } else { /* if add */
+        if(patternDisplay.options.length != 0){
+            addEditContent.style.display = "block"
+            $('#skyCol').minicolors('value', scenes[patternDisplay.value]['sky'].skyColor);
+            displayEditContent.style.display = "none"
+        } else {
+            alert("You must add a scene");
+            displayUtility.checked = false;
+        }
+    }
+}
+
+/* switches between add or edit mode or refreshes current mode display */
 function toggleAddEdit(swap){
     /* check if swapping modes or refreshing display */
     if(swap){ /* if the button to swap was pressed */
@@ -327,6 +362,9 @@ function toggleAddEdit(swap){
         hideEditStats(); /* hide edit containers */
 
         /* show add containers */;
+        saveButton.style.display = "block";
+        background.style.display = "block";
+        skyIn.style.display = "block";
         addChoice.style.display = "block"; 
         addButton.style.display = "block";
         upload.style.display = "block";
@@ -362,7 +400,7 @@ $('#color').minicolors({
     control: 'hue',
     position:'top',
     change: function () {
-        if(!flag){
+        if(!flag && $("#color").val().length == 7){
             editEntity();
         }
     },
@@ -671,3 +709,320 @@ function removeEntity(){
     }
     numAdded--;
 }
+
+var displayOrder = ['default'];
+function handlePatternSelect(snapshot){
+    /*let len = snapshot.options.length;
+    let i = 0;
+    while(i < len){
+        curr = snapshot.options[i]
+        if(curr.selected){
+            if(displayOrder.indexOf(curr) == -1){
+                displayOrder.push(curr)
+            }
+        } else {
+            if(displayOrder.indexOf(curr) != -1){
+                displayOrder.splice(displayOrder.indexOf(curr),1)
+            }
+        }
+        
+
+        i++;
+    }*/
+    curr = snapshot.id
+    if(displayOrder.indexOf(curr) == -1){
+        displayOrder.push(curr)
+    } else {
+            displayOrder.splice(displayOrder.indexOf(curr),1)
+    }
+    while(patternDisplay.options.length != 0){
+        patternDisplay.options.remove(patternDisplay.options[0])
+    }
+    i = 0
+    len = displayOrder.length
+    while(i < len){
+        if(i == 0){
+            patternDisplay.options.add(new Option(displayOrder[i], displayOrder[i], true, true))
+            revertChanges()
+            entityLoader(scenes[displayOrder[i]],null,false)
+
+        } else {
+            patternDisplay.options.add(new Option(displayOrder[i], displayOrder[i]))
+        }
+        i++;
+    }
+}
+
+function displayCurrentPattern(snapshot){
+    let len = snapshot.options.length;
+    let i = 0;
+    while(i < len){
+        curr = snapshot.options[i]
+        if(curr.selected){
+           /* display pattern */
+            revertChanges()
+            entityLoader(scenes[curr.text],)
+        } 
+        i++;
+    }
+}
+
+var scenes = {default: {sky: {skyColor: '#000000'}}}
+finished = false
+var ind = 0
+var block = false
+/* if JSON is uploaded */
+scene_display_input.addEventListener("change", function() {
+
+    var myLoop = slowLoop(scene_display_input.files, (itm, idx, cb)=>{
+    
+        setTimeout(()=>{
+            const reader = new FileReader();
+            reader.addEventListener("load", () => {
+
+                fileContent = JSON.parse(reader.result);
+                let arr = Object.keys(fileContent['scenes'])
+                let i = 0;
+                while(i < arr.length){
+                    if(Object.keys(scenes).indexOf(arr[i]) != -1){
+                        scenes[arr[i]+"1"] = fileContent['scenes'][arr[i]]
+                    } else {
+                        scenes[arr[i]] = fileContent['scenes'][arr[i]]
+                    }
+                    
+                    i++;
+                }
+                textures = fileContent['textures']['textureValues']
+                uploadedTextureFormats = fileContent['textures']['uploadedTextureFormats']
+                //scenes[itm.name.split(".")[0]] = fileContent /* loads all entities to scene */
+                //console.log(itm.name.split(".")[0])
+                cb();
+            });
+            if(itm.name.split(".")[1] != "JSON"){
+                alert("Invalid file type");
+                scene_display_input.value = ""
+                return;
+            }
+            if(Object.keys(scenes).indexOf(itm.name.split(".")[0]) != -1){
+                itm.name = itm.name.split(".")[0]+"1"+itm.name.split(".")[1]
+                console.log(itm)
+                /*alert("File already present");
+                scene_display_input.value = ""
+                return;*/
+            }
+            reader.readAsText(itm);
+            
+
+            
+            
+            // call cb when finished
+            
+            
+        }, 100);
+        
+    });
+    
+    // when it's done....
+    myLoop.then(()=>{
+        patternList.innerHTML = ''
+        let arr = Object.keys(scenes)
+        let len = arr.length
+        let i = 0;
+        let len2 = texture.options.length;
+        currTextures = []
+        while(i < len2){
+            currTextures.push(texture.options[i].text)
+            i++;
+        }
+        i = 0;
+        uploadedTextures = []
+        while(i < textures.length){
+            uploadedTextures.push(textures[i].text)
+            i++;
+        }
+        newTextures = [...new Set([...uploadedTextures,...currTextures])]
+        console.log(newTextures)
+        newTextures.forEach(text => {
+            var option = document.createElement("option"); 
+            if(uploadedTextures.indexOf(text) != -1 && currTextures.indexOf(text) == -1){
+                option.text = textures[uploadedTextures.indexOf(text)].text
+                option.value = textures[uploadedTextures.indexOf(text)].val
+                texture.add(option);
+            }
+            
+
+        })
+
+       
+
+
+        newUploadedTextureFormat = [...new Set([...Object.keys(uploadedTextureFormat),...Object.keys(uploadedTextureFormats)])]
+        console.log(newUploadedTextureFormat)
+        tmp = {}
+        newUploadedTextureFormat.forEach(texture => {
+            if(Object.keys(uploadedTextureFormat).indexOf(texture) != -1){
+                tmp[texture] = uploadedTextureFormat[texture]
+            } else {
+                tmp[texture] = uploadedTextureFormats[texture]
+            }
+        });
+        uploadedTextureFormat = tmp
+
+        i = 0;
+        while(i < len){
+            var toggle_button = '<p><input type="checkbox" id="'+arr[i]+'" name="'+arr[i]+'" onclick="handlePatternSelect(this)"'
+            let res = Array.from(patternDisplay.children).reduce(function(acc, x) {
+                acc = acc || x.text == arr[i]
+                return acc;
+              }, false);
+            if(res == true){
+                toggle_button += 'checked/>'
+            
+            } else {
+                toggle_button += '/>'
+            }
+            toggle_button += '<label for="'+arr[i]+'">'+arr[i]+'</label></p>';
+            $('#patternList').append(toggle_button)
+            //pattern.options.add(new Option(arr[i], arr[i]))
+            i++
+        }
+        console.log("Finished looping");
+
+    
+    });
+
+    /*while(ind < scene_display_input.files.length){
+
+
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+            console.log(ind)
+            /*if(curr.name.split(".")[1] != "JSON"){
+                alert("Invalid file type");
+                scene_display_input.value = ""
+                return;
+            }*/
+    
+            
+/*
+            fileContent = JSON.parse(reader.result);
+            scenes[curr.name.split(".")[0]] = fileContent /* loads all entities to scene */
+            /*finished = true;
+            console.log(curr.name.split(".")[0])
+            ind++;
+            block = false
+            
+        });
+        if(block != true){
+            console.log(ind)
+            curr = scene_display_input.files[ind];
+            reader.readAsText(curr);
+            block = true
+        }
+
+
+
+    }
+
+
+var myArray = ["a","b","c","d"];*/
+
+
+
+/**
+ * Execute the loopBody function once for each item in the items array, 
+ * waiting for the done function (which is passed into the loopBody function)
+ * to be called before proceeding to the next item in the array.
+ * @param {Array} items - The array of items to iterate through
+ * @param {Function} loopBody - A function to execute on each item in the array.
+ *		This function is passed 3 arguments - 
+ *			1. The item in the current iteration,
+ *			2. The index of the item in the array,
+ *			3. A function to be called when the iteration may continue.
+ * @returns {Promise} - A promise that is resolved when all the items in the 
+ *		in the array have been iterated through.
+ */
+function slowLoop(items, loopBody) {
+	return new Promise(f => {
+		done = arguments[2] || f;
+		idx = arguments[3] || 0;
+		let cb = items[idx + 1] ? () => slowLoop(items, loopBody, done, idx + 1) : done;
+		loopBody(items[idx], idx, cb);
+	});
+}
+    
+
+    
+});
+
+function resetScene(){
+    while(entityCanvas.childElementCount != 0){
+        entityCanvas.removeChild(entityCanvas.children[0])
+    } 
+    $('#skyCol').minicolors('value', '#000000');
+    els = []
+}
+
+function displayNext(direction){
+    if(direction){
+        // right
+        if(patternDisplay.selectedIndex == patternDisplay.childElementCount-1){
+            patternDisplay.selectedIndex = 0
+        } else {
+            patternDisplay.selectedIndex = patternDisplay.selectedIndex+1
+        }
+        
+        
+    } else {
+        // left
+        if(patternDisplay.selectedIndex == 0){
+            patternDisplay.selectedIndex = patternDisplay.childElementCount-1
+        } else {
+            patternDisplay.selectedIndex = patternDisplay.selectedIndex-1
+        }
+        
+    }
+    $('#patternDisplay').trigger('change')
+
+}
+
+function addPattern(){
+    console.log('test')
+    scenes[nameIn.value] = {sky: {skyColor: '#000000'}}
+    var toggle_button = '<p><input type="checkbox" id="'+nameIn.value+'" name="'+nameIn.value+'" onclick="handlePatternSelect(this)"/>\
+        <label for="'+nameIn.value+'">'+nameIn.value+'</label></p>';
+    $('#patternList').append(toggle_button)
+    //pattern.options.add(new Option(nameIn.value, nameIn.value))
+}
+
+function removePattern(){
+    revertChanges()
+    delete scenes[patternDisplay.value]
+    pattern.options.remove(new Option(patternDisplay.value, patternDisplay.value))
+    patternDisplay.options.remove(new Option(patternDisplay.value, patternDisplay.value))
+}
+
+function revertChanges(){
+    sky.setAttribute('material',{color: '#000000'})
+    while(entityCanvas.childElementCount != 0){
+        entityCanvas.removeChild(entityCanvas.children[0])
+
+       }
+        els = []
+        circleNum = 0; /* number of circles created */
+        planeNum = 0; /* number of planes created */
+        triangleNum = 0; /* number of triangles created */
+        gradientNum = 0; /* number of gradients created */
+        checkerboardNum = 0; /* number of checkerboards created */
+        grilleNum = 0;
+        textureNum = 0;
+        numAdded = 0;
+}
+
+document.addEventListener('keyup', (e) => {
+    if (e.code === "ArrowUp"){
+        displayNext(true)
+    } else if (e.code === "ArrowDown"){
+        displayNext(false)
+    }
+  });

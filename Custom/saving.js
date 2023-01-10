@@ -1,15 +1,18 @@
+var defaultStr = "default"
 /* saves scene in JSON format */
 function saveScene(){
     const jsonData = {};
     jsonData["sky"] = {skyColor: sky.getAttribute("material").color};
-    jsonData["uploadedTextureFormat"] = uploadedTextureFormat;
+    //jsonData["uploadedTextureFormat"] = uploadedTextureFormat;
     let i = 0;
     let arr = [];
+    let data = {scenes: {}, textures: {uploadedTextureFormats: {}, textureValues: []}, date: ""}
     while(i < texture.options.length){
         arr.push({val: texture.options[i].value, text: texture.options[i].text});
         i++;
     }
-    jsonData["textures"] = {vals: arr};
+    data["textures"]['textureValues'] = arr;
+    data["textures"]['uploadedTextureFormats'] = uploadedTextureFormat;
     els.forEach(element => { 
         if(element.id.includes("gradient") || element.id.includes("grille")){
             jsonData[element.id] = {angle: element.components.angle.attrValue, numBars: element.children.length, childGeometry: element.children[0].components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
@@ -22,10 +25,12 @@ function saveScene(){
         } else {
             jsonData[element.id]={angle: element.components.angle.attrValue, geometry: element.components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         }});
-            
-        var blob = new Blob([JSON.stringify(jsonData)],
+        
+        data['scenes'][patternDisplay.value] = jsonData
+        data['date'] = new Date().toLocaleString();
+        var blob = new Blob([JSON.stringify(data, null, '\t')],
         { type: "text/plain;charset=utf-8" });
-        saveAs(blob, "scene.JSON");
+        saveAs(blob, patternDisplay.value+".JSON");
 }
 
 /* if JSON is uploaded */
@@ -37,8 +42,8 @@ scene_input.addEventListener("change", function() {
     }
     const reader = new FileReader();
     reader.addEventListener("load", () => {
-        fileContent = JSON.parse(reader.result);
-        entityLoader(); /* loads all entities to scene */
+        contentFile = JSON.parse(reader.result);
+        entityLoader(contentFile,scene_input.value.split("\\")[2].split(".")[0],true); /* loads all entities to scene */
     });
     reader.readAsText(this.files[0]);
     
@@ -50,10 +55,13 @@ function getExtension(filename) {
   }
 
 /* loads entities from JSON to scene */
-function entityLoader(){
+function entityLoader(fileContent,name,def){
     let skip = false;
+    if(Object.keys(fileContent).length == 0){
+        alert("Cannot parse file");
+    }
     Object.keys(fileContent).forEach(key => {
-        if (!key.includes("uploadedTextureFormat") && !key.includes("texture") && !key.includes("sky") && !key.includes("circle") && !key.includes("plane") && !key.includes("triangle") && !key.includes("gradient") && !key.includes("checkerboard") && !key.includes("grille")){
+        if (/*!key.includes("uploadedTextureFormat") && */!key.includes("texture") && !key.includes("sky") && !key.includes("circle") && !key.includes("plane") && !key.includes("triangle") && !key.includes("gradient") && !key.includes("checkerboard") && !key.includes("grille")){
             alert("Cannot parse file");
             scene_input.value = "";
             skip = true;
@@ -67,6 +75,7 @@ function entityLoader(){
         if(!skip){
             if(key.includes("sky")){
                 sky.setAttribute("material",{color: fileContent[key].skyColor});
+                $('#skyCol').minicolors('value', fileContent[key].skyColor);
             } else if (key.includes("texture")){
                 let i = 0;
                 $("#texture").empty();
@@ -77,9 +86,9 @@ function entityLoader(){
                     texture.add(option);
                     i++;
                 }
-            } else if (key.includes("uploadedTextureFormat")){
+            } /*else if (key.includes("uploadedTextureFormat")){
                 uploadedTextureFormat = fileContent[key];
-            } else {
+            }*/ else {
                 el = document.createElement("a-entity"); /* create entity */
                 if(key.includes("circle")){ /* circle exclusive */
                     el.setAttribute("id","circle"+circleNum++);
@@ -119,7 +128,60 @@ function entityLoader(){
 
                 els.push(el);/* adds entity to list of created entities */
                 pool.push(el.object3D);
+                
             }
+            
         }
+
       });
+      if(def){
+                    
+        let len = pattern.childElementCount
+        let i = 0;
+        const obj = scenes[defaultStr]
+        scenes[name] = obj;
+        delete scenes[defaultStr];
+        while(i < len){
+            if(pattern.children[i].text == defaultStr){
+                pattern.children[i].text = name
+                pattern.children[i].value = name
+            }
+            i++;
+        }
+
+        len = patternDisplay.childElementCount
+        i = 0;
+        while(i < len){
+            if(patternDisplay.children[i].text == defaultStr){
+                patternDisplay.children[i].text = name
+                patternDisplay.children[i].value = name
+                defaultStr = name
+            }
+            i++;
+        }
+        scenes[name] = fileContent
+    }
+    
+}
+
+function saveSelected(){
+    let data = {scenes: {}, textures: {uploadedTextureFormats: {}, textureValues: []}, date: ""}
+    let i = 0;
+    let len = patternDisplay.options.length
+    textures = []
+    while(i < texture.options.length){
+        textures.push({val: texture.options[i].value, text: texture.options[i].text});
+        i++;
+    }
+    i = 0;
+    while(i < len){
+        data['scenes'][patternDisplay.options[i].text] = scenes[[patternDisplay.options[i].text]]
+        i++;
+    }
+    data['textures']['textureValues'] = textures
+    data['textures']['uploadedTextureFormats'] = uploadedTextureFormat
+    data['date'] = new Date().toLocaleString();
+    var blob = new Blob([JSON.stringify(data, null, '\t')],
+    { type: "text/plain;charset=utf-8" });
+    saveAs(blob, "pattern_package.JSON");
 }

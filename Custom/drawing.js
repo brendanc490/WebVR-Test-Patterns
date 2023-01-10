@@ -60,6 +60,7 @@ function addEntity(){
 
     els.push(el);/* add entity to list of created entities */
     pool.push(el.object3D);
+    updateJSON();
 }
 
 function drawPlaneBorder(width,height,fill,color,parent){
@@ -97,6 +98,7 @@ function drawPlaneBorder(width,height,fill,color,parent){
         parent.appendChild(vertR);
         parent.appendChild(horizU);
         parent.appendChild(horizD);
+        
 }
 
 function drawGradient(width,height,numBars,color,parent){
@@ -331,8 +333,36 @@ function editEntity(){
             i--;
         }
         drawCheckerboard(parseFloat($("#rowsIn").val()),parseFloat($("#colsIn").val()),parseFloat($("#tileSizeIn").val()),hexToRgb($("#color").val()),selectedEntity);
+        updateJSON()
     } 
 
+}
+
+
+function updateJSON(){
+    const jsonData = {};
+    jsonData["sky"] = {skyColor: sky.getAttribute("material").color};
+    jsonData["uploadedTextureFormat"] = uploadedTextureFormat;
+    let i = 0;
+    let arr = [];
+    while(i < texture.options.length){
+        arr.push({val: texture.options[i].value, text: texture.options[i].text});
+        i++;
+    }
+    jsonData["textures"] = {vals: arr};
+    els.forEach(element => { 
+        if(element.id.includes("gradient") || element.id.includes("grille")){
+            jsonData[element.id] = {angle: element.components.angle.attrValue, numBars: element.children.length, childGeometry: element.children[0].components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+        } else if(element.id.includes("checkerboard")){
+            jsonData[element.id] = {angle: element.components.angle.attrValue, rows: element.children.length, cols: element.children[0].children.length, tileSize: element.children[0].children[0].components.geometry.attrValue.width, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+        } else if(element.id.includes("plane")){
+            jsonData[element.id] = {angle: element.components.angle.attrValue, widthReal: (element.children.length == 0 ? element.components.geometry.attrValue.width : element.children[2].components.geometry.attrValue.width),fill: element.components.fill.attrValue, geometry: element.components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+        } else if(element.id.includes("circle")){
+            jsonData[element.id]={angle: element.components.angle.attrValue, geometry: element.components.geometry.attrValue, fill: element.components.fill.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+        } else {
+            jsonData[element.id]={angle: element.components.angle.attrValue, geometry: element.components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+        }});
+        scenes[patternDisplay.value] = jsonData
 }
 
 function hexToRgb(hex) {
