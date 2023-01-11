@@ -182,6 +182,7 @@ function selectNew(clickedEntity){
     
         selectedEntity = scene.querySelector("#"+$("#entityId :selected").text()); /* update selected entity */
     }
+    console.log('test')
     /* Update stats in edit section */
     hideEditStats(); /* hide section briefly */
     updateStats(); /* update stats */
@@ -285,6 +286,7 @@ function toggleDisplayEdit(swap){
     if(boolDisplayEdit){ /* if display */
         addEditContent.style.display = "none"
         displayEditContent.style.display = "block"
+        scene_input.value = ""
     } else { /* if add */
         if(patternDisplay.options.length != 0){
             addEditContent.style.display = "block"
@@ -368,6 +370,7 @@ function toggleAddEdit(swap){
         addChoice.style.display = "block"; 
         addButton.style.display = "block";
         upload.style.display = "block";
+        
     }
 }
 
@@ -377,6 +380,7 @@ function toggleAddEdit(swap){
     position:'top',
     change: function () {
         sky.setAttribute("material",{color: $("#skyCol").val()});
+        updateJSON();
     },
 });
 
@@ -708,6 +712,7 @@ function removeEntity(){
         selectNew(null);
     }
     numAdded--;
+    updateJSON()
 }
 
 var displayOrder = ['default'];
@@ -744,7 +749,7 @@ function handlePatternSelect(snapshot){
         if(i == 0){
             patternDisplay.options.add(new Option(displayOrder[i], displayOrder[i], true, true))
             revertChanges()
-            entityLoader(scenes[displayOrder[i]],null,false)
+            addEntitiesFromScene(scenes[displayOrder[i]])
 
         } else {
             patternDisplay.options.add(new Option(displayOrder[i], displayOrder[i]))
@@ -761,7 +766,8 @@ function displayCurrentPattern(snapshot){
         if(curr.selected){
            /* display pattern */
             revertChanges()
-            entityLoader(scenes[curr.text],)
+            console.log(scenes[curr.text])
+            addEntitiesFromScene(scenes[curr.text])
         } 
         i++;
     }
@@ -824,6 +830,7 @@ scene_display_input.addEventListener("change", function() {
     
     // when it's done....
     myLoop.then(()=>{
+        console.log('no')
         patternList.innerHTML = ''
         let arr = Object.keys(scenes)
         let len = arr.length
@@ -961,6 +968,7 @@ function resetScene(){
     } 
     $('#skyCol').minicolors('value', '#000000');
     els = []
+    updateJSON()
 }
 
 function displayNext(direction){
@@ -987,7 +995,6 @@ function displayNext(direction){
 }
 
 function addPattern(){
-    console.log('test')
     scenes[nameIn.value] = {sky: {skyColor: '#000000'}}
     var toggle_button = '<p><input type="checkbox" id="'+nameIn.value+'" name="'+nameIn.value+'" onclick="handlePatternSelect(this)"/>\
         <label for="'+nameIn.value+'">'+nameIn.value+'</label></p>';
@@ -998,7 +1005,16 @@ function addPattern(){
 function removePattern(){
     revertChanges()
     delete scenes[patternDisplay.value]
-    pattern.options.remove(new Option(patternDisplay.value, patternDisplay.value))
+    //pattern.options.remove(new Option(patternDisplay.value, patternDisplay.value))
+    let i = 0;
+    while(i < patternList.childElementCount){
+        if(patternList.children[i].children[0].id = patternDisplay.value){
+            patternList.removeChild(patternList.children[i])
+            i = patternList.childElementCount
+            displayOrder.splice(displayOrder.indexOf(patternDisplay.value),1);
+        }
+        i++;
+    }
     patternDisplay.options.remove(new Option(patternDisplay.value, patternDisplay.value))
 }
 
@@ -1006,7 +1022,9 @@ function revertChanges(){
     sky.setAttribute('material',{color: '#000000'})
     while(entityCanvas.childElementCount != 0){
         entityCanvas.removeChild(entityCanvas.children[0])
-
+       }
+       while(entitySelector.childElementCount != 0){
+            entitySelector.remove(entitySelector.children[0])
        }
         els = []
         circleNum = 0; /* number of circles created */

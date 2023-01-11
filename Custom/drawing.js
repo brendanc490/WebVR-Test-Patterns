@@ -333,23 +333,22 @@ function editEntity(){
             i--;
         }
         drawCheckerboard(parseFloat($("#rowsIn").val()),parseFloat($("#colsIn").val()),parseFloat($("#tileSizeIn").val()),hexToRgb($("#color").val()),selectedEntity);
-        updateJSON()
     } 
-
+    updateJSON()
 }
 
 
 function updateJSON(){
     const jsonData = {};
     jsonData["sky"] = {skyColor: sky.getAttribute("material").color};
-    jsonData["uploadedTextureFormat"] = uploadedTextureFormat;
+    /*jsonData["uploadedTextureFormat"] = uploadedTextureFormat;
     let i = 0;
     let arr = [];
     while(i < texture.options.length){
         arr.push({val: texture.options[i].value, text: texture.options[i].text});
         i++;
     }
-    jsonData["textures"] = {vals: arr};
+    jsonData["textures"] = {vals: arr};*/
     els.forEach(element => { 
         if(element.id.includes("gradient") || element.id.includes("grille")){
             jsonData[element.id] = {angle: element.components.angle.attrValue, numBars: element.children.length, childGeometry: element.children[0].components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
