@@ -995,9 +995,17 @@ function displayNext(direction){
 }
 
 function addPattern(){
-    scenes[nameIn.value] = {sky: {skyColor: '#000000'}}
-    var toggle_button = '<p><input type="checkbox" id="'+nameIn.value+'" name="'+nameIn.value+'" onclick="handlePatternSelect(this)"/>\
-        <label for="'+nameIn.value+'">'+nameIn.value+'</label></p>';
+    currName = ''
+    if(Object.keys(names).indexOf(nameIn.value) == -1){
+        names[nameIn.value] = 1
+        currName = nameIn.value
+    } else {
+        names[nameIn.value] = names[nameIn.value] + 1
+        currName = nameIn.value+''+names[nameIn.value]
+    }
+    scenes[currName] = {sky: {skyColor: '#000000'}}
+    var toggle_button = '<p><input type="checkbox" id="'+currName+'" name="'+currName+'" onclick="handlePatternSelect(this)"/>\
+        <label for="'+currName+'">'+currName+'</label></p>';
     $('#patternList').append(toggle_button)
     //pattern.options.add(new Option(nameIn.value, nameIn.value))
 }
@@ -1008,14 +1016,14 @@ function removePattern(){
     //pattern.options.remove(new Option(patternDisplay.value, patternDisplay.value))
     let i = 0;
     while(i < patternList.childElementCount){
-        if(patternList.children[i].children[0].id = patternDisplay.value){
+        if(patternList.children[i].children[0].id == patternDisplay.value){
             patternList.removeChild(patternList.children[i])
             i = patternList.childElementCount
             displayOrder.splice(displayOrder.indexOf(patternDisplay.value),1);
         }
         i++;
     }
-    patternDisplay.options.remove(new Option(patternDisplay.value, patternDisplay.value))
+    patternDisplay.options.remove(patternDisplay.selectedIndex)
 }
 
 function revertChanges(){
@@ -1044,3 +1052,5 @@ document.addEventListener('keyup', (e) => {
         displayNext(false)
     }
   });
+
+  names = {'default':1,'red':1,'green':1,'blue':1,'white':1,'grille':1}
