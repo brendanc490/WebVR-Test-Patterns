@@ -27,6 +27,12 @@ body {
     overflow-x:auto;
   }
 
+  .scrollable{
+    max-height: 15vh;
+    overflow-y:scroll;
+    overflow-x:auto;
+  }
+
   #directions{
     position: absolute;
     right: 10px;
@@ -88,6 +94,15 @@ input[type=text]{
     top: 50%;
     left:50%;
   }
+
+  input[type=file]{
+    text-align: center;
+    float: right;
+    padding-left: 20px;
+    right:0%;
+    top: 50%;
+  }
+
 
   .select{
     width: 100px;
