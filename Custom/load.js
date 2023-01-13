@@ -1,14 +1,14 @@
-import red from 'patterns/red.json' assert { type: "json" };
+import red from './prebuilt/red.json' assert { type: "json" };
 scenes['red'] = red['scenes']['default']
 
-import green from 'patterns/green.json' assert { type: "json" };
+import green from './prebuilt/green.json' assert { type: "json" };
 scenes['green'] = green['scenes']['default']
 
-import blue from 'patterns/blue.json' assert { type: "json" };
+import blue from './prebuilt/blue.json' assert { type: "json" };
 scenes['blue'] = blue['scenes']['default']
 
-import white from 'patterns/white.json' assert { type: "json" };
+import white from './prebuilt/white.json' assert { type: "json" };
 scenes['white'] = white['scenes']['default']
 
-import grille from 'patterns/grille.json' assert { type: "json" };
+import grille from './prebuilt/grille.json' assert { type: "json" };
 scenes['grille'] = grille['scenes']['default']
