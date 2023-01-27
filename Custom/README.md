@@ -5,7 +5,7 @@ To display the scene, hit the ***VR*** button in the bottom right hand corner.
 [**Check the demos folder for some basic editable scenes!**](./demos)
 
 ## Adding Entities
-![plot](../Images/editor.PNG)
+![plot](../Images/custom.PNG)
 To add an entity, make sure the slider at the top left of the webpage is set to ***Add Entity***.  
 
 Then, select the type of entity you would like to add using the ***Type of entity*** dropdown and hit the ***Add to Scene*** button.
