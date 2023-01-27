@@ -33,9 +33,9 @@ To display the scene, hit the ***VR*** button in the bottom right hand corner.
 Multiple scenes can be saved together by hitting the ***Save Selected Patterns*** button. This will save all currently selected patterns from the ***Pattern List***.
 To upload a group of scenes, press the ***Upload Patterns*** button and select the desired file. 
 
-## Ed
+## Editing Patterns
 
-## Adding Entities
+### Adding Entities
 ![plot](../Images/custom.PNG)
 To add an entity, make sure the slider at the top left of the webpage is set to ***Edit Pattern*** then move the slider below it to the ***Add Entity***.  
 
@@ -45,7 +45,7 @@ Entities will spawn at a random position within the editor camera field of view 
 
 ***Entities may appear skewed in the editor but this affect is corrected on the headset. Do not stack entities, it will result in [z-fighting].(https://en.wikipedia.org/wiki/Z-fighting)***
 
-### Types of Entities
+#### Types of Entities
 - Circle
 - Plane
 - Triangle
@@ -53,7 +53,7 @@ Entities will spawn at a random position within the editor camera field of view 
 - Checkerboard
 - Grille
 
-## Editing Entities
+### Editing Entities
 ![plot](../Images/editorExample.PNG)
 **In order to access the editor one or more entities must be added to the scene**. The editing bar can be hidden by pressing the ***Hide Settings*** button.
 
@@ -69,7 +69,7 @@ The current entity can be removed by hitting the ***Remove from Scene***. The en
 ### Saving the Scene
 To save the scene, press the ***Save Scene*** button located at the bottom of the editor tab. The scene is saved as an editable JSON file. Uploaded textures are preserved without image compression.
 
-## Background Color
+### Background Color
 To change the background color, select a new color or enter the hexadecimal code of the desired color.
 
 ### Universal Entity Settings
