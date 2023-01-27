@@ -3,4 +3,5 @@ The Compatibility Tool allows for the testing of different HMDs and their respse
 
 ![plot](../Images/compatability_in_action.PNG)
 
-## Displaying Patterns
+## Using the Tool
+
