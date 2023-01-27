@@ -170,10 +170,8 @@ If you would like to inspect the HTML or JavaScript data of the selected entity:
    
 ## JSON File Format
 {  
-&nbsp;&nbsp;"scenes": {  
-&nbsp;&nbsp;&nbsp;&nbsp;      /* map of scenes */  
-&nbsp;&nbsp;   },  
-   
+&nbsp;&nbsp;"scenes":   
+&nbsp;&nbsp;&nbsp;&nbsp;{ map of scenes },  
 &nbsp;&nbsp;   "textures": {  
 &nbsp;&nbsp;&nbsp;&nbsp;      "uploadedTextureFormats":  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ map of image sizes for uploaded textures },  
