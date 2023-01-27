@@ -1,7 +1,9 @@
 # Directions For Use: #
 The Custom Pattern Tool allows for the creation, editing, and saving of a pattern or groups of patterns.
 
-## Provided Patterns
+## Displaying Patterns
+
+### Provided Patterns
 - Default: A blank pattern that can be quickly edited
 - Red: A solid red background
 - Green: A solid green background
@@ -9,31 +11,33 @@ The Custom Pattern Tool allows for the creation, editing, and saving of a patter
 - White: A solid white background
 - Grille Pattern: A black and white background
 
-## Selecting a Scene
+### Selecting a Pattern
 To select a scene, first ensure that the checkbox for the scene under ***Pattern List*** has been checked. Then select the desired pattern from the ***Pattern Display*** dropdown. 
 
-## Adding a Scene
+### Adding a Pattern
 A scene a can be added using the ***Add Pattern*** button. A name for the added scene can be specified using textbox above the ***Add Pattern*** button.
 
-## Removing a Scene
+### Removing a Pattern
 Using the ***Remove Pattern*** button, the currently displayed scene can be removed.
 
-## Selecting Multiple Scenes
+### Selecting Multiple Patterns
 To select multiple scenes, check all of the desired checkboxes under ***Pattern List***. 
 **The order that the scenes are selected in will be the display order!**
 The current scene can be rotated through using the up or down arrows on the keyboard.
 
-## Displaying the Desired Scene
+### Displaying the Desired Pattern
 To display the scene, hit the ***VR*** button in the bottom right hand corner.
 [**Check the demos folder for some basic editable scenes!**](./demos)
 
-## Saving and Uploading a Group of Scenes
+## Saving and Uploading a Group of Patterns
 Multiple scenes can be saved together by hitting the ***Save Selected Patterns*** button. This will save all currently selected patterns from the ***Pattern List***.
 To upload a group of scenes, press the ***Upload Patterns*** button and select the desired file. 
 
+## Ed
+
 ## Adding Entities
 ![plot](../Images/custom.PNG)
-To add an entity, make sure the slider at the top left of the webpage is set to ***Add Entity***.  
+To add an entity, make sure the slider at the top left of the webpage is set to ***Edit Pattern*** then move the slider below it to the ***Add Entity***.  
 
 Then, select the type of entity you would like to add using the ***Type of entity*** dropdown and hit the ***Add to Scene*** button.
 
