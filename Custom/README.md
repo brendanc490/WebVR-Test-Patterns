@@ -170,18 +170,18 @@ If you would like to inspect the HTML or JavaScript data of the selected entity:
    
 ## JSON File Format
 {  
- "scenes": {  
-      /* map of scenes */  
-   },  
+&nbsp;&nbsp;"scenes": {  
+&nbsp;&nbsp;&nbsp;&nbsp;      /* map of scenes */  
+&nbsp;&nbsp;   },  
    
-   "textures": {  
-      "uploadedTextureFormats": {  
-      /* map of image sizes for uploaded textures */  
-      },  
-      "textureValues":  [  
-      /* list of textures associated with patterns being saved */  
-      ],  
-   }  
-   "date": "datetime of save"  
+&nbsp;&nbsp;   "textures": {  
+&nbsp;&nbsp;&nbsp;&nbsp;      "uploadedTextureFormats": {  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      /* map of image sizes for uploaded textures */  
+&nbsp;&nbsp;&nbsp;&nbsp;      },  
+&nbsp;&nbsp;&nbsp;&nbsp;      "textureValues":  [  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      /* list of textures associated with patterns being saved */  
+&nbsp;&nbsp;&nbsp;&nbsp;      ],  
+&nbsp;&nbsp;   }  
+&nbsp;&nbsp;   "date": "datetime of save"  
 }  
    
