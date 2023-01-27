@@ -12,34 +12,37 @@ The Custom Pattern Tool allows for the creation, editing, and saving of a patter
 - Grille Pattern: A black and white background
 
 ### Selecting a Pattern
-To select a scene, first ensure that the checkbox for the scene under ***Pattern List*** has been checked. Then select the desired pattern from the ***Pattern Display*** dropdown. 
+To select a pattern, first ensure that the checkbox for the pattern under ***Pattern List*** has been checked. Then select the desired pattern from the ***Pattern Display*** dropdown. 
 
 ### Adding a Pattern
-A scene a can be added using the ***Add Pattern*** button. A name for the added scene can be specified using textbox above the ***Add Pattern*** button.
+A pattern a can be added using the ***Add Pattern*** button. A name for the added pattern can be specified using textbox above the ***Add Pattern*** button.
 
 ### Removing a Pattern
-Using the ***Remove Pattern*** button, the currently displayed scene can be removed.
+Using the ***Remove Pattern*** button, the currently displayed pattern can be removed.
 
 ### Selecting Multiple Patterns
-To select multiple scenes, check all of the desired checkboxes under ***Pattern List***. 
-**The order that the scenes are selected in will be the display order!**
-The current scene can be rotated through using the up or down arrows on the keyboard.
+To select multiple patterns, check all of the desired checkboxes under ***Pattern List***. 
+**The order that the patterns are selected in will be the display order!**
+The current pattern can be rotated through using the up or down arrows on the keyboard.
 
 ### Displaying the Desired Pattern
-To display the scene, hit the ***VR*** button in the bottom right hand corner.
-[**Check the demos folder for some basic editable scenes!**](./demos)
+To display the pattern, hit the ***VR*** button in the bottom right hand corner.
+[**Check the demos folder for some basic editable patterns!**](./demos)
 
-## Saving and Uploading a Group of Patterns
-Multiple scenes can be saved together by hitting the ***Save Selected Patterns*** button. This will save all currently selected patterns from the ***Pattern List***.
-To upload a group of scenes, press the ***Upload Patterns*** button and select the desired file. 
+### Saving and Uploading a Group of Patterns
+Multiple patterns can be saved together by hitting the ***Save Selected Patterns*** button. This will save all currently selected patterns from the ***Pattern List***.
+To upload a group of patterns, press the ***Upload Patterns*** button and select the desired file. 
 
 ## Editing Patterns
+
+### Uploading a Pattern
+A single pattern can be uploaded to the current pattern. If a file containing multiple patterns is uploaded, it will be rejected.
 
 ### Adding Entities
 ![plot](../Images/custom.PNG)
 To add an entity, make sure the slider at the top left of the webpage is set to ***Edit Pattern*** then move the slider below it to the ***Add Entity***.  
 
-Then, select the type of entity you would like to add using the ***Type of entity*** dropdown and hit the ***Add to Scene*** button.
+Then, select the type of entity you would like to add using the ***Type of entity*** dropdown and hit the ***Add to Pattern*** button.
 
 Entities will spawn at a random position within the editor camera field of view with a random color.
 
@@ -55,19 +58,19 @@ Entities will spawn at a random position within the editor camera field of view 
 
 ### Editing Entities
 ![plot](../Images/editorExample.PNG)
-**In order to access the editor one or more entities must be added to the scene**. The editing bar can be hidden by pressing the ***Hide Settings*** button.
+**In order to access the editor one or more entities must be added to the pattern**. The editing bar can be hidden by pressing the ***Hide Settings*** button.
 
-Once entities have been added to the scene, change the slider to ***Edit Entity***.
+Once entities have been added to the pattern, change the slider to ***Edit Entity***.
 
 To change the entity being edited, either click on the entity or select the desired entity from the dropdown labeled ***Current Entity***.
 Entity ID's are automatically generated with the format **\<name of entity\>\<number of entities of this type previously created\>**.  
 
 Examples: circle0, checkerboard4, plane20.
 
-The current entity can be removed by hitting the ***Remove from Scene***. The entire scene can be reset by hitting the ***Reset Scene*** button.
+The current entity can be removed by hitting the ***Remove from Pattern***. The entire pattern can be reset by hitting the ***Reset Pattern*** button.
 
-### Saving the Scene
-To save the scene, press the ***Save Scene*** button located at the bottom of the editor tab. The scene is saved as an editable JSON file. Uploaded textures are preserved without image compression.
+### Saving the Pattern
+To save the pattern, press the ***Save Pattern*** button located at the bottom of the editor tab. The pattern is saved as an editable JSON file. Uploaded textures are preserved without image compression.
 
 ### Background Color
 To change the background color, select a new color or enter the hexadecimal code of the desired color.
@@ -111,7 +114,7 @@ Select a color using the color slider or input the desired color in hexadecimal 
 
 #### Plane
 - Texture: 
-   - There are some textures built into the site. [They can be found here.](./textures) Textures can also be uploaded as JPGS or PNGS and added to the list of available textures in the scene. 
+   - There are some textures built into the site. [They can be found here.](./textures) Textures can also be uploaded as JPGS or PNGS and added to the list of available textures in the pattern. 
    - Applying a texture will automatically scale the plane to fit the aspect ratio.
 - Height (m): 
    - The unit for height is world units where 1 world unit is equal to 1 meter in 3D space.
