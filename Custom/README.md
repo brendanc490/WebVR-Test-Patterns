@@ -170,7 +170,7 @@ If you would like to inspect the HTML or JavaScript data of the selected entity:
    
 ## JSON File Format
 {
-"scenes": {
+> "scenes": {
       /* map of scenes */
    },
    
