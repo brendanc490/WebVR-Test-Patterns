@@ -1,8 +1,35 @@
 # Directions For Use: #
+The Custom Pattern Tool allows for the creation, editing, and saving of a pattern or groups of patterns.
 
-## Displaying the Scene
+## Provided Patterns
+- Default: A blank pattern that can be quickly edited
+- Red: A solid red background
+- Green: A solid green background
+- Blue: A solid blue background
+- White: A solid white background
+- Grille Pattern: A black and white background
+
+## Selecting a Scene
+To select a scene, first ensure that the checkbox for the scene under ***Pattern List*** has been checked. Then select the desired pattern from the ***Pattern Display*** dropdown. 
+
+## Adding a Scene
+A scene a can be added using the ***Add Pattern*** button. A name for the added scene can be specified using textbox above the ***Add Pattern*** button.
+
+## Removing a Scene
+Using the ***Remove Pattern*** button, the currently displayed scene can be removed.
+
+## Selecting Multiple Scenes
+To select multiple scenes, check all of the desired checkboxes under ***Pattern List***. 
+**The order that the scenes are selected in will be the display order!**
+The current scene can be rotated through using the up or down arrows on the keyboard.
+
+## Displaying the Desired Scene
 To display the scene, hit the ***VR*** button in the bottom right hand corner.
 [**Check the demos folder for some basic editable scenes!**](./demos)
+
+## Saving and Uploading a Group of Scenes
+Multiple scenes can be saved together by hitting the ***Save Selected Patterns*** button. This will save all currently selected patterns from the ***Pattern List***.
+To upload a group of scenes, press the ***Upload Patterns*** button and select the desired file. 
 
 ## Adding Entities
 ![plot](../Images/custom.PNG)
