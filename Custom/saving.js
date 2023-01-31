@@ -171,6 +171,7 @@ function addEntitiesFromScene(scene){
         console.log(key)
         if(key.includes("sky")){
             sky.setAttribute("material",{color: scene[key].skyColor});
+            colorChange = false;
             $('#skyCol').minicolors('value', scene[key].skyColor);
         } else if (key.includes("texture")){
             let i = 0;
@@ -193,7 +194,9 @@ function addEntitiesFromScene(scene){
             } else if(key.includes("plane")){ /* plane exclusive */
                 el.setAttribute("id","plane"+planeNum++);
                 el.setAttribute("geometry", scene[key].geometry);
-                drawPlaneBorder(scene[key].widthReal,scene[key].geometry.height,scene[key].fill.val,hexToRgb(scene[key].material.color),el);
+                if(scene[key].material.src == ""){
+                    drawPlaneBorder(scene[key].widthReal,scene[key].geometry.height,scene[key].fill.val,hexToRgb(scene[key].material.color),el);
+                }   
                 el.setAttribute("fill",scene[key].fill);
             } else if(key.includes("triangle")){ /* triangle exclusive */
                 el.setAttribute("id","triangle"+triangleNum++);

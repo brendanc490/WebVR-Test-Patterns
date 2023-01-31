@@ -1,5 +1,6 @@
 /* adds entity to scene */
 function addEntity(){
+    console.log('firing')
     el = document.createElement('a-entity'); /* creates entity */
 
     /* check desired type of entity */
@@ -339,6 +340,7 @@ function editEntity(){
 
 
 function updateJSON(){
+    console.log('test2')
     const jsonData = {};
     jsonData["sky"] = {skyColor: sky.getAttribute("material").color};
     /*jsonData["uploadedTextureFormat"] = uploadedTextureFormat;

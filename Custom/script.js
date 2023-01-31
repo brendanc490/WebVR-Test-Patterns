@@ -17,6 +17,9 @@ directions.addEventListener("click", function() {
   });*/
 
 /* Edit Related */
+var conRight = document.querySelector("#con-right");
+var conLeft = document.querySelector("#con-left");
+
 /* Headers */
 const background = document.getElementById("backgroundSettings"); /* header for background settings */
 const ent = document.getElementById("entitySettings");
@@ -380,7 +383,10 @@ function toggleAddEdit(swap){
     position:'top',
     change: function () {
         sky.setAttribute("material",{color: $("#skyCol").val()});
-        updateJSON();
+        if(colorChange){
+            updateJSON();
+        }
+        colorChange = true
     },
 });
 
@@ -684,6 +690,7 @@ window.addEventListener("pointerup", function(e) {
 });*/
 
 function removeEntity(){
+    console.log('test')
     els.splice(els.indexOf(selectedEntity),1);
     pool.splice(pool.indexOf(selectedEntity.object3D),1);
     if(selectedEntity.id.includes("plane")){
@@ -1054,3 +1061,4 @@ document.addEventListener('keyup', (e) => {
   });
 
   names = {'default':1,'red':1,'green':1,'blue':1,'white':1,'grille':1}
+  var colorChange = true;

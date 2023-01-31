@@ -6,6 +6,7 @@
         <script src="../lib/FileSaver.js" type="text/javascript"></script>
         <link rel="stylesheet" href="../lib/jquery.minicolors.css">
         <script src="../lib/jquery.minicolors.min.js" type="text/javascript"> </script>
+        <script src="./ControllerComponents.js" type="text/javascript"></script>
         <script>
         /* Code to register the orthographic camera as parent camera and remove original camera */
         AFRAME.registerComponent('ortho', {
@@ -103,8 +104,8 @@
                 <img id="BR" src="textures/TG18-BR.2k_12b.png">
                 <img id="transparent" src="textures/transparent.jpg">
             </a-assets>
-            <a-entity oculus-touch-controls="hand: left"></a-entity>
-            <a-entity oculus-touch-controls="hand: right" thumbstick-logging-right button-listener></a-entity>
+            <a-entity id="con-left" laser-controls="hand: left" model="true" button-listener-l thumbstick-left trackpad-left position-updates-left></a-entity>
+            <a-entity id="con-right" laser-controls="hand: right" model="true" button-listener-r thumbstick-right trackpad-right position-updates-right></a-entity>
             <a-camera>
                 <a-sky id="sky" color="#000000" radius="1000"></a-sky>
                 <a-entity id="entityCanvas" visible="true"></a-entity>
@@ -136,33 +137,33 @@
                         <p>
                             <input type="checkbox" id="default"
                             onclick="handlePatternSelect(this)" checked/>
-                            <label for="default"> Default</label>
+                            <label for="default"> default</label>
                         </p>
                         <p>
                             <input type="checkbox" id="red"
                             onclick="handlePatternSelect(this)"/>
-                            <label for="red"> Red</label>
+                            <label for="red"> red</label>
                         </p>
                         <p>
                             <input type="checkbox" id="green"
                             onclick="handlePatternSelect(this)"/>
-                            <label for="green"> Green</label>
+                            <label for="green"> green</label>
                         </p>
                         <p>
                             <input type="checkbox" id="blue"
                             onclick="handlePatternSelect(this)"/>
-                            <label for="blue"> Blue</label>
+                            <label for="blue"> blue</label>
                         </p>
                         <p>
                             <input type="checkbox" id="white"
                             onclick="handlePatternSelect(this)"/>
-                            <label for="white"> White</label>
+                            <label for="white"> white</label>
                         </p>
     
                         <p>
                             <input type="checkbox" id="grille"
                             onclick="handlePatternSelect(this)"/>
-                            <label for="grille"> Grille</label>
+                            <label for="grille"> grille</label>
                         </p>
 
                         </div>
@@ -202,12 +203,12 @@
                         </select>
                     </p>
                     <p style="text-align:center;" id="addButton">
-                        <button class="button add" onclick="addEntity()">Add to Scene</button>
+                        <button class="button add" onclick="addEntity()">Add to Pattern</button>
                     </p>
                     <p id="backgroundSettings"><b>Background Settings</b></p>
                     <div id="skyIn" position="absolute" width="45%" left="0">Sky Color: <input type="text" class="input" id="skyCol" value="#000000"></div>
                     <p style="text-align:center;" id="removeButton">
-                        <button class="button reset" onclick="removeEntity()">Remove from Scene</button>
+                        <button class="button reset" onclick="removeEntity()">Remove from Pattern</button>
                     </p>
                     
                     <p id="entitySettings"><b>Entity Settings</b></p>
@@ -248,14 +249,14 @@
                         <button class="button add" onclick="sendBack(true)">Send back</button><button class="button add" onclick="sendBack(false)">Send forward</button>
                     </p>-->
                     <p style="text-align:center;" id="upload">
-                        <b>Upload a scene: </b><input type="file" id="scene-input" accept="text/JSON">
+                        <b>Upload a pattern: </b><input type="file" id="scene-input" accept="text/JSON">
                     </p>
 
                     <form id="reset" style="text-align:center;">
-                        <button type="button" class="button reset" onclick="resetScene()">Reset Scene</button>
+                        <button type="button" class="button reset" onclick="resetScene()">Reset Pattern</button>
                     </form>
                     <p style="text-align:center;" id="saveButton">
-                        <button class="button add" onclick="saveScene()">Save Scene</button>
+                        <button class="button add" onclick="saveScene()">Save Pattern</button>
                     </p>
                 </div>
             </div>
@@ -273,6 +274,7 @@
         <script src="drawing.js" type="text/javascript"></script>
         <script src="saving.js" type="text/javascript"></script>
         <script src="load.js" type="module"></script>
+        <script src="ControllerInputMapping.js" type="module"></script>
         
     </body>
 
