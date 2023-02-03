@@ -177,7 +177,7 @@ function editEntity(){
         return;
     }
     selectedEntity.setAttribute("angle",{x:-1*parseFloat($("#x").val()), y:-1*parseFloat($("#y").val())});
-    selectedEntity.setAttribute("position",{x: -250 * Math.sin((-parseFloat($("#x").val())*Math.PI)/180), y: parseFloat($("#y").val()), z: -250 * Math.cos((-parseFloat($("#x").val())*Math.PI)/180)+(0.0001*numAdded++)});
+    selectedEntity.setAttribute("position",{x: -250 * Math.sin((-parseFloat($("#x").val())*Math.PI)/180), y: parseFloat($("#y").val()), z: -250 * Math.cos((-parseFloat($("#x").val())*Math.PI)/180)});
     selectedEntity.setAttribute("rotation",{x: 0, y: -parseFloat($("#x").val()), z: parseFloat($("#rotation").val())});
     if($("#texture").val() == "none"){
         selectedEntity.setAttribute("material",{shader: "flat", src: "", color: $("#color").val()});
