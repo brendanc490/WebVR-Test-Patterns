@@ -24,6 +24,7 @@ Using the ***Remove Pattern*** button, the currently displayed pattern can be re
 To select multiple patterns, check all of the desired checkboxes under ***Pattern List***. 
 **The order that the patterns are selected in will be the display order!**
 The current pattern can be rotated through using the up or down arrows on the keyboard or the buttons on the left and right controllers.
+Any buttons on the left controller step back one pattern and any buttons on the right controller step forward one pattern.
 
 ### Displaying the Desired Pattern
 To display the pattern, hit the ***VR*** button in the bottom right hand corner.
