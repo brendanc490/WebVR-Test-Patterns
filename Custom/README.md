@@ -23,7 +23,7 @@ Using the ***Remove Pattern*** button, the currently displayed pattern can be re
 ### Selecting Multiple Patterns
 To select multiple patterns, check all of the desired checkboxes under ***Pattern List***. 
 **The order that the patterns are selected in will be the display order!**
-The current pattern can be rotated through using the up or down arrows on the keyboard.
+The current pattern can be rotated through using the up or down arrows on the keyboard or the buttons on the left and right controllers.
 
 ### Displaying the Desired Pattern
 To display the pattern, hit the ***VR*** button in the bottom right hand corner.
@@ -37,6 +37,13 @@ To upload a group of patterns, press the ***Upload Patterns*** button and select
 
 ### Uploading a Pattern
 A single pattern can be uploaded to the current pattern. If a file containing multiple patterns is uploaded, it will be rejected.
+
+### Uploading images
+Image files are treated as entity textures. Here are the steps on how to properly upload these files.
+
+1. Add a plane to a scene. Planes are the only entities that can be textured. 
+2. Click the edit entity toggle and locate the input for textures labeled "Upload your textures here." Any number of files can be uploaded here. Images uploaded will be available as textures in the dropdown labeled "Texture".
+3. Select the desired texture from the "Texture" dropdown. Selecting a texture will automatically resize the plane to the images aspect ratio. To retain the original image colors, set the plane color to be white.
 
 ### Adding Entities
 ![plot](../Images/custom.PNG)
