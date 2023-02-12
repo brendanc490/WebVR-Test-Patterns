@@ -7,18 +7,18 @@
 			"grille0": {
 				"angle": {
 					"x": 0,
-					"y": 0
+					"z": -250
 				},
 				"numBars": 100,
 				"childGeometry": {
 					"primitive": "plane",
 					"width": 10,
-					"height": 500
+					"height": 450
 				},
 				"position": {
 					"x": 0,
 					"y": 0,
-					"z": -249.9994
+					"z": -250
 				},
 				"material": {
 					"shader": "flat",
@@ -70,5 +70,5 @@
 			}
 		]
 	},
-	"date": "1/10/2023, 12:09:20 PM"
+	"date": "2/10/2023, 11:44:01 AM"
 }
