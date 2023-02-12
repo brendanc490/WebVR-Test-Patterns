@@ -28,10 +28,12 @@ const nonUni = document.getElementById("nonUniversalSettings");
 const utility = document.getElementById("utility");
 const collapse = document.getElementById("collapse");
 const content = document.getElementById("content");
+content.style.display = "block";
 const addEditContent = document.getElementById("addEditContent")
 const displayEditContent = document.getElementById("displayEditContent")
 const nameIn = document.getElementById('name');
 const displayUtility = document.getElementById('displayUtility');
+const advanced = document.getElementById('advanced');
 
 collapse.addEventListener("click", function() {
     //this.classList.toggle("active");
@@ -62,11 +64,16 @@ skyIn.style.width = "75%";
 /* Universal attributes */
 /* Position related */
 const posIn = document.getElementById("posIn"); /* position Container Paragraph */
-const xIn = document.getElementById("x"); /* x input */
-const yIn = document.getElementById("y"); /* y input */
+var xIn = document.getElementById("x"); /* x input */
+var yIn = document.getElementById("y"); /* y input */
+var zIn = document.getElementById("z"); /* z input */
 
 /* Rotation related */
-const rotation = document.getElementById("rotation"); /* rotation container paragraph */ 
+const rotationZ = document.getElementById("rotationZ");
+const rotationY = document.getElementById("rotationY");
+const rotationX = document.getElementById("rotationX"); /* rotation container paragraph */ 
+rotationY.style.display = 'none'
+rotationX.style.display = 'none'
 const rotIn = document.getElementById("rotIn"); /* rotation input */
 
 /* Color related */
@@ -185,7 +192,6 @@ function selectNew(clickedEntity){
     
         selectedEntity = scene.querySelector("#"+$("#entityId :selected").text()); /* update selected entity */
     }
-    console.log('test')
     /* Update stats in edit section */
     hideEditStats(); /* hide section briefly */
     updateStats(); /* update stats */
@@ -220,6 +226,7 @@ function hideEditStats(){
     textureIn.style.display = "none";
     uploadTextureIn.style.display = "none";
     fillIn.style.display = "none";
+    advanced.style.display = "none";
 }
  var flag = false;
 /* updates values in edit section */
@@ -228,9 +235,19 @@ function updateStats(){
     skyColor.value = sky.components.material.attrValue.color;
     $('#skyCol').minicolors("value",sky.components.material.attrValue.color);
     entity = selectedEntity;
-    xIn.value = -entity.components.angle.attrValue.x;
-    yIn.value = entity.components.position.attrValue.y;
-    rotation.value = entity.components.rotation.attrValue.z;
+    if(val){
+        xIn.value = entity.components.position.attrValue.x;
+        yIn.value = entity.components.position.attrValue.y;
+        zIn.value = -entity.components.position.attrValue.z;
+    } else {
+        xIn.value = -entity.components.angle.attrValue.x;
+        yIn.value = entity.components.position.attrValue.y;
+        zIn.value = -entity.components.angle.attrValue.z;
+    }
+
+    rotationZ.value = entity.components.rotation.attrValue.z;
+    rotationY.value = entity.components.rotation.attrValue.y;
+    rotationX.value = entity.components.rotation.attrValue.x;
     color.value = entity.components.material.attrValue.color;
     flag = true;
     $('#color').minicolors("value",entity.components.material.attrValue.color);
@@ -332,11 +349,13 @@ function toggleAddEdit(swap){
         saveButton.style.display = "block";
         posIn.style.display = "block";
         colIn.style.display = "block";
+        advanced.style.display = "block";
 
         /* add related containers hidden */
         addChoice.style.display = "none";
         addButton.style.display = "none";
         upload.style.display = "none";
+        
 
         /* check geometry of object */
         if (selectedEntity.getAttribute("id").includes("plane")){ /* plane exclusive containers shown */
@@ -402,6 +421,7 @@ $("#y").change(function() {
 
 /* If the textbox for z value is changed */
 $("#z").change(function() {
+    console.log('test z')
     editEntity();
   });
 
@@ -530,7 +550,17 @@ $("#fill").change(function() {
   });
 
 /* If the textbox for rotation value is changed */
-$("#rotation").change(function() {
+$("#rotationZ").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for rotation value is changed */
+$("#rotationY").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for rotation value is changed */
+$("#rotationX").change(function() {
     editEntity();
   });
 
@@ -905,44 +935,6 @@ scene_display_input.addEventListener("change", function() {
     
     });
 
-    /*while(ind < scene_display_input.files.length){
-
-
-        const reader = new FileReader();
-        reader.addEventListener("load", () => {
-            console.log(ind)
-            /*if(curr.name.split(".")[1] != "JSON"){
-                alert("Invalid file type");
-                scene_display_input.value = ""
-                return;
-            }*/
-    
-            
-/*
-            fileContent = JSON.parse(reader.result);
-            scenes[curr.name.split(".")[0]] = fileContent /* loads all entities to scene */
-            /*finished = true;
-            console.log(curr.name.split(".")[0])
-            ind++;
-            block = false
-            
-        });
-        if(block != true){
-            console.log(ind)
-            curr = scene_display_input.files[ind];
-            reader.readAsText(curr);
-            block = true
-        }
-
-
-
-    }
-
-
-var myArray = ["a","b","c","d"];*/
-
-
-
 /**
  * Execute the loopBody function once for each item in the items array, 
  * waiting for the done function (which is passed into the loopBody function)
@@ -970,9 +962,18 @@ function slowLoop(items, loopBody) {
 });
 
 function resetScene(){
+    planeNum = 0;
+    circleNum = 0;
+    triangleNum = 0;
+    gradientNum = 0;
+    checkerboardNum = 0;
+    grilleNum = 0;
     while(entityCanvas.childElementCount != 0){
         entityCanvas.removeChild(entityCanvas.children[0])
     } 
+    while(entitySelector.childElementCount != 0){
+        entitySelector.remove(entitySelector.children[0])
+   }
     $('#skyCol').minicolors('value', '#000000');
     els = []
     updateJSON()
@@ -1062,3 +1063,36 @@ document.addEventListener('keyup', (e) => {
 
   names = {'default':1,'red':1,'green':1,'blue':1,'white':1,'grille':1}
   var colorChange = true;
+
+  val = false;
+  function switchToAdvanced(switchVal){
+    if(!val){
+        posIn.innerHTML = 'Position: (x: m, y: m, z: m)<input type="text" class="input" id="z" value="'+-selectedEntity.getAttribute('position').z+'"> <input type="text" class="input" id="y" value="'+selectedEntity.getAttribute('position').y+'"> <input type="text" class="input" id="x" value="'+selectedEntity.getAttribute('position').x+'"></input>'
+        rotationY.style.display = 'block'
+        rotationX.style.display = 'block'
+        
+    } else {
+        posIn.innerHTML = 'Position: (\u03B1: deg, y: m, r: distance m)<input type="text" class="input" id="z" value="'+-selectedEntity.getAttribute('angle').z+'"> <input type="text" class="input" id="y" value="'+selectedEntity.getAttribute('position').y+'"> <input type="text" class="input" id="x" value="'+(-selectedEntity.getAttribute('angle').x)+'"></input>'
+        rotationY.style.display = 'none'
+        rotationX.style.display = 'none'
+    }
+    xIn = document.getElementById("x"); /* x input */
+    yIn = document.getElementById("y"); /* y input */
+    zIn = document.getElementById("z"); /* z input */
+
+    $("#x").change(function() {
+        editEntity();
+    });
+
+    /* If the textbox for y value is changed */
+    $("#y").change(function() {
+        editEntity();
+    });
+
+    /* If the textbox for z value is changed */
+    $("#z").change(function() {
+        editEntity();
+    });
+    val = !val
+    editEntity()
+  }

@@ -212,7 +212,7 @@ function addEntitiesFromScene(scene){
                 drawCheckerboard(scene[key].rows,scene[key].cols,scene[key].tileSize,hexToRgb(scene[key].material.color),el);
             }
             /* sets stats */
-            el.setAttribute("angle", {x: scene[key].angle.x});
+            el.setAttribute("angle", scene[key].angle);
             el.setAttribute("position", {x: scene[key].position.x, y: scene[key].position.y, z: scene[key].position.z});
             el.setAttribute("material", scene[key].material);
             el.setAttribute("rotation", scene[key].rotation);

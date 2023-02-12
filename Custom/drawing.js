@@ -49,7 +49,7 @@ function addEntity(){
     el.setAttribute("position",{x: -250 * Math.sin((THETAX*Math.PI)/180), y: Y, z: -250 * Math.cos((THETAX*Math.PI)/180)});
     el.setAttribute("rotation", {x: 0, y: THETAX, z: 0});
     
-    el.setAttribute("angle",{x: THETAX});
+    el.setAttribute("angle",{x: THETAX, z: -250});
     
 
     entityCanvas.appendChild(el); /* add entity to scene */
@@ -164,7 +164,7 @@ function drawCheckerboard(rows,cols,size,color,parent){
 /* edits selected entity */
 function editEntity(){
     /* universal changes */
-    if(isNaN(parseFloat($("#x").val())) || isNaN(parseFloat($("#y").val()))){
+    if(isNaN(parseFloat($("#x").val())) || isNaN(parseFloat($("#y").val())) || isNaN(parseFloat($("#z").val()))){
         alert("Please enter a valid position");
         return;
     }
@@ -172,13 +172,28 @@ function editEntity(){
         alert("Invalid color (check that the color was entered in hexadecimal format)");
         return;
     }
-    if(isNaN(parseFloat($("#rotation").val()))){
+    if(val && ((isNaN(parseFloat($("#rotationZ").val())) || isNaN(parseFloat($("#rotationY").val())) || isNaN(parseFloat($("#rotationX").val()))))){
+        alert("Please enter a valid rotation");
+        return;
+    } else if(!val && isNaN(parseFloat($("#rotationZ").val()))) {
         alert("Please enter a valid rotation");
         return;
     }
-    selectedEntity.setAttribute("angle",{x:-1*parseFloat($("#x").val()), y:-1*parseFloat($("#y").val())});
-    selectedEntity.setAttribute("position",{x: -250 * Math.sin((-parseFloat($("#x").val())*Math.PI)/180), y: parseFloat($("#y").val()), z: -250 * Math.cos((-parseFloat($("#x").val())*Math.PI)/180)});
-    selectedEntity.setAttribute("rotation",{x: 0, y: -parseFloat($("#x").val()), z: parseFloat($("#rotation").val())});
+
+    
+    if(val){
+        selectedEntity.setAttribute("position",{x: parseFloat($("#x").val()), y: parseFloat($("#y").val()), z: -parseFloat($("#z").val())});
+        d = (-Math.round(Math.sqrt((parseFloat($("#x").val()))*(parseFloat($("#x").val()))+(parseFloat($("#z").val()))*(parseFloat($("#z").val())))))
+        selectedEntity.setAttribute("angle",{x: ((Math.asin(parseFloat($("#x").val())/d))*180)/Math.PI, z: d});
+        selectedEntity.setAttribute("rotation",{x: parseFloat($("#rotationX").val()), y: parseFloat($("#rotationY").val()), z: parseFloat($("#rotationZ").val())});
+    } else {
+        console.log(-parseFloat($("#z").val()) * Math.sin((-parseFloat($("#x").val())*Math.PI)/180))
+        selectedEntity.setAttribute("position",{x: -parseFloat($("#z").val()) * Math.sin((-parseFloat($("#x").val())*Math.PI)/180), y: parseFloat($("#y").val()), z: -parseFloat($("#z").val()) * Math.cos((-parseFloat($("#x").val())*Math.PI)/180)});
+        selectedEntity.setAttribute("angle",{x: -parseFloat($("#x").val()), z: -parseFloat($("#z").val())})
+        selectedEntity.setAttribute("rotation",{x: 0, y: selectedEntity.getAttribute('angle').x, z: parseFloat($("#rotationZ").val())});
+    }
+    
+    //selectedEntity.setAttribute("rotation",{x: 0, y: -selectedEntity.getAttribute('angle').x, z: parseFloat($("#rotation").val())});
     if($("#texture").val() == "none"){
         selectedEntity.setAttribute("material",{shader: "flat", src: "", color: $("#color").val()});
     } else {
