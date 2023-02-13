@@ -421,7 +421,6 @@ $("#y").change(function() {
 
 /* If the textbox for z value is changed */
 $("#z").change(function() {
-    console.log('test z')
     editEntity();
   });
 
@@ -720,7 +719,6 @@ window.addEventListener("pointerup", function(e) {
 });*/
 
 function removeEntity(){
-    console.log('test')
     els.splice(els.indexOf(selectedEntity),1);
     pool.splice(pool.indexOf(selectedEntity.object3D),1);
     if(selectedEntity.id.includes("plane")){
@@ -754,6 +752,7 @@ function removeEntity(){
 
 var displayOrder = ['default'];
 function handlePatternSelect(snapshot){
+    console.log('is this firing rn')
     /*let len = snapshot.options.length;
     let i = 0;
     while(i < len){
@@ -775,11 +774,12 @@ function handlePatternSelect(snapshot){
     if(displayOrder.indexOf(curr) == -1){
         displayOrder.push(curr)
     } else {
-            displayOrder.splice(displayOrder.indexOf(curr),1)
+        displayOrder.splice(displayOrder.indexOf(curr),1)
     }
     while(patternDisplay.options.length != 0){
         patternDisplay.options.remove(patternDisplay.options[0])
     }
+    patternDisplay.selectedIndex = 0
     i = 0
     len = displayOrder.length
     while(i < len){
@@ -796,15 +796,19 @@ function handlePatternSelect(snapshot){
 }
 
 function displayCurrentPattern(snapshot){
+    console.log(patternDisplay.selectedIndex)
     let len = snapshot.options.length;
     let i = 0;
+    let sum = 0;
     while(i < len){
         curr = snapshot.options[i]
+        console.log(curr)
         if(curr.selected){
            /* display pattern */
+           //console.log('dont u dare fire twice')
             revertChanges()
-            console.log(scenes[curr.text])
-            addEntitiesFromScene(scenes[curr.text])
+            //console.log(scenes[curr.text])
+            addEntitiesFromScene(scenes[curr.text]);
         } 
         i++;
     }
@@ -998,8 +1002,8 @@ function displayNext(direction){
         }
         
     }
+    
     $('#patternDisplay').trigger('change')
-
 }
 
 function addPattern(){
@@ -1055,9 +1059,14 @@ function revertChanges(){
 
 document.addEventListener('keyup', (e) => {
     if (e.code === "ArrowUp"){
-        displayNext(true)
+        $(document.activeElement)[0].id
+        if($(document.activeElement)[0].id != 'patternDisplay'){
+            displayNext(false)
+        }
     } else if (e.code === "ArrowDown"){
-        displayNext(false)
+        if($(document.activeElement)[0].id != 'patternDisplay'){
+            displayNext(true)
+        }
     }
   });
 
@@ -1094,5 +1103,6 @@ document.addEventListener('keyup', (e) => {
         editEntity();
     });
     val = !val
+    updateStats()
     editEntity()
   }

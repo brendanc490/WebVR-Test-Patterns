@@ -208,8 +208,7 @@
                     <p id="backgroundSettings"><b>Background Settings</b></p>
                     <div id="skyIn" position="absolute" width="45%" left="0">Sky Color: <input type="text" class="input" id="skyCol" value="#000000"></div>
                     <p>
-                    <p style="text-align:center;" id="removeButton">
-                        <button class="button reset" onclick="removeEntity()">Remove from Pattern</button>
+
                     <p id="entitySettings" style="text-align:left;"><b>Entity Settings</b>
                                                
                             <span style="float:right;">
@@ -227,6 +226,8 @@
                     
                     <p id="editSelector">Current entity: <select name="entityId" id="entityId"  onchange="selectNew(null)">
                     </select></p>
+                    <p style="text-align:center;" id="removeButton">
+                        <button class="button reset" onclick="removeEntity()">Remove from Pattern</button></p>
                     <p id="universalSettings"><b>Universal Entity Settings</b></p>
                     <p id="posIn">Position: (&alpha;: deg, y: m, r: distance m)<input type="text" class="input" id="z" value="0"> <input type="text" class="input" id="y" value="0"> <input type="text" class="input" id="x" value="0"></p>
                     <p id="rotIn">Rotation (deg):  <input type="text" class="input" id="rotationZ" value="0"><input type="text" class="input" id="rotationY" value="0"><input type="text" class="input" id="rotationX" value="0"></p>
@@ -251,9 +252,9 @@
                     <p id="widthIn">Bar Width (m): <input type="text" class="input" id="width" value=".125"></p>
                     <p id="radiusIn">Radius (m): <input type="text" class="input" id="radius" value=".125"></p>
                     <p id="fillIn">Border Size (m): <input type="text" class="input" id="fill" value=".25"></p>
-                    <p id="va">Vertex A: <input type="text" class="input" id="vay" value="0.1875"> <input type="text" class="input" id="vax" value="0"></p>
-                    <p id="vb">Vertex B: <input type="text" class="input" id="vby" value="-0.25"> <input type="text" class="input" id="vbx" value="-0.25"></p>
-                    <p id="vc">Vertex C: <input type="text" class="input" id="vcy" value="-0.25"> <input type="text" class="input" id="vcx" value="0.25"></p>
+                    <p id="va">Vertex A: (x: m, y: m)<input type="text" class="input" id="vay" value="0.1875"> <input type="text" class="input" id="vax" value="0"></p>
+                    <p id="vb">Vertex B: (x: m, y: m)<input type="text" class="input" id="vby" value="-0.25"> <input type="text" class="input" id="vbx" value="-0.25"></p>
+                    <p id="vc">Vertex C: (x: m, y: m)<input type="text" class="input" id="vcy" value="-0.25"> <input type="text" class="input" id="vcx" value="0.25"></p>
                     <p id="numBars">Number of bars: <input type="text" class="input" id="numBarsIn" value="32"></p>
                     <p id="tileSize">Width/Height of square: <input type="text" class="input" id="tileSizeIn" value=".1"></p>
                     <p id="rows">Number of rows: <input type="text" class="input" id="rowsIn" value="16"></p>
