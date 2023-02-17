@@ -1104,11 +1104,11 @@ function revertChanges(){
 
 document.addEventListener('keyup', (e) => {
     if (e.code === "ArrowUp"){
-        if($(document.activeElement)[0].id != 'patternDisplay' && boolAddEdit != true){
+        if(($(document.activeElement)[0].id != 'patternDisplay'  && boolAddEdit == false)  || block == false){
             displayNext(false)
         }
     } else if (e.code === "ArrowDown"){
-        if($(document.activeElement)[0].id != 'patternDisplay'  && boolAddEdit != true){
+        if(($(document.activeElement)[0].id != 'patternDisplay'  && boolAddEdit == false)  || block == false){
             displayNext(true)
         }
     }
@@ -1124,3 +1124,12 @@ document.addEventListener('keyup', (e) => {
     updateStats()
     editEntity()
   }
+
+  scene.addEventListener('enter-vr',function(){
+    block = false;
+  });
+
+  scene.addEventListener('exit-vr',function(){
+    block = true;
+    toggleAddEdit(false);
+  });
