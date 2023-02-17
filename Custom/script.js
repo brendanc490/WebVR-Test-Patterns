@@ -192,10 +192,11 @@ function selectNew(clickedEntity){
     
         selectedEntity = scene.querySelector("#"+$("#entityId :selected").text()); /* update selected entity */
     }
+    advanced.checked = selectedEntity.getAttribute('advanced').val
     /* Update stats in edit section */
     hideEditStats(); /* hide section briefly */
     updateStats(); /* update stats */
-    toggleAddEdit(false); /* re-display section */
+    toggleAddEdit(null); /* re-display section */
 }
 
 /* hides edit section */
@@ -235,11 +236,51 @@ function updateStats(){
     skyColor.value = sky.components.material.attrValue.color;
     $('#skyCol').minicolors("value",sky.components.material.attrValue.color);
     entity = selectedEntity;
-    if(val){
+    if(selectedEntity.getAttribute('advanced').val){
+        posIn.innerHTML = 'Position: (x: m, y: m, z: m)<input type="text" class="input" id="z" value="'+-selectedEntity.getAttribute('position').z+'"> <input type="text" class="input" id="y" value="'+selectedEntity.getAttribute('position').y+'"> <input type="text" class="input" id="x" value="'+selectedEntity.getAttribute('position').x+'"></input>'
+        rotationY.style.display = 'block'
+        rotationX.style.display = 'block'
+        xIn = document.getElementById("x"); /* x input */
+        yIn = document.getElementById("y"); /* y input */
+        zIn = document.getElementById("z"); /* z input */
+    
+        $("#x").change(function() {
+            editEntity();
+        });
+    
+        /* If the textbox for y value is changed */
+        $("#y").change(function() {
+            editEntity();
+        });
+    
+        /* If the textbox for z value is changed */
+        $("#z").change(function() {
+            editEntity();
+        });
         xIn.value = entity.components.position.attrValue.x;
         yIn.value = entity.components.position.attrValue.y;
         zIn.value = -entity.components.position.attrValue.z;
     } else {
+        posIn.innerHTML = 'Position: (\u03B1: deg, y: m, r: distance m)<input type="text" class="input" id="z" value="'+-selectedEntity.getAttribute('angle').z+'"> <input type="text" class="input" id="y" value="'+selectedEntity.getAttribute('position').y+'"> <input type="text" class="input" id="x" value="'+(-selectedEntity.getAttribute('angle').x)+'"></input>'
+        rotationY.style.display = 'none'
+        rotationX.style.display = 'none'
+        xIn = document.getElementById("x"); /* x input */
+        yIn = document.getElementById("y"); /* y input */
+        zIn = document.getElementById("z"); /* z input */
+    
+        $("#x").change(function() {
+            editEntity();
+        });
+    
+        /* If the textbox for y value is changed */
+        $("#y").change(function() {
+            editEntity();
+        });
+    
+        /* If the textbox for z value is changed */
+        $("#z").change(function() {
+            editEntity();
+        });
         xIn.value = -entity.components.angle.attrValue.x;
         yIn.value = entity.components.position.attrValue.y;
         zIn.value = -entity.components.angle.attrValue.z;
@@ -307,6 +348,7 @@ function toggleDisplayEdit(swap){
         addEditContent.style.display = "none"
         displayEditContent.style.display = "block"
         scene_input.value = ""
+        toggleAddEdit(false);
     } else { /* if add */
         if(patternDisplay.options.length != 0){
             addEditContent.style.display = "block"
@@ -333,7 +375,10 @@ function toggleAddEdit(swap){
             selectedEntity = scene.querySelector("#"+$("#entityId :selected").text()); /* set selected entity to be first entity created */
             updateStats();
          } /* update stats */
-    } 
+    } else if(swap == false){
+        utility.checked = false;
+        boolAddEdit = false;
+    }
     /* check if current mode is add or edit */
     if(boolAddEdit){ /* if edit */
         removeButton.style.display = "block";
@@ -1059,12 +1104,11 @@ function revertChanges(){
 
 document.addEventListener('keyup', (e) => {
     if (e.code === "ArrowUp"){
-        $(document.activeElement)[0].id
-        if($(document.activeElement)[0].id != 'patternDisplay'){
+        if($(document.activeElement)[0].id != 'patternDisplay' && boolAddEdit != true){
             displayNext(false)
         }
     } else if (e.code === "ArrowDown"){
-        if($(document.activeElement)[0].id != 'patternDisplay'){
+        if($(document.activeElement)[0].id != 'patternDisplay'  && boolAddEdit != true){
             displayNext(true)
         }
     }
@@ -1075,34 +1119,8 @@ document.addEventListener('keyup', (e) => {
 
   val = false;
   function switchToAdvanced(switchVal){
-    if(!val){
-        posIn.innerHTML = 'Position: (x: m, y: m, z: m)<input type="text" class="input" id="z" value="'+-selectedEntity.getAttribute('position').z+'"> <input type="text" class="input" id="y" value="'+selectedEntity.getAttribute('position').y+'"> <input type="text" class="input" id="x" value="'+selectedEntity.getAttribute('position').x+'"></input>'
-        rotationY.style.display = 'block'
-        rotationX.style.display = 'block'
-        
-    } else {
-        posIn.innerHTML = 'Position: (\u03B1: deg, y: m, r: distance m)<input type="text" class="input" id="z" value="'+-selectedEntity.getAttribute('angle').z+'"> <input type="text" class="input" id="y" value="'+selectedEntity.getAttribute('position').y+'"> <input type="text" class="input" id="x" value="'+(-selectedEntity.getAttribute('angle').x)+'"></input>'
-        rotationY.style.display = 'none'
-        rotationX.style.display = 'none'
-    }
-    xIn = document.getElementById("x"); /* x input */
-    yIn = document.getElementById("y"); /* y input */
-    zIn = document.getElementById("z"); /* z input */
-
-    $("#x").change(function() {
-        editEntity();
-    });
-
-    /* If the textbox for y value is changed */
-    $("#y").change(function() {
-        editEntity();
-    });
-
-    /* If the textbox for z value is changed */
-    $("#z").change(function() {
-        editEntity();
-    });
-    val = !val
+    newVal = !selectedEntity.getAttribute('advanced').val
+    selectedEntity.setAttribute('advanced', {val: newVal});
     updateStats()
     editEntity()
   }
