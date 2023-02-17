@@ -5,6 +5,9 @@
 				"skyColor": "#000000"
 			},
 			"grille0": {
+				"advanced": {
+					"val": false
+				},
 				"angle": {
 					"x": 0,
 					"z": -250
