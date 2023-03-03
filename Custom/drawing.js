@@ -116,17 +116,19 @@ function drawPlaneBorder(width,height,fill,color,parent){
 /* draws gradient */
 function drawGradient(width,height,numBars,color,parent){
     /* creates evenly spaced planes that progressively trend towards full color */
-    r = color.r-(color.r/numBars)
-    g = color.g-(color.g/numBars)
-    b = color.b-(color.b/numBars)
-
+    r = Number("0x"+color.r)
+    g = Number("0x"+color.g)
+    b = Number("0x"+color.b)
+    console.log(r)
+    console.log(g)
+    console.log(b)
     var j = 0;
     while(j < numBars){
         let elChild = document.createElement('a-entity'); // creates plane
         elChild.setAttribute("id",parent.id+"-"+(numBars-j).toString()); // sets id correctly
         elChild.setAttribute("geometry",{primitive: "plane", width: width, height: height}); // sets size
         elChild.setAttribute("position",{x: width*numBars/2-(width*j)-(width/2), y: 0, z: 0}); // sets proper position
-        elChild.setAttribute("material",{shader: "flat", color: "rgb("+Math.ceil(r*j).toString()+","+Math.ceil(g*j).toString()+","+Math.ceil(b*j).toString()+")"}); // sets color
+        elChild.setAttribute("material",{shader: "flat", color: "rgb("+Math.ceil(r-((r/numBars)*j)).toString()+","+Math.ceil(g-((g/numBars)*j)).toString()+","+Math.ceil(b-((b/numBars)*j)).toString()+")"}); // sets color
         parent.appendChild(elChild); // adds entity to parent
         j++;
     }
