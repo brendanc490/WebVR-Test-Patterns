@@ -1,3 +1,10 @@
+/*
+    Listens for button inputs and handles them accordingly.
+    Any button press on the left controller will move backwards one scene.
+    Any button press on the right controller will move forward one scene.
+    
+*/
+
 /* Code to register thumbstick behavior for left hand */
 AFRAME.registerComponent('thumbstick-left',{
 init: function () {

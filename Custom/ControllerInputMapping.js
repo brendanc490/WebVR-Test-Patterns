@@ -1,3 +1,10 @@
+/* 
+    Reads in controller input profiles and sets event listeners.
+    Event listeners will fire and dispatch correctly encoded event to controller button listeners
+    Controller schemes are windows, oculus touch, oculus go, vive, vive focus, and a catch all that contains all buttons
+    
+*/
+
 import data from '../Compatibility/controller_profiles.json' assert { type: "json" };
 const windows = data[0]['windows']
 const oc_touch = data[0]['oc_touch']

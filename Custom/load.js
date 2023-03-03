@@ -1,3 +1,5 @@
+/* Loads in prebuilt scenes and adds them to scenes json */
+
 import red from './patterns/red.JSON' assert { type: "json" };
 scenes['red'] = red['scenes']['default']
 
