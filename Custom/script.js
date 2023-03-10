@@ -66,6 +66,8 @@ const rotIn = document.getElementById("rotIn"); /* rotation input */
 /* Color related */
 const color = document.getElementById("color"); /* color container paragraph */
 const colIn = document.getElementById("colIn"); /* color input */
+const colIn2 = document.getElementById("colIn2"); /* color input */
+const color2 = document.getElementById("color2"); /* color input */
 colIn.style.width = "75%";
 
 /* Texture related */

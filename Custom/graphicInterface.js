@@ -18,6 +18,7 @@ function hideEditStats(){
     entitySelectorText.style.display = "none";
     posIn.style.display = "none";
     colIn.style.display = "none";
+    colIn2.style.display = "none";
     heightIn.style.display = "none";
     widthIn.style.display = "none";
     radiusIn.style.display = "none";
@@ -134,14 +135,17 @@ function updateStats(){
         width.value = selectedEntity.children[0].components.geometry.attrValue.width;
         height.value = selectedEntity.children[0].components.geometry.attrValue.height;
         numBarsIn.value = selectedEntity.children.length;
+        $('#color2').minicolors("value",entity.components.color2.attrValue.val);
     } else if(selectedEntity.getAttribute("id").includes("checkerboard")){
         rowsIn.value = selectedEntity.children.length;
         colsIn.value = selectedEntity.children[0].children.length;
         tileSizeIn.value = selectedEntity.children[0].children[0].components.geometry.attrValue.width;
+        $('#color2').minicolors("value",entity.components.color2.attrValue.val);
     } else if(selectedEntity.getAttribute("id").includes("grille")){
         width.value = selectedEntity.children[0].components.geometry.attrValue.width;
         height.value = selectedEntity.children[0].components.geometry.attrValue.height;
         numBarsIn.value = selectedEntity.children.length;
+        $('#color2').minicolors("value",entity.components.color2.attrValue.val);
     }
 }
 
@@ -230,10 +234,12 @@ function toggleAddEdit(swap){
             heightIn.style.display = "block";
             widthIn.style.display = "block";
             numBars.style.display = "block";
+            colIn2.style.display = "block";
         } else if (selectedEntity.getAttribute("id").includes("checkerboard")) { /* gradient exlcusive containers shown */
             cols.style.display = "block";
             rows.style.display = "block";
             tileSize.style.display = "block";
+            colIn2.style.display = "block";
         }
     } else { /* if add */
         hideEditStats(); /* hide edit containers */

@@ -93,6 +93,11 @@
                 val: {type: 'boolean', default: false}
             },
         });
+        AFRAME.registerComponent('color2', {
+            schema: {
+                val: {type: 'string', default: "#000000"}
+            },
+        });
         </script>
     </head>
 
@@ -173,12 +178,15 @@
 
                         </div>
                 <p id="addPattern">
-                <b>Add a pattern: </b><input type="text" class="input" id="name" value="name"></p>
+                <b>Name: </b><input type="text" class="input" id="name" value="name"></p>
+                    <p style="text-align:center;" id="renamePatternButton">
+                        <button style="text-align:center;" class="button add" onclick="renamePattern()">Rename Pattern</button>
+                    </p>
                     <p style="text-align:center;" id="addPatternButton">
                         <button style="text-align:center;" class="button add" onclick="addPattern()">Add Pattern</button>
                     </p>
                     <p style="text-align:center;" id="removePatternButton">
-                        <button style="text-align:center;" class="button add" onclick="removePattern()">Remove Pattern</button>
+                        <button style="text-align:center;" class="button reset" onclick="removePattern()">Remove Pattern</button>
                     </p>
                 <p style="text-align:center;" id="uploadDisp">
                         <b>Upload patterns:            </b><input type="file" id="scene-disp-input" accept=".json" multiple>
@@ -236,7 +244,8 @@
                     <p id="universalSettings"><b>Universal Entity Settings</b></p>
                     <p id="posIn">Position: (&alpha;: deg, y: m, r: distance m)<input type="text" class="input" id="z" value="0"> <input type="text" class="input" id="y" value="0"> <input type="text" class="input" id="x" value="0"></p>
                     <p id="rotIn">Rotation (deg):  <input type="text" class="input" id="rotationZ" value="0"><input type="text" class="input" id="rotationY" value="0"><input type="text" class="input" id="rotationX" value="0"></p>
-                    <div id="colIn" position="absolute" width="75%" left="0">Color: <input type="text" class="input" id="color" value="#FFFFFF"></div>
+                    <div id="colIn" position="absolute" width="75%" left="0">Primary Color: <input type="text" class="input" id="color" value="#FFFFFF"></div>
+                    <div id="colIn2" position="absolute" width="75%" left="0">Secondary Color: <input type="text" class="input" id="color2" value="#FFFFFF"></div>
                     <p id="nonUniversalSettings"><b>Entity Specific Settings</b></p>
                     <p id="textureIn">Texture:                 <select class="select" name="texture" id="texture">
                         <option value="none">none</option>

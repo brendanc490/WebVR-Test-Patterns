@@ -1,7 +1,7 @@
 /* 
     Responsible for editing currently selected entity
     Whenever an appropriate change is queued, editEntity function is called and adjusts current entity based on changes
-    
+
 */
 
 /* edits selected entity */
@@ -167,10 +167,11 @@ function editEntity(){
         }
         // redraw gradient or grille
         if (selectedEntity.getAttribute("id").includes("gradient")){
-            drawGradient(parseFloat($("#width").val()),parseFloat($("#height").val()),parseFloat($("#numBarsIn").val()),hexToRgb($("#color").val()),selectedEntity);
+            drawGradient(parseFloat($("#width").val()),parseFloat($("#height").val()),parseFloat($("#numBarsIn").val()),hexToRgb($("#color").val()),hexToRgb($("#color2").val()),selectedEntity);
         } else {
-            drawGrille(parseFloat($("#width").val()),parseFloat($("#height").val()),parseFloat($("#numBarsIn").val()),hexToRgb($("#color").val()),selectedEntity);
+            drawGrille(parseFloat($("#width").val()),parseFloat($("#height").val()),parseFloat($("#numBarsIn").val()),$("#color").val(),$("#color2").val(),selectedEntity);
         }
+        selectedEntity.setAttribute('color2',{val: $("#color2").val()})
         
     } else if (selectedEntity.getAttribute("id").includes("checkerboard")){ /* checkerboard only changes */
         // check for valid inputs
@@ -196,6 +197,7 @@ function editEntity(){
             alert("Please enter a valid number of bars ( >= 0 )");
             return;
         }
+        selectedEntity.setAttribute('color2',{val: $("#color2").val()})
         // remove boxes
         let i = selectedEntity.children.length-1;
         while (i >= 0) {
@@ -203,7 +205,7 @@ function editEntity(){
             i--;
         }
         // draw new boxes
-        drawCheckerboard(parseFloat($("#rowsIn").val()),parseFloat($("#colsIn").val()),parseFloat($("#tileSizeIn").val()),hexToRgb($("#color").val()),selectedEntity);
+        drawCheckerboard(parseFloat($("#rowsIn").val()),parseFloat($("#colsIn").val()),parseFloat($("#tileSizeIn").val()),$("#color").val(),$("#color2").val(),selectedEntity);
     } 
     updateJSON() // update the json file of current scene
 }

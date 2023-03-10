@@ -42,6 +42,16 @@ $('#color').minicolors({
     },
 });
 
+$('#color2').minicolors({
+    control: 'hue',
+    position:'top',
+    change: function () {
+        if(!flag && $("#color").val().length == 7){
+            editEntity();
+        }
+    },
+});
+
 /* If the textbox for x value is changed */
 $("#texture").change(function() {
     if(texture.value == "none"){

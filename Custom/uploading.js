@@ -177,13 +177,16 @@ function addEntitiesFromScene(scene){
                 el.setAttribute("geometry", scene[key].geometry);
             } else if (key.includes("gradient")){
                 el.setAttribute("id", "gradient"+gradientNum++);
-                drawGradient(scene[key].childGeometry.width,scene[key].childGeometry.height,scene[key].numBars,hexToRgb(scene[key].material.color),el);
+                drawGradient(scene[key].childGeometry.width,scene[key].childGeometry.height,scene[key].numBars,hexToRgb(scene[key].material.color),hexToRgb(scene[key].color2.val),el);
+                el.setAttribute('color2',scene[key].color2)
             } else if (key.includes("grille")){
                 el.setAttribute("id", "grille"+grilleNum++);
-                drawGrille(scene[key].childGeometry.width,scene[key].childGeometry.height,scene[key].numBars,hexToRgb(scene[key].material.color),el);
+                drawGrille(scene[key].childGeometry.width,scene[key].childGeometry.height,scene[key].numBars,scene[key].material.color,scene[key].color2.val,el);
+                el.setAttribute('color2',scene[key].color2)
             } else if (key.includes("checkerboard")){
                 el.setAttribute("id", "checkerboard"+checkerboardNum++);
-                drawCheckerboard(scene[key].rows,scene[key].cols,scene[key].tileSize,hexToRgb(scene[key].material.color),el);
+                drawCheckerboard(scene[key].rows,scene[key].cols,scene[key].tileSize,scene[key].material.color,scene[key].color2.val,el);
+                el.setAttribute('color2',scene[key].color2)
             }
             /* sets stats */
             el.setAttribute("angle", scene[key].angle);

@@ -18,6 +18,7 @@ function selectNew(clickedEntity){
     hideEditStats(); /* hide section briefly */
     updateStats(); /* update stats */
     toggleAddEdit(null); /* re-display section */
+    highlightSelection(selectedEntity);
 }
 
 /* Removes current entity */
@@ -163,7 +164,6 @@ function addPattern(){
 function removePattern(){
     revertChanges()
     delete scenes[patternDisplay.value]
-    //pattern.options.remove(new Option(patternDisplay.value, patternDisplay.value))
     let i = 0;
     while(i < patternList.childElementCount){
         if(patternList.children[i].children[0].id == patternDisplay.value){
@@ -231,3 +231,72 @@ scene.addEventListener('exit-vr',function(){
     block = true;
     toggleAddEdit(false);
   });
+
+function highlightSelection(ent){
+    newPos = {x: 0, y: 0, z: -50};
+    if(ent.id.includes("plane")){
+        newGeom = {primitive: 'plane', width: ent.getAttribute('geometry').width*1.5, height: ent.getAttribute('geometry').height*1.5};
+    } else if(selectedEntity.id.includes("circle")){
+        newGeom = {primitive: 'ring', radiusOuter: ent.getAttribute('geometry').radiusOuter*1.5, radiusInner: 0};
+    } else if(selectedEntity.id.includes("triangle")){
+        newGeom = {primitive: 'triangle', vertexA: {x: ent.getAttribute('geometry').vertexA.x*1.5 ,y: ent.getAttribute('geometry').vertexA.y*1.5 ,z: ent.getAttribute('geometry').vertexA.z*1.5}, vertexB: {x: ent.getAttribute('geometry').vertexB.x*1.5 ,y: ent.getAttribute('geometry').vertexB.y*1.5 ,z: ent.getAttribute('geometry').vertexB.z*1.5}, vertexC: {x: ent.getAttribute('geometry').vertexC.x*1.5 ,y: ent.getAttribute('geometry').vertexC.y*1.5 ,z: ent.getAttribute('geometry').vertexC.z*1.5}};
+    } else if(selectedEntity.id.includes("checkerboard")){
+        rowNum = ent.children.length;
+        colNum = ent.children[0].children.length;
+        tileSizeNum = ent.children[0].children[0].components.geometry.attrValue.width;
+        newGeom = {primitive: 'plane', width: colNum*tileSizeNum*1.5, height: rowNum*tileSizeNum*1.5};
+    } else if(selectedEntity.id.includes("gradient")){
+        let width = ent.children[0].components.geometry.attrValue.width;
+        let height = ent.children[0].components.geometry.attrValue.height;
+        let numBars = ent.children.length;
+        newGeom = {primitive: 'plane', width: width*numBars*1.25, height: height*1.5};
+    } else if(selectedEntity.id.includes("grille")){
+        let width = selectedEntity.children[0].components.geometry.attrValue.width;
+        let height = selectedEntity.children[0].components.geometry.attrValue.height;
+        let numBars = selectedEntity.children.length;
+        newGeom = {primitive: 'plane', width: width*numBars*1.25, height: height*1.5};
+    }
+    tmp = document.createElement('a-entity');
+    tmp.setAttribute('id','tmp')
+    tmp.setAttribute("geometry",newGeom);
+    tmp.setAttribute('position',newPos);
+    tmp.setAttribute("material", {shader: "flat", color: "#FFFF00"});
+    ent.appendChild(tmp);
+    setTimeout(() => {
+        let i = selectedEntity.children.length-1;
+        while (i >= 0) {
+            if(selectedEntity.children[i].getAttribute('id') == 'tmp'){
+                selectedEntity.children[i].parentNode.removeChild(selectedEntity.children[i]);
+                i--;
+            }
+            i--;
+        }
+    }, 1000);
+
+
+}
+
+function renamePattern(){
+    oldName = patternDisplay.value
+    currScene = scenes[patternDisplay.value]
+    currName = ''
+    if(Object.keys(names).indexOf(nameIn.value) == -1){
+        names[nameIn.value] = 1
+        currName = nameIn.value
+    } else {
+        names[nameIn.value] = names[nameIn.value] + 1
+        currName = nameIn.value+''+names[nameIn.value]
+    }
+    scenes[currName] = currScene
+    delete scenes[oldName]
+
+    displayOrder[displayOrder.indexOf(oldName)] = currName
+
+    var opt = patternDisplay.options[patternDisplay.selectedIndex];
+     opt.value =  currName;
+     opt.text = currName;
+
+    label = document.querySelector('label[for="'+oldName+'"]')
+    label.setAttribute('for',currName)
+    label.textContent = currName
+}

@@ -13,6 +13,7 @@ function addEntity(){
     let R = ((Math.floor(Math.random()*255).toString(16)).toUpperCase()).padStart(2, '0');
     let G = ((Math.floor(Math.random()*255).toString(16)).toUpperCase()).padStart(2, '0');
     let B = ((Math.floor(Math.random()*255).toString(16)).toUpperCase()).padStart(2, '0');
+    
 
     /* check desired type of entity */
     if($("#entity :selected").text() == "circle"){ /* if circle */
@@ -33,16 +34,19 @@ function addEntity(){
         el.setAttribute("material", {shader: "flat", color: "#"+R+G+B});
     } else if ($("#entity :selected").text() == "gradient"){
         el.setAttribute("id","gradient"+gradientNum++);
-        drawGradient(.025*250,.075*250,32,{r: R, g: G, b: B},el);
+        drawGradient(.025*250,.075*250,32,hexToRgb("#"+R+G+B),hexToRgb("#000000"),el);
         el.setAttribute("material",{shader: "flat", color: "#"+R+G+B});
+        el.setAttribute("color2",{val: "#000000"})
     } else if ($("#entity :selected").text() == "checkerboard"){
         el.setAttribute("id","checkerboard"+checkerboardNum++);
-        drawCheckerboard(16,16,.02*250,{r: R, g: G, b: B},el);
+        drawCheckerboard(16,16,.02*250,"#"+R+G+B,"#000000",el);
         el.setAttribute("material",{shader: "flat", color: "#"+R+G+B});
+        el.setAttribute("color2",{val: "#000000"})
     } else if ($("#entity :selected").text() == "grille"){
         el.setAttribute("id","grille"+grilleNum++);
-        drawGrille(.025*250,.125*250,32,{r: R, g: G, b: B},el);
+        drawGrille(.025*250,.125*250,32,"#"+R+G+B,"#000000",el);
         el.setAttribute("material",{shader: "flat", color: "#"+R+G+B});
+        el.setAttribute("color2",{val: "#000000"})
     }
     /* Set default universal stats */
 
@@ -114,28 +118,41 @@ function drawPlaneBorder(width,height,fill,color,parent){
 }
 
 /* draws gradient */
-function drawGradient(width,height,numBars,color,parent){
+function drawGradient(width,height,numBars,color1,color2,parent){
     /* creates evenly spaced planes that progressively trend towards full color */
-    r = Number("0x"+color.r)
-    g = Number("0x"+color.g)
-    b = Number("0x"+color.b)
-    console.log(r)
-    console.log(g)
-    console.log(b)
-    var j = 0;
-    while(j < numBars){
+    rDiff = color2.r-color1.r
+    gDiff = color2.g-color1.g
+    bDiff = color2.b-color1.b    
+    rStep = rDiff/(numBars-1)
+    gStep = gDiff/(numBars-1)
+    bStep = bDiff/(numBars-1)
+    var j = numBars-1;
+    while(j >= 0){
         let elChild = document.createElement('a-entity'); // creates plane
         elChild.setAttribute("id",parent.id+"-"+(numBars-j).toString()); // sets id correctly
         elChild.setAttribute("geometry",{primitive: "plane", width: width, height: height}); // sets size
         elChild.setAttribute("position",{x: width*numBars/2-(width*j)-(width/2), y: 0, z: 0}); // sets proper position
-        elChild.setAttribute("material",{shader: "flat", color: "rgb("+Math.ceil(r-((r/numBars)*j)).toString()+","+Math.ceil(g-((g/numBars)*j)).toString()+","+Math.ceil(b-((b/numBars)*j)).toString()+")"}); // sets color
+        elChild.setAttribute("material",{shader: "flat", color: "rgb("+Math.ceil(color2.r-(rStep*j)).toString()+","+Math.ceil(color2.g-(gStep*j)).toString()+","+Math.floor(color2.b-(bStep*j)).toString()+")"}); // sets color
+        parent.appendChild(elChild); // adds entity to parent
+        j--;
+    }
+    
+    /*
+    var j = 0;
+    while(j < numBars){
+
+        let elChild = document.createElement('a-entity'); // creates plane
+        elChild.setAttribute("id",parent.id+"-"+(numBars-j).toString()); // sets id correctly
+        elChild.setAttribute("geometry",{primitive: "plane", width: width, height: height}); // sets size
+        elChild.setAttribute("position",{x: width*numBars/2-(width*j)-(width/2), y: 0, z: 0}); // sets proper position
+        elChild.setAttribute("material",{shader: "flat", color: "rgb("+Math.ceil(color.r-((color.r/numBars)*j)).toString()+","+Math.ceil(color.g-((color.g/numBars)*j)).toString()+","+Math.ceil(color.b-((color.b/numBars)*j)).toString()+")"}); // sets color
         parent.appendChild(elChild); // adds entity to parent
         j++;
-    }
+    }*/
 }
 
 /* draws grille */
-function drawGrille(width,height,numBars,color,parent){
+function drawGrille(width,height,numBars,color1, color2,parent){
     /* creates evenly spaced planes that alternate between some color and black */
 
     var j = 0;
@@ -146,9 +163,9 @@ function drawGrille(width,height,numBars,color,parent){
         elChild.setAttribute("geometry",{primitive: "plane", width: width, height: height});
         elChild.setAttribute("position",{x: width*numBars/2-(width*j)-(width/2), y: 0, z: 0});
         if(isBlack){ // if on black bar
-            elChild.setAttribute("material",{shader: "flat", color: "rgb(0,0,0)"});
+            elChild.setAttribute("material",{shader: "flat", color: color2});
         } else {
-            elChild.setAttribute("material",{shader: "flat", color: "#"+color.r+color.g+color.b});
+            elChild.setAttribute("material",{shader: "flat", color: color1});
         }
         isBlack = !isBlack;
         parent.appendChild(elChild);
@@ -157,7 +174,7 @@ function drawGrille(width,height,numBars,color,parent){
 }
 
 /* draws checkerboard */
-function drawCheckerboard(rows,cols,size,color,parent){
+function drawCheckerboard(rows,cols,size,color1,color2,parent){
     /* draws evenly spaced squares */
     var r = 0;
     var isBlack = false;
@@ -171,9 +188,9 @@ function drawCheckerboard(rows,cols,size,color,parent){
             elChildCol.setAttribute("geometry",{primitive: "plane", width: size, height: size});
             elChildCol.setAttribute("position",{x: size*cols/2-(size*c)-(size/2), y: size*rows/2-(size*r)-(size/2), z: 0});
             if(isBlack){
-                elChildCol.setAttribute("material",{shader: "flat", color: "rgb(0,0,0)"});
+                elChildCol.setAttribute("material",{shader: "flat", color: color2});
             } else {
-                elChildCol.setAttribute("material",{shader: "flat", color: "#"+color.r+color.g+color.b});
+                elChildCol.setAttribute("material",{shader: "flat", color: color1});
             }
             isBlack = !isBlack;
             elChildRow.appendChild(elChildCol)
@@ -191,9 +208,9 @@ function updateJSON(){
     jsonData["sky"] = {skyColor: sky.getAttribute("material").color};
     els.forEach(element => { 
         if(element.id.includes("gradient") || element.id.includes("grille")){
-            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, numBars: element.children.length, childGeometry: element.children[0].components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, numBars: element.children.length, color2: element.components.color2.attrValue, childGeometry: element.children[0].components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         } else if(element.id.includes("checkerboard")){
-            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, rows: element.children.length, cols: element.children[0].children.length, tileSize: element.children[0].children[0].components.geometry.attrValue.width, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, rows: element.children.length, cols: element.children[0].children.length, tileSize: element.children[0].children[0].components.geometry.attrValue.width,  color2: element.components.color2.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         } else if(element.id.includes("plane")){
             jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, widthReal: (element.children.length == 0 ? element.components.geometry.attrValue.width : element.children[2].components.geometry.attrValue.width),fill: element.components.fill.attrValue, geometry: element.components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         } else if(element.id.includes("circle")){
