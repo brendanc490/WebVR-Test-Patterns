@@ -86,7 +86,7 @@ Examples: circle0, checkerboard4, plane20.
 The current entity can be removed by hitting the ***Remove from Pattern***. The entire pattern can be reset by hitting the ***Reset Pattern*** button.
 
 ### Saving the Pattern
-To save the pattern, press the ***Save Pattern*** button located at the bottom of the editor tab. The pattern is saved as an editable JSON file. Uploaded textures are preserved without image compression.
+To save the current pattern, press the ***Save Pattern*** button located at the bottom of the editor tab. The pattern is saved as an editable JSON file. Uploaded textures are preserved without image compression.
 
 ### Background Color
 To change the background color, select a new color or enter the hexadecimal code of the desired color.
