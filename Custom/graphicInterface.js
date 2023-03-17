@@ -169,6 +169,7 @@ function toggleDisplayEdit(swap){
         } else {
             alert("You must add a scene");
             displayUtility.checked = false;
+            boolDisplayEdit = !boolDisplayEdit;
         }
     }
 }
