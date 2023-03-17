@@ -39,13 +39,13 @@ To display the pattern, hit the ***VR*** button in the bottom right hand corner.
 [**Check the demos folder for some basic editable patterns!**](./demos)
 
 ### Saving and Uploading a Group of Patterns
-Multiple patterns can be saved together by hitting the ***Save Selected Patterns*** button. This will save all currently selected patterns from the ***Pattern List***.
-To upload a group of patterns, press the ***Upload Patterns*** button and select the desired file. 
+Multiple patterns can be saved together by hitting the ***Save Selected Patterns*** button. This will save all currently selected patterns from the ***Pattern List*** as a JSON file.
+To upload a group of patterns, press the ***Upload Patterns*** button and select the desired JSON file. This JSON file can contain one or more patterns and will add them all to the ***Pattern List***.
 
 ## Editing Patterns
 
 ### Uploading a Pattern
-A single pattern can be uploaded to the current pattern. If a file containing multiple patterns is uploaded, it will be rejected.
+A JSON file containing a single pattern can be uploaded to the ***Upload a pattern*** input. If a file containing multiple patterns is uploaded, it will be rejected.
 
 ### Uploading images
 Image files are treated as entity textures. Here are the steps on how to properly upload these files.
