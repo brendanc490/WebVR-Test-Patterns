@@ -18,6 +18,9 @@
 					"width": 10,
 					"height": 450
 				},
+				"color2": {
+					"val": "#000000"
+				},
 				"position": {
 					"x": 0,
 					"y": 0,
