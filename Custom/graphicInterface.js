@@ -46,7 +46,7 @@ function updateStats(){
     $('#skyCol').minicolors("value",sky.components.material.attrValue.color);
     entity = selectedEntity;
     if(selectedEntity.getAttribute('advanced').val){
-        posIn.innerHTML = 'Position: (x: m, y: m, z: m)<input type="text" class="input" id="z" value="'+-selectedEntity.getAttribute('position').z+'"> <input type="text" class="input" id="y" value="'+selectedEntity.getAttribute('position').y+'"> <input type="text" class="input" id="x" value="'+selectedEntity.getAttribute('position').x+'"></input>'
+        posIn.innerHTML = 'Position: (x: m, y: m, z: m)<input type="text" class="input" id="z" value="'+(-selectedEntity.getAttribute('position').z).toFixed(3)+'"> <input type="text" class="input" id="y" value="'+(selectedEntity.getAttribute('position').y).toFixed(3)+'"> <input type="text" class="input" id="x" value="'+(selectedEntity.getAttribute('position').x).toFixed(3)+'"></input>'
         rotationY.style.display = 'block'
         rotationX.style.display = 'block'
         xIn = document.getElementById("x"); /* x input */
@@ -66,11 +66,11 @@ function updateStats(){
         $("#z").change(function() {
             editEntity();
         });
-        xIn.value = entity.components.position.attrValue.x;
-        yIn.value = entity.components.position.attrValue.y;
-        zIn.value = -entity.components.position.attrValue.z;
+        xIn.value = (entity.components.position.attrValue.x).toFixed(3);
+        yIn.value = (entity.components.position.attrValue.y).toFixed(3);
+        zIn.value = (-entity.components.position.attrValue.z).toFixed(3);
     } else {
-        posIn.innerHTML = 'Position: (\u03B1: deg, y: m, r: distance m)<input type="text" class="input" id="z" value="'+-selectedEntity.getAttribute('angle').z+'"> <input type="text" class="input" id="y" value="'+selectedEntity.getAttribute('position').y+'"> <input type="text" class="input" id="x" value="'+(-selectedEntity.getAttribute('angle').x)+'"></input>'
+        posIn.innerHTML = 'Position: (\u03B1: deg, y: m, r: distance m)<input type="text" class="input" id="z" value="'+(-selectedEntity.getAttribute('angle').z).toFixed(3)+'"> <input type="text" class="input" id="y" value="'+(selectedEntity.getAttribute('position').y).toFixed(3)+'"> <input type="text" class="input" id="x" value="'+(-selectedEntity.getAttribute('angle').x).toFixed(3)+'"></input>'
         rotationY.style.display = 'none'
         rotationX.style.display = 'none'
         xIn = document.getElementById("x"); /* x input */
@@ -90,14 +90,14 @@ function updateStats(){
         $("#z").change(function() {
             editEntity();
         });
-        xIn.value = -entity.components.angle.attrValue.x;
-        yIn.value = entity.components.position.attrValue.y;
-        zIn.value = -entity.components.angle.attrValue.z;
+        xIn.value = (-entity.components.angle.attrValue.x).toFixed(3);
+        yIn.value = (entity.components.position.attrValue.y).toFixed(3);
+        zIn.value = (-entity.components.angle.attrValue.z).toFixed(3);
     }
 
-    rotationZ.value = entity.components.rotation.attrValue.z;
-    rotationY.value = entity.components.rotation.attrValue.y;
-    rotationX.value = entity.components.rotation.attrValue.x;
+    rotationZ.value = (entity.components.rotation.attrValue.z).toFixed(3);
+    rotationY.value = (entity.components.rotation.attrValue.y).toFixed(3);
+    rotationX.value = (entity.components.rotation.attrValue.x).toFixed(3);
     color.value = entity.components.material.attrValue.color;
     flag = true;
     $('#color').minicolors("value",entity.components.material.attrValue.color);
@@ -114,37 +114,37 @@ function updateStats(){
 
     if(selectedEntity.getAttribute("id").includes("plane")){ /* plane exclusives */
         if(selectedEntity.children.length == 0){
-            width.value = selectedEntity.components.geometry.attrValue.width;
+            width.value = (selectedEntity.components.geometry.attrValue.width).toFixed(3);
             
         } else {
-            width.value = selectedEntity.children[2].components.geometry.attrValue.width;
+            width.value = (selectedEntity.children[2].components.geometry.attrValue.width).toFixed(3);
         }
-        height.value = selectedEntity.components.geometry.attrValue.height;
-        fill.value = selectedEntity.components.fill.attrValue.val;
+        height.value = (selectedEntity.components.geometry.attrValue.height).toFixed(3);
+        fill.value = (selectedEntity.components.fill.attrValue.val).toFixed(3);
     } else if(selectedEntity.getAttribute("id").includes("circle")){ /* circle exclusives */
-        radius.value = selectedEntity.components.geometry.attrValue.radiusOuter;
-        fill.value = selectedEntity.components.fill.attrValue.val;
+        radius.value = (selectedEntity.components.geometry.attrValue.radiusOuter).toFixed(3);
+        fill.value = (selectedEntity.components.fill.attrValue.val).toFixed(3);
     } else if(selectedEntity.getAttribute("id").includes("triangle")){ /* triangle exclusives */
-        vax.value = selectedEntity.components.geometry.attrValue.vertexA.x;
-        vay.value = selectedEntity.components.geometry.attrValue.vertexA.y;
-        vbx.value = selectedEntity.components.geometry.attrValue.vertexB.x;
-        vby.value = selectedEntity.components.geometry.attrValue.vertexB.y;
-        vcx.value = selectedEntity.components.geometry.attrValue.vertexC.x;
-        vcy.value = selectedEntity.components.geometry.attrValue.vertexC.y;
+        vax.value = (selectedEntity.components.geometry.attrValue.vertexA.x).toFixed(3);
+        vay.value = (selectedEntity.components.geometry.attrValue.vertexA.y).toFixed(3);
+        vbx.value = (selectedEntity.components.geometry.attrValue.vertexB.x).toFixed(3);
+        vby.value = (selectedEntity.components.geometry.attrValue.vertexB.y).toFixed(3);
+        vcx.value = (selectedEntity.components.geometry.attrValue.vertexC.x).toFixed(3);
+        vcy.value = (selectedEntity.components.geometry.attrValue.vertexC.y).toFixed(3);
     } else if(selectedEntity.getAttribute("id").includes("gradient")){ /* gradient exclusives */
-        width.value = selectedEntity.children[0].components.geometry.attrValue.width;
-        height.value = selectedEntity.children[0].components.geometry.attrValue.height;
-        numBarsIn.value = selectedEntity.children.length;
+        width.value = (selectedEntity.children[0].components.geometry.attrValue.width).toFixed(3);
+        height.value = (selectedEntity.children[0].components.geometry.attrValue.height).toFixed(3);
+        numBarsIn.value = (selectedEntity.children.length).toFixed(3);
         $('#color2').minicolors("value",entity.components.color2.attrValue.val);
     } else if(selectedEntity.getAttribute("id").includes("checkerboard")){
-        rowsIn.value = selectedEntity.children.length;
-        colsIn.value = selectedEntity.children[0].children.length;
-        tileSizeIn.value = selectedEntity.children[0].children[0].components.geometry.attrValue.width;
+        rowsIn.value = (selectedEntity.children.length).toFixed(3);
+        colsIn.value = (selectedEntity.children[0].children.length).toFixed(3);
+        tileSizeIn.value = (selectedEntity.children[0].children[0].components.geometry.attrValue.width).toFixed(3);
         $('#color2').minicolors("value",entity.components.color2.attrValue.val);
     } else if(selectedEntity.getAttribute("id").includes("grille")){
-        width.value = selectedEntity.children[0].components.geometry.attrValue.width;
-        height.value = selectedEntity.children[0].components.geometry.attrValue.height;
-        numBarsIn.value = selectedEntity.children.length;
+        width.value = (selectedEntity.children[0].components.geometry.attrValue.width).toFixed(3);
+        height.value = (selectedEntity.children[0].components.geometry.attrValue.height).toFixed(3);
+        numBarsIn.value = (selectedEntity.children.length).toFixed(3);
         $('#color2').minicolors("value",entity.components.color2.attrValue.val);
     }
 }

@@ -233,6 +233,9 @@ scene.addEventListener('exit-vr',function(){
   });
 
 function highlightSelection(ent){
+    if(!block){
+        return
+    }
     newPos = {x: 0, y: 0, z: -50};
     if(ent.id.includes("plane")){
         newGeom = {primitive: 'plane', width: ent.getAttribute('geometry').width*1.5, height: ent.getAttribute('geometry').height*1.5};

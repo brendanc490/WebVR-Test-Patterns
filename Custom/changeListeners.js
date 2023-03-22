@@ -182,10 +182,6 @@ $("#rotationX").change(function() {
 
 /* If the textbox for radius value is changed */
 $("#radius").change(function() {
-    /*if(parseFloat($("#fill").val()) > parseFloat($("#radius").val()) || selectedEntity.getAttribute("fill").isFull){
-        fill.value = parseFloat($("#radius").val());
-        selectedEntity.setAttribute("fill",{val: selectedEntity.getAttribute("fill").val, isFull: true});
-    }*/
     if(parseFloat($("#fill").val()) > parseFloat($("#radius").val()) || selectedEntity.getAttribute("fill").isFull){
         fill.value = parseFloat($("#radius").val());
         selectedEntity.setAttribute("fill",{val: parseFloat($("#radius").val()), isFull: true});
@@ -195,13 +191,6 @@ $("#radius").change(function() {
 
 /* If the textbox for width value is changed */
 $("#width").change(function() {
-    /*if(selectedEntity.id.includes("plane")){
-        if((parseFloat($("#fill").val()) > parseFloat($("#width").val()) && parseFloat($("#height").val()) > parseFloat($("#width").val())) || (parseFloat($("#height").val()) > parseFloat($("#width").val()) && selectedEntity.getAttribute("fill").isFull)){
-            fill.value = parseFloat($("#width").val());
-            selectedEntity.setAttribute("fill",{val: selectedEntity.getAttribute("fill").val, isFull: true});
-        }
-    }*/
-
     if(selectedEntity.id.includes("plane")){
         if((parseFloat($("#fill").val()) > parseFloat($("#width").val()) && parseFloat($("#height").val()) > parseFloat($("#width").val())) || (parseFloat($("#height").val()) > parseFloat($("#width").val()) && selectedEntity.getAttribute("fill").isFull)){
             fill.value = parseFloat($("#width").val());
