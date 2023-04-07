@@ -15,10 +15,16 @@
                 }
             });
         </script>
+        <script src="./ControllerComponents.js" type="text/javascript"></script>
     </head>
 
     <body>
         <a-scene>
+            <a-entity id="con-left" laser-controls="hand: left" model="true" button-listener-l thumbstick-left trackpad-left position-updates-left></a-entity>
+            <a-entity id="con-right" laser-controls="hand: right" model="true" button-listener-r thumbstick-right trackpad-right position-updates-right></a-entity>
+            <a-text id="pixelRatio" value="Pixel Ratio: " position="0 3 -2" color="white" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="center" side="double"></a-text>
+            <a-text id="size" value="Width: \nHeight:" position="0 2.7 -2" color="white" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="center" side="double"></a-text>
+            
             <a-entity id="calibrationscene"  visible="true">
                 <a-sky color="#797979" ></a-sky>
                 <a-camera>
@@ -66,7 +72,35 @@
                 <option value="calibration">Calibration</option>
                 <option value="contrast">Contrast</option>
               </select></p>
-            </div></p>
+              <p>Max Canvas Width: <input type="text" class="input" id="maxWidth" value="1920"></p>
+              <p>Max Canvas Height: <input type="text" class="input" id="maxHeight" value="1920"></p>
+              <p>Foveation Level: <input type="text" class="input" id="foveationInput" value="0"> <div class="slidecontainer">
+                <input type="range" min="0" max="3" value="0" class="slider2" id="foveationRange" step=".01">
+                </div></p>
+            <p>Precision (low, medium, high): <input type="text" class="input" id="precisionInput" value="high"> <div class="slidecontainer">
+                    <input type="range" min="0" max="2" value="2" class="slider2" id="precisionRange" step="1">
+                    </div></p>
+                <p>
+                    <input type="checkbox" id="antialias"
+                    onclick="setAA(this)"/>
+                    <label for="antialias"> anti-alias</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="alpha"
+                    onclick="setAlpha(this)" Checked/>
+                    <label for="alpha"> alpha</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="log"
+                    onclick="setLog(this)"/>
+                    <label for="log"> logarithmic depth buffer</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="colorMgmt"
+                    onclick="setColorMgmt(this)"/>
+                    <label for="colorMgmt"> color management</label>
+                </p>
+            <p style="text-align:center;" id="findRendererInfo"><button class="button add" onclick="updateInfo()">Find Renderer Info</button></p>
         </div>
 
     </body>
