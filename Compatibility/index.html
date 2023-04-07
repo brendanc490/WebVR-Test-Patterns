@@ -54,8 +54,8 @@
                 <a-entity position ="-1.5 1.4 -5" geometry="primitive:circle; radius: .5" material="shader: flat; color: #797979; side:double">
                    <a-entity id="oc-leftThumbIndicator" position ="0 0 .001" geometry="primitive:circle; radius: 0.2" material="shader: flat; color: #222222; side:double" button></a-entity>
                 </a-entity>
-                <a-entity id="oc-yButtonAnimation" position ="-2.4 1.6 -5" geometry="primitive:circle; radius: .15" material="shader: flat; color: #797979; side:double" button></a-entity>
-                <a-entity id="oc-xButtonAnimation" position ="-2.25 1.1 -5" geometry="primitive:circle; radius: .15" material="shader: flat; color: #797979; side:double" button></a-entity>
+                <a-entity id="oc-yButtonAnimation" position ="-.75 1.6 -5" geometry="primitive:circle; radius: .15" material="shader: flat; color: #797979; side:double" button></a-entity>
+                <a-entity id="oc-xButtonAnimation" position ="-.8 1.1 -5" geometry="primitive:circle; radius: .15" material="shader: flat; color: #797979; side:double" button></a-entity>
                 <a-entity id="oc-gripLeftButtonAnimation" position ="-1.5 .3 -5" geometry="primitive:plane; height: .8; width: .25" material="shader: flat; color: #797979; side:double" button></a-entity>
                 <a-entity id="oc-triggerLeftButtonAnimation" position ="-1.5 2.25 -5" geometry="primitive:plane; height: .5; width: .5" material="shader: flat; color: #797979; side:double" button></a-entity>
 
@@ -72,12 +72,81 @@
                 <a-entity position ="1.5 1.4 -5" geometry="primitive:circle; radius: .5" material="shader: flat; color: #797979; side:double">
                     <a-entity id="oc-rightThumbIndicator" position ="0 0 .001" geometry="primitive:circle; radius: 0.2" material="shader: flat; color: #222222; side:double"></a-entity>
                 </a-entity>
-                <a-entity id="oc-bButtonAnimation" position ="2.4 1.6 -5" geometry="primitive:circle; radius: .15" material="shader: flat; color: #797979; side:double"></a-entity>
-                <a-entity id="oc-aButtonAnimation" position ="2.25 1.1 -5" geometry="primitive:circle; radius: .15" material="shader: flat; color: #797979; side:double"></a-entity>
+                <a-entity id="oc-bButtonAnimation" position =".75 1.6 -5" geometry="primitive:circle; radius: .15" material="shader: flat; color: #797979; side:double"></a-entity>
+                <a-entity id="oc-aButtonAnimation" position =".8 1.1 -5" geometry="primitive:circle; radius: .15" material="shader: flat; color: #797979; side:double"></a-entity>
                 <a-entity id="oc-gripRightButtonAnimation" position ="1.5 .3 -5" geometry="primitive:plane; height: .8; width: .25" material="shader: flat; color: #797979; side:double"></a-entity>
                 <a-entity id="oc-triggerRightButtonAnimation" position ="1.5 2.25 -5" geometry="primitive:plane; height: .5; width: .5" material="shader: flat; color: #797979; side:double"></a-entity>
 
             </a-entity>
+
+            <a-entity id="oc-go-interface" position="0 0 0" visible="false"> 
+                <!-- Vive Button Layout Left Hand -->
+                <a-text id="oc-go-leftTrackpad" value="Left Trackpad: No" position="-3 2 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="right" side="double"></a-text>
+                <a-text id="oc-go-leftTrackpadPress" value="Left Trackpad Pressed: No" position="-3 1.75 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="right" side="double"></a-text>
+                <a-text id="oc-go-leftTrigger" value="Left Trigger: No" position="-3 1.25 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="right" side="double"></a-text>
+            
+                <!-- Left Hand Animations -->
+                <a-entity position ="-1.5 1.4 -5" geometry="primitive:circle; radius: .5" material="shader: flat; color: #797979; side:double">
+                   <a-entity id="oc-go-leftTrackpadIndicator" position ="0 0 .001" geometry="primitive:circle; radius: 0.2" material="shader: flat; color: #797979; side:double"></a-entity>
+                </a-entity>
+                <a-entity id="oc-go-gripLeftButtonAnimation" position ="-1.5 .3 -5" geometry="primitive:plane; height: .8; width: .25" material="shader: flat; color: #797979; side:double"></a-entity>
+                <a-entity id="vive-triggerLeftButtonAnimation" position ="-1.5 2.25 -5" geometry="primitive:plane; height: .5; width: .5" material="shader: flat; color: #797979; side:double"></a-entity>
+
+                <!-- Oculus Go Button Layout Right Hand -->
+                <a-text id="oc-go-rightTrackpad" value="Right Trackpad: No" position="3 2 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" side="double"></a-text>
+                <a-text id="oc-go-rightTrackpadPress" value="Right Trackpad Pressed: No" position="3 1.75 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" side="double"></a-text>
+                <a-text id="oc-go-rightGrip" value="Right Grip: No" position="3 1.5 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" side="double"></a-text>
+                <a-text id="oc-go-rightTrigger" value="Right Trigger: No" position="3 1.25 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" side="double"></a-text>
+            
+                <!-- Right Hand Animations -->
+                <a-entity position ="1.5 1.4 -5" geometry="primitive:circle; radius: .5" material="shader: flat; color: #797979; side:double">
+                    <a-entity id="oc-go-rightTrackpadIndicator" position ="0 0 .001" geometry="primitive:circle; radius: 0.2" material="shader: flat; color: #797979; side:double"></a-entity>
+                </a-entity>
+                <a-entity id="oc-go-gripRightButtonAnimation" position ="1.5 .3 -5" geometry="primitive:plane; height: .8; width: .25" material="shader: flat; color: #797979; side:double"></a-entity>
+                <a-entity id="oc-go-triggerRightButtonAnimation" position ="1.5 2.25 -5" geometry="primitive:plane; height: .5; width: .5" material="shader: flat; color: #797979; side:double"></a-entity>                
+            </a-entity>
+            
+            <a-entity id="generic-interface" position="0 0 0" visible="false"> 
+                <!-- Oculus Button Layout Left Hand -->
+                <a-text id="gen-leftAxis" value="Left Axis: No" position="-3 2 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="right" side="double"></a-text>
+                <a-text id="gen-leftGrip" value="Left Grip: No" position="-3 1.5 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="right" side="double"></a-text>
+                <a-text id="gen-x" value="X button: No" position="-3 1.25 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="right" side="double"></a-text>
+                <a-text id="gen-y" value="Y button: No" position="-3 1 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="right" side="double"></a-text>
+                <a-text id="gen-leftStick" value="Left Thumbstick Pressed: No" position="-3 .75 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="right" side="double"></a-text>
+                <a-text id="gen-leftMenu" value="Left Menu: No" position="-3 .5 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="right" side="double"></a-text>
+                <a-text id="gen-leftTrigger" value="Left Trigger: No" position="-3 1.75 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="right" side="double"></a-text>
+            
+                <!-- Left Hand Animations -->
+                <a-entity position ="-1.5 1.4 -5" geometry="primitive:circle; radius: .5" material="shader: flat; color: #797979; side:double">
+                   <a-entity id="gen-leftThumbIndicator" position ="0 0 .001" geometry="primitive:circle; radius: 0.2" material="shader: flat; color: #222222; side:double" button></a-entity>
+                </a-entity>
+                <a-entity id="gen-yButtonAnimation" position ="-.75 1.6 -5" geometry="primitive:circle; radius: .15" material="shader: flat; color: #797979; side:double" button></a-entity>
+                <a-entity id="gen-xButtonAnimation" position ="-.8 1.1 -5" geometry="primitive:circle; radius: .15" material="shader: flat; color: #797979; side:double" button></a-entity>
+                <a-entity id="gen-gripLeftButtonAnimation" position ="-1.5 .3 -5" geometry="primitive:plane; height: .8; width: .25" material="shader: flat; color: #797979; side:double" button></a-entity>
+                <a-entity id="gen-triggerLeftButtonAnimation" position ="-1.5 2.25 -5" geometry="primitive:plane; height: .5; width: .5" material="shader: flat; color: #797979; side:double" button></a-entity>
+
+                <!-- Oculus Button Layout Right Hand -->
+                <a-text id="gen-rightAxis" value="Right Axis: No" position="3 2 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" side="double"></a-text>
+                <a-text id="gen-rightGrip" value="Right Grip: No" position="3 1.5 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" side="double"></a-text>
+                <a-text id="gen-a" value="A button: No" position="3 1.25 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" side="double"></a-text>
+                <a-text id="gen-b" value="B button: No" position="3 1 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" side="double"></a-text>
+                <a-text id="gen-rightStick" value="Right Thumbstick Pressed: No" position="3 .75 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" side="double"></a-text>
+                <a-text id="gen-rightMenu" value="Right Menu: No" position="3 .5 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" side="double"></a-text>
+                <a-text id="gen-rightTrigger" value="Right Trigger: No" position="3 1.75 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" side="double"></a-text>
+            
+                <!-- Right Hand Animations -->
+                <a-entity position ="1.5 1.4 -5" geometry="primitive:circle; radius: .5" material="shader: flat; color: #797979; side:double">
+                    <a-entity id="gen-rightThumbIndicator" position ="0 0 .001" geometry="primitive:circle; radius: 0.2" material="shader: flat; color: #222222; side:double"></a-entity>
+                </a-entity>
+                <a-entity id="gen-bButtonAnimation" position =".75 1.6 -5" geometry="primitive:circle; radius: .15" material="shader: flat; color: #797979; side:double"></a-entity>
+                <a-entity id="gen-aButtonAnimation" position =".8 1.1 -5" geometry="primitive:circle; radius: .15" material="shader: flat; color: #797979; side:double"></a-entity>
+                <a-entity id="gen-gripRightButtonAnimation" position ="1.5 .3 -5" geometry="primitive:plane; height: .8; width: .25" material="shader: flat; color: #797979; side:double"></a-entity>
+                <a-entity id="gen-triggerRightButtonAnimation" position ="1.5 2.25 -5" geometry="primitive:plane; height: .5; width: .5" material="shader: flat; color: #797979; side:double"></a-entity>
+
+                
+            </a-entity>
+
+
             <a-entity id="vive-interface" position="0 0 0" visible="false">
                 <!-- Vive Button Layout Left Hand -->
                 <a-text id="vive-leftTrackpad" value="Left Trackpad: No" position="-3 2 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="right" side="double"></a-text>

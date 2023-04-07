@@ -299,7 +299,7 @@ init: function () {
         triggerLeftButtonAnimation.setAttribute("button", {isPressed: false})
     });
 
-    el.addEventListener('abuttondown', function (evt) {
+    el.addEventListener('xbuttondown', function (evt) {
         if(queriesFound == false){
             return
         }
@@ -307,22 +307,22 @@ init: function () {
         x.setAttribute("value", "X Button: Yes"); x.setAttribute("color","green")
         xButtonAnimation.setAttribute("button", {isPressed: true})
     });
-    el.addEventListener('abuttonup', function (evt) {
+    el.addEventListener('xbuttonup', function (evt) {
         if(queriesFound == false){
             return
         }
         xButtonAnimation.setAttribute("button", {isPressed: false})
     });
 
-    el.addEventListener('bbuttondown', function (evt) {
+    el.addEventListener('ybuttondown', function (evt) {
         if(queriesFound == false){
             return
         }
         yPressed = true;
         y.setAttribute("value", "Y Button: Yes"); y.setAttribute("color","green")
-        xButtonAnimation.setAttribute("button", {isPressed: true})
+        yButtonAnimation.setAttribute("button", {isPressed: true})
     });
-    el.addEventListener('bbuttonup', function (evt) {
+    el.addEventListener('ybuttonup', function (evt) {
         if(queriesFound == false){
             return
         }

@@ -62,8 +62,9 @@ scene.addEventListener('enter-vr',function(){
     } else {
         //isDevice.textContent = isPositional.textContent = 'No'
     }
+    
     // Checks for gamepads connected
-    var gamePads = navigator.getGamepads();
+    /*var gamePads = navigator.getGamepads();
     var pads = [];
     console.log(gamePads)
     // Count the number of non-null pads
@@ -73,8 +74,7 @@ scene.addEventListener('enter-vr',function(){
             return prev + 1
         } else{ 
             return prev}}, 0);
-    console.log(result)
-
+    console.log(result)*/
     console.log('Entering VR');
     controlsInterval = setInterval(findControls,10);
 });
@@ -91,7 +91,6 @@ scene.addEventListener('exit-vr',function(){
 
 var leftModel, rightModel
 function findControls(){
-    
     isRight = !(conRight.getAttribute("position").x == 0 && conRight.getAttribute("position").y == 0 && conRight.getAttribute("position").z == 0);
     isLeft = !(conLeft.getAttribute("position").x == 0 && conLeft.getAttribute("position").y == 0 && conLeft.getAttribute("position").z == 0);
     queryPrefix = ""
@@ -260,7 +259,7 @@ function findControls(){
                 rightModel = file
                 conRight.setAttribute("gltf-model", path+file)
             }*/
-            clearInterval(controlsInterval)
+            //clearInterval(controlsInterval)
         }
     }
     
@@ -318,7 +317,7 @@ function executeQueries(pref){
 }
 
 function exportJSON(){
-    var blob = new Blob([JSON.stringify(jsonOut)],
+    var blob = new Blob([JSON.stringify(jsonOut, null, '\t')],
     { type: "text/plain;charset=utf-8" });
     saveAs(blob, devName.value+"Compatibility.JSON");
 }
