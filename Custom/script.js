@@ -139,6 +139,7 @@ const upload = document.getElementById("upload"); /* upload button container par
 const scene_input = document.querySelector("#scene-input"); /* upload button */
 
 const removeButton = document.getElementById("removeButton"); /* remove button container paragraph */
+const duplicateButton = document.getElementById("duplicateButton");
 
 /* Local Variables */
 var el = null; /* recently created entity */

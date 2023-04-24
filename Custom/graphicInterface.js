@@ -10,6 +10,7 @@ toggleAddEdit(null);
 /* hides edit section */
 function hideEditStats(){
     removeButton.style.display = "none";
+    duplicateButton.display = "none";
     background.style.display = "none";
     ent.style.display = "none";
     uni.style.display = "none";
@@ -195,6 +196,7 @@ function toggleAddEdit(swap){
     /* check if current mode is add or edit */
     if(boolAddEdit){ /* if edit */
         removeButton.style.display = "block";
+        duplicateButton.display = "block";
         /* universal containers shown */
         background.style.display = "block";
         ent.style.display = "block";

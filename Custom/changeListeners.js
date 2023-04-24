@@ -361,7 +361,6 @@ scene_display_input.addEventListener("change", function() {
             }
             if(Object.keys(scenes).indexOf(itm.name.split(".")[0]) != -1){
                 itm.name = itm.name.split(".")[0]+"1"+itm.name.split(".")[1]
-                console.log(itm)
 
             }
             reader.readAsText(itm);
@@ -378,7 +377,6 @@ scene_display_input.addEventListener("change", function() {
     
     // when it's done....
     myLoop.then(()=>{
-        console.log('no')
         patternList.innerHTML = ''
         let arr = Object.keys(scenes)
         let len = arr.length
@@ -396,7 +394,6 @@ scene_display_input.addEventListener("change", function() {
             i++;
         }
         newTextures = [...new Set([...uploadedTextures,...currTextures])]
-        console.log(newTextures)
         newTextures.forEach(text => {
             var option = document.createElement("option"); 
             if(uploadedTextures.indexOf(text) != -1 && currTextures.indexOf(text) == -1){
@@ -410,7 +407,6 @@ scene_display_input.addEventListener("change", function() {
 
     
         newUploadedTextureFormat = [...new Set([...Object.keys(uploadedTextureFormat),...Object.keys(uploadedTextureFormats)])]
-        console.log(newUploadedTextureFormat)
         tmp = {}
         newUploadedTextureFormat.forEach(texture => {
             if(Object.keys(uploadedTextureFormat).indexOf(texture) != -1){

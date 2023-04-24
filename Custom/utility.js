@@ -54,6 +54,57 @@ function removeEntity(){
     updateJSON()
 }
 
+function duplicateEntity(){
+    // get entity id and increment by 1
+    key = selectedEntity.getAttribute("id");
+    el = document.createElement("a-entity"); /* create entity */
+    if(key.includes("circle")){ /* circle exclusive */
+        el.setAttribute("id","circle"+circleNum++);
+        el.setAttribute("geometry", scenes[patternDisplay.value][key].geometry);
+        el.setAttribute("fill",scenes[patternDisplay.value][key].fill);
+    } else if(key.includes("plane")){ /* plane exclusive */
+        el.setAttribute("id","plane"+planeNum++);
+        el.setAttribute("geometry", scenes[patternDisplay.value][key].geometry);
+        if(scenes[patternDisplay.value][key].material.src == ""){
+            drawPlaneBorder(scenes[patternDisplay.value][key].widthReal,scenes[patternDisplay.value][key].geometry.height,scenes[patternDisplay.value][key].fill.val,hexToRgb(scenes[patternDisplay.value][key].material.color),el);
+        }   
+        el.setAttribute("fill",scenes[patternDisplay.value][key].fill);
+    } else if(key.includes("triangle")){ /* triangle exclusive */
+        el.setAttribute("id","triangle"+triangleNum++);
+        el.setAttribute("geometry", scenes[patternDisplay.value][key].geometry);
+    } else if (key.includes("gradient")){
+        el.setAttribute("id", "gradient"+gradientNum++);
+        drawGradient(scenes[patternDisplay.value][key].childGeometry.width,scenes[patternDisplay.value][key].childGeometry.height,scenes[patternDisplay.value][key].numBars,hexToRgb(scenes[patternDisplay.value][key].material.color),hexToRgb(scenes[patternDisplay.value][key].color2.val),el);
+        el.setAttribute('color2',scenes[patternDisplay.value][key].color2)
+    } else if (key.includes("grille")){
+        el.setAttribute("id", "grille"+grilleNum++);
+        drawGrille(scenes[patternDisplay.value][key].childGeometry.width,scenes[patternDisplay.value][key].childGeometry.height,scenes[patternDisplay.value][key].numBars,scenes[patternDisplay.value][key].material.color,scenes[patternDisplay.value][key].color2.val,el);
+        el.setAttribute('color2',scenes[patternDisplay.value][key].color2)
+    } else if (key.includes("checkerboard")){
+        el.setAttribute("id", "checkerboard"+checkerboardNum++);
+        drawCheckerboard(scenes[patternDisplay.value][key].rows,scenes[patternDisplay.value][key].cols,scenes[patternDisplay.value][key].tileSize,scenes[patternDisplay.value][key].material.color,scenes[patternDisplay.value][key].color2.val,el);
+        el.setAttribute('color2',scenes[patternDisplay.value][key].color2)
+    }
+    /* sets stats */
+    el.setAttribute("angle", scenes[patternDisplay.value][key].angle);
+    el.setAttribute("advanced", scenes[patternDisplay.value][key].advanced);
+    el.setAttribute("position", {x: scenes[patternDisplay.value][key].position.x, y: scenes[patternDisplay.value][key].position.y, z: scenes[patternDisplay.value][key].position.z});
+    el.setAttribute("material", scenes[patternDisplay.value][key].material);
+    el.setAttribute("rotation", scenes[patternDisplay.value][key].rotation);
+    el.setAttribute("click-checker","");
+    numAdded++;
+    entityCanvas.appendChild(el); /* adds entity to scene */
+
+    /* adds option to dropdown */
+    var option = document.createElement("option");
+    option.text = el.getAttribute("id");
+    entitySelector.add(option);
+
+    els.push(el);/* adds entity to list of created entities */
+    pool.push(el.object3D);
+    setTimeout(() => {  selectNew(el) }, 100);
+}
+
 /* handles changes in selected pattern */
 var displayOrder = ['default'];
 function handlePatternSelect(snapshot){
@@ -84,13 +135,11 @@ function handlePatternSelect(snapshot){
 
 /* displays current pattern selected */
 function displayCurrentPattern(snapshot){
-    console.log(patternDisplay.selectedIndex)
     let len = snapshot.options.length;
     let i = 0;
     let sum = 0;
     while(i < len){
         curr = snapshot.options[i]
-        console.log(curr)
         if(curr.selected){
            /* display pattern */
             revertChanges()
@@ -145,6 +194,10 @@ function displayNext(direction){
 
 /* adds a pattern to pattern list */
 function addPattern(){
+    if(scenes[nameIn.value] != null){
+        alert('A pattern with this name already exists');
+        return;
+    }
     currName = ''
     if(Object.keys(names).indexOf(nameIn.value) == -1){
         names[nameIn.value] = 1
@@ -233,7 +286,7 @@ scene.addEventListener('exit-vr',function(){
   });
 
 function highlightSelection(ent){
-    if(!block){
+    if(block){
         return
     }
     newPos = {x: 0, y: 0, z: -50};

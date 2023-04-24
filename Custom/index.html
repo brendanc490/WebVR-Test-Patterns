@@ -3,7 +3,6 @@
         <link href="../style.css" rel="stylesheet">
         <script src="../lib/jquery-3.6.0.min.js" type="text/javascript"> </script>
         <script src="../lib/aframe.min.js" type="text/javascript"></script>
-        <script src="../lib/FileSaver.js" type="text/javascript"></script>
         <link rel="stylesheet" href="../lib/jquery.minicolors.css">
         <script src="../lib/jquery.minicolors.min.js" type="text/javascript"> </script>
         <script src="./ControllerComponents.js" type="text/javascript"></script>
@@ -241,6 +240,8 @@
                     </select></p>
                     <p style="text-align:center;" id="removeButton">
                         <button class="button reset" onclick="removeEntity()">Remove from Pattern</button></p>
+                    <p style="text-align:center;" id="duplicateButton">
+                        <button class="button add" onclick="duplicateEntity()">Duplicate Entity</button></p>
                     <p id="universalSettings"><b>Universal Entity Settings</b></p>
                     <p id="posIn">Position: (&alpha;: deg, y: m, r: distance m)<input type="text" class="input" id="z" value="0"> <input type="text" class="input" id="y" value="0"> <input type="text" class="input" id="x" value="0"></p>
                     <p id="rotIn">Rotation (deg):  <input type="text" class="input" id="rotationZ" value="0"><input type="text" class="input" id="rotationY" value="0"><input type="text" class="input" id="rotationX" value="0"></p>

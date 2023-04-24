@@ -20,8 +20,7 @@ function saveScene(){
     data['scenes'][patternDisplay.value] = scenes[[patternDisplay.value]]
     // add current date
     data['date'] = new Date().toLocaleString();
-    var blob = new Blob([JSON.stringify(data, null, '\t')], { type: "text/plain;charset=utf-8" });
-    saveAs(blob, patternDisplay.value+".JSON"); // save object as JSON file
+    download(data,patternDisplay.value+".JSON","text/plain;charset=utf-8")
 }
 
 /* saves package of scenes in JSON format */
@@ -46,6 +45,13 @@ function saveSelected(){
     data['textures']['uploadedTextureFormats'] = uploadedTextureFormat
     // add date
     data['date'] = new Date().toLocaleString();
-    var blob = new Blob([JSON.stringify(data, null, '\t')], { type: "text/plain;charset=utf-8" });
-    saveAs(blob, "pattern_package.JSON"); // save object as JSON file
+    download(data,"pattern_package.JSON","text/plain;charset=utf-8")
+}
+
+function download(content, fileName, contentType) {
+    var a = document.createElement("a");
+    var file = new Blob([JSON.stringify(content, null, '\t')], {type: contentType});
+    a.href = URL.createObjectURL(file);
+    a.download = fileName;
+    a.click();
 }
