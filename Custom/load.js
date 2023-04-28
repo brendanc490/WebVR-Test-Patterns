@@ -28,4 +28,4 @@ import dot_array from './patterns/dot array.JSON' assert { type: "json" };
 scenes['dot array'] = checkerboard_w['scenes']['dot array']
 
 import crosshair from './patterns/crosshair.JSON' assert { type: "json" };
-scenes['crosshair'] = checkerboard_w['scenes']['crosshair']
+scenes['crosshair'] = crosshair['scenes']['crosshair']
