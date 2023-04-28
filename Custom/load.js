@@ -25,7 +25,7 @@ import checkerboard_b from './patterns/checkerboard (b).JSON' assert { type: "js
 scenes['checkerboard (b)'] = checkerboard_b['scenes']['checkerboard (b)']
 
 import dot_array from './patterns/dot array.JSON' assert { type: "json" };
-scenes['dot array'] = checkerboard_w['scenes']['dot array']
+scenes['dot array'] = dot_array['scenes']['dot array']
 
 import crosshair from './patterns/crosshair.JSON' assert { type: "json" };
 scenes['crosshair'] = crosshair['scenes']['crosshair']
