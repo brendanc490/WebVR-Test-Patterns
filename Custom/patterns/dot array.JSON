@@ -1,0 +1,2588 @@
+{
+	"scenes": {
+		"dot array": {
+			"sky": {
+				"skyColor": "#000000"
+			},
+			"circle0": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 85.50503583141717,
+					"y": 0,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -20,
+					"z": 0
+				}
+			},
+			"circle1": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 85.50503583141717,
+					"y": 20,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -20,
+					"z": 0
+				}
+			},
+			"circle2": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 0,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 0,
+					"y": 40,
+					"z": -250
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				}
+			},
+			"circle3": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 85.50503583141717,
+					"y": 60,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -20,
+					"z": 0
+				}
+			},
+			"circle4": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -85.50503583141717,
+					"y": 80,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 20,
+					"z": 0
+				}
+			},
+			"circle5": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -43.412044416732584,
+					"y": 100,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 10,
+					"z": 0
+				}
+			},
+			"circle6": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 85.50503583141717,
+					"y": -20,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -20,
+					"z": 0
+				}
+			},
+			"circle7": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 0,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 0,
+					"y": -40,
+					"z": -250
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				}
+			},
+			"circle8": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 0,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 0,
+					"y": -60,
+					"z": -250
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				}
+			},
+			"circle9": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 0,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 0,
+					"y": -80,
+					"z": -250
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				}
+			},
+			"circle10": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 0,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 0,
+					"y": -100,
+					"z": -250
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				}
+			},
+			"circle11": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 85.50503583141717,
+					"y": 100,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -20,
+					"z": 0
+				}
+			},
+			"circle12": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -85.50503583141717,
+					"y": 100,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 20,
+					"z": 0
+				}
+			},
+			"circle13": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 124.99999999999999,
+					"y": 100,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -30,
+					"z": 0
+				}
+			},
+			"circle14": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 0,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 0,
+					"y": 100,
+					"z": -250
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				}
+			},
+			"circle15": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 43.412044416732584,
+					"y": 100,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -10,
+					"z": 0
+				}
+			},
+			"circle16": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -124.99999999999999,
+					"y": 100,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 30,
+					"z": 0
+				}
+			},
+			"circle17": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -43.412044416732584,
+					"y": 80,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 10,
+					"z": 0
+				}
+			},
+			"circle18": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -124.99999999999999,
+					"y": 80,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 30,
+					"z": 0
+				}
+			},
+			"circle19": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 85.50503583141717,
+					"y": 80,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -20,
+					"z": 0
+				}
+			},
+			"circle20": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 124.99999999999999,
+					"y": 80,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -30,
+					"z": 0
+				}
+			},
+			"circle21": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 0,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 0,
+					"y": 80,
+					"z": -250
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				}
+			},
+			"circle22": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 43.412044416732584,
+					"y": 80,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -10,
+					"z": 0
+				}
+			},
+			"circle23": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 124.99999999999999,
+					"y": 60,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -30,
+					"z": 0
+				}
+			},
+			"circle24": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -43.412044416732584,
+					"y": 60,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 10,
+					"z": 0
+				}
+			},
+			"circle25": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -85.50503583141717,
+					"y": 60,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 20,
+					"z": 0
+				}
+			},
+			"circle26": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -124.99999999999999,
+					"y": 60,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 30,
+					"z": 0
+				}
+			},
+			"circle27": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 0,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 0,
+					"y": 60,
+					"z": -250
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				}
+			},
+			"circle28": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 43.412044416732584,
+					"y": 60,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -10,
+					"z": 0
+				}
+			},
+			"circle29": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 43.412044416732584,
+					"y": 40,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -10,
+					"z": 0
+				}
+			},
+			"circle30": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -43.412044416732584,
+					"y": 40,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 10,
+					"z": 0
+				}
+			},
+			"circle31": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -85.50503583141717,
+					"y": 40,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 20,
+					"z": 0
+				}
+			},
+			"circle32": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 85.50503583141717,
+					"y": 40,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -20,
+					"z": 0
+				}
+			},
+			"circle33": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 124.99999999999999,
+					"y": 40,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -30,
+					"z": 0
+				}
+			},
+			"circle34": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -124.99999999999999,
+					"y": 40,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 30,
+					"z": 0
+				}
+			},
+			"circle35": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 124.99999999999999,
+					"y": 20,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -30,
+					"z": 0
+				}
+			},
+			"circle36": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -43.412044416732584,
+					"y": 20,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 10,
+					"z": 0
+				}
+			},
+			"circle37": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -85.50503583141717,
+					"y": 20,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 20,
+					"z": 0
+				}
+			},
+			"circle38": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -124.99999999999999,
+					"y": 20,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 30,
+					"z": 0
+				}
+			},
+			"circle39": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 0,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 0,
+					"y": 20,
+					"z": -250
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				}
+			},
+			"circle40": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 43.412044416732584,
+					"y": 20,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -10,
+					"z": 0
+				}
+			},
+			"circle41": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 124.99999999999999,
+					"y": 0,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -30,
+					"z": 0
+				}
+			},
+			"circle42": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -43.412044416732584,
+					"y": 0,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 10,
+					"z": 0
+				}
+			},
+			"circle43": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -85.50503583141717,
+					"y": 0,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 20,
+					"z": 0
+				}
+			},
+			"circle44": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -124.99999999999999,
+					"y": 0,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 30,
+					"z": 0
+				}
+			},
+			"circle45": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 0,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 0,
+					"y": 0,
+					"z": -250
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				}
+			},
+			"circle46": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 43.412044416732584,
+					"y": 0,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -10,
+					"z": 0
+				}
+			},
+			"circle47": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 124.99999999999999,
+					"y": -20,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -30,
+					"z": 0
+				}
+			},
+			"circle48": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -43.412044416732584,
+					"y": -20,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 10,
+					"z": 0
+				}
+			},
+			"circle49": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -85.50503583141717,
+					"y": -20,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 20,
+					"z": 0
+				}
+			},
+			"circle50": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -124.99999999999999,
+					"y": -20,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 30,
+					"z": 0
+				}
+			},
+			"circle51": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 0,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 0,
+					"y": -20,
+					"z": -250
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				}
+			},
+			"circle52": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 43.412044416732584,
+					"y": -20,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -10,
+					"z": 0
+				}
+			},
+			"circle53": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 43.412044416732584,
+					"y": -40,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -10,
+					"z": 0
+				}
+			},
+			"circle54": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 85.50503583141717,
+					"y": -40,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -20,
+					"z": 0
+				}
+			},
+			"circle55": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 124.99999999999999,
+					"y": -40,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -30,
+					"z": 0
+				}
+			},
+			"circle56": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -124.99999999999999,
+					"y": -40,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 30,
+					"z": 0
+				}
+			},
+			"circle57": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -85.50503583141717,
+					"y": -40,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 20,
+					"z": 0
+				}
+			},
+			"circle58": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -43.412044416732584,
+					"y": -40,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 10,
+					"z": 0
+				}
+			},
+			"circle59": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 43.412044416732584,
+					"y": -60,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -10,
+					"z": 0
+				}
+			},
+			"circle60": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 85.50503583141717,
+					"y": -60,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -20,
+					"z": 0
+				}
+			},
+			"circle61": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 124.99999999999999,
+					"y": -60,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -30,
+					"z": 0
+				}
+			},
+			"circle62": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -124.99999999999999,
+					"y": -60,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 30,
+					"z": 0
+				}
+			},
+			"circle63": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -85.50503583141717,
+					"y": -60,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 20,
+					"z": 0
+				}
+			},
+			"circle64": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -43.412044416732584,
+					"y": -60,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 10,
+					"z": 0
+				}
+			},
+			"circle65": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 43.412044416732584,
+					"y": -80,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -10,
+					"z": 0
+				}
+			},
+			"circle66": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 85.50503583141717,
+					"y": -80,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -20,
+					"z": 0
+				}
+			},
+			"circle67": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 124.99999999999999,
+					"y": -80,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -30,
+					"z": 0
+				}
+			},
+			"circle68": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -124.99999999999999,
+					"y": -80,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 30,
+					"z": 0
+				}
+			},
+			"circle69": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -85.50503583141717,
+					"y": -80,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 20,
+					"z": 0
+				}
+			},
+			"circle70": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -43.412044416732584,
+					"y": -80,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 10,
+					"z": 0
+				}
+			},
+			"circle71": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 43.412044416732584,
+					"y": -100,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -10,
+					"z": 0
+				}
+			},
+			"circle72": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 85.50503583141717,
+					"y": -100,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -20,
+					"z": 0
+				}
+			},
+			"circle73": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": -30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": 124.99999999999999,
+					"y": -100,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": -30,
+					"z": 0
+				}
+			},
+			"circle74": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 30,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -124.99999999999999,
+					"y": -100,
+					"z": -216.50635094610968
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 30,
+					"z": 0
+				}
+			},
+			"circle75": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 20,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -85.50503583141717,
+					"y": -100,
+					"z": -234.9231551964771
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 20,
+					"z": 0
+				}
+			},
+			"circle76": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 10,
+					"z": -250
+				},
+				"geometry": {
+					"primitive": "ring",
+					"radiusOuter": 3,
+					"radiusInner": 0
+				},
+				"fill": {
+					"val": 3,
+					"isFull": true
+				},
+				"position": {
+					"x": -43.412044416732584,
+					"y": -100,
+					"z": -246.201938253052
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 10,
+					"z": 0
+				}
+			}
+		}
+	},
+	"textures": {
+		"uploadedTextureFormats": {},
+		"textureValues": [
+			{
+				"val": "none",
+				"text": "none"
+			},
+			{
+				"val": "QC",
+				"text": "TG18-QC.2k_12b"
+			},
+			{
+				"val": "CH",
+				"text": "TG18-CH.2k"
+			},
+			{
+				"val": "MM1",
+				"text": "TG18-MM1.2k"
+			},
+			{
+				"val": "MM2",
+				"text": "TG18-MM2.2k"
+			},
+			{
+				"val": "sQC",
+				"text": "TG270sQC"
+			},
+			{
+				"val": "PQC",
+				"text": "TG18-PQC.2k_12b"
+			},
+			{
+				"val": "BR",
+				"text": "TG18-BR.2k_12b"
+			}
+		]
+	},
+	"date": "4/27/2023, 10:50:27 PM"
+}
