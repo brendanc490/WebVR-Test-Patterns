@@ -103,6 +103,7 @@ function duplicateEntity(){
     els.push(el);/* adds entity to list of created entities */
     pool.push(el.object3D);
     setTimeout(() => {  selectNew(el) }, 10);
+    updateJSON();
 }
 
 /* handles changes in selected pattern */
