@@ -4,6 +4,8 @@
 */
 
 /* selects a new entity for editing*/
+highlightBlock = false;
+
 function selectNew(clickedEntity){
     /* Check if entity was clicked on or selected via dropdown */
     if(clickedEntity != null){ /* if clicked */
@@ -18,7 +20,9 @@ function selectNew(clickedEntity){
     hideEditStats(); /* hide section briefly */
     updateStats(); /* update stats */
     toggleAddEdit(null); /* re-display section */
-    highlightSelection(selectedEntity);
+    if(!highlightBlock){
+        highlightSelection(selectedEntity);
+    }
 }
 
 /* Removes current entity */
@@ -290,6 +294,7 @@ function highlightSelection(ent){
     if(block){
         return
     }
+    highlightBlock = true;
     newPos = {x: 0, y: 0, z: -50};
     if(ent.id.includes("plane")){
         newGeom = {primitive: 'plane', width: ent.getAttribute('geometry').width*1.5, height: ent.getAttribute('geometry').height*1.5};
@@ -328,6 +333,7 @@ function highlightSelection(ent){
             }
             i--;
         }
+        highlightBlock = false;
     }, 1000);
 
 
