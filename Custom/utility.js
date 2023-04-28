@@ -325,10 +325,10 @@ function highlightSelection(ent){
     tmp.setAttribute("material", {shader: "flat", color: "#FFFF00"});
     ent.appendChild(tmp);
     setTimeout(() => {
-        let i = selectedEntity.children.length-1;
+        let i = ent.children.length-1;
         while (i >= 0) {
-            if(selectedEntity.children[i].getAttribute('id') == 'tmp'){
-                selectedEntity.children[i].parentNode.removeChild(selectedEntity.children[i]);
+            if(ent.children[i].getAttribute('id') == 'tmp'){
+                ent.children[i].parentNode.removeChild(ent.children[i]);
                 i--;
             }
             i--;
