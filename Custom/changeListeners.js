@@ -263,6 +263,16 @@ $("#tileSizeIn").change(function() {
     editEntity();
   });
 
+  /* If the textbox for size of tiles is changed */
+$("#circleSizeIn").change(function() {
+    editEntity();
+  });
+
+  /* If the textbox for size of tiles is changed */
+$("#spacingIn").change(function() {
+    editEntity();
+  });
+
 /* sends entity back or forward one layer */
 /*function sendBack(isback){
     let tmp = null;

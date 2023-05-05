@@ -47,6 +47,10 @@ function addEntity(){
         drawGrille(.025*250,.125*250,32,"#"+R+G+B,"#000000",el);
         el.setAttribute("material",{shader: "flat", color: "#"+R+G+B});
         el.setAttribute("color2",{val: "#000000"})
+    } else if ($("#entity :selected").text() == "dot array"){
+        el.setAttribute("id","dotarray"+dotarrayNum++);
+        drawDotArray(5,5,2,10,"#"+R+G+B,el);
+        el.setAttribute("material",{shader: "flat", color: "#"+R+G+B});
     }
     /* Set default universal stats */
 
@@ -202,6 +206,34 @@ function drawCheckerboard(rows,cols,size,color1,color2,parent){
     }
 }
 
+/* draws dot array */
+function drawDotArray(rows,cols,size,spacing,color1,parent){
+    /* draws evenly spaced squares */
+    var r = 0;
+    while (r < rows){
+        let elChildRow = document.createElement("a-entity");
+        elChildRow.setAttribute("id",parent.id+"-"+"row"+r);
+        var c = 0;
+        while (c < cols){
+
+            let elChildCol = document.createElement("a-entity");
+            elChildCol.setAttribute("id",parent.id+"-"+"col"+c);
+            if(spacing*cols/2-(spacing*c)-(spacing/2) == 0 && spacing*rows/2-(spacing*r)-(spacing/2) == 0){
+                elChildCol.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: size/3});
+            } else {
+                elChildCol.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: 0});
+            }
+            elChildCol.setAttribute("position",{x: spacing*cols/2-(spacing*c)-(spacing/2), y: spacing*rows/2-(spacing*r)-(spacing/2), z: 0});
+            elChildCol.setAttribute("material",{shader: "flat", color: color1});
+            elChildRow.appendChild(elChildCol)
+            c++;
+        }
+        parent.appendChild(elChildRow);
+        r++;
+    }
+    
+}
+
 /* updates the current json object for the active scene*/
 function updateJSON(){
     const jsonData = {};
@@ -215,8 +247,10 @@ function updateJSON(){
             jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, widthReal: (element.children.length == 0 ? element.components.geometry.attrValue.width : element.children[2].components.geometry.attrValue.width),fill: element.components.fill.attrValue, geometry: element.components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         } else if(element.id.includes("circle")){
             jsonData[element.id]={advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, geometry: element.components.geometry.attrValue, fill: element.components.fill.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
-        } else {
+        } else if(element.id.includes("triangle")){
             jsonData[element.id]={advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, geometry: element.components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+        } else if(element.id.includes("dotarray")){
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, rows: element.children.length, cols: element.children[0].children.length, circleSize: element.children[0].children[0].components.geometry.attrValue.radiusOuter, spacing: Math.abs(element.children[0].children[1].components.position.attrValue.x-element.children[0].children[0].components.position.attrValue.x), position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         }});
         scenes[patternDisplay.value] = jsonData
 }

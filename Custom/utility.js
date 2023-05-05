@@ -4,8 +4,6 @@
 */
 
 /* selects a new entity for editing*/
-highlightBlock = false;
-
 function selectNew(clickedEntity){
     /* Check if entity was clicked on or selected via dropdown */
     if(clickedEntity != null){ /* if clicked */
@@ -20,9 +18,7 @@ function selectNew(clickedEntity){
     hideEditStats(); /* hide section briefly */
     updateStats(); /* update stats */
     toggleAddEdit(null); /* re-display section */
-    if(!highlightBlock){
-        highlightSelection(selectedEntity);
-    }
+    highlightSelection(selectedEntity);
 }
 
 /* Removes current entity */
@@ -41,6 +37,8 @@ function removeEntity(){
         gradientNum--;
     } else if(selectedEntity.id.includes("grille")){
         grilleNum--;
+    } else if(selectedEntity.id.includes("dotarray")){
+        dotarrayNum--;
     }
     entityCanvas.removeChild(selectedEntity);
     for (var i=0; i<entitySelector.length; i++) {
@@ -88,6 +86,10 @@ function duplicateEntity(){
         el.setAttribute("id", "checkerboard"+checkerboardNum++);
         drawCheckerboard(scenes[patternDisplay.value][key].rows,scenes[patternDisplay.value][key].cols,scenes[patternDisplay.value][key].tileSize,scenes[patternDisplay.value][key].material.color,scenes[patternDisplay.value][key].color2.val,el);
         el.setAttribute('color2',scenes[patternDisplay.value][key].color2)
+    } else if (key.includes("checkerboard")){
+        el.setAttribute("id", "dotarray"+checkerboardNum++);
+        drawDotArray(scenes[patternDisplay.value][key].rows,scenes[patternDisplay.value][key].cols,scenes[patternDisplay.value][key].circleSize,scenes[patternDisplay.value][key].spacing,scenes[patternDisplay.value][key].material.color,el);
+        el.setAttribute('color2',scenes[patternDisplay.value][key].color2)
     }
     /* sets stats */
     el.setAttribute("angle", scenes[patternDisplay.value][key].angle);
@@ -106,8 +108,7 @@ function duplicateEntity(){
 
     els.push(el);/* adds entity to list of created entities */
     pool.push(el.object3D);
-    setTimeout(() => {  selectNew(el) }, 10);
-    updateJSON();
+    setTimeout(() => {  selectNew(el) }, 100);
 }
 
 /* handles changes in selected pattern */
@@ -162,6 +163,7 @@ function resetScene(){
     gradientNum = 0;
     checkerboardNum = 0;
     grilleNum = 0;
+    dotarrayNum = 0;
     while(entityCanvas.childElementCount != 0){
         entityCanvas.removeChild(entityCanvas.children[0])
     } 
@@ -250,6 +252,7 @@ function revertChanges(){
         gradientNum = 0; /* number of gradients created */
         checkerboardNum = 0; /* number of checkerboards created */
         grilleNum = 0;
+        dotarrayNum = 0;
         textureNum = 0;
         numAdded = 0;
 }
@@ -294,8 +297,7 @@ function highlightSelection(ent){
     if(block){
         return
     }
-    highlightBlock = true;
-    newPos = {x: 0, y: 0, z: -50};
+    newPos = {x: 0, y: 0, z: -5};
     if(ent.id.includes("plane")){
         newGeom = {primitive: 'plane', width: ent.getAttribute('geometry').width*1.5, height: ent.getAttribute('geometry').height*1.5};
     } else if(selectedEntity.id.includes("circle")){
@@ -317,6 +319,11 @@ function highlightSelection(ent){
         let height = selectedEntity.children[0].components.geometry.attrValue.height;
         let numBars = selectedEntity.children.length;
         newGeom = {primitive: 'plane', width: width*numBars*1.25, height: height*1.5};
+    } else if(selectedEntity.id.includes("dotarray")){
+        rowNum = ent.children.length;
+        colNum = ent.children[0].children.length;
+        //tileSizeNum = ent.children[0].children[0].components.geometry.attrValue.width;
+        newGeom = {primitive: 'ring', radiusOuter: ent.children[0].children[0].components.geometry.attrValue.radiusOuter*1.5, radiusInner: 0};
     }
     tmp = document.createElement('a-entity');
     tmp.setAttribute('id','tmp')
@@ -325,15 +332,14 @@ function highlightSelection(ent){
     tmp.setAttribute("material", {shader: "flat", color: "#FFFF00"});
     ent.appendChild(tmp);
     setTimeout(() => {
-        let i = ent.children.length-1;
+        let i = selectedEntity.children.length-1;
         while (i >= 0) {
-            if(ent.children[i].getAttribute('id') == 'tmp'){
-                ent.children[i].parentNode.removeChild(ent.children[i]);
+            if(selectedEntity.children[i].getAttribute('id') == 'tmp'){
+                selectedEntity.children[i].parentNode.removeChild(selectedEntity.children[i]);
                 i--;
             }
             i--;
         }
-        highlightBlock = false;
     }, 1000);
 
 

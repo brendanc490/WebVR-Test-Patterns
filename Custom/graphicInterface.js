@@ -38,6 +38,8 @@ function hideEditStats(){
     uploadTextureIn.style.display = "none";
     fillIn.style.display = "none";
     advanced.style.display = "none";
+    circleSize.style.display = "none";
+    spacing.style.display = "none";
 }
  var flag = false;
 /* updates values in edit section */
@@ -135,18 +137,23 @@ function updateStats(){
     } else if(selectedEntity.getAttribute("id").includes("gradient")){ /* gradient exclusives */
         width.value = (selectedEntity.children[0].components.geometry.attrValue.width).toFixed(3);
         height.value = (selectedEntity.children[0].components.geometry.attrValue.height).toFixed(3);
-        numBarsIn.value = (selectedEntity.children.length).toFixed(3);
+        numBarsIn.value = (selectedEntity.children.length);
         $('#color2').minicolors("value",entity.components.color2.attrValue.val);
     } else if(selectedEntity.getAttribute("id").includes("checkerboard")){
-        rowsIn.value = (selectedEntity.children.length).toFixed(3);
-        colsIn.value = (selectedEntity.children[0].children.length).toFixed(3);
+        rowsIn.value = (selectedEntity.children.length);
+        colsIn.value = (selectedEntity.children[0].children.length);
         tileSizeIn.value = (selectedEntity.children[0].children[0].components.geometry.attrValue.width).toFixed(3);
         $('#color2').minicolors("value",entity.components.color2.attrValue.val);
     } else if(selectedEntity.getAttribute("id").includes("grille")){
         width.value = (selectedEntity.children[0].components.geometry.attrValue.width).toFixed(3);
         height.value = (selectedEntity.children[0].components.geometry.attrValue.height).toFixed(3);
-        numBarsIn.value = (selectedEntity.children.length).toFixed(3);
+        numBarsIn.value = (selectedEntity.children.length);
         $('#color2').minicolors("value",entity.components.color2.attrValue.val);
+    } else if(selectedEntity.getAttribute("id").includes("dotarray")){
+        rowsIn.value = (selectedEntity.children.length);
+        colsIn.value = (selectedEntity.children[0].children.length);
+        circleSizeIn.value = (selectedEntity.children[0].children[0].components.geometry.attrValue.radiusOuter).toFixed(3);
+        spacingIn.value = Math.abs(selectedEntity.children[0].children[1].components.position.attrValue.x-selectedEntity.children[0].children[0].components.position.attrValue.x).toFixed(3);
     }
 }
 
@@ -243,6 +250,11 @@ function toggleAddEdit(swap){
             rows.style.display = "block";
             tileSize.style.display = "block";
             colIn2.style.display = "block";
+        } else if (selectedEntity.getAttribute("id").includes("dotarray")){
+            cols.style.display = "block";
+            rows.style.display = "block";
+            circleSize.style.display = "block";
+            spacing.style.display = "block";
         }
     } else { /* if add */
         hideEditStats(); /* hide edit containers */

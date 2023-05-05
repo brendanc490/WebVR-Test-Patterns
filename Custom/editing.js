@@ -154,8 +154,8 @@ function editEntity(){
         } else if(parseFloat($("#width").val()) < 0){
             alert("Please enter a valid width ( >= 0 )");
             return;
-        } else if(parseFloat($("#numBarsIn").val()) < 0){
-            alert("Please enter a valid number of bars ( >= 0 )");
+        } else if(parseFloat($("#numBarsIn").val()) < 0 || parseFloat($("#numBarsIn").val()) % 1 != 0){
+            alert("Please enter a valid number of bars ( >= 0 and a whole number )");
             return;
         }
 
@@ -187,14 +187,14 @@ function editEntity(){
             alert("Please enter a valid size");
             return;
         }
-        if(parseFloat($("#rowsIn").val()) < 0){
-            alert("Please enter a valid height ( >= 0 )");
+        if(parseFloat($("#rowsIn").val()) < 0 || parseFloat($("#rowsIn").val()) % 1 != 0){
+            alert("Please enter a valid number of rows ( >= 0 and a whole number)");
             return;
-        } else if(parseFloat($("#colsIn").val()) < 0){
-            alert("Please enter a valid width ( >= 0 )");
+        } else if(parseFloat($("#colsIn").val()) < 0 || parseFloat($("#colsIn").val()) % 1 != 0){
+            alert("Please enter a valid number of cols ( >= 0 and a whole number)");
             return;
         } else if(parseFloat($("#tileSizeIn").val()) < 0){
-            alert("Please enter a valid number of bars ( >= 0 )");
+            alert("Please enter a tile size ( >= 0 )");
             return;
         }
         selectedEntity.setAttribute('color2',{val: $("#color2").val()})
@@ -206,6 +206,45 @@ function editEntity(){
         }
         // draw new boxes
         drawCheckerboard(parseFloat($("#rowsIn").val()),parseFloat($("#colsIn").val()),parseFloat($("#tileSizeIn").val()),$("#color").val(),$("#color2").val(),selectedEntity);
+    } else if (selectedEntity.getAttribute("id").includes("dotarray")){ /* checkerboard only changes */
+    // check for valid inputs
+    if(isNaN(parseFloat($("#rowsIn").val()))){
+        alert("Please enter a valid number of rows");
+        return;
+    }
+    if(isNaN(parseFloat($("#colsIn").val()))){
+        alert("Please enter a valid number of columns");
+        return;
+    }
+    if(isNaN(parseFloat($("#circleSizeIn").val()))){
+        alert("Please enter a valid size");
+        return;
+    }
+    if(isNaN(parseFloat($("#spacingIn").val()))){
+        alert("Please enter a spacing");
+        return;
+    }
+    if(parseFloat($("#rowsIn").val()) < 0 || parseFloat($("#rowsIn").val()) % 1 != 0){
+        alert("Please enter a valid number of rows ( >= 0 and a whole number)");
+        return;
+    } else if(parseFloat($("#colsIn").val()) < 0 || parseFloat($("#colsIn").val()) % 1 != 0){
+        alert("Please enter a valid number of cols ( >= 0 and a whole number)");
+        return;
+    } else if(parseFloat($("#circleSizeIn").val()) < 0){
+        alert("Please enter a circle size ( >= 0 )");
+        return;
+    } else if(parseFloat($("#spacingIn").val()) < 0){
+        alert("Please enter a valid spacing ( >= 0 )");
+        return;
+    }
+    // remove boxes
+    let i = selectedEntity.children.length-1;
+    while (i >= 0) {
+        selectedEntity.children[i].parentNode.removeChild(selectedEntity.children[i]);
+        i--;
+    }
+    // draw new boxes
+    drawDotArray(parseFloat($("#rowsIn").val()),parseFloat($("#colsIn").val()),parseFloat($("#circleSizeIn").val()),parseFloat($("#spacingIn").val()),$("#color").val(),selectedEntity);
     } 
     updateJSON() // update the json file of current scene
 }

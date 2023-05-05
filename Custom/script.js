@@ -123,6 +123,12 @@ const colsIn = document.getElementById("colsIn"); /* columns input */
 const tileSize = document.getElementById("tileSize"); /* tile size container paragraph */
 const tileSizeIn = document.getElementById("tileSizeIn"); /* tile size input */
 
+/* dotarray attributes */
+const circleSize = document.getElementById("circleSize"); /* circle size container paragraph */
+const circleSizeIn = document.getElementById("circleSizeIn"); /* circle size input */
+const spacing = document.getElementById("spacing"); /* circle size container paragraph */
+const spacingIn = document.getElementById("spacingIn"); /* circle size input */
+
 /* Send back/forward */
 /*const sendButton = document.getElementById("sendButton");*/
 
@@ -156,6 +162,7 @@ var triangleNum = 0; /* number of triangles created */
 var gradientNum = 0; /* number of gradients created */
 var checkerboardNum = 0; /* number of checkerboards created */
 var grilleNum = 0;
+var dotarrayNum = 0;
 var textureNum = 0;
 var numAdded = 0; /* total entities added */
 

@@ -174,7 +174,7 @@
                             onclick="handlePatternSelect(this)"/>
                             <label for="grille"> grille</label>
                         </p>
-                        
+                         
                         <p>
                             <input type="checkbox" id="crosshair"
                             onclick="handlePatternSelect(this)"/>
@@ -241,6 +241,7 @@
                             <option value="gradient">gradient</option>
                             <option value="checkerboard">checkerboard</option>
                             <option value="grille">grille</option>
+                            <option value="dotarray">dot array</option>
                             
                         </select>
                     </p>
@@ -302,8 +303,12 @@
                     <p id="vc">Vertex C: (x: m, y: m)<input type="text" class="input" id="vcy" value="-0.25"> <input type="text" class="input" id="vcx" value="0.25"></p>
                     <p id="numBars">Number of bars: <input type="text" class="input" id="numBarsIn" value="32"></p>
                     <p id="tileSize">Width/Height of square: <input type="text" class="input" id="tileSizeIn" value=".1"></p>
+                    <p id="circleSize">Radius of circles: <input type="text" class="input" id="circleSizeIn" value=".1"></p>
+                    <p id="spacing">Spacing of circles: <input type="text" class="input" id="spacingIn" value=".1"></p>
                     <p id="rows">Number of rows: <input type="text" class="input" id="rowsIn" value="16"></p>
                     <p id="cols">Number of columns: <input type="text" class="input" id="colsIn" value="16"></p>
+
+                    
                     <!--<p style="text-align:center;" id="sendButton">
                         <button class="button add" onclick="sendBack(true)">Send back</button><button class="button add" onclick="sendBack(false)">Send forward</button>
                     </p>-->
