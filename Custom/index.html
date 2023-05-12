@@ -97,6 +97,11 @@
                 val: {type: 'string', default: "#000000"}
             },
         });
+        AFRAME.registerComponent('arrayRadius', {
+            schema: {
+                val: {type: 'float', default: 30}
+            },
+        });
         </script>
     </head>
 
@@ -188,6 +193,12 @@
                         </p>
                         
                         <p>
+                            <input type="checkbox" id="circular dot array"
+                            onclick="handlePatternSelect(this)"/>
+                            <label for="circular dot array">circular dot array</label>
+                        </p>
+
+                        <p>
                             <input type="checkbox" id="dot array"
                             onclick="handlePatternSelect(this)"/>
                             <label for="dot array"> dot array</label>
@@ -203,6 +214,23 @@
                             <input type="checkbox" id="checkerboard (b)"
                             onclick="handlePatternSelect(this)"/>
                             <label for="checkerboard (b)"> checkerboard (b)</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" id="ring_w5"
+                            onclick="handlePatternSelect(this)"/>
+                            <label for="ring_w5"> ring_w5</label>
+                        </p>
+
+                        <p>
+                            <input type="checkbox" id="ring_w10"
+                            onclick="handlePatternSelect(this)"/>
+                            <label for="ring_w10"> ring_w10</label>
+                        </p>
+
+                        <p>
+                            <input type="checkbox" id="ring_w20"
+                            onclick="handlePatternSelect(this)"/>
+                            <label for="ring_w20"> ring_w20</label>
                         </p>
 
                         </div>
@@ -242,7 +270,7 @@
                             <option value="checkerboard">checkerboard</option>
                             <option value="grille">grille</option>
                             <option value="dotarray">dot array</option>
-                            
+                            <option value="dotcircle">circlular dot array</option>
                         </select>
                     </p>
                     <p style="text-align:center;" id="addButton">
@@ -303,10 +331,12 @@
                     <p id="vc">Vertex C: (x: m, y: m)<input type="text" class="input" id="vcy" value="-0.25"> <input type="text" class="input" id="vcx" value="0.25"></p>
                     <p id="numBars">Number of bars: <input type="text" class="input" id="numBarsIn" value="32"></p>
                     <p id="tileSize">Width/Height of square: <input type="text" class="input" id="tileSizeIn" value=".1"></p>
-                    <p id="circleSize">Radius of circles: <input type="text" class="input" id="circleSizeIn" value=".1"></p>
-                    <p id="spacing">Spacing of circles: <input type="text" class="input" id="spacingIn" value=".1"></p>
+                    <p id="circleSize">Radius of dots: <input type="text" class="input" id="circleSizeIn" value=".1"></p>
+                    <p id="spacing">Spacing of dots: <input type="text" class="input" id="spacingIn" value=".1"></p>
                     <p id="rows">Number of rows: <input type="text" class="input" id="rowsIn" value="16"></p>
                     <p id="cols">Number of columns: <input type="text" class="input" id="colsIn" value="16"></p>
+                    <p id="numDots">Number of dots: <input type="text" class="input" id="numDotsIn" value="16"></p>
+                    <p id="arrayRadius">Radius of circle array: <input type="text" class="input" id="arrayRadiusIn" value=".1"></p>
 
                     
                     <!--<p style="text-align:center;" id="sendButton">

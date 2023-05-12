@@ -128,6 +128,10 @@ const circleSize = document.getElementById("circleSize"); /* circle size contain
 const circleSizeIn = document.getElementById("circleSizeIn"); /* circle size input */
 const spacing = document.getElementById("spacing"); /* circle size container paragraph */
 const spacingIn = document.getElementById("spacingIn"); /* circle size input */
+const numDots = document.getElementById("numDots"); /* circle size container paragraph */
+const numDotsIn = document.getElementById("numDotsIn"); /* circle size input */
+const arrayRadius = document.getElementById("arrayRadius"); /* circle size container paragraph */
+const arrayRadiusIn = document.getElementById("arrayRadiusIn"); /* circle size input */
 
 /* Send back/forward */
 /*const sendButton = document.getElementById("sendButton");*/
@@ -163,6 +167,7 @@ var gradientNum = 0; /* number of gradients created */
 var checkerboardNum = 0; /* number of checkerboards created */
 var grilleNum = 0;
 var dotarrayNum = 0;
+var circularDotarrayNum = 0;
 var textureNum = 0;
 var numAdded = 0; /* total entities added */
 

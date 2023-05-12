@@ -40,6 +40,8 @@ function hideEditStats(){
     advanced.style.display = "none";
     circleSize.style.display = "none";
     spacing.style.display = "none";
+    numDots.style.display = "none";
+    arrayRadius.style.display = "none";
 }
  var flag = false;
 /* updates values in edit section */
@@ -149,12 +151,17 @@ function updateStats(){
         height.value = (selectedEntity.children[0].components.geometry.attrValue.height).toFixed(3);
         numBarsIn.value = (selectedEntity.children.length);
         $('#color2').minicolors("value",entity.components.color2.attrValue.val);
+    } else if(selectedEntity.getAttribute("id").includes("circularDotarray")){
+        numDotsIn.value = (selectedEntity.children.length);
+        arrayRadiusIn.value = selectedEntity.components.arrayRadius.attrValue.val;
+        circleSizeIn.value = (selectedEntity.children[0].components.geometry.attrValue.radiusOuter).toFixed(3);
     } else if(selectedEntity.getAttribute("id").includes("dotarray")){
         rowsIn.value = (selectedEntity.children.length);
         colsIn.value = (selectedEntity.children[0].children.length);
         circleSizeIn.value = (selectedEntity.children[0].children[0].components.geometry.attrValue.radiusOuter).toFixed(3);
         spacingIn.value = Math.abs(selectedEntity.children[0].children[1].components.position.attrValue.x-selectedEntity.children[0].children[0].components.position.attrValue.x).toFixed(3);
     }
+
 }
 
 /* switches between add or edit mode or refreshes current mode display */
@@ -250,6 +257,10 @@ function toggleAddEdit(swap){
             rows.style.display = "block";
             tileSize.style.display = "block";
             colIn2.style.display = "block";
+        } else if (selectedEntity.getAttribute("id").includes("circularDotarray")){
+            numDots.style.display = "block";
+            arrayRadius.style.display = "block";
+            circleSize.style.display = "block";
         } else if (selectedEntity.getAttribute("id").includes("dotarray")){
             cols.style.display = "block";
             rows.style.display = "block";

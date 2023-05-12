@@ -187,6 +187,10 @@ function addEntitiesFromScene(scene){
                 el.setAttribute("id", "checkerboard"+checkerboardNum++);
                 drawCheckerboard(scene[key].rows,scene[key].cols,scene[key].tileSize,scene[key].material.color,scene[key].color2.val,el);
                 el.setAttribute('color2',scene[key].color2)
+            } else if (key.includes("circularDotarray")){
+                el.setAttribute("id", "circularDotarray"+circularDotarrayNum++);
+                drawCircularDotArray(scene[key].arrayRadius.val,scene[key].dots,scene[key].circleSize,scene[key].material.color,el);
+                el.setAttribute("arrayRadius",scene[key].arrayRadius);
             } else if (key.includes("dotarray")){
                 el.setAttribute("id", "dotarray"+dotarrayNum++);
                 drawDotArray(scene[key].rows,scene[key].cols,scene[key].circleSize,scene[key].spacing,scene[key].material.color,el);

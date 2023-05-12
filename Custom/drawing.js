@@ -51,6 +51,11 @@ function addEntity(){
         el.setAttribute("id","dotarray"+dotarrayNum++);
         drawDotArray(5,5,2,10,"#"+R+G+B,el);
         el.setAttribute("material",{shader: "flat", color: "#"+R+G+B});
+    }  else if ($("#entity :selected").text() == "circlular dot array"){
+        el.setAttribute("id","circularDotarray"+circularDotarrayNum++);
+        drawCircularDotArray(30,4,2,"#"+R+G+B,el);
+        el.setAttribute("material",{shader: "flat", color: "#"+R+G+B});
+        el.setAttribute("arrayRadius",{val: 30});
     }
     /* Set default universal stats */
 
@@ -234,6 +239,22 @@ function drawDotArray(rows,cols,size,spacing,color1,parent){
     
 }
 
+function drawCircularDotArray(radius,dots,size,color1,parent){
+    let i = 1;
+    while(i <= dots){
+        let elChild = document.createElement("a-entity");
+        elChild.setAttribute("id",parent.id+"-"+i);
+        let theta = i*(2*Math.PI)/dots;
+        x = radius*Math.cos(theta);
+        y = radius*Math.sin(theta);
+        elChild.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: 0});
+        elChild.setAttribute("position",{x: x, y: y, z: 0});
+        elChild.setAttribute("material",{shader: "flat", color: color1});
+        parent.appendChild(elChild)
+        i++;
+    }
+}
+
 /* updates the current json object for the active scene*/
 function updateJSON(){
     const jsonData = {};
@@ -249,6 +270,8 @@ function updateJSON(){
             jsonData[element.id]={advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, geometry: element.components.geometry.attrValue, fill: element.components.fill.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         } else if(element.id.includes("triangle")){
             jsonData[element.id]={advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, geometry: element.components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+        } else if(element.id.includes("circularDotarray")){
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, dots: element.children.length, arrayRadius: element.components.arrayRadius.attrValue, circleSize: element.children[0].components.geometry.attrValue.radiusOuter, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         } else if(element.id.includes("dotarray")){
             jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, rows: element.children.length, cols: element.children[0].children.length, circleSize: element.children[0].children[0].components.geometry.attrValue.radiusOuter, spacing: Math.abs(element.children[0].children[1].components.position.attrValue.x-element.children[0].children[0].components.position.attrValue.x), position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         }});
