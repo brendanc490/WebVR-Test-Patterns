@@ -132,6 +132,19 @@ const numDots = document.getElementById("numDots"); /* circle size container par
 const numDotsIn = document.getElementById("numDotsIn"); /* circle size input */
 const arrayRadius = document.getElementById("arrayRadius"); /* circle size container paragraph */
 const arrayRadiusIn = document.getElementById("arrayRadiusIn"); /* circle size input */
+const numCircles = document.getElementById("numCircles"); /* circle size container paragraph */
+const numCirclesIn = document.getElementById("numCirclesIn"); /* circle size input */
+const arraySpacing = document.getElementById("arraySpacing"); /* circle size container paragraph */
+const arraySpacingIn = document.getElementById("arraySpacingIn"); /* circle size input */
+
+/* bullseye attributes */
+const numRings = document.getElementById("numRings"); /* circle size container paragraph */
+const numRingsIn = document.getElementById("numRingsIn"); /* circle size input */
+const ringThickness = document.getElementById("ringThickness"); /* circle size container paragraph */
+const ringThicknessIn = document.getElementById("ringThicknessIn"); /* circle size input */
+const ringSpacing = document.getElementById("ringSpacing"); /* circle size container paragraph */
+const ringSpacingIn = document.getElementById("ringSpacingIn"); /* circle size input */
+
 
 /* Send back/forward */
 /*const sendButton = document.getElementById("sendButton");*/
@@ -168,6 +181,7 @@ var checkerboardNum = 0; /* number of checkerboards created */
 var grilleNum = 0;
 var dotarrayNum = 0;
 var circularDotarrayNum = 0;
+var bullseyeNum = 0;
 var textureNum = 0;
 var numAdded = 0; /* total entities added */
 

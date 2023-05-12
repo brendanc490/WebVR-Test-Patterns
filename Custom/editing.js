@@ -187,11 +187,11 @@ function editEntity(){
             alert("Please enter a valid size");
             return;
         }
-        if(parseFloat($("#rowsIn").val()) < 0 || parseFloat($("#rowsIn").val()) % 1 != 0){
-            alert("Please enter a valid number of rows ( >= 0 and a whole number)");
+        if(parseFloat($("#rowsIn").val()) <= 0 || parseFloat($("#rowsIn").val()) % 1 != 0){
+            alert("Please enter a valid number of rows ( > 0 and a whole number)");
             return;
-        } else if(parseFloat($("#colsIn").val()) < 0 || parseFloat($("#colsIn").val()) % 1 != 0){
-            alert("Please enter a valid number of cols ( >= 0 and a whole number)");
+        } else if(parseFloat($("#colsIn").val()) <= 0 || parseFloat($("#colsIn").val()) % 1 != 0){
+            alert("Please enter a valid number of cols ( > 0 and a whole number)");
             return;
         } else if(parseFloat($("#tileSizeIn").val()) < 0){
             alert("Please enter a tile size ( >= 0 )");
@@ -212,22 +212,29 @@ function editEntity(){
             alert("Please enter a valid number of dots");
             return;
         }
+        if(isNaN(parseFloat($("#numCirclesIn").val()))){
+            alert("Please enter a valid number of circles");
+            return;
+        }
         if(isNaN(parseFloat($("#circleSizeIn").val()))){
             alert("Please enter a valid size");
             return;
         }
-        if(isNaN(parseFloat($("#arrayRadiusIn").val()))){
-            alert("Please enter a valid radius");
+        if(isNaN(parseFloat($("#arraySpacingIn").val()))){
+            alert("Please enter a valid array spacing");
             return;
         }
         if(parseFloat($("#numDotsIn").val()) < 0 || parseFloat($("#numDotsIn").val()) % 1 != 0){
             alert("Please enter a valid number of dots ( >= 0 and a whole number)");
             return;
+        } else if(parseFloat($("#numCirclesIn").val()) <= 0 || parseFloat($("#numCirclesIn").val()) % 1 != 0){
+            alert("Please enter a valid number of circles ( > 0 and a whole number)");
+            return;
         } else if(parseFloat($("#circleSizeIn").val()) < 0){
             alert("Please enter a circle size ( >= 0 )");
             return;
-        } else if(parseFloat($("#arrayRadiusIn").val()) < 0){
-            alert("Please enter a valid array radius ( >= 0 )");
+        } else if(parseFloat($("#arraySpacingIn").val()) < 0){
+            alert("Please enter a valid array spacing ( >= 0 )");
             return;
         }
         // remove boxes
@@ -237,8 +244,8 @@ function editEntity(){
             i--;
         }
         // draw new boxes
-        drawCircularDotArray(parseFloat($("#arrayRadiusIn").val()),parseFloat($("#numDotsIn").val()),parseFloat($("#circleSizeIn").val()),$("#color").val(),selectedEntity);
-        selectedEntity.setAttribute('arrayRadius',{val: parseFloat($("#arrayRadiusIn").val())});
+        drawCircularDotArray(parseFloat($("#arraySpacingIn").val()),parseFloat($("#numCirclesIn").val()),parseFloat($("#numDotsIn").val()),parseFloat($("#circleSizeIn").val()),$("#color").val(),selectedEntity);
+        selectedEntity.setAttribute('arraySpacing',{val: parseFloat($("#arraySpacingIn").val())});
     } else if (selectedEntity.getAttribute("id").includes("dotarray")){ /* checkerboard only changes */
         // check for valid inputs
         if(isNaN(parseFloat($("#rowsIn").val()))){
@@ -257,11 +264,11 @@ function editEntity(){
             alert("Please enter a spacing");
             return;
         }
-        if(parseFloat($("#rowsIn").val()) < 0 || parseFloat($("#rowsIn").val()) % 1 != 0){
-            alert("Please enter a valid number of rows ( >= 0 and a whole number)");
+        if(parseFloat($("#rowsIn").val()) <= 0 || parseFloat($("#rowsIn").val()) % 1 != 0){
+            alert("Please enter a valid number of rows ( > 0 and a whole number)");
             return;
-        } else if(parseFloat($("#colsIn").val()) < 0 || parseFloat($("#colsIn").val()) % 1 != 0){
-            alert("Please enter a valid number of cols ( >= 0 and a whole number)");
+        } else if(parseFloat($("#colsIn").val()) <= 0 || parseFloat($("#colsIn").val()) % 1 != 0){
+            alert("Please enter a valid number of cols ( > 0 and a whole number)");
             return;
         } else if(parseFloat($("#circleSizeIn").val()) < 0){
             alert("Please enter a circle size ( >= 0 )");
@@ -278,6 +285,40 @@ function editEntity(){
         }
         // draw new boxes
         drawDotArray(parseFloat($("#rowsIn").val()),parseFloat($("#colsIn").val()),parseFloat($("#circleSizeIn").val()),parseFloat($("#spacingIn").val()),$("#color").val(),selectedEntity);
+        selectedEntity.setAttribute('arraySpacing',{val: parseFloat($("#spacingIn").val())});
+    }  else if (selectedEntity.getAttribute("id").includes("bullseye")){ /* checkerboard only changes */
+        // check for valid inputs
+        if(isNaN(parseFloat($("#numRingsIn").val()))){
+            alert("Please enter a valid number of rings");
+            return;
+        }
+        if(isNaN(parseFloat($("#ringThicknessIn").val()))){
+            alert("Please enter a valid ring thickness");
+            return;
+        }
+        if(isNaN(parseFloat($("#ringSpacingIn").val()))){
+            alert("Please enter a valid ring spacing");
+            return;
+        }
+        if(parseFloat($("#numRingsIn").val()) <= 0 || parseFloat($("#numRingsIn").val()) % 1 != 0){
+            alert("Please enter a valid number of rings ( > 0 and a whole number)");
+            return;
+        } else if(parseFloat($("#ringThicknessIn").val()) < 0){
+            alert("Please enter a ring thickness ( >= 0 )");
+            return;
+        } else if(parseFloat($("#ringSpacingIn").val()) < 0){
+            alert("Please enter a valid ring spacing ( >= 0 )");
+            return;
+        }
+        // remove boxes
+        let i = selectedEntity.children.length-1;
+        while (i >= 0) {
+            selectedEntity.children[i].parentNode.removeChild(selectedEntity.children[i]);
+            i--;
+        }
+        // draw new boxes
+        drawBullseye(parseFloat($("#ringSpacingIn").val()),parseFloat($("#ringThicknessIn").val()),parseFloat($("#numRingsIn").val()),$("#color").val(),selectedEntity);
+        selectedEntity.setAttribute('ringSpacing',{val: parseFloat($("#ringSpacingIn").val())});
     } 
     updateJSON() // update the json file of current scene
 }

@@ -1,27 +1,26 @@
 {
 	"scenes": {
-		"circularDotArray": {
+		"bullseye": {
 			"sky": {
 				"skyColor": "#000000"
 			},
-			"circularDotarray0": {
+			"bullseye0": {
 				"advanced": {
 					"val": false
 				},
 				"angle": {
-					"x": 0,
+					"x": 3.228,
 					"z": -250
 				},
-				"circles": 10,
-				"dots": 20,
-				"arraySpacing": {
-					"val": 15
+				"numRings": 30,
+				"ringThickness": 2,
+				"ringSpacing": {
+					"val": 2
 				},
-				"circleSize": 1.5,
 				"position": {
-					"x": 0,
-					"y": 0,
-					"z": -250
+					"x": -14.07735712807152,
+					"y": 11.03,
+					"z": -249.6033413564184
 				},
 				"material": {
 					"shader": "flat",
@@ -30,7 +29,7 @@
 				},
 				"rotation": {
 					"x": 0,
-					"y": 0,
+					"y": 3.228,
 					"z": 0
 				}
 			}
@@ -98,5 +97,5 @@
 			}
 		]
 	},
-	"date": "5/12/2023, 10:58:03 AM"
+	"date": "5/12/2023, 11:53:52 AM"
 }

@@ -90,13 +90,18 @@ function duplicateEntity(){
         el.setAttribute('color2',scenes[patternDisplay.value][key].color2)
     } else if (key.includes("circularDotarray")){
         el.setAttribute("id", "circularDotarray"+circularDotarrayNum++);
-        drawCircularDotArray(scenes[patternDisplay.value][key].arrayRadius.val,scenes[patternDisplay.value][key].dots,scenes[patternDisplay.value][key].circleSize,scenes[patternDisplay.value][key].material.color,el);
-        el.setAttribute("arrayRadius",scenes[patternDisplay.value][key].arrayRadius);
+        drawCircularDotArray(scenes[patternDisplay.value][key].arraySpacing.val,scenes[patternDisplay.value][key].circles,scenes[patternDisplay.value][key].dots,scenes[patternDisplay.value][key].circleSize,scenes[patternDisplay.value][key].material.color,el);
+        el.setAttribute("arraySpacing",scenes[patternDisplay.value][key].arraySpacing);
     } else if (key.includes("dotarray")){
         el.setAttribute("id", "dotarray"+dotarrayNum++);
-        drawDotArray(scenes[patternDisplay.value][key].rows,scenes[patternDisplay.value][key].cols,scenes[patternDisplay.value][key].circleSize,scenes[patternDisplay.value][key].spacing,scenes[patternDisplay.value][key].material.color,el);
-
+        drawDotArray(scenes[patternDisplay.value][key].rows,scenes[patternDisplay.value][key].cols,scenes[patternDisplay.value][key].circleSize,scenes[patternDisplay.value][key].spacing.val,scenes[patternDisplay.value][key].material.color,el);
+        el.setAttribute("arraySpacing",scenes[patternDisplay.value][key].spacing);
+    } else if (key.includes("bullseye")){
+        el.setAttribute("id", "bullseye"+bullseyeNum++);
+        drawBullseye(scenes[patternDisplay.value][key].ringSpacing.val,scenes[patternDisplay.value][key].ringThickness,scenes[patternDisplay.value][key].numRings,scenes[patternDisplay.value][key].material.color,el);
+        el.setAttribute("ringSpacing",scenes[patternDisplay.value][key].arraySpacing);
     }
+
     /* sets stats */
     el.setAttribute("angle", scenes[patternDisplay.value][key].angle);
     el.setAttribute("advanced", scenes[patternDisplay.value][key].advanced);
@@ -171,6 +176,7 @@ function resetScene(){
     grilleNum = 0;
     dotarrayNum = 0;
     circularDotarrayNum = 0;
+    bullseyeNum = 0;
     while(entityCanvas.childElementCount != 0){
         entityCanvas.removeChild(entityCanvas.children[0])
     } 
@@ -261,6 +267,7 @@ function revertChanges(){
         grilleNum = 0;
         dotarrayNum = 0;
         circularDotarrayNum = 0;
+        bullseyeNum = 0;
         textureNum = 0;
         numAdded = 0;
 }
@@ -335,7 +342,12 @@ function highlightSelection(ent){
         colNum = ent.children[0].children.length;
         //tileSizeNum = ent.children[0].children[0].components.geometry.attrValue.width;
         newGeom = {primitive: 'ring', radiusOuter: ent.children[0].children[0].components.geometry.attrValue.radiusOuter*1.5, radiusInner: 0};
-    }
+    }  else if(selectedEntity.id.includes("bullseye")){
+        rowNum = ent.children.length;
+        colNum = ent.children[0].children.length;
+        //tileSizeNum = ent.children[0].children[0].components.geometry.attrValue.width;
+        newGeom = {primitive: 'ring', radiusOuter: ent.children[0].components.geometry.attrValue.radiusOuter*1.5, radiusInner: 0};
+    } 
     tmp = document.createElement('a-entity');
     tmp.setAttribute('id','tmp')
     tmp.setAttribute("geometry",newGeom);

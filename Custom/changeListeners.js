@@ -279,7 +279,27 @@ $("#numDotsIn").change(function() {
   });
 
   /* If the textbox for size of tiles is changed */
-$("#arrayRadiusIn").change(function() {
+$("#numCirclesIn").change(function() {
+    editEntity();
+  });
+
+  /* If the textbox for size of tiles is changed */
+$("#arraySpacingIn").change(function() {
+    editEntity();
+  });
+
+  /* If the textbox for size of tiles is changed */
+$("#numRingsIn").change(function() {
+    editEntity();
+  });
+
+  /* If the textbox for size of tiles is changed */
+$("#ringSpacingIn").change(function() {
+    editEntity();
+  });
+
+  /* If the textbox for size of tiles is changed */
+$("#ringThicknessIn").change(function() {
     editEntity();
   });
 

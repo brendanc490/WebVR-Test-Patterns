@@ -97,9 +97,14 @@
                 val: {type: 'string', default: "#000000"}
             },
         });
-        AFRAME.registerComponent('arrayRadius', {
+        AFRAME.registerComponent('arraySpacing', {
             schema: {
-                val: {type: 'float', default: 30}
+                val: {type: 'float', default: 10}
+            },
+        });
+        AFRAME.registerComponent('ringSpacing', {
+            schema: {
+                val: {type: 'float', default: 10}
             },
         });
         </script>
@@ -233,6 +238,12 @@
                             <label for="ring_w20"> ring_w20</label>
                         </p>
 
+                        <p>
+                            <input type="checkbox" id="bullseye"
+                            onclick="handlePatternSelect(this)"/>
+                            <label for="bullseye"> bullseye</label>
+                        </p>
+
                         </div>
                 <p id="addPattern">
                 <b>Name: </b><input type="text" class="input" id="name" value="name"></p>
@@ -271,6 +282,7 @@
                             <option value="grille">grille</option>
                             <option value="dotarray">dot array</option>
                             <option value="dotcircle">circlular dot array</option>
+                            <option value="bullseye">bullseye</option>
                         </select>
                     </p>
                     <p style="text-align:center;" id="addButton">
@@ -336,7 +348,11 @@
                     <p id="rows">Number of rows: <input type="text" class="input" id="rowsIn" value="16"></p>
                     <p id="cols">Number of columns: <input type="text" class="input" id="colsIn" value="16"></p>
                     <p id="numDots">Number of dots: <input type="text" class="input" id="numDotsIn" value="16"></p>
-                    <p id="arrayRadius">Radius of circle array: <input type="text" class="input" id="arrayRadiusIn" value=".1"></p>
+                    <p id="numCircles">Number of circle arrays: <input type="text" class="input" id="numCirclesIn" value=".1"></p>
+                    <p id="arraySpacing">Spacing of circle arrays: <input type="text" class="input" id="arraySpacingIn" value=".1"></p>
+                    <p id="numRings">Number of rings: <input type="text" class="input" id="numRingsIn" value=".1"></p>
+                    <p id="ringThickness">Ring Thickness: <input type="text" class="input" id="ringThicknessIn" value=".1"></p>
+                    <p id="ringSpacing">Spacing of rings: <input type="text" class="input" id="ringSpacingIn" value=".1"></p>
 
                     
                     <!--<p style="text-align:center;" id="sendButton">

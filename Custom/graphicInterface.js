@@ -41,7 +41,11 @@ function hideEditStats(){
     circleSize.style.display = "none";
     spacing.style.display = "none";
     numDots.style.display = "none";
-    arrayRadius.style.display = "none";
+    numCircles.style.display = "none";
+    arraySpacing.style.display = "none";
+    ringSpacing.style.display = "none";
+    ringThickness.style.display = "none";
+    numRings.style.display = "none";
 }
  var flag = false;
 /* updates values in edit section */
@@ -152,14 +156,19 @@ function updateStats(){
         numBarsIn.value = (selectedEntity.children.length);
         $('#color2').minicolors("value",entity.components.color2.attrValue.val);
     } else if(selectedEntity.getAttribute("id").includes("circularDotarray")){
-        numDotsIn.value = (selectedEntity.children.length);
-        arrayRadiusIn.value = selectedEntity.components.arrayRadius.attrValue.val;
+        numDotsIn.value = (selectedEntity.children[1].children.length);
+        numCirclesIn.value = (selectedEntity.children.length-1);
+        arraySpacingIn.value = selectedEntity.components.arraySpacing.attrValue.val;
         circleSizeIn.value = (selectedEntity.children[0].components.geometry.attrValue.radiusOuter).toFixed(3);
     } else if(selectedEntity.getAttribute("id").includes("dotarray")){
         rowsIn.value = (selectedEntity.children.length);
         colsIn.value = (selectedEntity.children[0].children.length);
         circleSizeIn.value = (selectedEntity.children[0].children[0].components.geometry.attrValue.radiusOuter).toFixed(3);
-        spacingIn.value = Math.abs(selectedEntity.children[0].children[1].components.position.attrValue.x-selectedEntity.children[0].children[0].components.position.attrValue.x).toFixed(3);
+        spacingIn.value = selectedEntity.components.arraySpacing.attrValue.val;
+    } else if(selectedEntity.getAttribute("id").includes("bullseye")){
+        numRingsIn.value = (selectedEntity.children.length-1);
+        ringThicknessIn.value = (selectedEntity.children[0].components.geometry.attrValue.radiusOuter-selectedEntity.children[0].components.geometry.attrValue.radiusInner);
+        ringSpacingIn.value = selectedEntity.components.ringSpacing.attrValue.val;
     }
 
 }
@@ -259,13 +268,18 @@ function toggleAddEdit(swap){
             colIn2.style.display = "block";
         } else if (selectedEntity.getAttribute("id").includes("circularDotarray")){
             numDots.style.display = "block";
-            arrayRadius.style.display = "block";
+            numCircles.style.display = "block";
+            arraySpacing.style.display = "block";
             circleSize.style.display = "block";
         } else if (selectedEntity.getAttribute("id").includes("dotarray")){
             cols.style.display = "block";
             rows.style.display = "block";
             circleSize.style.display = "block";
             spacing.style.display = "block";
+        } else if (selectedEntity.getAttribute("id").includes("bullseye")){
+            numRings.style.display = "block";
+            ringThickness.style.display = "block";
+            ringSpacing.style.display = "block";
         }
     } else { /* if add */
         hideEditStats(); /* hide edit containers */

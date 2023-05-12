@@ -33,6 +33,9 @@ scenes['circular dot array'] = circular_dot_array['scenes']['circularDotArray']
 import crosshair from './patterns/crosshair.JSON' assert { type: "json" };
 scenes['crosshair'] = crosshair['scenes']['crosshair']
 
+import bullseye from './patterns/bullseye.JSON' assert { type: "json" };
+scenes['bullseye'] = bullseye['scenes']['bullseye']
+
 import ring_package from './patterns/pattern_package_ring_w5_10_20.JSON' assert { type: "json" };
 scenes['ring_w5'] = ring_package['scenes']['ring_w5']
 scenes['ring_w10'] = ring_package['scenes']['ring_w10']
