@@ -27,7 +27,6 @@ function saveScene(){
 function saveSelected(){
     let data = {scenes: {}, textures: {uploadedTextureFormats: {}, textureValues: []}, date: ""}
     let i = 0;
-    let len = patternDisplay.options.length
     textures = []
     // get all textures
     while(i < texture.options.length){
@@ -35,17 +34,13 @@ function saveSelected(){
         i++;
     }
     // get all scenes
-    i = 0;
-    while(i < len){
-        data['scenes'][patternDisplay.options[i].text] = scenes[[patternDisplay.options[i].text]]
-        i++;
-    }
+    data['scenes'] = scenes[packageSelect.value]
     // add textures
     data['textures']['textureValues'] = textures
     data['textures']['uploadedTextureFormats'] = uploadedTextureFormat
     // add date
     data['date'] = new Date().toLocaleString();
-    download(data,"pattern_package.JSON","text/plain;charset=utf-8")
+    download(data,packageSelect.value+".JSON","text/plain;charset=utf-8")
 }
 
 function download(content, fileName, contentType) {

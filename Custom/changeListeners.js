@@ -365,10 +365,11 @@ window.addEventListener("pointerup", function(e) {
 });*/
 
 
-var scenes = {default: {sky: {skyColor: '#000000'}}}
+var scenes = {default: {}}
 finished = false
 var ind = 0
 var block = false
+var fileName;
 /* if JSON is uploaded */
 scene_display_input.addEventListener("change", function() {
 
@@ -379,17 +380,7 @@ scene_display_input.addEventListener("change", function() {
             reader.addEventListener("load", () => {
 
                 fileContent = JSON.parse(reader.result);
-                let arr = Object.keys(fileContent['scenes'])
-                let i = 0;
-                while(i < arr.length){
-                    if(Object.keys(scenes).indexOf(arr[i]) != -1){
-                        scenes[arr[i]+"1"] = fileContent['scenes'][arr[i]]
-                    } else {
-                        scenes[arr[i]] = fileContent['scenes'][arr[i]]
-                    }
-                    
-                    i++;
-                }
+                scenes[fileName] = fileContent['scenes']
                 textures = fileContent['textures']['textureValues']
                 uploadedTextureFormats = fileContent['textures']['uploadedTextureFormats']
                 cb();
@@ -401,7 +392,13 @@ scene_display_input.addEventListener("change", function() {
             }
             if(Object.keys(scenes).indexOf(itm.name.split(".")[0]) != -1){
                 itm.name = itm.name.split(".")[0]+"1"+itm.name.split(".")[1]
+                fileName = itm.name;
 
+            }
+            fileName = itm.name.split(".")[0];
+            if(scenes[fileName] != null){
+                alert('A package with this name already exists');
+                return;
             }
             reader.readAsText(itm);
             
@@ -417,7 +414,7 @@ scene_display_input.addEventListener("change", function() {
     
     // when it's done....
     myLoop.then(()=>{
-        patternList.innerHTML = ''
+        //patternList.innerHTML = ''
         let arr = Object.keys(scenes)
         let len = arr.length
         let i = 0;
@@ -456,8 +453,19 @@ scene_display_input.addEventListener("change", function() {
             }
         });
         uploadedTextureFormat = tmp
-
+        flag = false;
         i = 0;
+        while(i < packageSelect.options.length){
+            if(packageSelect.options[i].value == nameIn.value){
+                alert('A package with this name already exists');
+                return
+            }
+            i++;
+        }
+    
+        packageSelect.options.add(new Option(fileName,fileName))
+
+        /*i = 0;
         while(i < len){
             var toggle_button = '<p><input type="checkbox" id="'+arr[i]+'" name="'+arr[i]+'" onclick="handlePatternSelect(this)"'
             let res = Array.from(patternDisplay.children).reduce(function(acc, x) {
@@ -474,7 +482,7 @@ scene_display_input.addEventListener("change", function() {
             $('#patternList').append(toggle_button)
             //pattern.options.add(new Option(arr[i], arr[i]))
             i++
-        }
+        }*/
 
     
     });
@@ -504,3 +512,78 @@ function slowLoop(items, loopBody) {
 }
     
 });
+
+keysPressed = {ctrl: false, x: false, c: false, v: false}
+
+/* listens for key presses to change pattern */
+document.addEventListener('keyup', (e) => {
+    if (e.code === "ArrowUp"){
+        if( boolAddEdit == false  || block == false){
+            if(isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
+                return
+            }
+            if(parseInt(patternList.getAttribute('selectedIndex')) == 0){
+                patternList.children[patternList.children.length-1].dispatchEvent(new Event('click',{target: patternList.children[parseInt(patternList.getAttribute('selectedIndex'))+1]}));
+            } else {
+                patternList.children[parseInt(patternList.getAttribute('selectedIndex'))-1].dispatchEvent(new Event('click',{target: patternList.children[parseInt(patternList.getAttribute('selectedIndex'))+1]}));
+            }
+            
+        }
+    } else if (e.code === "ArrowDown"){
+        if( boolAddEdit == false  || block == false){
+            if(isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
+                return
+            }
+            if(parseInt(patternList.getAttribute('selectedIndex')) == patternList.children.length-1){
+                patternList.children[0].dispatchEvent(new Event('click',{target: patternList.children[parseInt(patternList.getAttribute('selectedIndex'))+1]}));
+            } else {
+                patternList.children[parseInt(patternList.getAttribute('selectedIndex'))+1].dispatchEvent(new Event('click',{target: patternList.children[parseInt(patternList.getAttribute('selectedIndex'))+1]}));
+            }
+            
+        }
+    } else if (e.key === "Control"){
+        keysPressed["ctrl"] = false;
+    } else if(e.code === "KeyC"){
+        keysPressed["c"] = false;
+    } else if(e.code === "KeyX"){
+        keysPressed["x"] = false;
+    } else if(e.code === "KeyV"){
+        keysPressed["v"] = false;
+    }
+  });
+
+/* listens for key presses to change pattern */
+document.addEventListener('keydown', (e) => {
+    if (e.key === "Control"){
+        keysPressed["ctrl"] = true;
+        if(keysPressed["c"]){
+            // copy
+            copyPattern();
+        } else if(keysPressed["x"]){
+            // cut
+            cutPattern();
+
+        } else if(keysPressed["v"]){
+            // paste
+            pastePattern();
+        }
+    } else if(e.code === "KeyC"){
+        keysPressed["c"] = true;
+        if(keysPressed["ctrl"]){
+            // copy
+            copyPattern();
+        }
+    } else if(e.code === "KeyX"){
+        keysPressed["x"] = true;
+        if(keysPressed["ctrl"]){
+            // cut
+            cutPattern();
+        }
+    } else if(e.code === "KeyV"){
+        keysPressed["v"] = true;
+        if(keysPressed["ctrl"]){
+            // paste
+            pastePattern();
+        }
+    }
+  });  

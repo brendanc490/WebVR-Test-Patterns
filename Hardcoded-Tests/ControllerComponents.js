@@ -97,7 +97,7 @@ init: function () {
     var el = this.el;
 
     el.addEventListener('gripdown', function (evt) {
-        displayNext(true);
+        updateInfo();
     });
     /*el.addEventListener('gripup', function (evt) {
 
@@ -111,14 +111,14 @@ init: function () {
     });*/
 
     el.addEventListener('abuttondown', function (evt) {
-        displayNext(true);
+        updateInfo();
     });
     /*el.addEventListener('abuttonup', function (evt) {
 
     });*/
 
     el.addEventListener('bbuttondown', function (evt) {
-        displayNext(true);
+        updateInfo();
     });
     /*el.addEventListener('bbuttonup', function (evt) {
 
@@ -130,7 +130,7 @@ init: function () {
     });*/
 
     el.addEventListener('thumbstickdown', function (evt) {
-        displayNext(true);
+        updateInfo();
     });
     /*el.addEventListener('thumbstickup', function (evt) {
         
@@ -159,7 +159,7 @@ init: function () {
     var el = this.el;
 
     el.addEventListener('gripdown', function (evt) {
-        displayNext(false);
+        updateInfo();
     });
     /*
     el.addEventListener('gripup', function (evt) {
@@ -175,7 +175,7 @@ init: function () {
     });*/
 
     el.addEventListener('xbuttondown', function (evt) {
-        displayNext(false);
+        updateInfo();
     });
     
     /*el.addEventListener('xbuttonup', function (evt) {
@@ -183,7 +183,7 @@ init: function () {
     });*/
 
     el.addEventListener('ybuttondown', function (evt) {
-        displayNext(false);
+        updateInfo();
     });
     
     /*el.addEventListener('ybuttonup', function (evt) {
@@ -196,7 +196,7 @@ init: function () {
     });*/
 
     el.addEventListener('thumbstickdown', function (evt) {
-        displayNext(false);
+        updateInfo();
     });
     /*el.addEventListener('thumbstickup', function (evt) {
 

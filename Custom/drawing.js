@@ -19,7 +19,7 @@ function addEntity(){
     if($("#entity :selected").text() == "circle"){ /* if circle */
         /* Set radius*/
         el.setAttribute("id","circle"+circleNum++);
-        el.setAttribute("geometry",{primitive: "ring", radiusOuter: 0.125*250, radiusInner: 0});
+        el.setAttribute("geometry",{primitive: "ring", radiusOuter: 0.125*250, radiusInner: 0, segmentsTheta: 100});
         el.setAttribute("fill",{val: .125*250, isFull: true});
         el.setAttribute("material", {shader: "flat", color: "#"+R+G+B});
 
@@ -229,9 +229,9 @@ function drawDotArray(rows,cols,size,spacing,color1,parent){
             let elChildCol = document.createElement("a-entity");
             elChildCol.setAttribute("id",parent.id+"-"+"col"+c);
             if((size+2*spacing)*cols/2-((size+2*spacing)*c)-((size+2*spacing)/2) == 0 && (size+2*spacing)*rows/2-((size+2*spacing)*r)-((size+2*spacing)/2) == 0){
-                elChildCol.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: size/3});
+                elChildCol.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: size/3, segmentsTheta: 100});
             } else {
-                elChildCol.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: 0});
+                elChildCol.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: 0, segmentsTheta: 100});
             }
             elChildCol.setAttribute("position",{x: (size+2*spacing)*cols/2-((size+2*spacing)*c)-((size+2*spacing)/2), y: (size+2*spacing)*rows/2-((size+2*spacing)*r)-((size+2*spacing)/2), z: 0});
             elChildCol.setAttribute("material",{shader: "flat", color: color1});
@@ -248,7 +248,7 @@ function drawCircularDotArray(radius,circles,dots,size,color1,parent){
     let c = 1;
     let middleDot = document.createElement("a-entity");
     middleDot.setAttribute("id",parent.id+"-center");
-    middleDot.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: 0});
+    middleDot.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: 0, segmentsTheta: 100});
     middleDot.setAttribute("position",{x: 0, y: 0, z: 0});
     middleDot.setAttribute("material",{shader: "flat", color: color1});
     parent.appendChild(middleDot)
@@ -262,7 +262,7 @@ function drawCircularDotArray(radius,circles,dots,size,color1,parent){
             let theta = i*(2*Math.PI)/dots;
             x = (radius*c)*Math.cos(theta);
             y = (radius*c)*Math.sin(theta);
-            elChild.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: 0});
+            elChild.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: 0, segmentsTheta: 100});
             elChild.setAttribute("position",{x: x, y: y, z: 0});
             elChild.setAttribute("material",{shader: "flat", color: color1});
             elChildArr.appendChild(elChild)
@@ -278,14 +278,14 @@ function drawBullseye(radius,thickness,rings,color1,parent){
     let r = 1;
     let middleDot = document.createElement("a-entity");
     middleDot.setAttribute("id",parent.id+"-center");
-    middleDot.setAttribute("geometry",{primitive: "ring", radiusOuter: thickness, radiusInner: 0});
+    middleDot.setAttribute("geometry",{primitive: "ring", radiusOuter: thickness, radiusInner: 0, segmentsTheta: 100});
     middleDot.setAttribute("position",{x: 0, y: 0, z: 0});
     middleDot.setAttribute("material",{shader: "flat", color: color1});
     parent.appendChild(middleDot);
     while(r <= rings){
         let elChild = document.createElement("a-entity");
         elChild.setAttribute("id",parent.id+"-"+"ring-"+r);
-        elChild.setAttribute("geometry",{primitive: "ring", radiusOuter: (thickness+radius)*r+thickness, radiusInner: (thickness+radius)*r});
+        elChild.setAttribute("geometry",{primitive: "ring", radiusOuter: (thickness+radius)*r+thickness, radiusInner: (thickness+radius)*r, segmentsTheta: 100});
         elChild.setAttribute("position",{x: 0, y: 0, z: 0});
         elChild.setAttribute("material",{shader: "flat", color: color1});
         parent.append(elChild);
@@ -316,7 +316,7 @@ function updateJSON(){
         } else if(element.id.includes("bullseye")){
             jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, numRings: element.children.length-1, ringThickness: element.children[0].components.geometry.attrValue.radiusOuter-element.children[0].components.geometry.attrValue.radiusInner, ringSpacing: element.components.ringSpacing.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         }});
-        scenes[patternDisplay.value] = jsonData
+        scenes[packageSelect.value][patternList.children[parseFloat(patternList.getAttribute('selectedIndex'))].textContent] = jsonData
 }
 
 /* converts hex to RGB values */

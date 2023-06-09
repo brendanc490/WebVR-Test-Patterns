@@ -23,6 +23,10 @@ function selectNew(clickedEntity){
 
 /* Removes current entity */
 function removeEntity(){
+    if(selectedEntity == null){
+        alert('No entities added');
+        return
+    }
     els.splice(els.indexOf(selectedEntity),1);
     pool.splice(pool.indexOf(selectedEntity.object3D),1);
     if(selectedEntity.id.includes("plane")){
@@ -59,55 +63,59 @@ function removeEntity(){
 }
 
 function duplicateEntity(){
+    if(selectedEntity == null){
+        alert('No entities added');
+        return
+    }
     // get entity id and increment by 1
     key = selectedEntity.getAttribute("id");
     el = document.createElement("a-entity"); /* create entity */
     if(key.includes("circle")){ /* circle exclusive */
         el.setAttribute("id","circle"+circleNum++);
-        el.setAttribute("geometry", scenes[patternDisplay.value][key].geometry);
-        el.setAttribute("fill",scenes[patternDisplay.value][key].fill);
+        el.setAttribute("geometry", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].geometry);
+        el.setAttribute("fill",scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].fill);
     } else if(key.includes("plane")){ /* plane exclusive */
         el.setAttribute("id","plane"+planeNum++);
-        el.setAttribute("geometry", scenes[patternDisplay.value][key].geometry);
-        if(scenes[patternDisplay.value][key].material.src == ""){
-            drawPlaneBorder(scenes[patternDisplay.value][key].widthReal,scenes[patternDisplay.value][key].geometry.height,scenes[patternDisplay.value][key].fill.val,hexToRgb(scenes[patternDisplay.value][key].material.color),el);
+        el.setAttribute("geometry", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].geometry);
+        if(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material.src == ""){
+            drawPlaneBorder(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].widthReal,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].geometry.height,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].fill.val,hexToRgb(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material.color),el);
         }   
-        el.setAttribute("fill",scenes[patternDisplay.value][key].fill);
+        el.setAttribute("fill",scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].fill);
     } else if(key.includes("triangle")){ /* triangle exclusive */
         el.setAttribute("id","triangle"+triangleNum++);
-        el.setAttribute("geometry", scenes[patternDisplay.value][key].geometry);
+        el.setAttribute("geometry", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].geometry);
     } else if (key.includes("gradient")){
         el.setAttribute("id", "gradient"+gradientNum++);
-        drawGradient(scenes[patternDisplay.value][key].childGeometry.width,scenes[patternDisplay.value][key].childGeometry.height,scenes[patternDisplay.value][key].numBars,hexToRgb(scenes[patternDisplay.value][key].material.color),hexToRgb(scenes[patternDisplay.value][key].color2.val),el);
-        el.setAttribute('color2',scenes[patternDisplay.value][key].color2)
+        drawGradient(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].childGeometry.width,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].childGeometry.height,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].numBars,hexToRgb(scenes[patternDisplay.value][key].material.color),hexToRgb(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].color2.val),el);
+        el.setAttribute('color2',scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].color2)
     } else if (key.includes("grille")){
         el.setAttribute("id", "grille"+grilleNum++);
-        drawGrille(scenes[patternDisplay.value][key].childGeometry.width,scenes[patternDisplay.value][key].childGeometry.height,scenes[patternDisplay.value][key].numBars,scenes[patternDisplay.value][key].material.color,scenes[patternDisplay.value][key].color2.val,el);
-        el.setAttribute('color2',scenes[patternDisplay.value][key].color2)
+        drawGrille(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].childGeometry.width,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].childGeometry.height,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].numBars,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material.color,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].color2.val,el);
+        el.setAttribute('color2',scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].color2)
     } else if (key.includes("checkerboard")){
         el.setAttribute("id", "checkerboard"+checkerboardNum++);
-        drawCheckerboard(scenes[patternDisplay.value][key].rows,scenes[patternDisplay.value][key].cols,scenes[patternDisplay.value][key].tileSize,scenes[patternDisplay.value][key].material.color,scenes[patternDisplay.value][key].color2.val,el);
-        el.setAttribute('color2',scenes[patternDisplay.value][key].color2)
+        drawCheckerboard(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].rows,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].cols,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].tileSize,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material.color,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].color2.val,el);
+        el.setAttribute('color2',scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].color2)
     } else if (key.includes("circularDotarray")){
         el.setAttribute("id", "circularDotarray"+circularDotarrayNum++);
-        drawCircularDotArray(scenes[patternDisplay.value][key].arraySpacing.val,scenes[patternDisplay.value][key].circles,scenes[patternDisplay.value][key].dots,scenes[patternDisplay.value][key].circleSize,scenes[patternDisplay.value][key].material.color,el);
-        el.setAttribute("arraySpacing",scenes[patternDisplay.value][key].arraySpacing);
+        drawCircularDotArray(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].arraySpacing.val,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].circles,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].dots,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].circleSize,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material.color,el);
+        el.setAttribute("arraySpacing",scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].arraySpacing);
     } else if (key.includes("dotarray")){
         el.setAttribute("id", "dotarray"+dotarrayNum++);
-        drawDotArray(scenes[patternDisplay.value][key].rows,scenes[patternDisplay.value][key].cols,scenes[patternDisplay.value][key].circleSize,scenes[patternDisplay.value][key].spacing.val,scenes[patternDisplay.value][key].material.color,el);
-        el.setAttribute("arraySpacing",scenes[patternDisplay.value][key].spacing);
+        drawDotArray(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].rows,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].cols,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].circleSize,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].spacing.val,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material.color,el);
+        el.setAttribute("arraySpacing",scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].spacing);
     } else if (key.includes("bullseye")){
         el.setAttribute("id", "bullseye"+bullseyeNum++);
-        drawBullseye(scenes[patternDisplay.value][key].ringSpacing.val,scenes[patternDisplay.value][key].ringThickness,scenes[patternDisplay.value][key].numRings,scenes[patternDisplay.value][key].material.color,el);
-        el.setAttribute("ringSpacing",scenes[patternDisplay.value][key].arraySpacing);
+        drawBullseye(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].ringSpacing.val,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].ringThickness,scenes[patternDisplay.value][key].numRings,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material.color,el);
+        el.setAttribute("ringSpacing",scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].arraySpacing);
     }
 
     /* sets stats */
-    el.setAttribute("angle", scenes[patternDisplay.value][key].angle);
-    el.setAttribute("advanced", scenes[patternDisplay.value][key].advanced);
-    el.setAttribute("position", {x: scenes[patternDisplay.value][key].position.x, y: scenes[patternDisplay.value][key].position.y, z: scenes[patternDisplay.value][key].position.z});
-    el.setAttribute("material", scenes[patternDisplay.value][key].material);
-    el.setAttribute("rotation", scenes[patternDisplay.value][key].rotation);
+    el.setAttribute("angle", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].angle);
+    el.setAttribute("advanced", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].advanced);
+    el.setAttribute("position", {x: scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].position.x, y: scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].position.y, z: scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].position.z});
+    el.setAttribute("material", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material);
+    el.setAttribute("rotation", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].rotation);
     el.setAttribute("click-checker","");
     numAdded++;
     entityCanvas.appendChild(el); /* adds entity to scene */
@@ -123,8 +131,8 @@ function duplicateEntity(){
 }
 
 /* handles changes in selected pattern */
-var displayOrder = ['default'];
-function handlePatternSelect(snapshot){
+//var displayOrder = ['default'];
+/*function handlePatternSelect(snapshot){
     curr = snapshot.id
     if(displayOrder.indexOf(curr) == -1){
         displayOrder.push(curr)
@@ -148,23 +156,22 @@ function handlePatternSelect(snapshot){
         }
         i++;
     }
-}
+}*/
 
 /* displays current pattern selected */
-function displayCurrentPattern(snapshot){
+/*function displayCurrentPattern(snapshot){
     let len = snapshot.options.length;
     let i = 0;
     let sum = 0;
     while(i < len){
         curr = snapshot.options[i]
         if(curr.selected){
-           /* display pattern */
             revertChanges()
             addEntitiesFromScene(scenes[curr.text]);
         } 
         i++;
     }
-}
+}*/
 
 /* resets current scene */
 function resetScene(){
@@ -192,19 +199,24 @@ function resetScene(){
 function displayNext(direction){
     if(direction){
         // right
-        if(patternDisplay.selectedIndex == patternDisplay.childElementCount-1){
-            patternDisplay.selectedIndex = 0
-        } else {
-            patternDisplay.selectedIndex = patternDisplay.selectedIndex+1
+        if(isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
+            return
         }
-        
+        if(parseInt(patternList.getAttribute('selectedIndex')) == patternList.children.length-1){
+            patternList.children[0].dispatchEvent(new Event('click',{target: patternList.children[parseInt(patternList.getAttribute('selectedIndex'))+1]}));
+        } else {
+            patternList.children[parseInt(patternList.getAttribute('selectedIndex'))+1].dispatchEvent(new Event('click',{target: patternList.children[parseInt(patternList.getAttribute('selectedIndex'))+1]}));
+        }        
         
     } else {
         // left
-        if(patternDisplay.selectedIndex == 0){
-            patternDisplay.selectedIndex = patternDisplay.childElementCount-1
+        if(isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
+            return
+        }
+        if(parseInt(patternList.getAttribute('selectedIndex')) == 0){
+            patternList.children[patternList.children.length-1].dispatchEvent(new Event('click',{target: patternList.children[parseInt(patternList.getAttribute('selectedIndex'))+1]}));
         } else {
-            patternDisplay.selectedIndex = patternDisplay.selectedIndex-1
+            patternList.children[parseInt(patternList.getAttribute('selectedIndex'))-1].dispatchEvent(new Event('click',{target: patternList.children[parseInt(patternList.getAttribute('selectedIndex'))+1]}));
         }
         
     }
@@ -214,39 +226,60 @@ function displayNext(direction){
 
 /* adds a pattern to pattern list */
 function addPattern(){
-    if(scenes[nameIn.value] != null){
+    /*if(scenes[packageSelect.value][nameIn.value] != null){
         alert('A pattern with this name already exists');
         return;
+    }*/
+    if(nameIn.value.indexOf('(') > 0 || nameIn.value.indexOf(')') > 0){
+        alert('A name cannot include parenthesis ()');
+        return
     }
     currName = ''
-    if(Object.keys(names).indexOf(nameIn.value) == -1){
-        names[nameIn.value] = 1
+    if(Object.keys(names[packageSelect.value]).indexOf(nameIn.value) == -1){
+        names[packageSelect.value][nameIn.value] = 1
         currName = nameIn.value
     } else {
-        names[nameIn.value] = names[nameIn.value] + 1
-        currName = nameIn.value+''+names[nameIn.value]
+        currName = nameIn.value+' ('+names[packageSelect.value][nameIn.value]+')'
+        names[packageSelect.value][nameIn.value] = names[packageSelect.value][nameIn.value] + 1
     }
-    scenes[currName] = {sky: {skyColor: '#000000'}}
-    var toggle_button = '<p><input type="checkbox" id="'+currName+'" name="'+currName+'" onclick="handlePatternSelect(this)"/>\
-        <label for="'+currName+'">'+currName+'</label></p>';
-    $('#patternList').append(toggle_button)
+    scenes[packageSelect.value][currName] = {sky: {skyColor: '#000000'}}
+    var toggle_button = '<li id="'+currName+'">'+currName+'</li>';
+
+    $('#items-list').append(toggle_button)
+    
+    item = document.getElementById(currName)
+    $(item).prop('draggable', true)
+    item.addEventListener('dragstart', dragStart)
+    item.addEventListener('drop', dropped)
+    item.addEventListener('dragenter', cancelDefault)
+    item.addEventListener('dragover', cancelDefault)
+    item.addEventListener('click',selectPattern)
     //pattern.options.add(new Option(nameIn.value, nameIn.value))
 }
 
 /* removes current pattern from pattern list */
 function removePattern(){
-    revertChanges()
-    delete scenes[patternDisplay.value]
     let i = 0;
-    while(i < patternList.childElementCount){
-        if(patternList.children[i].children[0].id == patternDisplay.value){
-            patternList.removeChild(patternList.children[i])
-            i = patternList.childElementCount
-            displayOrder.splice(displayOrder.indexOf(patternDisplay.value),1);
+    indices = []
+    while(i < patternList.children.length){
+        if(patternList.children[i].style.background == 'rgb(243, 152, 20)'){
+            indices.push(i)
         }
         i++;
     }
-    patternDisplay.options.remove(patternDisplay.selectedIndex)
+    children = []
+    revertChanges()
+    indices.forEach(ind => {
+        delete scenes[packageSelect.value][patternList.children[ind].textContent]
+        if(names[packageSelect.value][patternList.children[ind].textContent] == 1){
+            delete names[packageSelect.value][patternList.children[ind].textContent]
+        }
+        children.push(patternList.children[ind])
+    })
+    children.forEach(child =>{
+        patternList.removeChild(child)
+    })
+    
 }
 
 /* function used to remove changes made to a scene */
@@ -255,10 +288,11 @@ function revertChanges(){
     while(entityCanvas.childElementCount != 0){
         entityCanvas.removeChild(entityCanvas.children[0])
        }
-       while(entitySelector.childElementCount != 0){
+       /*while(entitySelector.childElementCount != 0){
             entitySelector.remove(entitySelector.children[0])
-       }
+       }*/
         els = []
+        pool = []
         circleNum = 0; /* number of circles created */
         planeNum = 0; /* number of planes created */
         triangleNum = 0; /* number of triangles created */
@@ -272,20 +306,7 @@ function revertChanges(){
         numAdded = 0;
 }
 
-/* listens for key presses to change pattern */
-document.addEventListener('keyup', (e) => {
-    if (e.code === "ArrowUp"){
-        if(($(document.activeElement)[0].id != 'patternDisplay'  && boolAddEdit == false)  || block == false){
-            displayNext(false)
-        }
-    } else if (e.code === "ArrowDown"){
-        if(($(document.activeElement)[0].id != 'patternDisplay'  && boolAddEdit == false)  || block == false){
-            displayNext(true)
-        }
-    }
-  });
-
-names = {'default':1,'red':1,'green':1,'blue':1,'white':1,'grille':1}
+names = {'default' : {'red':1,'green':1,'blue':1,'white':1,'grille':1,'crosshair':1,'line':1,'circular dot array':1,'dot array':1,'checkerboard (w)':1,'checkerboard (b)':1,'ring_w5':1,'ring_w10':1,'ring_w20':1,'bullseye':1}}
 var colorChange = true;
 
 /* handles switches to advanced mode */
@@ -300,6 +321,10 @@ function switchToAdvanced(switchVal){
 /* listens for entering vr and removes restrictions on clicking through patterns */
 scene.addEventListener('enter-vr',function(){
     block = false;
+    if(isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
+        alert('No scene is selected, please exit immersive mode and select a scene.')
+    }
+    
   });
 
 /* listens for exiting vr and restricts clicking through patterns */
@@ -369,8 +394,16 @@ function highlightSelection(ent){
 }
 
 function renamePattern(){
-    oldName = patternDisplay.value
-    currScene = scenes[patternDisplay.value]
+    if(scenes[packageSelect.value][nameIn.value] != null){
+        alert('A pattern with this name already exists');
+        return;
+    }
+    if(nameIn.value.indexOf('(') > 0 || nameIn.value.indexOf(')') > 0){
+        alert('A name cannot include parenthesis ()');
+        return
+    }
+    oldName = patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent
+    currScene = scenes[packageSelect.value][oldName]
     currName = ''
     if(Object.keys(names).indexOf(nameIn.value) == -1){
         names[nameIn.value] = 1
@@ -379,16 +412,125 @@ function renamePattern(){
         names[nameIn.value] = names[nameIn.value] + 1
         currName = nameIn.value+''+names[nameIn.value]
     }
-    scenes[currName] = currScene
-    delete scenes[oldName]
+    scenes[packageSelect.value][currName] = currScene
+    delete scenes[packageSelect.value][oldName]
 
-    displayOrder[displayOrder.indexOf(oldName)] = currName
+    patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent = currName
+}
 
-    var opt = patternDisplay.options[patternDisplay.selectedIndex];
-     opt.value =  currName;
-     opt.text = currName;
+let clipboard;
+function copyPattern(){
+    if(isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
+        return
+    }
+    let i = 0;
+    indices = []
+    while(i < patternList.children.length){
+        if(patternList.children[i].style.background == 'rgb(243, 152, 20)'){
+            indices.push(i)
+        }
+        i++;
+    }
+    clipboard = {}
+    indices.forEach(ind => {
+        clipboard[patternList.children[ind].textContent] = scenes[packageSelect.value][patternList.children[ind].textContent]
+    })
+}
 
-    label = document.querySelector('label[for="'+oldName+'"]')
-    label.setAttribute('for',currName)
-    label.textContent = currName
+function addPackage(){
+    flag = false;
+    let i = 0;
+    if(nameIn.value.indexOf('(') > 0 || nameIn.value.indexOf(')') > 0){
+        alert('A name cannot include parenthesis ()');
+        return
+    }
+    while(i < packageSelect.options.length){
+        if(packageSelect.options[i].value == nameIn.value){
+            alert('A package with this name already exists');
+            return
+        }
+        i++;
+    }
+
+    packageSelect.options.add(new Option(nameIn.value,nameIn.value))
+    scenes[nameIn.value] = {}
+}
+
+function changePackage(){
+    let i = 0;
+    patternList.setAttribute('selectedIndex',"")
+    while(patternList.children.length != 0){
+        patternList.removeChild(patternList.children[0])
+    }
+    Object.keys(scenes[packageSelect.value]).forEach(currName =>{
+        var toggle_button = '<li id="'+currName+'">'+currName+'</li>';
+
+        $('#items-list').append(toggle_button)
+        
+        item = document.getElementById(currName)
+        $(item).prop('draggable', true)
+        item.addEventListener('dragstart', dragStart)
+        item.addEventListener('drop', dropped)
+        item.addEventListener('dragenter', cancelDefault)
+        item.addEventListener('dragover', cancelDefault)
+        item.addEventListener('click',selectPattern)
+    }
+    )
+    revertChanges()
+}
+
+function renamePackage(){
+    if(scenes[nameIn.value] != null){
+        alert('A package with this name already exists');
+        return;
+    }
+    if(nameIn.value.indexOf('(') > 0 || nameIn.value.indexOf(')') > 0){
+        alert('A name cannot include parenthesis ()');
+        return;
+    }
+    oldName = packageSelect.value
+    currPackage = scenes[packageSelect.value]
+    
+    scenes[nameIn.value] = currPackage
+    delete scenes[packageSelect.value]
+    packageSelect.options[packageSelect.selectedIndex].value = nameIn.value
+    packageSelect.options[packageSelect.selectedIndex].text = nameIn.value
+    //patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent = currName
+}
+
+function pastePattern(){
+    if(clipboard == null){
+        return;
+    }
+    /*if(scenes[packageSelect.value][clipboard.name] != null){
+        alert('A scene with the name of the copied pattern already exists, please rename the scene')
+        return
+    }*/
+    Object.keys(clipboard).forEach(name =>{
+        currName = name.split(' (')[0];
+        if(names[packageSelect.value][currName]){
+            currName = currName + ' ('+names[packageSelect.value][currName]+')'
+            names[packageSelect.value][name.split(' (')[0]] = names[packageSelect.value][name.split(' (')[0]] + 1
+        } else {
+            names[packageSelect.value][currName] = 1
+        }
+        scenes[packageSelect.value][currName] = clipboard[name]
+        var toggle_button = '<li id="'+currName+'">'+currName+'</li>';
+
+        $('#items-list').append(toggle_button)
+        
+        item = document.getElementById(currName)
+        $(item).prop('draggable', true)
+        item.addEventListener('dragstart', dragStart)
+        item.addEventListener('drop', dropped)
+        item.addEventListener('dragenter', cancelDefault)
+        item.addEventListener('dragover', cancelDefault)
+        item.addEventListener('click',selectPattern)
+    })
+    
+}
+
+function cutPattern(){
+    copyPattern()
+    removePattern()
 }

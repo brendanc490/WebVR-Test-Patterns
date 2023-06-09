@@ -15,8 +15,10 @@ const nonUni = document.getElementById("nonUniversalSettings");
 const utility = document.getElementById("utility");
 const collapse = document.getElementById("collapse");
 const content = document.getElementById("content");
-content.style.display = "block";
+//content.style.display = "block";
 const addEditContent = document.getElementById("addEditContent")
+const addContent = document.getElementById('addContent')
+const editContent = document.getElementById('editContent')
 const displayEditContent = document.getElementById("displayEditContent")
 const nameIn = document.getElementById('name');
 const displayUtility = document.getElementById('displayUtility');
@@ -35,7 +37,17 @@ collapse.addEventListener("click", function() {
 
 /* Display scenes */
 const pattern = document.getElementById("pattern");
-const patternList = document.getElementById("patternList");
+const patternList = document.getElementById("items-list");
+/*$( function() {
+    $( "#items-list" ).selectable({
+     // selected: function(event, ui) { 
+     //   $(ui.selected).addClass("ui-selected").siblings().removeClass("ui-selected");           
+    }    
+    //}
+    );
+    
+  } );*/
+
 const patternDisplay = document.getElementById("patternDisplay");
 const scene_display_input = document.getElementById("scene-disp-input");
 
@@ -46,7 +58,7 @@ const entitySelector = document.getElementById("entityId"); /* selector */
 /* Sky related */
 const skyIn = document.getElementById("skyIn"); /* sky color container */
 const skyColor = document.getElementById("skyCol"); /* sky color input */
-skyIn.style.width = "75%";
+//skyIn.style.width = "75%";
 
 /* Universal attributes */
 /* Position related */
@@ -59,8 +71,8 @@ var zIn = document.getElementById("z"); /* z input */
 const rotationZ = document.getElementById("rotationZ");
 const rotationY = document.getElementById("rotationY");
 const rotationX = document.getElementById("rotationX"); /* rotation container paragraph */ 
-rotationY.style.display = 'none'
-rotationX.style.display = 'none'
+//rotationY.style.display = 'none'
+//rotationX.style.display = 'none'
 const rotIn = document.getElementById("rotIn"); /* rotation input */
 
 /* Color related */
@@ -68,7 +80,7 @@ const color = document.getElementById("color"); /* color container paragraph */
 const colIn = document.getElementById("colIn"); /* color input */
 const colIn2 = document.getElementById("colIn2"); /* color input */
 const color2 = document.getElementById("color2"); /* color input */
-colIn.style.width = "75%";
+//colIn.style.width = "75%";
 
 /* Texture related */
 const textureIn = document.getElementById("textureIn");
@@ -193,3 +205,73 @@ var fileContent = null; /* contents of uploaded JSON file */
 var uploadedTextureFormat = {};
 
 
+const coreLayout = document.getElementById('coreLayout');
+const packageLayout = document.getElementById('packageLayout');
+const editPatternLayout = document.getElementById('editPatternLayout');
+const packageSelect = document.getElementById('packageDisplay')
+patternList.setAttribute('multi-select',false);
+
+
+let items = document.querySelectorAll('#items-list > li');
+
+items.forEach(item => {
+  $(item).prop('draggable', true)
+  item.addEventListener('dragstart', dragStart)
+  item.addEventListener('drop', dropped)
+  item.addEventListener('dragenter', cancelDefault)
+  item.addEventListener('dragover', cancelDefault)
+  item.addEventListener('click',selectPattern)
+})
+
+function selectPattern (e){
+  e.target.style.background = '#F39814'
+  items = document.querySelectorAll('#items-list > li');
+  if(keysPressed['ctrl'] && !isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
+    patternList.setAttribute("multi-select",true);
+    return;
+  }
+  items.forEach(item => {
+    if(item != e.target){
+      item.style.background = '#FFF'
+    } else {
+      patternList.setAttribute("selectedIndex",$(item).index())
+      patternList.setAttribute("multi-select",false);
+      revertChanges()
+      addEntitiesFromScene(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent])
+      if(els.length > 0){
+        selectedEntity = els[0]
+      }
+    }
+  })
+  
+}
+
+function dragStart (e) {
+  var index = $(e.target).index()
+  e.dataTransfer.setData('text/plain', index)
+}
+
+function dropped (e) {
+  cancelDefault(e)
+  
+  // get new and old index
+  let oldIndex = e.dataTransfer.getData('text/plain')
+  let target = $(e.target)
+  let newIndex = target.index()
+  
+  // remove dropped items at old place
+  let dropped = $(this).parent().children().eq(oldIndex).remove()
+
+  // insert the dropped items at new place
+  if (newIndex < oldIndex) {
+    target.before(dropped)
+  } else {
+    target.after(dropped)
+  }
+}
+
+function cancelDefault (e) {
+  e.preventDefault()
+  e.stopPropagation()
+  return false
+}

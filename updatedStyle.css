@@ -1,0 +1,300 @@
+h1 {
+    color:white;
+    text-align: center;
+}
+
+body {
+    margin:0;
+    background-color: rgb(26, 26, 26);
+    font-family: 'Segoe UI', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  .center-block {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  #info{
+    position: absolute;
+    max-height: 90vh;
+    max-width: 30vw;
+    left: 10px;
+    top: 10px;
+    background-color: rgba(211,211,211, 1);
+    color: Black;
+    padding: 1em;
+    overflow-y:auto;
+    overflow-x:auto;
+  }
+
+  .scrollable{
+    max-height: 15vh;
+    overflow-y:scroll;
+    overflow-x:auto;
+  }
+
+  #directions{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: rgba(211,211,211, 1);
+    color: Black;
+    padding: 1em;
+    overflow-y:auto;
+    overflow-x:auto;
+  }
+
+  .toggle {
+    position : relative ;
+    display : inline-block;
+    max-height: 100vh;
+    width : 50px;
+    height : 27px;
+    background-color: #efefef;
+    border-radius: 30px;
+    border-style: groove;
+    vertical-align: middle;
+    border: 2px solid #3b75ba;
+}
+       
+/* After slide changes */
+.toggle:after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: rgba(0,117,255,255);
+    top: 1px;
+    left: 1px;
+    transition:  all 0.5s;
+}
+
+.checkbox:checked + .toggle::after {
+    left : 24px;
+}
+       
+/* Checkbox checked toggle label bg color */
+.checkbox:checked + .toggle {
+    background-color: #efefef;
+}
+       
+/* Checkbox vanished */
+.checkbox {
+    display : none;
+}
+
+input[type=text]{
+  width:70px;
+  text-align: center;
+  background:rgb(255,255,255);
+  border: 1px solid rgb(138, 138, 138);
+  color:black;
+  float:right;
+  top: 50%;
+  left:50%;
+}
+
+  input[type=file]{
+    position: relative;
+    text-align: center;
+    left: 0%;
+    top: 0%;
+  }
+
+
+  .select{
+    width: 100px;
+    font-size: 16px;
+    text-align: center;
+    top: 50%;
+    left:50%;
+  }
+
+.button{
+    border-radius: 4px;
+    border-style: groove;
+    border-color: rgba(150,150,150, 1);
+    color: black;
+    padding: 5px;
+    width:60%;
+    font-size: 15px;
+    top: 50%;
+    left:50%;
+  }
+
+.reset:hover {
+    background-color: #f44336;
+    color: white;
+  }
+
+.add:hover {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 22px;
+  }
+  
+  .active, .collapsible:hover {
+    background-color: #555;
+  }
+  
+  .content {
+    padding: 0 18px;
+    display: block;
+    overflow: hidden;
+    background-color: #f1f1f1;
+  }
+  .hide { grid-area: Hide; text-align: center;}
+  .swap { grid-area: Toggle; text-align: center; padding-top: 2%;}
+  .content{ grid-area: Content;}
+
+  .core-container {
+    display: grid;
+     grid-template-areas:
+       'Hide'
+       'Toggle'
+       'Content';
+     grid-template-columns: 100%;
+     grid-template-rows: 7% 7% 86%;
+     background-color: #000000;
+     height: 90vh;
+     width: auto;
+     overflow-y:auto;
+     overflow-x:auto;
+   }
+   
+   .core-container > div {
+     background-color: rgba(255, 255, 255, 0.8);
+   }
+
+
+
+.item1 { grid-area: Select; text-align: center;}
+.item2 { grid-area: Patterns; text-align: center; padding-top: 5%;}
+.item3 { grid-area: NameText; text-align: center;}
+.item4 { grid-area: NameInput; text-align: center;}
+.item5 { grid-area: AddPackage; text-align: center;}
+.item6 { grid-area: RenamePackage; text-align: center;}
+.item7 { grid-area: AddPattern; text-align: center;}
+.item8 { grid-area: RenamePattern; text-align: center;}
+.item9 { grid-area: DeletePattern; text-align: center;}
+.item10 { grid-area: CopyPattern; text-align: center;}
+.item11 { grid-area: SavePackage; text-align: center;}
+.item12 { grid-area: pastePattern; text-align: center;}
+.item13 {grid-area: UploadPackage; text-align: center; font-size: 15px; padding-top: 5%;}
+
+  .grid-container {
+    display: grid;
+     grid-template-areas:
+       'Select Select'
+       'Patterns Patterns'
+       'UploadPackage UploadPackage'
+       'NameText NameInput'
+       'AddPackage AddPattern'
+       'RenamePackage RenamePattern'
+       'SavePackage DeletePattern'
+       'pastePattern CopyPattern';
+     grid-template-columns: 50% 50%;
+     grid-template-rows: 9% 37% 9% 9% 9% 9% 9% 9%;
+     background-color: #000000;
+     height: 100%;
+     width: 25vw;
+   }
+   
+   .grid-container > div {
+     background-color: rgba(255, 255, 255, 0.8);
+   }
+
+   [draggable="true"] {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+  
+  [draggable="true"] {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+  
+  ol.moveable {
+    list-style: decimal;
+    margin: 0px;
+    height: 90%;
+    margin-left: 0;
+    margin-right: 0;
+    
+    overflow-x:auto;
+  }
+
+  #items-list .ui-selecting { background: #FECA40; }
+  #items-list .ui-selected { background: #F39814; color: white; }
+  
+   li {
+      position: relative;
+      text-align: center;
+      list-style-image: none;
+      border: 1px solid #000;
+      border-radius: 4px;
+      font-size: 15px;
+      background-color: #FFF;
+      color: #000;
+      cursor: move;
+      margin: 5px;
+      width:80%;
+      height:7%;
+      top:0%;
+      left:5%;
+      padding-bottom: 2%;
+  
+
+   }
+   
+   li:hover {
+    background-color: #eee;
+  }
+
+
+  .item1-EP { grid-area: Toggle; text-align: center;}
+  .item2-EP { grid-area: Select; text-align: center; padding-top: 5%;}
+  .item3-EP { grid-area: Add; text-align: center;}
+  .item4-EP { grid-area: Background; text-align: center;}
+  .item5-EP { grid-area: Color; text-align: center;}
+  .item6-EP { grid-area: Reset; text-align: center;}
+
+  .grid-container-EP {
+    display: none;
+     grid-template-areas:
+       'Toggle2'
+       'Select'
+       'Add'
+       'Background'
+       'Color'
+       'Reset';
+
+     grid-template-columns: 100%;
+     grid-template-rows: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+     background-color: #000000;
+     height: 90vh;
+     width: auto;
+     overflow-y:auto;
+     overflow-x:auto;
+   }
+   
+   .grid-container-EP > div {
+     background-color: rgba(255, 255, 255, 0.8);
+   }

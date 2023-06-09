@@ -1,45 +1,45 @@
 /* Loads in prebuilt scenes and adds them to scenes json */
 
 import red from './patterns/red.JSON' assert { type: "json" };
-scenes['red'] = red['scenes']['default']
+scenes['default']['red'] = red['scenes']['default']
 
 import green from './patterns/green.JSON' assert { type: "json" };
-scenes['green'] = green['scenes']['default']
+scenes['default']['green'] = green['scenes']['default']
 
 import blue from './patterns/blue.JSON' assert { type: "json" };
-scenes['blue'] = blue['scenes']['default']
+scenes['default']['blue'] = blue['scenes']['default']
 
 import white from './patterns/white.JSON' assert { type: "json" };
-scenes['white'] = white['scenes']['default']
+scenes['default']['white'] = white['scenes']['default']
 
 import grille from './patterns/grille.JSON' assert { type: "json" };
-scenes['grille'] = grille['scenes']['default']
+scenes['default']['grille'] = grille['scenes']['default']
 
 import line from './patterns/line.JSON' assert { type: "json" };
-scenes['line'] = line['scenes']['line']
+scenes['default']['line'] = line['scenes']['line']
 
-import checkerboard_w from './patterns/checkerboard (w).JSON' assert { type: "json" };
-scenes['checkerboard (w)'] = checkerboard_w['scenes']['checkerboard (w)']
+import checkerboard_w from './patterns/checkerboard_w.JSON' assert { type: "json" };
+scenes['default']['checkerboard_w'] = checkerboard_w['scenes']['checkerboard_w']
 
-import checkerboard_b from './patterns/checkerboard (b).JSON' assert { type: "json" };
-scenes['checkerboard (b)'] = checkerboard_b['scenes']['checkerboard (b)']
+import checkerboard_b from './patterns/checkerboard_b.JSON' assert { type: "json" };
+scenes['default']['checkerboard_b'] = checkerboard_b['scenes']['checkerboard_b']
 
 import dot_array from './patterns/dot array.JSON' assert { type: "json" };
-scenes['dot array'] = dot_array['scenes']['dot array']
+scenes['default']['dot array'] = dot_array['scenes']['dot array']
 
 import circular_dot_array from './patterns/circularDotArray.JSON' assert { type: "json" };
-scenes['circular dot array'] = circular_dot_array['scenes']['circularDotArray']
+scenes['default']['circular dot array'] = circular_dot_array['scenes']['circularDotArray']
 
 import crosshair from './patterns/crosshair.JSON' assert { type: "json" };
-scenes['crosshair'] = crosshair['scenes']['crosshair']
+scenes['default']['crosshair'] = crosshair['scenes']['crosshair']
 
 import bullseye from './patterns/bullseye.JSON' assert { type: "json" };
-scenes['bullseye'] = bullseye['scenes']['bullseye']
+scenes['default']['bullseye'] = bullseye['scenes']['bullseye']
 
 import ring_package from './patterns/pattern_package_ring_w5_10_20.JSON' assert { type: "json" };
-scenes['ring_w5'] = ring_package['scenes']['ring_w5']
-scenes['ring_w10'] = ring_package['scenes']['ring_w10']
-scenes['ring_w20'] = ring_package['scenes']['ring_w20']
+scenes['default']['ring_w5'] = ring_package['scenes']['ring_w5']
+scenes['default']['ring_w10'] = ring_package['scenes']['ring_w10']
+scenes['default']['ring_w20'] = ring_package['scenes']['ring_w20']
 
 let arr = Object.keys(scenes)
     let len = arr.length

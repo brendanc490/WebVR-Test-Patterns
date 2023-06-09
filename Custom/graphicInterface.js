@@ -15,7 +15,7 @@ function hideEditStats(){
     ent.style.display = "none";
     uni.style.display = "none";
     nonUni.style.display = "none";
-    skyIn.style.display = "none";
+    //skyIn.style.display = "none";
     entitySelectorText.style.display = "none";
     posIn.style.display = "none";
     colIn.style.display = "none";
@@ -26,7 +26,7 @@ function hideEditStats(){
     /*editButton.style.display = "none";*/
     /*sendButton.style.display = "none";*/
     rotIn.style.display = "none";
-    saveButton.style.display = "none";
+    //saveButton.style.display = "none";
     va.style.display = "none";
     vb.style.display = "none";
     vc.style.display = "none";
@@ -179,19 +179,22 @@ function toggleDisplayEdit(swap){
     if(swap){ /* if the button to swap was pressed */
         boolDisplayEdit = !boolDisplayEdit; /* change current mode */
     } 
+    utility.checked = false;
+    boolAddEdit = false;
+    toggleAddEdit(null)
     /* check if current mode is add or edit */
     if(boolDisplayEdit){ /* if display */
-        addEditContent.style.display = "none"
-        displayEditContent.style.display = "block"
-        scene_input.value = ""
-        toggleAddEdit(false);
+    addEditContent.style.display = "none"
+    packageLayout.style.display = "grid"
+        //scene_input.value = ""
+        //toggleAddEdit(false);
     } else { /* if add */
-        if(patternDisplay.options.length != 0){
+        if(!isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
             addEditContent.style.display = "block"
-            $('#skyCol').minicolors('value', scenes[patternDisplay.value]['sky'].skyColor);
-            displayEditContent.style.display = "none"
+            packageLayout.style.display = "none"
+            //$('#skyCol').minicolors('value', scenes[patternDisplay.value]['sky'].skyColor);
         } else {
-            alert("You must add a scene");
+            alert("You must select a pattern");
             displayUtility.checked = false;
             boolDisplayEdit = !boolDisplayEdit;
         }
@@ -209,7 +212,7 @@ function toggleAddEdit(swap){
         }
         boolAddEdit = !boolAddEdit; /* change current mode */
         if(boolAddEdit){
-            selectedEntity = scene.querySelector("#"+$("#entityId :selected").text()); /* set selected entity to be first entity created */
+            selectedEntity = els[0] /* set selected entity to be first entity created */
             updateStats();
          } /* update stats */
     } else if(swap == false){
@@ -218,6 +221,8 @@ function toggleAddEdit(swap){
     }
     /* check if current mode is add or edit */
     if(boolAddEdit){ /* if edit */
+        editContent.style.display = 'block'
+        addContent.style.display = 'none'
         removeButton.style.display = "block";
         duplicateButton.display = "block";
         /* universal containers shown */
@@ -229,15 +234,15 @@ function toggleAddEdit(swap){
         entitySelectorText.style.display = "block";
         rotIn.style.display = "block";
         /*sendButton.style.display = "block";*/
-        saveButton.style.display = "block";
+        //saveButton.style.display = "block";
         posIn.style.display = "block";
         colIn.style.display = "block";
         advanced.style.display = "block";
 
         /* add related containers hidden */
-        addChoice.style.display = "none";
-        addButton.style.display = "none";
-        upload.style.display = "none";
+        //addChoice.style.display = "none";
+        //addButton.style.display = "none";
+        //upload.style.display = "none";
         
 
         /* check geometry of object */
@@ -282,15 +287,9 @@ function toggleAddEdit(swap){
             ringSpacing.style.display = "block";
         }
     } else { /* if add */
+        editContent.style.display = 'none'
+        addContent.style.display = 'block'
         hideEditStats(); /* hide edit containers */
-
-        /* show add containers */;
-        saveButton.style.display = "block";
-        background.style.display = "block";
-        skyIn.style.display = "block";
-        addChoice.style.display = "block"; 
-        addButton.style.display = "block";
-        upload.style.display = "block";
         
     }
 }

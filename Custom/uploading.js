@@ -6,7 +6,7 @@
 var defaultStr = "default"
 
 /* if JSON is uploaded */
-scene_input.addEventListener("change", function() {
+/*scene_input.addEventListener("change", function() {
     // checks if uploaded file is a JSON
     if(scene_input.value.split(".")[1] != "JSON"){
         alert("Invalid file type");
@@ -17,11 +17,11 @@ scene_input.addEventListener("change", function() {
     const reader = new FileReader();
     reader.addEventListener("load", () => {
         contentFile = JSON.parse(reader.result);
-        entityLoader(contentFile,scene_input.value.split("\\")[2].split(".")[0],true,true); /* loads all entities to scene */
+        entityLoader(contentFile,scene_input.value.split("\\")[2].split(".")[0],true,true); 
     });
     reader.readAsText(this.files[0]);
     
-});
+});*/
 
 // gets the extension of the current file name
 function getExtension(filename) {
