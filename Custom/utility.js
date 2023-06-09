@@ -255,6 +255,13 @@ function addPattern(){
     item.addEventListener('dragover', cancelDefault)
     item.addEventListener('click',selectPattern)
     //pattern.options.add(new Option(nameIn.value, nameIn.value))
+    
+    patternList.scrollTo({
+        top: 1000000000,
+        left: 0,
+        behavior: "smooth",
+      });
+      patternList.children[patternList.children.length-1].dispatchEvent(new Event('click',{target: patternList.children[parseInt(patternList.getAttribute('selectedIndex'))+1]}));
 }
 
 /* removes current pattern from pattern list */
@@ -455,6 +462,8 @@ function addPackage(){
     packageSelect.options.add(new Option(nameIn.value,nameIn.value))
     scenes[nameIn.value] = {}
     names[nameIn.value] = {}
+    packageSelect.value = nameIn.value
+    changePackage();
 }
 
 function changePackage(){
@@ -528,6 +537,11 @@ function pastePattern(){
         item.addEventListener('dragover', cancelDefault)
         item.addEventListener('click',selectPattern)
     })
+    patternList.scrollTo({
+        top: 1000000000,
+        left: 0,
+        behavior: "smooth",
+      });
     
 }
 

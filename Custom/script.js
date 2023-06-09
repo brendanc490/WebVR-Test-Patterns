@@ -224,6 +224,14 @@ items.forEach(item => {
 })
 
 function selectPattern (e){
+  if(e.target.style.background == 'rgb(243, 152, 20)'){
+    e.target.style.background = '#FFF'
+    patternList.setAttribute("selectedIndex","")
+    patternList.setAttribute("multi-select",false);
+    revertChanges()
+    nameIn.value = packageSelect.value;
+    return;
+  }
   e.target.style.background = '#F39814'
   items = document.querySelectorAll('#items-list > li');
   if(keysPressed['ctrl'] && !isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
@@ -238,12 +246,12 @@ function selectPattern (e){
       patternList.setAttribute("multi-select",false);
       revertChanges()
       addEntitiesFromScene(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent])
+      nameIn.value = patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent;
       if(els.length > 0){
         selectedEntity = els[0]
       }
     }
   })
-  
 }
 
 function dragStart (e) {

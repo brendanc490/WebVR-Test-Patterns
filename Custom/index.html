@@ -146,7 +146,7 @@
                         <p style="position: relative; text-align: center; padding-bottom: 10%; top: 0%;"><select class="select" name="packageDisplay" id="packageDisplay" onchange="changePackage(this)">
                             <option value="default">default</option>
                             </select></p></div>  
-                    <div class="item2" title="Hold the ctrl button to select multiple"><b>Pattern List:</b><ol id="items-list" class="moveable" selectedIndex="" multi-select="">
+                    <div class="item2" title="Hold the ctrl button to select multiple"><button style="text-align:center; width:10%" class="button add" onclick="copyPattern()"  title="Copy Patterns"><i class="fa-solid fa-clipboard"></i></button><b style="padding: 15%;">Pattern List:</b><button style="text-align:center; width:10%" class="button add" onclick="pastePattern()"  title="Paste Patterns"><i class="fa-solid fa-paste"></i></button><ol id="items-list" class="moveable" selectedIndex="" multi-select="" style="padding-top: 1%;">
                         <li>red</li>
                         <li>green</li>
                         <li>blue</li>
@@ -165,7 +165,7 @@
                         
                     </ol></div>
                     <div class="item3"><b>Name For Package/Pattern: </b></div>
-                    <div class="item4"><input type="text" class="input" id="name" value="name" style="width:60%;height:50%;text-align: center;background:rgb(255,255,255);border: 1px solid rgb(138, 138, 138);font-size: 15px;color:black;top: 0%;left: -20%;position: relative;"></div> 
+                    <div class="item4"><input type="text" class="input" id="name" value="default" style="width:60%;height:50%;text-align: center;background:rgb(255,255,255);border: 1px solid rgb(138, 138, 138);font-size: 15px;color:black;top: 0%;left: -20%;position: relative;"></div> 
                     <div class="item5"><button style="text-align:center;" class="button add" onclick="addPackage()" title="Add Package"><i class="fa-solid fa-plus"></i> Package</button></div>
                     <div class="item6"><button style="text-align:center;" class="button add" onclick="renamePackage()">Rename Package</button></div>
                     <div class="item7"><button style="text-align:center;" class="button add" onclick="addPattern()"  title="Add Pattern"><i class="fa-solid fa-plus"></i> Pattern</button></div>

@@ -456,7 +456,7 @@ scene_display_input.addEventListener("change", function() {
         flag = false;
         i = 0;
         while(i < packageSelect.options.length){
-            if(packageSelect.options[i].value == nameIn.value){
+            if(packageSelect.options[i].value == fileName){
                 alert('A package with this name already exists');
                 return
             }
@@ -464,7 +464,8 @@ scene_display_input.addEventListener("change", function() {
         }
     
         packageSelect.options.add(new Option(fileName,fileName))
-
+        packageSelect.value = fileName
+        changePackage()
         /*i = 0;
         while(i < len){
             var toggle_button = '<p><input type="checkbox" id="'+arr[i]+'" name="'+arr[i]+'" onclick="handlePatternSelect(this)"'
