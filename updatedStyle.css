@@ -205,7 +205,7 @@ input[type=text]{
        'AddPackage AddPattern'
        'RenamePackage RenamePattern'
        'SavePackage DeletePattern'
-       'pastePattern CopyPattern';
+       'CopyPattern pastePattern';
      grid-template-columns: 50% 50%;
      grid-template-rows: 9% 37% 9% 9% 9% 9% 9% 9%;
      background-color: #000000;

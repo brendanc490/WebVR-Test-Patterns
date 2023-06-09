@@ -454,6 +454,7 @@ function addPackage(){
 
     packageSelect.options.add(new Option(nameIn.value,nameIn.value))
     scenes[nameIn.value] = {}
+    names[nameIn.value] = {}
 }
 
 function changePackage(){
