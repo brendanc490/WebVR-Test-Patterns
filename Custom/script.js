@@ -150,12 +150,10 @@ const arraySpacing = document.getElementById("arraySpacing"); /* circle size con
 const arraySpacingIn = document.getElementById("arraySpacingIn"); /* circle size input */
 
 /* bullseye attributes */
-const numRings = document.getElementById("numRings"); /* circle size container paragraph */
-const numRingsIn = document.getElementById("numRingsIn"); /* circle size input */
-const ringThickness = document.getElementById("ringThickness"); /* circle size container paragraph */
-const ringThicknessIn = document.getElementById("ringThicknessIn"); /* circle size input */
-const ringSpacing = document.getElementById("ringSpacing"); /* circle size container paragraph */
-const ringSpacingIn = document.getElementById("ringSpacingIn"); /* circle size input */
+const numRings = document.getElementById("numRings"); /* number of rings container paragraph */
+const numRingsIn = document.getElementById("numRingsIn"); /* number of rings input */
+const ringPitch = document.getElementById("ringPitch"); /* ring pitch container paragraph */
+const ringPitchIn = document.getElementById("ringPitchIn"); /* ring pitch input */
 
 
 /* Send back/forward */

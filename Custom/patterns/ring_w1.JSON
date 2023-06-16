@@ -1,6 +1,6 @@
 {
 	"scenes": {
-		"bullseye": {
+		"ring_w1": {
 			"sky": {
 				"skyColor": "#000000"
 			},
@@ -13,7 +13,7 @@
 					"z": -250
 				},
 				"numRings": 30,
-				"ringPitch": 5,
+				"ringPitch": 1,
 				"position": {
 					"x": 0,
 					"y": 0,

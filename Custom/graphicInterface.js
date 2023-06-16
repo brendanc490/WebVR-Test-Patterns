@@ -43,8 +43,7 @@ function hideEditStats(){
     numDots.style.display = "none";
     numCircles.style.display = "none";
     arraySpacing.style.display = "none";
-    ringSpacing.style.display = "none";
-    ringThickness.style.display = "none";
+    ringPitch.style.display = "none";
     numRings.style.display = "none";
 }
  var flag = false;
@@ -167,8 +166,7 @@ function updateStats(){
         spacingIn.value = selectedEntity.components.arraySpacing.attrValue.val;
     } else if(selectedEntity.getAttribute("id").includes("bullseye")){
         numRingsIn.value = (selectedEntity.children.length-1);
-        ringThicknessIn.value = (selectedEntity.children[0].components.geometry.attrValue.radiusOuter-selectedEntity.children[0].components.geometry.attrValue.radiusInner);
-        ringSpacingIn.value = selectedEntity.components.ringSpacing.attrValue.val;
+        ringPitchIn.value = selectedEntity.children[0].components.geometry.attrValue.radiusOuter*2;
     }
 
 }
@@ -283,8 +281,7 @@ function toggleAddEdit(swap){
             spacing.style.display = "block";
         } else if (selectedEntity.getAttribute("id").includes("bullseye")){
             numRings.style.display = "block";
-            ringThickness.style.display = "block";
-            ringSpacing.style.display = "block";
+            ringPitch.style.display = "block";
         }
     } else { /* if add */
         editContent.style.display = 'none'

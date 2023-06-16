@@ -33,15 +33,24 @@ scenes['default']['circular dot array'] = circular_dot_array['scenes']['circular
 import crosshair from './patterns/crosshair.JSON' assert { type: "json" };
 scenes['default']['crosshair'] = crosshair['scenes']['crosshair']
 
-import bullseye from './patterns/bullseye.JSON' assert { type: "json" };
-scenes['default']['bullseye'] = bullseye['scenes']['bullseye']
+/*import bullseye from './patterns/bullseye.JSON' assert { type: "json" };
+scenes['default']['bullseye'] = bullseye['scenes']['bullseye']*/
 
-import ring_package from './patterns/pattern_package_ring_w5_10_20.JSON' assert { type: "json" };
+/*import ring_package from './patterns/pattern_package_ring_w5_10_20.JSON' assert { type: "json" };
 scenes['default']['ring_w5'] = ring_package['scenes']['ring_w5']
 scenes['default']['ring_w10'] = ring_package['scenes']['ring_w10']
-scenes['default']['ring_w20'] = ring_package['scenes']['ring_w20']
+scenes['default']['ring_w20'] = ring_package['scenes']['ring_w20']*/
 
-let arr = Object.keys(scenes)
+import ring_w1 from './patterns/ring_w1.JSON' assert { type: "json" };
+scenes['default']['ring_w1'] = ring_w1['scenes']['ring_w1']
+
+import ring_w2 from './patterns/ring_w2.JSON' assert { type: "json" };
+scenes['default']['ring_w2'] = ring_w2['scenes']['ring_w2']
+
+import ring_w5 from './patterns/ring_w5.JSON' assert { type: "json" };
+scenes['default']['ring_w5'] = ring_w5['scenes']['ring_w5']
+
+/*let arr = Object.keys(scenes)
     let len = arr.length
     let i = 0;
     let len2 = texture.options.length;
@@ -75,5 +84,5 @@ let arr = Object.keys(scenes)
             tmp[texture] = ring_package['textures']['uploadedTextureFormats'][texture]
         }
     });
-    uploadedTextureFormat = tmp
+    uploadedTextureFormat = tmp*/
         

@@ -104,11 +104,6 @@
                 val: {type: 'float', default: 10}
             },
         });
-        AFRAME.registerComponent('ringSpacing', {
-            schema: {
-                val: {type: 'float', default: 10}
-            },
-        });
         </script>
     </head>
 
@@ -158,10 +153,10 @@
                         <li>dot array</li>
                         <li>checkerboard_w</li>
                         <li>checkerboard_b</li>
+                        <li>ring_w1</li>
+                        <li>ring_w2</li>
                         <li>ring_w5</li>
-                        <li>ring_w10</li>
-                        <li>ring_w20</li>
-                        <li>bullseye</li>
+                        <!--<li>bullseye</li>-->
                         
                     </ol></div>
                     <div class="item3"><b>Name For Package/Pattern: </b></div>
@@ -223,8 +218,7 @@
                                 <p id="numCircles">Number of circle arrays: <input type="text" class="input" id="numCirclesIn" value=".1"></p>
                                 <p id="arraySpacing">Spacing of circle arrays: <input type="text" class="input" id="arraySpacingIn" value=".1"></p>
                                 <p id="numRings">Number of rings: <input type="text" class="input" id="numRingsIn" value=".1"></p>
-                                <p id="ringThickness">Ring Thickness: <input type="text" class="input" id="ringThicknessIn" value=".1"></p>
-                                <p id="ringSpacing">Spacing of rings: <input type="text" class="input" id="ringSpacingIn" value=".1"></p>
+                                <p id="ringPitch">Ring Pitch: <input type="text" class="input" id="ringPitchIn" value=".1"></p>
                                 <p id="textureIn">Texture:                 <select class="select" name="texture" id="texture">
                                     <option value="none">none</option>
                                     <option value="QC">TG18-QC.2k_12b</option>

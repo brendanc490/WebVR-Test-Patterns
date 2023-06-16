@@ -197,8 +197,7 @@ function addEntitiesFromScene(scene){
                 el.setAttribute('arraySpacing',scene[key].spacing);
             }  else if (key.includes("bullseye")){
                 el.setAttribute("id", "bullseye"+bullseyeNum++);
-                drawBullseye(scene[key].ringSpacing.val,scene[key].ringThickness,scene[key].numRings,scene[key].material.color,el);
-                el.setAttribute("ringSpacing",scene[key].ringSpacing);
+                drawBullseye(scene[key].ringPitch,scene[key].numRings,scene[key].material.color,el);
             }
             /* sets stats */
             el.setAttribute("angle", scene[key].angle);

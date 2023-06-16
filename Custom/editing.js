@@ -292,7 +292,7 @@ function editEntity(){
             alert("Please enter a valid number of rings");
             return;
         }
-        if(isNaN(parseFloat($("#ringThicknessIn").val()))){
+        if(isNaN(parseFloat($("#ringPitchIn").val()))){
             alert("Please enter a valid ring thickness");
             return;
         }
@@ -303,11 +303,8 @@ function editEntity(){
         if(parseFloat($("#numRingsIn").val()) <= 0 || parseFloat($("#numRingsIn").val()) % 1 != 0){
             alert("Please enter a valid number of rings ( > 0 and a whole number)");
             return;
-        } else if(parseFloat($("#ringThicknessIn").val()) < 0){
+        } else if(parseFloat($("#ringPitchIn").val()) < 0){
             alert("Please enter a ring thickness ( >= 0 )");
-            return;
-        } else if(parseFloat($("#ringSpacingIn").val()) < 0){
-            alert("Please enter a valid ring spacing ( >= 0 )");
             return;
         }
         // remove boxes
@@ -317,8 +314,7 @@ function editEntity(){
             i--;
         }
         // draw new boxes
-        drawBullseye(parseFloat($("#ringSpacingIn").val()),parseFloat($("#ringThicknessIn").val()),parseFloat($("#numRingsIn").val()),$("#color").val(),selectedEntity);
-        selectedEntity.setAttribute('ringSpacing',{val: parseFloat($("#ringSpacingIn").val())});
+        drawBullseye(parseFloat($("#ringPitchIn").val()),parseFloat($("#numRingsIn").val()),$("#color").val(),selectedEntity);
     } 
     updateJSON() // update the json file of current scene
 }

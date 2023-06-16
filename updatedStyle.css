@@ -24,7 +24,7 @@ body {
     background-color: rgba(211,211,211, 1);
     color: Black;
     padding: 1em;
-    overflow-y:auto;
+    overflow-y:scroll;
     overflow-x:auto;
   }
 
