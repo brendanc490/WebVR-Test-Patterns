@@ -24,7 +24,7 @@ body {
     background-color: rgba(211,211,211, 1);
     color: Black;
     padding: 1em;
-    overflow-y:scroll;
+    overflow-y:auto;
     overflow-x:auto;
   }
 
@@ -42,6 +42,20 @@ body {
     color: Black;
     padding: 1em;
     overflow-y:auto;
+    overflow-x:auto;
+  }
+
+  #debug{
+    display: block;
+    position: absolute;
+    width: 70vw;
+    height: 50vh;
+    right: 10px;
+    top: 10px;
+    background-color: rgba(211,211,211, 1);
+    color: Black;
+    padding: 1em;
+    overflow-y:scroll;
     overflow-x:auto;
   }
 
@@ -153,7 +167,7 @@ input[type=text]{
   .content {
     padding: 0 18px;
     display: block;
-    overflow: hidden;
+    overflow-y: scroll;
     background-color: #f1f1f1;
   }
   .hide { grid-area: Hide; text-align: center;}
