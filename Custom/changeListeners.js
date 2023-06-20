@@ -370,21 +370,39 @@ finished = false
 var ind = 0
 var block = false
 var fileName;
+var myLoop;
+var test;
 /* if JSON is uploaded */
 scene_display_input.addEventListener("change", function() {
 
-    var myLoop = slowLoop(scene_display_input.files, (itm, idx, cb)=>{
-    
+    myLoop = slowLoop(scene_display_input.files, (itm, idx, cb)=>{
+        test = itm;
         setTimeout(()=>{
             const reader = new FileReader();
-            reader.addEventListener("load", () => {
+            /*reader.addEventListener("load", () => {
 
                 fileContent = JSON.parse(reader.result);
                 scenes[fileName] = fileContent['scenes']
                 textures = fileContent['textures']['textureValues']
                 uploadedTextureFormats = fileContent['textures']['uploadedTextureFormats']
                 cb();
-            });
+            });*/
+
+            reader.onload = function() {
+                fileContent = JSON.parse(reader.result);
+                scenes[fileName] = fileContent['scenes']
+                textures = fileContent['textures']['textureValues']
+                uploadedTextureFormats = fileContent['textures']['uploadedTextureFormats']
+                cb();
+            };
+
+            reader.onabort = function() {
+                console.log('aborted')
+            };
+            reader.onerror = function(){
+                console.log('error')
+            }
+
             if(itm.name.split(".")[1] != "JSON"){
                 alert("Invalid file type");
                 scene_display_input.value = ""
@@ -401,20 +419,22 @@ scene_display_input.addEventListener("change", function() {
                 return;
             }
             reader.readAsText(itm);
-            
-
+            console.log(fileName)
             
             
             // call cb when finished
-            
             
         }, 100);
         
     });
     
+    myLoop.catch(() => {
+        console.log('error')
+    })
     // when it's done....
     myLoop.then(()=>{
         //patternList.innerHTML = ''
+        console.log('then');
         let arr = Object.keys(scenes)
         let len = arr.length
         let i = 0;
@@ -466,6 +486,7 @@ scene_display_input.addEventListener("change", function() {
         packageSelect.options.add(new Option(fileName,fileName))
         packageSelect.value = fileName
         changePackage()
+        console.log(JSON.stringify(scenes[fileName]))
         /*i = 0;
         while(i < len){
             var toggle_button = '<p><input type="checkbox" id="'+arr[i]+'" name="'+arr[i]+'" onclick="handlePatternSelect(this)"'
@@ -514,7 +535,7 @@ function slowLoop(items, loopBody) {
     
 });
 
-keysPressed = {ctrl: false, x: false, c: false, v: false}
+keysPressed = {ctrl: false, x: false, c: false, v: false, i: false}
 
 /* listens for key presses to change pattern */
 document.addEventListener('keyup', (e) => {
@@ -550,6 +571,8 @@ document.addEventListener('keyup', (e) => {
         keysPressed["x"] = false;
     } else if(e.code === "KeyV"){
         keysPressed["v"] = false;
+    } else if(e.code === "KeyI"){
+        keysPressed["i"] = false;
     }
   });
 
@@ -567,6 +590,8 @@ document.addEventListener('keydown', (e) => {
         } else if(keysPressed["v"]){
             // paste
             pastePattern();
+        } else if(keysPressed["i"]){
+            document.querySelector("#debug").style.display == 'block' ? document.querySelector("#debug").style.display = 'none' : document.querySelector("#debug").style.display = 'block'
         }
     } else if(e.code === "KeyC"){
         keysPressed["c"] = true;
@@ -585,6 +610,12 @@ document.addEventListener('keydown', (e) => {
         if(keysPressed["ctrl"]){
             // paste
             pastePattern();
+        }
+    } else if(e.code === "KeyI"){
+        keysPressed["i"] = true;
+        if(keysPressed["ctrl"]){
+            // paste
+            document.querySelector("#debug").style.display == 'block' ? document.querySelector("#debug").style.display = 'none' : document.querySelector("#debug").style.display = 'block'
         }
     }
   });  
