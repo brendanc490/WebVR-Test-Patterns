@@ -3,17 +3,15 @@ window.onload = function() {
     let id = thisPage.searchParams.forEach( id => {
         pastebinFetch('https://pastebin.run/'+id+'.txt');
     })
-    recentPackages.selectedIndex = -1
+    
     let i = 1;
     while(i < localStorage.length){
         var option = document.createElement("option");
         option.text = localStorage.getItem("key"+i)
         recentPackages.add(option);
-        if(id == option.text){
-            recentPackages.selectedIndex = i-1;
-        }
         i++;
     }
+    recentPackages.selectedIndex = -1
     
     
   };
