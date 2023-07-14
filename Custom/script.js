@@ -285,14 +285,25 @@ function dropped (e) {
   let newIndex = target.index()
   
   // remove dropped items at old place
-  let dropped = $(this).parent().children().eq(oldIndex).remove()
+  if(newIndex != oldIndex){
+    let dropped = $(this).parent().children().eq(oldIndex).remove()
 
-  // insert the dropped items at new place
-  if (newIndex < oldIndex) {
-    target.before(dropped)
-  } else {
-    target.after(dropped)
+    // insert the dropped items at new place
+    if (newIndex < oldIndex) {
+      target.before(dropped)
+    } else {
+      target.after(dropped)
+    }
+  } 
+  
+  let i = 0;
+  let reorderedScene = {}
+  while(i < patternList.children.length){
+    reorderedScene[patternList.children[i].innerHTML] = scenes[packageSelect.value][patternList.children[i].innerHTML]
+    i++;
   }
+  scenes[packageSelect.value] = reorderedScene
+
 }
 
 function cancelDefault (e) {
