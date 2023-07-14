@@ -26,11 +26,10 @@ async function pastebinFetch(url){
             
         } else {
             console.log(url)
-           manageLocalStorage(url.split("https://pastebin.run/")[1].split(".txt")[0])
            return res.json()
         }
     });
-
+    manageLocalStorage(fileContent['filename'] + " ("+url.split("https://pastebin.run/")[1].split(".txt")[0]+")")
     scenes[fileContent['filename']] = fileContent['scenes']
     names[fileContent['filename']] = {}
     Object.keys(fileContent['scenes']).forEach( name => {

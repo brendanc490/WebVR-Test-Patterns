@@ -644,9 +644,10 @@ function cutPattern(){
 
 function handleImport(){
     let url = prompt('Enter the provided url: ');
-    if(!url.includes('id') || !url.includes('Custom')){
+    if(!url.includes('pastebin') || !url.includes('.txt')){
         alert('Please enter a valid link');
         return;
     }
-    window.location = url;
+    pastebinFetch(url)
+    //window.location = url;
 }
