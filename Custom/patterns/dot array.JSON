@@ -12,6 +12,7 @@
 					"x": 0,
 					"z": -250
 				},
+				"toggleCenterDot": false,
 				"rows": 21,
 				"cols": 21,
 				"circleSize": 2,

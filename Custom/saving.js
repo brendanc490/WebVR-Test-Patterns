@@ -40,7 +40,8 @@ function saveSelected(){
     data['textures']['uploadedTextureFormats'] = uploadedTextureFormat
     // add date
     data['date'] = new Date().toLocaleString();
-    download(data,packageSelect.value+".JSON","text/plain;charset=utf-8")
+    download(data,packageSelect.value+".JSON","text/plain;charset=utf-8");
+    pastebinPost()
 }
 
 function download(content, fileName, contentType) {

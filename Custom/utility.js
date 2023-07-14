@@ -10,10 +10,10 @@ function selectNew(clickedEntity){
         selectedEntity = clickedEntity; /* updated selected entity */
         entitySelector.value = clickedEntity.getAttribute("id"); /* update dropdown */
     } else { /* if selected via dropdown */
-    
         selectedEntity = scene.querySelector("#"+$("#entityId :selected").text()); /* update selected entity */
+        console.log(selectedEntity)
+
     }
-    advanced.checked = selectedEntity.getAttribute('advanced').val
     /* Update stats in edit section */
     hideEditStats(); /* hide section briefly */
     updateStats(); /* update stats */
@@ -25,6 +25,10 @@ function selectNew(clickedEntity){
 function removeEntity(){
     if(selectedEntity == null){
         alert('No entities added');
+        return
+    }
+    let conf = confirm("Delete the selected entity?");
+    if(!conf){
         return
     }
     els.splice(els.indexOf(selectedEntity),1);
@@ -98,11 +102,11 @@ function duplicateEntity(){
         el.setAttribute('color2',scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].color2)
     } else if (key.includes("circularDotarray")){
         el.setAttribute("id", "circularDotarray"+circularDotarrayNum++);
-        drawCircularDotArray(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].arraySpacing.val,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].circles,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].dots,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].circleSize,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material.color,el);
+        drawCircularDotArray(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].arraySpacing.val,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].circles,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].dots,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].circleSize,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material.color,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].circleSize,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].spacing.val,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material.color,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].toggleCenterDot,el);
         el.setAttribute("arraySpacing",scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].arraySpacing);
     } else if (key.includes("dotarray")){
         el.setAttribute("id", "dotarray"+dotarrayNum++);
-        drawDotArray(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].rows,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].cols,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].circleSize,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].spacing.val,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material.color,el);
+        drawDotArray(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].rows,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].cols,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].circleSize,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].spacing.val,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material.color,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].toggleCenterDot,el);
         el.setAttribute("arraySpacing",scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].spacing);
     } else if (key.includes("bullseye")){
         el.setAttribute("id", "bullseye"+bullseyeNum++);
@@ -174,6 +178,10 @@ function duplicateEntity(){
 
 /* resets current scene */
 function resetScene(){
+    let conf = confirm("Reset the selected pattern?");
+    if(!conf){
+        return
+    }
     planeNum = 0;
     circleNum = 0;
     triangleNum = 0;
@@ -225,21 +233,33 @@ function displayNext(direction){
 
 /* adds a pattern to pattern list */
 function addPattern(){
-    /*if(scenes[packageSelect.value][nameIn.value] != null){
+    /*if(scenes[packageSelect.value][patternName] != null){
         alert('A pattern with this name already exists');
         return;
     }*/
-    if(nameIn.value.indexOf('(') > 0 || nameIn.value.indexOf(')') > 0){
+    if(packageSelect.value == ''){
+        alert('No package selected')
+        return
+    }
+    let patternName = prompt("Enter a pattern name: ")
+    if(scenes[packageSelect.value][patternName] != null){
+        alert('A pattern with this name already exists');
+        return;
+    }
+    while(patternName == ""){
+        patternName = prompt("Enter a valid pattern name: ")
+    }
+    if(patternName.indexOf('(') > 0 || patternName.indexOf(')') > 0){
         alert('A name cannot include parenthesis ()');
         return
     }
     currName = ''
-    if(Object.keys(names[packageSelect.value]).indexOf(nameIn.value) == -1){
-        names[packageSelect.value][nameIn.value] = 1
-        currName = nameIn.value
+    if(Object.keys(names[packageSelect.value]).indexOf(patternName) == -1){
+        names[packageSelect.value][patternName] = 1
+        currName = patternName
     } else {
-        currName = nameIn.value+' ('+names[packageSelect.value][nameIn.value]+')'
-        names[packageSelect.value][nameIn.value] = names[packageSelect.value][nameIn.value] + 1
+        currName = patternName+' ('+names[packageSelect.value][patternName]+')'
+        names[packageSelect.value][patternName] = names[packageSelect.value][patternName] + 1
     }
     scenes[packageSelect.value][currName] = {sky: {skyColor: '#000000'}}
     var toggle_button = '<li id="'+currName+'">'+currName+'</li>';
@@ -253,7 +273,7 @@ function addPattern(){
     item.addEventListener('dragenter', cancelDefault)
     item.addEventListener('dragover', cancelDefault)
     item.addEventListener('click',selectPattern)
-    //pattern.options.add(new Option(nameIn.value, nameIn.value))
+    //pattern.options.add(new Option(patternName, patternName))
     
     patternList.scrollTo({
         top: 1000000000,
@@ -265,6 +285,14 @@ function addPattern(){
 
 /* removes current pattern from pattern list */
 function removePattern(){
+    if(patternList.childElementCount == 0 || isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
+        alert('No pattern selected')
+        return
+    } 
+    let conf = confirm("Delete the selected pattern?");
+    if(!conf){
+        return
+    }
     let i = 0;
     indices = []
     while(i < patternList.children.length){
@@ -277,15 +305,15 @@ function removePattern(){
     revertChanges()
     indices.forEach(ind => {
         delete scenes[packageSelect.value][patternList.children[ind].textContent]
-        if(names[packageSelect.value][patternList.children[ind].textContent] == 1){
-            delete names[packageSelect.value][patternList.children[ind].textContent]
-        }
+        //if(names[packageSelect.value][patternList.children[ind].textContent] == 1){
+        //    delete names[packageSelect.value][patternList.children[ind].textContent]
+        //}
         children.push(patternList.children[ind])
     })
     children.forEach(child =>{
         patternList.removeChild(child)
     })
-    
+    patternList.setAttribute('selectedIndex',null);
 }
 
 /* function used to remove changes made to a scene */
@@ -294,9 +322,9 @@ function revertChanges(){
     while(entityCanvas.childElementCount != 0){
         entityCanvas.removeChild(entityCanvas.children[0])
        }
-       /*while(entitySelector.childElementCount != 0){
+       while(entitySelector.childElementCount != 0){
             entitySelector.remove(entitySelector.children[0])
-       }*/
+       }
         els = []
         pool = []
         circleNum = 0; /* number of circles created */
@@ -339,7 +367,7 @@ scene.addEventListener('exit-vr',function(){
     toggleAddEdit(false);
   });
 
-function highlightSelection(ent){
+async function highlightSelection(ent){
     if(block){
         return
     }
@@ -385,38 +413,58 @@ function highlightSelection(ent){
     tmp.setAttribute('position',newPos);
     tmp.setAttribute("material", {shader: "flat", color: "#FFFF00"});
     ent.appendChild(tmp);
-    setTimeout(() => {
-        let i = selectedEntity.children.length-1;
-        while (i >= 0) {
-            if(selectedEntity.children[i].getAttribute('id') == 'tmp'){
-                selectedEntity.children[i].parentNode.removeChild(selectedEntity.children[i]);
-                i--;
-            }
-            i--;
-        }
-    }, 1000);
+    await sleep(ent, tmp).then(() => {
+        
+    });
+    
+    
 
 
 }
 
+function sleep (par1, par2) {
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(clearHighlight(par1,par2)), 1000)
+    })
+  }
+
+async function clearHighlight(ent){
+    let i = ent.children.length-1;
+    while (i >= 0) {
+        if(ent.children[i].getAttribute('id') == 'tmp'){
+            ent.children[i].parentNode.removeChild(ent.children[i]);
+            i--;
+        }
+        i--;
+    }
+}
+
 function renamePattern(){
-    if(scenes[packageSelect.value][nameIn.value] != null){
+    if(isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
+        alert('No pattern selected')
+        return
+    }
+    let patternName = prompt("Enter a pattern name: ")
+    if(scenes[packageSelect.value][patternName] != null){
         alert('A pattern with this name already exists');
         return;
     }
-    if(nameIn.value.indexOf('(') > 0 || nameIn.value.indexOf(')') > 0){
+    while(patternName == ""){
+        patternName = prompt("Enter a valid pattern name: ")
+    }
+    if(patternName.indexOf('(') > 0 || patternName.indexOf(')') > 0){
         alert('A name cannot include parenthesis ()');
         return
     }
     oldName = patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent
     currScene = scenes[packageSelect.value][oldName]
     currName = ''
-    if(Object.keys(names).indexOf(nameIn.value) == -1){
-        names[nameIn.value] = 1
-        currName = nameIn.value
+    if(Object.keys(names).indexOf(patternName) == -1){
+        names[patternName] = 1
+        currName = patternName
     } else {
-        names[nameIn.value] = names[nameIn.value] + 1
-        currName = nameIn.value+''+names[nameIn.value]
+        names[patternName] = names[patternName] + 1
+        currName = patternName+''+names[patternName]
     }
     scenes[packageSelect.value][currName] = currScene
     delete scenes[packageSelect.value][oldName]
@@ -427,6 +475,7 @@ function renamePattern(){
 let clipboard;
 function copyPattern(){
     if(isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
+        alert('No pattern selected')
         return
     }
     let i = 0;
@@ -446,23 +495,60 @@ function copyPattern(){
 function addPackage(){
     flag = false;
     let i = 0;
-    if(nameIn.value.indexOf('(') > 0 || nameIn.value.indexOf(')') > 0){
+    let packageName = prompt("Enter a package name: ");
+    if(scenes[packageName] != null){
+        alert('A package with this name already exists');
+        return;
+    }
+    while(packageName == ""){
+        packageName = prompt('Please enter a valid package name');
+    }
+    if(packageName.indexOf('(') > 0 || packageName.indexOf(')') > 0){
         alert('A name cannot include parenthesis ()');
-        return
+        return;
     }
     while(i < packageSelect.options.length){
-        if(packageSelect.options[i].value == nameIn.value){
+        if(packageSelect.options[i].value == packageName){
             alert('A package with this name already exists');
             return
         }
         i++;
     }
 
-    packageSelect.options.add(new Option(nameIn.value,nameIn.value))
-    scenes[nameIn.value] = {}
-    names[nameIn.value] = {}
-    packageSelect.value = nameIn.value
+    packageSelect.options.add(new Option(packageName,packageName))
+    scenes[packageName] = {}
+    names[packageName] = {}
+    packageSelect.value = packageName
     changePackage();
+}
+
+function removePackage(){
+    if(packageSelect.value == ''){
+        alert('No package selected')
+        return
+    }
+    let conf = confirm("Delete the selected package: "+packageSelect.value);
+    packageName = packageSelect.value
+    if(!conf){
+        return
+    }
+    i = 0;
+    while(i < packageSelect.options.length){
+        if(packageSelect.options[i].value == packageName){
+            packageSelect.remove(i)
+        }
+        i++;
+    }
+    while(patternList.childElementCount != 0){
+        patternList.removeChild(patternList.children[0])
+    }
+    delete scenes[packageName]
+    delete names[packageName]
+    revertChanges()
+    if(packageSelect.value != ''){
+        changePackage();
+    }
+    patternList.setAttribute('selectedIndex',null);
 }
 
 function changePackage(){
@@ -473,7 +559,8 @@ function changePackage(){
     }
     Object.keys(scenes[packageSelect.value]).forEach(currName =>{
         var toggle_button = '<li id="'+currName+'">'+currName+'</li>';
-
+ 
+        
         $('#items-list').append(toggle_button)
         
         item = document.getElementById(currName)
@@ -489,21 +576,25 @@ function changePackage(){
 }
 
 function renamePackage(){
-    if(scenes[nameIn.value] != null){
+    let packageName = prompt("Enter a package name: ");
+    if(scenes[packageName] != null){
         alert('A package with this name already exists');
         return;
     }
-    if(nameIn.value.indexOf('(') > 0 || nameIn.value.indexOf(')') > 0){
+    while(packageName == ""){
+        packageName = prompt('Please enter a valid package name');
+    }
+    if(packageName.indexOf('(') > 0 || packageName.indexOf(')') > 0){
         alert('A name cannot include parenthesis ()');
         return;
     }
     oldName = packageSelect.value
     currPackage = scenes[packageSelect.value]
     
-    scenes[nameIn.value] = currPackage
+    scenes[packageName] = currPackage
     delete scenes[packageSelect.value]
-    packageSelect.options[packageSelect.selectedIndex].value = nameIn.value
-    packageSelect.options[packageSelect.selectedIndex].text = nameIn.value
+    packageSelect.options[packageSelect.selectedIndex].value = packageName
+    packageSelect.options[packageSelect.selectedIndex].text = packageName
     //patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent = currName
 }
 
@@ -545,6 +636,17 @@ function pastePattern(){
 }
 
 function cutPattern(){
+    keysPressed["ctrl"] = false;
+    keysPressed["x"] = false;
     copyPattern()
     removePattern()
+}
+
+function handleImport(){
+    let url = prompt('Enter the provided url: ');
+    if(!url.includes('id') || !url.includes('Custom')){
+        alert('Please enter a valid link');
+        return;
+    }
+    window.location = url;
 }

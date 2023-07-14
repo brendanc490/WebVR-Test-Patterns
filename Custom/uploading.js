@@ -6,22 +6,6 @@
 var defaultStr = "default"
 
 /* if JSON is uploaded */
-/*scene_input.addEventListener("change", function() {
-    // checks if uploaded file is a JSON
-    if(scene_input.value.split(".")[1] != "JSON"){
-        alert("Invalid file type");
-        scene_input.value = "";
-        return;
-    }
-    // reads in file
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-        contentFile = JSON.parse(reader.result);
-        entityLoader(contentFile,scene_input.value.split("\\")[2].split(".")[0],true,true); 
-    });
-    reader.readAsText(this.files[0]);
-    
-});*/
 
 // gets the extension of the current file name
 function getExtension(filename) {
@@ -189,12 +173,14 @@ function addEntitiesFromScene(scene){
                 el.setAttribute('color2',scene[key].color2)
             } else if (key.includes("circularDotarray")){
                 el.setAttribute("id", "circularDotarray"+circularDotarrayNum++);
-                drawCircularDotArray(scene[key].arraySpacing.val,scene[key].circles,scene[key].dots,scene[key].circleSize,scene[key].material.color,el);
+                drawCircularDotArray(scene[key].arraySpacing.val,scene[key].circles,scene[key].dots,scene[key].circleSize,scene[key].material.color,scene[key].toggleCenterDot,el);
                 el.setAttribute("arraySpacing",scene[key].arraySpacing);
+                el.setAttribute('toggleCenterDot',scene[key].toggleCenterDot);
             } else if (key.includes("dotarray")){
                 el.setAttribute("id", "dotarray"+dotarrayNum++);
-                drawDotArray(scene[key].rows,scene[key].cols,scene[key].circleSize,scene[key].spacing.val,scene[key].material.color,el);
+                drawDotArray(scene[key].rows,scene[key].cols,scene[key].circleSize,scene[key].spacing.val,scene[key].material.color,scene[key].toggleCenterDot,el);
                 el.setAttribute('arraySpacing',scene[key].spacing);
+                el.setAttribute('toggleCenterDot',scene[key].toggleCenterDot);
             }  else if (key.includes("bullseye")){
                 el.setAttribute("id", "bullseye"+bullseyeNum++);
                 drawBullseye(scene[key].ringPitch,scene[key].numRings,scene[key].material.color,el);

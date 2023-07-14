@@ -303,6 +303,14 @@ $("#ringThicknessIn").change(function() {
     editEntity();
   });
 
+$("#toggleCenterDotIn").change(function() {
+    editEntity();
+});
+
+$("#ringPitchIn").change(function() {
+    editEntity();
+});
+
 /* sends entity back or forward one layer */
 /*function sendBack(isback){
     let tmp = null;
@@ -391,6 +399,14 @@ scene_display_input.addEventListener("change", function() {
             reader.onload = function() {
                 fileContent = JSON.parse(reader.result);
                 scenes[fileName] = fileContent['scenes']
+                names[fileName] = {}
+                Object.keys(fileContent['scenes']).forEach( currName => {
+                    if(names[fileName] == null){
+                        names[fileName][currName] = names[fileName][currName] + 1
+                    } else {
+                        names[fileName][currName] = 1
+                    }
+                });
                 textures = fileContent['textures']['textureValues']
                 uploadedTextureFormats = fileContent['textures']['uploadedTextureFormats']
                 cb();
@@ -399,9 +415,10 @@ scene_display_input.addEventListener("change", function() {
             reader.onabort = function() {
                 console.log('aborted')
             };
-            reader.onerror = function(){
-                console.log('error')
-            }
+            reader.addEventListener("error", (event) => {
+                console.log('error:')
+                console.log(event.currentTarget.error)
+            });
 
             if(itm.name.split(".")[1] != "JSON"){
                 alert("Invalid file type");
@@ -429,7 +446,7 @@ scene_display_input.addEventListener("change", function() {
     });
     
     myLoop.catch(() => {
-        console.log('error')
+        //console.log('error')
     })
     // when it's done....
     myLoop.then(()=>{
@@ -486,7 +503,6 @@ scene_display_input.addEventListener("change", function() {
         packageSelect.options.add(new Option(fileName,fileName))
         packageSelect.value = fileName
         changePackage()
-        console.log(JSON.stringify(scenes[fileName]))
         /*i = 0;
         while(i < len){
             var toggle_button = '<p><input type="checkbox" id="'+arr[i]+'" name="'+arr[i]+'" onclick="handlePatternSelect(this)"'

@@ -24,17 +24,6 @@ const nameIn = document.getElementById('name');
 const displayUtility = document.getElementById('displayUtility');
 const advanced = document.getElementById('advanced');
 
-collapse.addEventListener("click", function() {
-    //this.classList.toggle("active");
-    if (content.style.display === "block") {
-        collapse.innerHTML = "Show Settings";
-        content.style.display = "none";
-    } else {
-        collapse.innerHTML = "Hide Settings";
-        content.style.display = "block";
-    }
-  });
-
 /* Display scenes */
 const pattern = document.getElementById("pattern");
 const patternList = document.getElementById("items-list");
@@ -70,12 +59,18 @@ var zIn = document.getElementById("z"); /* z input */
 /* Rotation related */
 const rotationZ = document.getElementById("rotationZ");
 const rotationY = document.getElementById("rotationY");
-const rotationX = document.getElementById("rotationX"); /* rotation container paragraph */ 
+const rotationX = document.getElementById("rotationX");
+
+const pitch = document.getElementById("pitch");
+const roll = document.getElementById("roll");
+const yaw = document.getElementById("yaw");
+/* rotation container paragraph */ 
 //rotationY.style.display = 'none'
 //rotationX.style.display = 'none'
-const rotIn = document.getElementById("rotIn"); /* rotation input */
+const rotIn = document.getElementById("rotation"); /* rotation input */
 
 /* Color related */
+const entColor = document.getElementById("entColor");
 const color = document.getElementById("color"); /* color container paragraph */
 const colIn = document.getElementById("colIn"); /* color input */
 const colIn2 = document.getElementById("colIn2"); /* color input */
@@ -108,6 +103,8 @@ const heightIn = document.getElementById("heightIn"); /* height input */
 
 /* Triangle only attributes */
 /* Vertex A related */
+
+const vertices = document.getElementById("vertices");
 const va = document.getElementById("va"); /* vertex A container paragraph */
 const vax = document.getElementById("vax"); /* x input */
 const vay = document.getElementById("vay"); /* y input */
@@ -148,12 +145,20 @@ const numCircles = document.getElementById("numCircles"); /* circle size contain
 const numCirclesIn = document.getElementById("numCirclesIn"); /* circle size input */
 const arraySpacing = document.getElementById("arraySpacing"); /* circle size container paragraph */
 const arraySpacingIn = document.getElementById("arraySpacingIn"); /* circle size input */
+const toggleCenterDot = document.getElementById("toggleCenterDot");
+const toggleCenterDotIn = document.getElementById("toggleCenterDotIn");
 
 /* bullseye attributes */
 const numRings = document.getElementById("numRings"); /* number of rings container paragraph */
 const numRingsIn = document.getElementById("numRingsIn"); /* number of rings input */
 const ringPitch = document.getElementById("ringPitch"); /* ring pitch container paragraph */
 const ringPitchIn = document.getElementById("ringPitchIn"); /* ring pitch input */
+
+const settingsButtonContainer = document.getElementById("settingsButtonContainer");
+const settingsButton = document.getElementById("settingsButton");
+const settingsIcon = document.getElementById("settingsIcon");
+
+const swapContainer = document.getElementById("swapContainer");
 
 
 /* Send back/forward */
@@ -173,6 +178,17 @@ const scene_input = document.querySelector("#scene-input"); /* upload button */
 
 const removeButton = document.getElementById("removeButton"); /* remove button container paragraph */
 const duplicateButton = document.getElementById("duplicateButton");
+
+const specificSettings = document.getElementById("specificSettings");
+const area1 = document.getElementById("area1");
+const area2 = document.getElementById("area2");
+const area3 = document.getElementById("area3");
+const area4 = document.getElementById("area4");
+const area5 = document.getElementById("area5");
+
+const hideUniversalIcon = document.getElementById("hideUniversalIcon");
+const hideSpecificIcon = document.getElementById("hideSpecificIcon");
+const universalHeader = document.getElementById("universalHeader");
 
 /* Local Variables */
 var el = null; /* recently created entity */
@@ -207,6 +223,9 @@ const coreLayout = document.getElementById('coreLayout');
 const packageLayout = document.getElementById('packageLayout');
 const editPatternLayout = document.getElementById('editPatternLayout');
 const packageSelect = document.getElementById('packageDisplay')
+
+const recentPackages = document.getElementById('recentPackages')
+
 patternList.setAttribute('multi-select',false);
 
 
@@ -244,7 +263,7 @@ function selectPattern (e){
       patternList.setAttribute("multi-select",false);
       revertChanges()
       addEntitiesFromScene(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent])
-      nameIn.value = patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent;
+      //nameIn.value = patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent;
       if(els.length > 0){
         selectedEntity = els[0]
       }

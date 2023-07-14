@@ -1,5 +1,5 @@
 .minicolors {
-  position: absolute;
+  position: relative;
 }
 
 .minicolors-sprite {
@@ -64,7 +64,7 @@
 
 /* Panel positioning */
 .minicolors-position-top .minicolors-panel {
-  top: -154px;
+  left: -100px;
 }
 
 .minicolors-position-right .minicolors-panel {

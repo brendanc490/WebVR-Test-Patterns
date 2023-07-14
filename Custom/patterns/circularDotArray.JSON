@@ -12,6 +12,7 @@
 					"x": 0,
 					"z": -250
 				},
+				"toggleCenterDot": false,
 				"circles": 10,
 				"dots": 20,
 				"arraySpacing": {

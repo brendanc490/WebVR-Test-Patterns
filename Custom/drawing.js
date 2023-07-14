@@ -49,14 +49,16 @@ function addEntity(){
         el.setAttribute("color2",{val: "#000000"})
     } else if ($("#entity :selected").text() == "dot array"){
         el.setAttribute("id","dotarray"+dotarrayNum++);
-        drawDotArray(5,5,2,10,"#"+R+G+B,el);
+        drawDotArray(5,5,2,10,"#"+R+G+B,false,el);
         el.setAttribute("arraySpacing",{val: 10});
+        el.setAttribute("toggleCenterDot",false);
         el.setAttribute("material",{shader: "flat", color: "#"+R+G+B});
     }  else if ($("#entity :selected").text() == "circlular dot array"){
         el.setAttribute("id","circularDotarray"+circularDotarrayNum++);
-        drawCircularDotArray(10,5,10,2,"#"+R+G+B,el);
+        drawCircularDotArray(10,5,10,2,"#"+R+G+B,false,el);
         el.setAttribute("material",{shader: "flat", color: "#"+R+G+B});
         el.setAttribute("arraySpacing",{val: 10});
+        el.setAttribute("toggleCenterDot",false);
     } else if ($("#entity :selected").text() == "bullseye"){
         el.setAttribute("id","bullseye"+bullseyeNum++);
         drawBullseye(5,5,"#"+R+G+B,el);
@@ -75,8 +77,8 @@ function addEntity(){
     
     entityCanvas.appendChild(el); /* add entity to scene */
 
-    /* add entity to potential selections */
-    var option = document.createElement("option"); 
+    /* adds option to dropdown */
+    var option = document.createElement("option");
     option.text = el.getAttribute("id");
     entitySelector.add(option);
 
@@ -217,7 +219,7 @@ function drawCheckerboard(rows,cols,size,color1,color2,parent){
 }
 
 /* draws dot array */
-function drawDotArray(rows,cols,size,spacing,color1,parent){
+function drawDotArray(rows,cols,size,spacing,color1,toggle,parent){
     /* draws evenly spaced squares */
     var r = 0;
     while (r < rows){
@@ -228,7 +230,11 @@ function drawDotArray(rows,cols,size,spacing,color1,parent){
             let elChildCol = document.createElement("a-entity");
             elChildCol.setAttribute("id",parent.id+"-"+"col"+c);
             if((size+2*spacing)*cols/2-((size+2*spacing)*c)-((size+2*spacing)/2) == 0 && (size+2*spacing)*rows/2-((size+2*spacing)*r)-((size+2*spacing)/2) == 0){
-                elChildCol.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: size/3, segmentsTheta: 100});
+                if(toggle){
+                    elChildCol.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: 0, segmentsTheta: 100});
+                } else {
+                    elChildCol.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: size/3, segmentsTheta: 100});
+                }
             } else {
                 elChildCol.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: 0, segmentsTheta: 100});
             }
@@ -243,11 +249,16 @@ function drawDotArray(rows,cols,size,spacing,color1,parent){
     
 }
 
-function drawCircularDotArray(radius,circles,dots,size,color1,parent){
+function drawCircularDotArray(radius,circles,dots,size,color1,toggle,parent){
     let c = 1;
     let middleDot = document.createElement("a-entity");
     middleDot.setAttribute("id",parent.id+"-center");
-    middleDot.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: 0, segmentsTheta: 100});
+    if(toggle){
+        middleDot.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: 0, segmentsTheta: 100});
+    } else {
+        middleDot.setAttribute("geometry",{primitive: "ring", radiusOuter: size, radiusInner: size/3, segmentsTheta: 100});
+    }
+    
     middleDot.setAttribute("position",{x: 0, y: 0, z: 0});
     middleDot.setAttribute("material",{shader: "flat", color: color1});
     parent.appendChild(middleDot)
@@ -309,9 +320,9 @@ function updateJSON(){
         } else if(element.id.includes("triangle")){
             jsonData[element.id]={advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, geometry: element.components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         } else if(element.id.includes("circularDotarray")){
-            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, circles: element.children.length-1, dots: element.children[1].children.length, arraySpacing: element.components.arraySpacing.attrValue, circleSize: element.children[0].components.geometry.attrValue.radiusOuter, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, toggleCenterDot: element.components.angle.attrValue, circles: element.children.length-1, dots: element.children[1].children.length, arraySpacing: element.components.arraySpacing.attrValue, circleSize: element.children[0].components.geometry.attrValue.radiusOuter, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         } else if(element.id.includes("dotarray")){
-            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, rows: element.children.length, cols: element.children[0].children.length, circleSize: element.children[0].children[0].components.geometry.attrValue.radiusOuter, spacing: element.components.arraySpacing.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, toggleCenterDot: element.components.angle.attrValue, rows: element.children.length, cols: element.children[0].children.length, circleSize: element.children[0].children[0].components.geometry.attrValue.radiusOuter, spacing: element.components.arraySpacing.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         } else if(element.id.includes("bullseye")){
             jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, numRings: element.children.length-1, ringPitch: element.children[0].components.geometry.attrValue.radiusOuter*2, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         }});

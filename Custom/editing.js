@@ -244,7 +244,7 @@ function editEntity(){
             i--;
         }
         // draw new boxes
-        drawCircularDotArray(parseFloat($("#arraySpacingIn").val()),parseFloat($("#numCirclesIn").val()),parseFloat($("#numDotsIn").val()),parseFloat($("#circleSizeIn").val()),$("#color").val(),selectedEntity);
+        drawCircularDotArray(parseFloat($("#arraySpacingIn").val()),parseFloat($("#numCirclesIn").val()),parseFloat($("#numDotsIn").val()),parseFloat($("#circleSizeIn").val()),$("#color").val(),toggleCenterDotIn.checked,selectedEntity);
         selectedEntity.setAttribute('arraySpacing',{val: parseFloat($("#arraySpacingIn").val())});
     } else if (selectedEntity.getAttribute("id").includes("dotarray")){ /* checkerboard only changes */
         // check for valid inputs
@@ -284,8 +284,9 @@ function editEntity(){
             i--;
         }
         // draw new boxes
-        drawDotArray(parseFloat($("#rowsIn").val()),parseFloat($("#colsIn").val()),parseFloat($("#circleSizeIn").val()),parseFloat($("#spacingIn").val()),$("#color").val(),selectedEntity);
+        drawDotArray(parseFloat($("#rowsIn").val()),parseFloat($("#colsIn").val()),parseFloat($("#circleSizeIn").val()),parseFloat($("#spacingIn").val()),$("#color").val(),toggleCenterDotIn.checked,selectedEntity);
         selectedEntity.setAttribute('arraySpacing',{val: parseFloat($("#spacingIn").val())});
+        selectedEntity.setAttribute('toggleCenterDot',toggleCenterDotIn.checked);
     }  else if (selectedEntity.getAttribute("id").includes("bullseye")){ /* checkerboard only changes */
         // check for valid inputs
         if(isNaN(parseFloat($("#numRingsIn").val()))){
@@ -294,10 +295,6 @@ function editEntity(){
         }
         if(isNaN(parseFloat($("#ringPitchIn").val()))){
             alert("Please enter a valid ring thickness");
-            return;
-        }
-        if(isNaN(parseFloat($("#ringSpacingIn").val()))){
-            alert("Please enter a valid ring spacing");
             return;
         }
         if(parseFloat($("#numRingsIn").val()) <= 0 || parseFloat($("#numRingsIn").val()) % 1 != 0){
