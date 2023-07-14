@@ -200,6 +200,6 @@ function changeUrl(){
         return
     }
     let thisPage = new URL(window.location);
-    newUrl = thisPage.origin+thisPage.pathname+"?id="+recentPackages.value
+    newUrl = thisPage.origin+thisPage.pathname+"?id="+recentPackages.value.split('(')[1].split(')')[0]
     window.location = newUrl
 }
