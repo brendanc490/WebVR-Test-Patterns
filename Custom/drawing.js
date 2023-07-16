@@ -51,14 +51,15 @@ function addEntity(){
         el.setAttribute("id","dotarray"+dotarrayNum++);
         drawDotArray(5,5,2,10,"#"+R+G+B,false,el);
         el.setAttribute("arraySpacing",{val: 10});
-        el.setAttribute("toggleCenterDot",false);
+        el.setAttribute("toggleCenterDot", {val: false});
         el.setAttribute("material",{shader: "flat", color: "#"+R+G+B});
     }  else if ($("#entity :selected").text() == "circlular dot array"){
         el.setAttribute("id","circularDotarray"+circularDotarrayNum++);
         drawCircularDotArray(10,5,10,2,"#"+R+G+B,false,el);
         el.setAttribute("material",{shader: "flat", color: "#"+R+G+B});
-        el.setAttribute("arraySpacing",{val: 10});
-        el.setAttribute("toggleCenterDot",false);
+        el.setAttribute("arraySpacing", {val: 10});
+        el.setAttribute("toggleCenterDot", {val: false});
+        console.log('toggleCenterDot')
     } else if ($("#entity :selected").text() == "bullseye"){
         el.setAttribute("id","bullseye"+bullseyeNum++);
         drawBullseye(5,5,"#"+R+G+B,el);
@@ -320,9 +321,9 @@ function updateJSON(){
         } else if(element.id.includes("triangle")){
             jsonData[element.id]={advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, geometry: element.components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         } else if(element.id.includes("circularDotarray")){
-            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, toggleCenterDot: element.components.angle.attrValue, circles: element.children.length-1, dots: element.children[1].children.length, arraySpacing: element.components.arraySpacing.attrValue, circleSize: element.children[0].components.geometry.attrValue.radiusOuter, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, toggleCenterDot: element.components.toggleCenterDot.attrValue, circles: element.children.length-1, dots: element.children[1].children.length, arraySpacing: element.components.arraySpacing.attrValue, circleSize: element.children[0].components.geometry.attrValue.radiusOuter, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         } else if(element.id.includes("dotarray")){
-            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, toggleCenterDot: element.components.angle.attrValue, rows: element.children.length, cols: element.children[0].children.length, circleSize: element.children[0].children[0].components.geometry.attrValue.radiusOuter, spacing: element.components.arraySpacing.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, toggleCenterDot: element.components.toggleCenterDot.attrValue, rows: element.children.length, cols: element.children[0].children.length, circleSize: element.children[0].children[0].components.geometry.attrValue.radiusOuter, spacing: element.components.arraySpacing.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         } else if(element.id.includes("bullseye")){
             jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, numRings: element.children.length-1, ringPitch: element.children[0].components.geometry.attrValue.radiusOuter*2, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
         }});

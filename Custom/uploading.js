@@ -173,12 +173,12 @@ function addEntitiesFromScene(scene){
                 el.setAttribute('color2',scene[key].color2)
             } else if (key.includes("circularDotarray")){
                 el.setAttribute("id", "circularDotarray"+circularDotarrayNum++);
-                drawCircularDotArray(scene[key].arraySpacing.val,scene[key].circles,scene[key].dots,scene[key].circleSize,scene[key].material.color,scene[key].toggleCenterDot,el);
+                drawCircularDotArray(scene[key].arraySpacing.val,scene[key].circles,scene[key].dots,scene[key].circleSize,scene[key].material.color,scene[key].toggleCenterDot.val,el);
                 el.setAttribute("arraySpacing",scene[key].arraySpacing);
                 el.setAttribute('toggleCenterDot',scene[key].toggleCenterDot);
             } else if (key.includes("dotarray")){
                 el.setAttribute("id", "dotarray"+dotarrayNum++);
-                drawDotArray(scene[key].rows,scene[key].cols,scene[key].circleSize,scene[key].spacing.val,scene[key].material.color,scene[key].toggleCenterDot,el);
+                drawDotArray(scene[key].rows,scene[key].cols,scene[key].circleSize,scene[key].spacing.val,scene[key].material.color,scene[key].toggleCenterDot.val,el);
                 el.setAttribute('arraySpacing',scene[key].spacing);
                 el.setAttribute('toggleCenterDot',scene[key].toggleCenterDot);
             }  else if (key.includes("bullseye")){

@@ -240,6 +240,14 @@ items.forEach(item => {
   item.addEventListener('click',selectPattern)
 })
 
+let i = 0;
+let reorderedScene = {}
+while(i < patternList.children.length){
+  reorderedScene[patternList.children[i].innerHTML] = scenes[packageSelect.value][patternList.children[i].innerHTML]
+  i++;
+}
+scenes[packageSelect.value] = reorderedScene
+
 function selectPattern (e){
   if(e.target.style.background == 'rgb(243, 152, 20)'){
     e.target.style.background = '#FFF'

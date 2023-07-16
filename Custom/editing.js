@@ -246,6 +246,7 @@ function editEntity(){
         // draw new boxes
         drawCircularDotArray(parseFloat($("#arraySpacingIn").val()),parseFloat($("#numCirclesIn").val()),parseFloat($("#numDotsIn").val()),parseFloat($("#circleSizeIn").val()),$("#color").val(),toggleCenterDotIn.checked,selectedEntity);
         selectedEntity.setAttribute('arraySpacing',{val: parseFloat($("#arraySpacingIn").val())});
+        selectedEntity.setAttribute('toggleCenterDot',{val: toggleCenterDotIn.checked});
     } else if (selectedEntity.getAttribute("id").includes("dotarray")){ /* checkerboard only changes */
         // check for valid inputs
         if(isNaN(parseFloat($("#rowsIn").val()))){
@@ -286,7 +287,7 @@ function editEntity(){
         // draw new boxes
         drawDotArray(parseFloat($("#rowsIn").val()),parseFloat($("#colsIn").val()),parseFloat($("#circleSizeIn").val()),parseFloat($("#spacingIn").val()),$("#color").val(),toggleCenterDotIn.checked,selectedEntity);
         selectedEntity.setAttribute('arraySpacing',{val: parseFloat($("#spacingIn").val())});
-        selectedEntity.setAttribute('toggleCenterDot',toggleCenterDotIn.checked);
+        selectedEntity.setAttribute('toggleCenterDot',{val: toggleCenterDotIn.checked});
     }  else if (selectedEntity.getAttribute("id").includes("bullseye")){ /* checkerboard only changes */
         // check for valid inputs
         if(isNaN(parseFloat($("#numRingsIn").val()))){

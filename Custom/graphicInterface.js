@@ -158,13 +158,13 @@ function updateStats(){
         numCirclesIn.value = (selectedEntity.children.length-1);
         arraySpacingIn.value = selectedEntity.components.arraySpacing.attrValue.val;
         circleSizeIn.value = (selectedEntity.children[0].components.geometry.attrValue.radiusOuter).toFixed(3);
-        toggleCenterDotIn.checked = (selectedEntity.components.toggleCenterDot.attrValue);
+        toggleCenterDotIn.checked = (selectedEntity.components.toggleCenterDot.attrValue.val);
     } else if(selectedEntity.getAttribute("id").includes("dotarray")){
         rowsIn.value = (selectedEntity.children.length);
         colsIn.value = (selectedEntity.children[0].children.length);
         circleSizeIn.value = (selectedEntity.children[0].children[0].components.geometry.attrValue.radiusOuter).toFixed(3);
         spacingIn.value = selectedEntity.components.arraySpacing.attrValue.val;
-        toggleCenterDotIn.checked = (selectedEntity.components.toggleCenterDot.attrValue);
+        toggleCenterDotIn.checked = (selectedEntity.components.toggleCenterDot.attrValue.val);
     } else if(selectedEntity.getAttribute("id").includes("bullseye")){
         numRingsIn.value = (selectedEntity.children.length-1);
         ringPitchIn.value = selectedEntity.children[0].components.geometry.attrValue.radiusOuter*2;
