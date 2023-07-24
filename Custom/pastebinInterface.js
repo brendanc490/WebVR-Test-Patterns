@@ -8,7 +8,7 @@ window.onload = async function() {
 
     if(thisPage.searchParams.size != 0){
         //let id = window.location.href.split(window.location.origin+'/Custom/index.html?id=')[1].split(',').forEach( async id => {
-            for (const id of window.location.href.split(window.location.origin+'/Custom/index.html?id=')[1].split(',')) {
+            for (const id of window.location.search.split('?id=')[1].split(',')) {
             //console.log(id)
                 if(decodeURIComponent(id) == id){
                     const res = await pastebinFetch('https://pastebin.run/'+id+'.txt');
