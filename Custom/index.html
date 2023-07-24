@@ -185,7 +185,7 @@
 
                         <div id="editContent" class="entity-container">
                             <div id="universalSettings" class="universal">
-                                <div id="universalHeader" class="UniversalHeader" onclick="hideUniversal()"><b>Universal Settings</b><div id="settingsButtonContainer" style="padding-left: 40px; display: inline-block; width: 30px;padding-top:12px;"><button id="advancedButton" style="text-align:center; width:100%;" class="button add" onclick="switchToAdvanced(true)" title="Open Advanced"><i id="advancedIcon" class="fa-solid fa-a"></i></button></div></div>
+                                <div id="universalHeader" class="UniversalHeader" onclick="hideUniversal()"><b>Universal Settings</b><div id="advancedButtonContainer" style="padding-left: 40px; display: inline-block; width: 30px;"><button id="advancedButton" style="text-align:center; width:100%;" class="button add" onclick="switchToAdvanced(true)" title="Open Advanced"><i id="advancedIcon" class="fa-solid fa-a"></i></button></div></div>
                                 <div id="posIn" class="Position">Position (&alpha;: deg, y: m, r: m):</div>
                                 <div id="xIn" class="x"><input type="text" class="input" id="x" value="0"></div>
                                 <div id="yIn" class="y"><input type="text" class="input" id="y" value="0"></div>
@@ -301,8 +301,8 @@
                             <div class="pattern-settings-container">
                                 <b class="patternSettingsHeader">Pattern Settings:</b>
                                 <div class="renamePattern"><button style="text-align:center;" class="button add" onclick="renamePattern()" title="Rename Pattern">Rename</button></div>
-                                <div class="cut"><button style="text-align:center;" class="button add" onclick="cutPattern()"  title="Cut (Ctrl+x)"><i class="fa-solid fa-cut"></i></button></div>
-                                <div class="copy"><button style="text-align:center;" class="button add" onclick="copyPattern()"  title="Copy (Ctrl+c)"><i class="fa-solid fa-copy"></i></button></div>
+                                <div class="cut"><button style="text-align:center; cursor: copy;" class="button add" onclick="cutPattern()"  title="Cut (Ctrl+x)"><i class="fa-solid fa-cut"></i></button></div>
+                                <div class="copy"><button style="text-align:center; cursor: copy;" class="button add" onclick="copyPattern()"  title="Copy (Ctrl+c)"><i class="fa-solid fa-copy"></i></button></div>
                                 <div class="paste"><button style="text-align:center;" class="button add" onclick="pastePattern()"  title="Paste (Ctr+v)"><i class="fa-solid fa-paste"></i></button></div>
                             </div>
                         </div>

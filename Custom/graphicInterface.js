@@ -373,6 +373,7 @@ function hideUniversal(){
         roll.style.display = "none"
         yaw.style.display = "none"
         entColor.style.display = "none"
+        advanced.style.display = "none"
         //universalHeader.style.display = "none";
         //uni.style.borderBottom = "0px solid #999";
         uni.style.gridTemplateRows = "100% 0% 0% 0% 0% 0%"
@@ -394,6 +395,7 @@ function hideUniversal(){
         roll.style.display = "block"
         yaw.style.display = "block"
         entColor.style.display = "block"
+        advanced.style.display = "block"
         //universalHeader.style.display = "block";
         //uni.style.borderBottom = "1px solid #999";
         uni.style.gridTemplateRows = "17% 17% 16% 17% 16% 17%"
