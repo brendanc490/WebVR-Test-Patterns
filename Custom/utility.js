@@ -249,7 +249,7 @@ function addPattern(){
     }
     const re = /^[a-zA-Z0-9-_ ]+$/
     if(!re.test(patternName)){
-        alert('Pattern name is invalid. Limit names to only alphanumerics, - , _ , or spaces.')
+        alert('Pattern name is invalid. '+ patternName +' Limit names to only alphanumerics, - , _ , or spaces.')
         return;
     }
     if(scenes[packageSelect.value][patternName] != null){
@@ -455,7 +455,7 @@ function renamePattern(){
     }
     const re = /^[a-zA-Z0-9-_ ]+$/
     if(!re.test(patternName)){
-        alert('Pattern name is invalid. Limit names to only alphanumerics, - , _ , or spaces.')
+        alert('Pattern name is invalid. '+ patternName +' Limit names to only alphanumerics, - , _ , or spaces.')
         return;
     }
     if(scenes[packageSelect.value][patternName] != null){
@@ -511,7 +511,7 @@ function addPackage(){
     }
     const re = /^[a-zA-Z0-9-_ ]+$/
     if(!re.test(packageName)){
-        alert('Package name is invalid. Limit names to only alphanumerics, -, _, or spaces.')
+        alert('Package name is invalid. '+ packageName +' Limit names to only alphanumerics, -, _, or spaces.')
         return;
     }
     if(scenes[packageName] != null){
@@ -601,7 +601,7 @@ function renamePackage(){
     }
     const re = /^[a-zA-Z0-9-_ ]+$/
     if(!re.test(packageName)){
-        alert('Package name is invalid. Limit names to only alphanumerics, -, _, or spaces.')
+        alert('Package name is invalid. '+ packageName +' Limit names to only alphanumerics, -, _, or spaces.')
         return;
     }
     if(scenes[packageName] != null){

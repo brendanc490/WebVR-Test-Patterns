@@ -52,7 +52,7 @@ var fileContent = await fetch(url).then((res) => {
     //console.log(fileContent['filename'])
     const re = /^[a-zA-Z0-9-_ ]+$/
     if(!re.test(fileContent['filename'])){
-        alert('Package name is invalid. '+packages[fileContent['filename']]+' Limit names to only alphanumerics, -, _, or spaces.')
+        alert('Package name is invalid. '+fileContent['filename']+' Limit names to only alphanumerics, -, _, or spaces.')
         return false;
     }
     if(packages[fileContent['filename']] != null){

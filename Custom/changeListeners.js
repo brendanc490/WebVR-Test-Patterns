@@ -397,19 +397,20 @@ scene_display_input.addEventListener("change", function() {
 
             reader.onload = function() {
                 fileContent = JSON.parse(reader.result);
+                names[fileName] = ""
                 for (const [name, value] of Object.entries(fileContent['scenes'])) {
                     const re = /^[a-zA-Z0-9-_ ]+( \([0-9]+\))?$/
-                    if(!re.test(fileName)){
+                    if(!re.test(name)){
                         alert('Pattern name is invalid. '+name+' Limit names to only alphanumerics, -, _, or spaces.')
-                        delete names[fileContent['filename']]
-                        reader.abort()
+                        delete names[fileName]
+                        return
                     }
                     currName = name.split(' (')[0];
-                    if(names[fileContent['filename']][currName]){
-                        currName = currName + ' ('+names[fileContent['filename']][currName]+')'
-                        names[fileContent['filename']][name.split(' (')[0]] = names[fileContent['filename']][name.split(' (')[0]] + 1
+                    if(names[fileName][currName]){
+                        currName = currName + ' ('+names[fileName][currName]+')'
+                        names[fileName][name.split(' (')[0]] = names[fileName][name.split(' (')[0]] + 1
                     } else {
-                        names[fileContent['filename']][currName] = 1
+                        names[fileName][currName] = 1
                     }
                   }
                 scenes[fileName] = fileContent['scenes']
@@ -448,7 +449,7 @@ scene_display_input.addEventListener("change", function() {
             fileName = itm.name.split(".")[0];
             const re = /^[a-zA-Z0-9-_ ]+$/
             if(!re.test(itm.name.split(".")[0])){
-                alert('Package name is invalid. '+packages[fileContent['filename']]+' Limit names to only alphanumerics, -, _, or spaces.')
+                alert('Package name is invalid. '+fileName+' Limit names to only alphanumerics, -, _, or spaces.')
                 return false;
             }
             if(scenes[fileName] != null){
@@ -472,6 +473,7 @@ scene_display_input.addEventListener("change", function() {
     myLoop.then(()=>{
         //patternList.innerHTML = ''
         console.log('then');
+        packages[fileName] = ''
         let arr = Object.keys(scenes)
         let len = arr.length
         let i = 0;
