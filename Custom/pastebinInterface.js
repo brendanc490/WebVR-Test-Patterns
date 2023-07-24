@@ -4,6 +4,7 @@
    Local storage is updated to reflect links. */
    packages = {default: ''}
 window.onload = async function() {
+    scene.canvas.classList.remove("a-grab-cursor")
     let thisPage = new URL(window.location);
 
     if(thisPage.searchParams.size != 0){

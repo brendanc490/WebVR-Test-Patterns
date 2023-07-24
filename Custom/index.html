@@ -75,7 +75,16 @@
                     console.log(this.el);
                     selectNew(this.el);
                     });
+                this.el.addEventListener("mouseenter", (e) => {
+                    console.log('enter')
+                    document.body.style.cursor = "pointer"
+                })
+                this.el.addEventListener("mouseleave", (e) => {
+                    console.log('leave')
+                    document.body.style.cursor = "default"
+                })
                 }
+                
             });
 
         AFRAME.registerComponent('fill', {
@@ -115,7 +124,7 @@
 
     <body>
         <a-scene>
-            <a-entity raycaster cursor="rayOrigin: mouse" position="0 0 0" ></a-entity>
+            <a-entity raycaster cursor="rayOrigin: mouse; mouseCursorStylesEnabled: false;" position="0 0 0" ></a-entity>
             <a-assets>
                 <img id="QC" src="textures/TG18-QC.2k_12b.png">
                 <img id="CH" src="textures/TG18-CH.2k.png">
