@@ -9,20 +9,37 @@
 <body>
     <h1>WebXR Test Patterns by DIDSR</h1>
     <div style="margin:auto;width: fit-content;">
-        <form action="./Custom/">
-            <input type="submit" value="Create a Pattern" />
+        <script>
+        function navigateToCustom(){
+            window.location = window.location.origin+"/Custom/"
+        }
+        function navigateToCompatibility(){
+            window.location = window.location.origin+"/Custom/"
+        }
+        function navigateToTCA(){
+            window.location = window.location.origin+"/Custom/"
+        }
+        function navigateToHardcoded(){
+            window.location = window.location.origin+"/Custom/"
+        }
+        function navigateToImageBased(){
+            window.location = window.location.origin+"/Custom/"
+        }
+        </script>
+        <form>
+            <input type="button" value="Create a Pattern" onclick="navigateToCustom()"/>
         </form>
-        <form action="./Compatibility/">
-            <input type="submit" value="Check Device Compatibility" />
+        <form>
+            <input type="submit" value="Check Device Compatibility" onclick="navigateToCompatibility()" />
         </form>
         <form action="./TCA/">
-            <input type="submit" value="TCA Test" />
+            <input type="submit" value="TCA Test" onclick="navigateToTCA()"/>
         </form>
         <form action="./Hardcoded-Tests/">
-            <input type="submit" value="Dropdown Change Tests" />
+            <input type="submit" value="Dropdown Change Tests" onclick="navigateToHardcoded()"/>
         </form>
         <form action="./Image-Based-Tests/">
-            <input type="submit" value="Texture Based Tests" />
+            <input type="submit" value="Texture Based Tests" onclick="navigateToImageBased()"/>
         </form>
     </div>
 </body>

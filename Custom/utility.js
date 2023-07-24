@@ -658,6 +658,10 @@ function pastePattern(){
 }
 
 function cutPattern(){
+    if(isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
+        alert('No pattern selected')
+        return
+    }
     keysPressed["ctrl"] = false;
     keysPressed["x"] = false;
     copyPattern()

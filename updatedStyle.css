@@ -275,7 +275,8 @@ input[type=text]{
 .item11 { grid-area: PastebinPOST; text-align: center;}
 
 
-.universalHeader {grid-area: UniversalHeader; text-align: center;}
+.universalHeader {grid-area: UniversalHeader; text-align: center; }
+.universalHeader:hover {background-color: #888;}
 .position {grid-area: Position; text-align: left;}
 .rotation {grid-area: Rotation; text-align: left;}
 .x {grid-area: x; text-align: center;}
@@ -307,6 +308,7 @@ input[type=text]{
 }
 
 .specificHeader {grid-area: SpecificHeader; text-align: center;}
+.specificHeader:hover {background-color: #888;}
 .area1 {grid-area: Area1; text-align: left;}
 .area2 {grid-area: Area2; text-align: left;}
 .area3 {grid-area: Area3; text-align: left;}
@@ -325,7 +327,7 @@ input[type=text]{
     'Area3'
     'Area4'
     'Area5';
-    grid-template-rows: 17% 17% 16% 17% 16% 17%;
+    grid-template-rows: 13% 17% 17% 17% 17% 17%;
   }
 
 .removeEnt {grid-area: Buttons; text-align: center; padding-top: 20px;}
@@ -371,12 +373,6 @@ input[type=text]{
     -ms-user-select: none;
   }
   
-  [draggable="true"] {
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-  }
   
   ol.moveable {
     list-style: decimal;
