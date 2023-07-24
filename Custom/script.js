@@ -1,4 +1,5 @@
-/* DOM */
+/* Contains DOM information and code that will run on page load */
+
 /* Scene related */
 const scene = document.querySelector("a-scene");
 const entityCanvas = scene.querySelector("#entityCanvas");
@@ -22,20 +23,11 @@ const editContent = document.getElementById('editContent')
 const displayEditContent = document.getElementById("displayEditContent")
 const nameIn = document.getElementById('name');
 const displayUtility = document.getElementById('displayUtility');
-const advanced = document.getElementById('advanced');
+const advanced = document.getElementById('advancedButton');
 
 /* Display scenes */
 const pattern = document.getElementById("pattern");
 const patternList = document.getElementById("items-list");
-/*$( function() {
-    $( "#items-list" ).selectable({
-     // selected: function(event, ui) { 
-     //   $(ui.selected).addClass("ui-selected").siblings().removeClass("ui-selected");           
-    }    
-    //}
-    );
-    
-  } );*/
 
 const patternDisplay = document.getElementById("patternDisplay");
 const scene_display_input = document.getElementById("scene-disp-input");
@@ -189,6 +181,11 @@ const area5 = document.getElementById("area5");
 const hideUniversalIcon = document.getElementById("hideUniversalIcon");
 const hideSpecificIcon = document.getElementById("hideSpecificIcon");
 const universalHeader = document.getElementById("universalHeader");
+const coreLayout = document.getElementById('coreLayout');
+const packageLayout = document.getElementById('packageLayout');
+const editPatternLayout = document.getElementById('editPatternLayout');
+const packageSelect = document.getElementById('packageDisplay')
+const recentPackages = document.getElementById('recentPackages')
 
 /* Local Variables */
 var el = null; /* recently created entity */
@@ -217,14 +214,8 @@ var boolDisplayEdit = true; /* toggle for add or edit element */
 var fileContent = null; /* contents of uploaded JSON file */
 
 var uploadedTextureFormat = {};
+var scenes = {default: {}};
 
-
-const coreLayout = document.getElementById('coreLayout');
-const packageLayout = document.getElementById('packageLayout');
-const editPatternLayout = document.getElementById('editPatternLayout');
-const packageSelect = document.getElementById('packageDisplay')
-
-const recentPackages = document.getElementById('recentPackages')
 
 patternList.setAttribute('multi-select',false);
 
@@ -248,8 +239,9 @@ while(i < patternList.children.length){
 }
 scenes[packageSelect.value] = reorderedScene
 
+// handles a pattern being selected from the pattern list
 function selectPattern (e){
-  if(e.target.style.background == 'rgb(243, 152, 20)'){
+  if(e.target.style.background == 'rgb(243, 152, 20)'){ // if selected pattern is highlighted, unselect it
     e.target.style.background = '#FFF'
     patternList.setAttribute("selectedIndex","")
     patternList.setAttribute("multi-select",false);
@@ -257,13 +249,13 @@ function selectPattern (e){
     nameIn.value = packageSelect.value;
     return;
   }
-  e.target.style.background = '#F39814'
+  e.target.style.background = '#F39814' // highlights selected pattern
   items = document.querySelectorAll('#items-list > li');
-  if(keysPressed['ctrl'] && !isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
+  if(keysPressed['ctrl'] && !isNaN(parseInt(patternList.getAttribute('selectedIndex')))){ // checks for multiselect
     patternList.setAttribute("multi-select",true);
     return;
   }
-  items.forEach(item => {
+  items.forEach(item => { // changes displayed pattern to selected pattern
     if(item != e.target){
       item.style.background = '#FFF'
     } else {
@@ -279,6 +271,8 @@ function selectPattern (e){
   })
 }
 
+
+/* Code to make pattern list elements draggable */
 function dragStart (e) {
   var index = $(e.target).index()
   e.dataTransfer.setData('text/plain', index)
@@ -320,7 +314,11 @@ function cancelDefault (e) {
   return false
 }
 
-// SOURCE    https://stackoverflow.com/questions/16616722/sending-all-javascript-console-output-into-a-dom-element 
+
+
+// SOURCE https://stackoverflow.com/questions/16616722/sending-all-javascript-console-output-into-a-dom-element 
+// Writes console information to the debug div which can be opened by pressing ctrl+i
+
 
 var baseLogFunction = console.log;
 console.log = function(){

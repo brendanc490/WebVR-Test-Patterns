@@ -14,7 +14,7 @@ function hideEditStats(){
     area3.style.display = "none";
     area4.style.display = "none";
     area5.style.display = "none";
-    specificSettings.style.gridTemplateRows = "17% 17% 16% 17% 16% 17%";
+    specificSettings.style.gridTemplateRows = "13% 17% 16% 17% 16% 17%";
 
     removeButton.style.display = "none";
     duplicateButton.display = "none";
@@ -358,10 +358,12 @@ function collapseTab(){
     }
 }
 
+hideUniversal()
 function hideUniversal(){
-    if(hideUniversalIcon.classList[1] == 'fa-chevron-down'){
+
+    if(uni.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%"){
         // hide
-        hideUniversalIcon.className = "fa-solid fa-chevron-right"
+        //hideUniversalIcon.className = "fa-solid fa-chevron-right"
         posIn.style.display = "none"
         xIn.style.display = "none"
         yIn.style.display = "none"
@@ -373,15 +375,16 @@ function hideUniversal(){
         entColor.style.display = "none"
         //universalHeader.style.display = "none";
         //uni.style.borderBottom = "0px solid #999";
-        if(hideSpecificIcon.className == "fa-solid fa-chevron-right"){
-            editContent.style.gridTemplateRows = "8% 5% 5%"
+        uni.style.gridTemplateRows = "100% 0% 0% 0% 0% 0%"
+        if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
+            editContent.style.gridTemplateRows = "8% 8% 5%"
         } else {
             editContent.style.gridTemplateRows = "8% 50% 5%"
         }
         
     } else {
         // show
-        hideUniversalIcon.className = "fa-solid fa-chevron-down"
+        //hideUniversalIcon.className = "fa-solid fa-chevron-down"
         posIn.style.display = "block"
         xIn.style.display = "block"
         yIn.style.display = "block"
@@ -393,36 +396,40 @@ function hideUniversal(){
         entColor.style.display = "block"
         //universalHeader.style.display = "block";
         //uni.style.borderBottom = "1px solid #999";
-        if(hideSpecificIcon.className == "fa-solid fa-chevron-right"){
-            editContent.style.gridTemplateRows = "40% 5% 5%"
+        uni.style.gridTemplateRows = "17% 17% 16% 17% 16% 17%"
+        if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
+            editContent.style.gridTemplateRows = "40% 8% 5%"
         } else {
             editContent.style.gridTemplateRows = "40% 50% 5%"
         }
     }
 }
-
+var oldSize = null;
 function hideSpecific(){
-    if(hideSpecificIcon.classList[1] == 'fa-chevron-down'){
+    if(specificSettings.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%"){
         // hide
-        hideSpecificIcon.className = "fa-solid fa-chevron-right"
+        //hideSpecificIcon.className = "fa-solid fa-chevron-right"
+        oldSize = specificSettings.style.gridTemplateRows
         area1.style.display = "none"
         area2.style.display = "none"
         area3.style.display = "none"
         area4.style.display = "none"
         area5.style.display = "none"
-        if(hideUniversalIcon.className == "fa-solid fa-chevron-right"){
-            editContent.style.gridTemplateRows = "8% 5% 5%"
+        specificSettings.style.gridTemplateRows = "100% 0% 0% 0% 0% 0%"
+        if(uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
+            editContent.style.gridTemplateRows = "8% 8% 5%"
         } else {
-            editContent.style.gridTemplateRows = "40% 5% 5%"
+            editContent.style.gridTemplateRows = "40% 8% 5%"
         }
         
     } else {
         // show
-        hideSpecificIcon.className = "fa-solid fa-chevron-down"
+        //hideSpecificIcon.className = "fa-solid fa-chevron-down"
         toggleAddEdit(null);
+        specificSettings.style.gridTemplateRows = oldSize
         //universalHeader.style.display = "block";
         //uni.style.borderBottom = "1px solid #999";
-        if(hideUniversalIcon.className == "fa-solid fa-chevron-right"){
+        if(uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
             editContent.style.gridTemplateRows = "8% 50% 5%"
         } else {
             editContent.style.gridTemplateRows = "40% 50% 5%"

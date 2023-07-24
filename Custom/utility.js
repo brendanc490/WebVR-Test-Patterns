@@ -244,17 +244,19 @@ function addPattern(){
         return
     }
     let patternName = prompt("Enter a pattern name: ")
+    while(patternName == ""){
+        patternName = prompt("Enter a valid pattern name: ")
+    }
+    const re = /^[a-zA-Z0-9-_ ]+$/
+    if(!re.test(patternName)){
+        alert('Pattern name is invalid. Limit names to only alphanumerics, - , _ , or spaces.')
+        return;
+    }
     if(scenes[packageSelect.value][patternName] != null){
         alert('A pattern with this name already exists');
         return;
     }
-    while(patternName == ""){
-        patternName = prompt("Enter a valid pattern name: ")
-    }
-    if(patternName.indexOf('(') > 0 || patternName.indexOf(')') > 0){
-        alert('A name cannot include parenthesis ()');
-        return
-    }
+
     currName = ''
     if(Object.keys(names[packageSelect.value]).indexOf(patternName) == -1){
         names[packageSelect.value][patternName] = 1
@@ -350,6 +352,7 @@ val = false;
 function switchToAdvanced(switchVal){
     newVal = !selectedEntity.getAttribute('advanced').val
     selectedEntity.setAttribute('advanced', {val: newVal});
+    advanced.style.backgroundColor == '' ? advanced.style.backgroundColor = '#00FF00' : advanced.style.backgroundColor =''
     updateStats()
     editEntity()
   }
@@ -447,16 +450,17 @@ function renamePattern(){
         return
     }
     let patternName = prompt("Enter a pattern name: ")
-    if(scenes[packageSelect.value][patternName] != null){
-        alert('A pattern with this name already exists');
-        return;
-    }
     while(patternName == ""){
         patternName = prompt("Enter a valid pattern name: ")
     }
-    if(patternName.indexOf('(') > 0 || patternName.indexOf(')') > 0){
-        alert('A name cannot include parenthesis ()');
-        return
+    const re = /^[a-zA-Z0-9-_ ]+$/
+    if(!re.test(patternName)){
+        alert('Pattern name is invalid. Limit names to only alphanumerics, - , _ , or spaces.')
+        return;
+    }
+    if(scenes[packageSelect.value][patternName] != null){
+        alert('A pattern with this name already exists');
+        return;
     }
     oldName = patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent
     currScene = scenes[packageSelect.value][oldName]
@@ -497,16 +501,21 @@ function copyPattern(){
 function addPackage(){
     flag = false;
     let i = 0;
-    let packageName = prompt("Enter a package name: ");
-    if(scenes[packageName] != null){
-        alert('A package with this name already exists');
+    if(packageSelect.options.length == 10){
+        alert('There are already 10 packages.')
         return;
     }
+    let packageName = prompt("Enter a package name: ");
     while(packageName == ""){
         packageName = prompt('Please enter a valid package name');
     }
-    if(packageName.indexOf('(') > 0 || packageName.indexOf(')') > 0){
-        alert('A name cannot include parenthesis ()');
+    const re = /^[a-zA-Z0-9-_ ]+$/
+    if(!re.test(packageName)){
+        alert('Package name is invalid. Limit names to only alphanumerics, -, _, or spaces.')
+        return;
+    }
+    if(scenes[packageName] != null){
+        alert('A package with this name already exists');
         return;
     }
     while(i < packageSelect.options.length){
@@ -518,6 +527,7 @@ function addPackage(){
     }
 
     packageSelect.options.add(new Option(packageName,packageName))
+    packages[packageName] = ''
     scenes[packageName] = {}
     names[packageName] = {}
     packageSelect.value = packageName
@@ -551,6 +561,13 @@ function removePackage(){
         changePackage();
     }
     patternList.setAttribute('selectedIndex',null);
+    if(packages[packageName] != ''){
+        let newURL = window.location.href.replace(","+encodeURIComponent(packages[packageName]),'')
+        newURL = newURL.replace(encodeURIComponent(packages[packageName])+",",'')
+        newURL = newURL.replace(encodeURIComponent(packages[packageName]),'')
+        window.history.pushState('object', document.title, newURL);
+    }
+    delete packages[packageName]
 }
 
 function changePackage(){
@@ -579,17 +596,20 @@ function changePackage(){
 
 function renamePackage(){
     let packageName = prompt("Enter a package name: ");
+    while(packageName == ""){
+        packageName = prompt('Please enter a valid package name');
+    }
+    const re = /^[a-zA-Z0-9-_ ]+$/
+    if(!re.test(packageName)){
+        alert('Package name is invalid. Limit names to only alphanumerics, -, _, or spaces.')
+        return;
+    }
     if(scenes[packageName] != null){
         alert('A package with this name already exists');
         return;
     }
-    while(packageName == ""){
-        packageName = prompt('Please enter a valid package name');
-    }
-    if(packageName.indexOf('(') > 0 || packageName.indexOf(')') > 0){
-        alert('A name cannot include parenthesis ()');
-        return;
-    }
+
+
     oldName = packageSelect.value
     currPackage = scenes[packageSelect.value]
     
@@ -644,12 +664,3 @@ function cutPattern(){
     removePattern()
 }
 
-function handleImport(){
-    let url = prompt('Enter the provided url: ');
-    if(!url.includes('pastebin') || !url.includes('.txt')){
-        alert('Please enter a valid link');
-        return;
-    }
-    pastebinFetch(url)
-    //window.location = url;
-}

@@ -1,8 +1,25 @@
-window.onload = function() {
+// Contains all code that interfaces with the pastebin.run API
+
+/* On page load, fetch all packages that are contained within the link.
+   Local storage is updated to reflect links. */
+   packages = {default: ''}
+window.onload = async function() {
     let thisPage = new URL(window.location);
-    let id = thisPage.searchParams.forEach( id => {
-        pastebinFetch('https://pastebin.run/'+id+'.txt');
-    })
+
+    if(thisPage.searchParams.size != 0){
+        //let id = window.location.href.split(window.location.origin+'/Custom/index.html?id=')[1].split(',').forEach( async id => {
+            for (const id of window.location.href.split(window.location.origin+'/Custom/index.html?id=')[1].split(',')) {
+            //console.log(id)
+                if(decodeURIComponent(id) == id){
+                    const res = await pastebinFetch('https://pastebin.run/'+id+'.txt');
+                } else {
+                    const res = await pastebinFetch(decodeURIComponent(id));
+            }
+        }
+    }
+
+
+   
     
     let i = 1;
     while(i < localStorage.length){
@@ -13,24 +30,43 @@ window.onload = function() {
     }
     recentPackages.selectedIndex = -1
     
-    
   };
 
-
+/* Fetches content from pastebin or another valid JSON link.
+   Returns true on success and false on failure. */
 async function pastebinFetch(url){
-    var fileContent = await fetch(url).then((res) => {
+var fileContent = await fetch(url).then((res) => {
         if(res.ok != true){
             return null
             
         } else {
-            console.log(url)
+            //console.log(url)
            return res.json()
         }
     });
-    manageLocalStorage(fileContent['filename'] + " ("+url.split("https://pastebin.run/")[1].split(".txt")[0]+")")
-    scenes[fileContent['filename']] = fileContent['scenes']
+
+    if(fileContent == null){
+        alert('No package found')
+        return false;
+    }
+    //console.log(fileContent['filename'])
+    const re = /^[a-zA-Z0-9-_ ]+$/
+    if(!re.test(fileContent['filename'])){
+        alert('Package name is invalid. '+packages[fileContent['filename']]+' Limit names to only alphanumerics, -, _, or spaces.')
+        return false;
+    }
+    if(packages[fileContent['filename']] != null){
+        alert('A package with this name already exists')
+        return false;
+    }
     names[fileContent['filename']] = {}
-    Object.keys(fileContent['scenes']).forEach( name => {
+    for (const [name, value] of Object.entries(fileContent['scenes'])) {
+        const re = /^[a-zA-Z0-9-_ ]+( \([0-9]+\))?$/
+        if(!re.test(name)){
+            alert('Pattern name is invalid. '+name+' Limit names to only alphanumerics, -, _, or spaces.')
+            delete names[fileContent['filename']]
+            return false;
+        }
         currName = name.split(' (')[0];
         if(names[fileContent['filename']][currName]){
             currName = currName + ' ('+names[fileContent['filename']][currName]+')'
@@ -38,7 +74,25 @@ async function pastebinFetch(url){
         } else {
             names[fileContent['filename']][currName] = 1
         }
-    });
+      }
+    if(url.split("https://pastebin.run/").length > 1){
+        let out = manageLocalStorage(fileContent['filename'] + " ("+url.split("https://pastebin.run/")[1].split(".txt")[0]+")")
+        if(out == false){
+            return false;
+        }
+        packages[fileContent['filename']] = url.split("https://pastebin.run/")[1].split(".txt")[0]
+    } else {
+        let out = manageLocalStorage(fileContent['filename'] + " ("+encodeURIComponent(url)+")")
+        if(out == false){
+            return false;
+        }
+        packages[fileContent['filename']] = url
+    }
+    console.log(localStorage)
+    
+    scenes[fileContent['filename']] = fileContent['scenes']
+    
+
 
     textures = fileContent['textures']['textureValues']
     uploadedTextureFormats = fileContent['textures']['uploadedTextureFormats']
@@ -86,16 +140,18 @@ async function pastebinFetch(url){
     while(i < packageSelect.options.length){
         if(packageSelect.options[i].value == fileContent['filename']){
             alert('A package with this name already exists');
-            return
+            return false;
         }
         i++;
     }
-
+    
     packageSelect.options.add(new Option(fileContent['filename'],fileContent['filename']))
     packageSelect.value = fileContent['filename']
     changePackage()
+    return true;
 }
 
+// function to compress textures (unused)
 function compressTextures(textures){
     textures.forEach( texture => {
         if(texture['val'].split("url(data:image/png;base64").length > 1){
@@ -103,7 +159,7 @@ function compressTextures(textures){
             // save id as pastebin(<id>)
             //let compressed = LZString.compressToBase64(texture.val.split(',')[1].split(')')[0])
             let code = {name: texture['name'], val: texture.val.split(',')[1].split(')')[0]}
-            console.log(texture.val.split(',')[1].split(')')[0])
+            //console.log(texture.val.split(',')[1].split(')')[0])
             fetch('https://pastebin.run/api/v1/pastes', {
                 method: 'POST',
                 headers: {
@@ -123,6 +179,8 @@ function compressTextures(textures){
             })
 }
 
+/* Posts content to pastebin.
+   Navigates to new link on success and returns false on failure. */
 async function pastebinPost(){
     textures = []
     // get all textures
@@ -132,13 +190,18 @@ async function pastebinPost(){
         i++;
     }
     let code = {filename: packageSelect.value, scenes: scenes[packageSelect.value], textures: {uploadedTextureFormats: {}, textureValues: []}, date: ""}
-    let compressedTextures = compressTextures(textures);
+    
+    //let compressedTextures = compressTextures(textures);
     code['textures']['textureValues'] = textures
     code['textures']['uploadedTextureFormats'] = uploadedTextureFormat
     // add date
     code['date'] = new Date().toLocaleString();
-    console.log(code)
-    fetch('https://pastebin.run/api/v1/pastes', {
+    const size = new TextEncoder().encode(JSON.stringify(code)).length
+    if(size >= 9995){
+        alert('Package is too large, no link can be generated');
+        return false
+    }
+    await fetch('https://pastebin.run/api/v1/pastes', {
     method: 'POST',
     headers: {
         'Accept': 'application/json',
@@ -151,18 +214,35 @@ async function pastebinPost(){
         let thisPage = new URL(window.location);
         newUrl = thisPage.origin+thisPage.pathname+"?id="+text
         manageLocalStorage(packageSelect.value+" ("+text+")");
+        tmp = packages[packageSelect.value]
+        packages[packageSelect.value] = text
         await navigator.clipboard.writeText(newUrl);
         alert("URL copied to clipboard: "+ newUrl);
-        window.location = newUrl
+        if(!window.location.href.includes('?')){
+            let newURL = window.location.href + "?id=" +text
+            window.history.pushState('object', document.title, newURL);
+        } else {
+            let newURL = '';
+            if(tmp != null || tmp != ''){
+                newURL = window.location.href.replace(tmp,text)
+            } else {
+                newURL = window.location.href + "," +text
+            }
+            window.history.pushState('object', document.title, newURL);
+        }
       } catch (err) {
         console.error('Failed to copy: ', err);
+        return false
       }
    })
 }
 
+/* Adds packages to local storage.
+   Returns true on success and throws an error on failure.
+ */
 function manageLocalStorage(key){
-
-    let i = localStorage.length < 6 ? localStorage.length : 5;
+    //console.log(key)
+    let i = localStorage.length < 11 ? localStorage.length : 10;
     while(i > 0){
         localStorage.setItem("key"+i,localStorage.getItem("key"+(i-1)))
         i--;
@@ -181,23 +261,36 @@ function manageLocalStorage(key){
         }
         i++;
     }
-    /*if(localStorage.length == 6){
-        localStorage.setItem("key5",localStorage.getItem("key4"))
-        localStorage.setItem("key4",localStorage.getItem("key3"))
-        localStorage.setItem("key3",localStorage.getItem("key2"))
-        localStorage.setItem("key2",localStorage.getItem("key1"))
-        localStorage.setItem("key1",key)
-        
-    } else {
-        localStorage.setItem("key"+localStorage.length,key)
-    }*/
+    //console.log(localStorage)
+    return true;
 }
 
-function changeUrl(){
+// Called when a package is selected from the local storage options
+async function changeUrl(){
     if(recentPackages.value == "none"){
         return
     }
-    let thisPage = new URL(window.location);
-    newUrl = thisPage.origin+thisPage.pathname+"?id="+recentPackages.value.split('(')[1].split(')')[0]
-    window.location = newUrl
+    if(packageSelect.options.length == 10){
+        alert('There are already 10 packages.')
+        return;
+    }
+    let url = recentPackages.value.split('(')[1].split(')')[0];
+    if(decodeURIComponent(url) != url){
+        url = decodeURIComponent(url)
+    } else {
+        url = 'https://pastebin.run/'+url+'.txt'
+    }
+    await pastebinFetch(url).then( res => {
+        if(res){
+            if(!window.location.href.includes('?')){
+                let newURL = window.location.href + "?id=" +recentPackages.value.split('(')[1].split(')')[0]
+                window.history.pushState('object', document.title, newURL);
+            } else {
+                let newURL = window.location.href + "," +recentPackages.value.split('(')[1].split(')')[0]
+                window.history.pushState('object', document.title, newURL);
+            }
+        }
+    })
+    
 }
+

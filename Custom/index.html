@@ -185,7 +185,7 @@
 
                         <div id="editContent" class="entity-container">
                             <div id="universalSettings" class="universal">
-                                <div id="universalHeader" class="UniversalHeader"><b>Universal Settings</b><div id="settingsButtonContainer" style="padding-left: 40px; display: inline-block; width: 30px;padding-top:12px;"><button id="advancedButton" style="text-align:center; width:100%;" class="button add" onclick="switchToAdvanced(true)" title="Open Advanced"><i id="advancedIcon" class="fa-solid fa-a"></i></button></div></div>
+                                <div id="universalHeader" class="UniversalHeader" onclick="hideUniversal()"><b>Universal Settings</b><div id="settingsButtonContainer" style="padding-left: 40px; display: inline-block; width: 30px;padding-top:12px;"><button id="advancedButton" style="text-align:center; width:100%;" class="button add" onclick="switchToAdvanced(true)" title="Open Advanced"><i id="advancedIcon" class="fa-solid fa-a"></i></button></div></div>
                                 <div id="posIn" class="Position">Position (&alpha;: deg, y: m, r: m):</div>
                                 <div id="xIn" class="x"><input type="text" class="input" id="x" value="0"></div>
                                 <div id="yIn" class="y"><input type="text" class="input" id="y" value="0"></div>
@@ -195,11 +195,11 @@
                                 <div id="yaw" class="yaw"><input type="text" class="input" id="rotationY" value="0"></div>
                                 <div id="roll" class="roll"><input type="text" class="input" id="rotationZ" value="0"></div>
                                 <div id="entColor" class="EntColor"><div style="width: fit-content; display: inline-block; padding-right: 25px;">Entity Color: </div><input type="text" class="input" id="color" value="#FFFFFF"></div>
-                                <div id="hideUniversal" style="position:absolute; top: -1px; left:-10px;"><button id="hideUniversalButton" style="text-align:center; width:100%; height: 15px; padding: 0px;" class="button reset" onclick="hideUniversal()" title="Hide Universal Settings"><i id="hideUniversalIcon" class="fa-solid fa-chevron-down" style="font-size: 13px"></i></button></div>
+                                <!--<div id="hideUniversal" style="position:absolute; top: -1px; left:-10px;"><button id="hideUniversalButton" style="text-align:center; width:25px; height: 18px; padding: 0px;" class="button reset" onclick="hideUniversal()" title="Hide Universal Settings"><i id="hideUniversalIcon" class="fa-solid fa-chevron-down" style="font-size: 13px"></i></button></div>-->
                             </div>  
                             <div id="specificSettings" class="specific" style="position: relative;">
-                                <div id="hideSpecific" style="position:absolute; top: -1px; left:-10px;"><button id="hideSpecificButton" style="text-align:center; width:100%; height: 15px; padding: 0px;" class="button reset" onclick="hideSpecific()" title="Hide Specific Settings"><i id="hideSpecificIcon" class="fa-solid fa-chevron-down" style="font-size: 13px"></i></button></div>
-                                <div id="specificHeader" class="specificHeader"><b>Specific Settings</b></div>
+                                <!--<div id="hideSpecific" style="position:absolute; top: -1px; left:-10px;"><button id="hideSpecificButton" style="text-align:center; width:25px; height: 18px; padding: 0px;" class="button reset" onclick="hideSpecific()" title="Hide Specific Settings"><i id="hideSpecificIcon" class="fa-solid fa-chevron-down" style="font-size: 13px"></i></button></div>-->
+                                <div id="specificHeader" class="specificHeader"  onclick="hideSpecific()"><b>Specific Settings</b></div>
                                 <div id="area1" class="area1">
                                     <div id="heightIn" style="justify-content: space-between;">Bar Height (m): <input type="text" class="input" id="height" value=".25"></div>
                                     <div id="radiusIn" style="justify-content: space-between;">Radius (m): <input type="text" class="input" id="radius" value=".125"></div>
@@ -345,135 +345,6 @@
                     <div class="item11"><button style="text-align:center;" class="button add" onclick="pastebinPost()"  title="Pastebin Export"><i class="fa-solid fa-cloud-arrow-down"></i></button></div>
                         
                     </div>
-                    
-
-            <!--<button type="button" class="collapsible" id="collapse">Hide Settings</button>
-            <div id="content">
-                <p style="text-align:center;">Display Patterns              <input type="checkbox" id="displayUtility"
-                    class="checkbox" onclick="toggleDisplayEdit(true)"/>
-                    <label for="displayUtility" class="toggle"> </label>                  Edit Patterns</p>
-                <div id="displayEditContent">
-                    <p id="patternDisp"><b>Pattern Display:</b>
-                        <p style="text-align:center;"><select class="select" name="patternDisplay" id="patternDisplay" onchange="displayCurrentPattern(this)">
-                            <option value="default">default</option>
-        
-                            </select></p></p>
-
-                    <p><b>Pattern List: </b></p>
-                    <div id="patternList" class="scrollable">
-                        <p>
-                            <input type="checkbox" id="default"
-                            onclick="handlePatternSelect(this)" checked/>
-                            <label for="default"> default</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="red"
-                            onclick="handlePatternSelect(this)"/>
-                            <label for="red"> red</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="green"
-                            onclick="handlePatternSelect(this)"/>
-                            <label for="green"> green</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="blue"
-                            onclick="handlePatternSelect(this)"/>
-                            <label for="blue"> blue</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="white"
-                            onclick="handlePatternSelect(this)"/>
-                            <label for="white"> white</label>
-                        </p>
-    
-                        <p>
-                            <input type="checkbox" id="grille"
-                            onclick="handlePatternSelect(this)"/>
-                            <label for="grille"> grille</label>
-                        </p>
-                         
-                        <p>
-                            <input type="checkbox" id="crosshair"
-                            onclick="handlePatternSelect(this)"/>
-                            <label for="crosshair"> crosshair</label>
-                        </p>
-                        
-                        <p>
-                            <input type="checkbox" id="line"
-                            onclick="handlePatternSelect(this)"/>
-                            <label for="line"> line</label>
-                        </p>
-                        
-                        <p>
-                            <input type="checkbox" id="circular dot array"
-                            onclick="handlePatternSelect(this)"/>
-                            <label for="circular dot array">circular dot array</label>
-                        </p>
-
-                        <p>
-                            <input type="checkbox" id="dot array"
-                            onclick="handlePatternSelect(this)"/>
-                            <label for="dot array"> dot array</label>
-                        </p>
-                        
-                        <p>
-                            <input type="checkbox" id="checkerboard (w)"
-                            onclick="handlePatternSelect(this)"/>
-                            <label for="checkerboard (w)"> checkerboard (w)</label>
-                        </p>
-                        
-                        <p>
-                            <input type="checkbox" id="checkerboard (b)"
-                            onclick="handlePatternSelect(this)"/>
-                            <label for="checkerboard (b)"> checkerboard (b)</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="ring_w5"
-                            onclick="handlePatternSelect(this)"/>
-                            <label for="ring_w5"> ring_w5</label>
-                        </p>
-
-                        <p>
-                            <input type="checkbox" id="ring_w10"
-                            onclick="handlePatternSelect(this)"/>
-                            <label for="ring_w10"> ring_w10</label>
-                        </p>
-
-                        <p>
-                            <input type="checkbox" id="ring_w20"
-                            onclick="handlePatternSelect(this)"/>
-                            <label for="ring_w20"> ring_w20</label>
-                        </p>
-
-                        <p>
-                            <input type="checkbox" id="bullseye"
-                            onclick="handlePatternSelect(this)"/>
-                            <label for="bullseye"> bullseye</label>
-                        </p>
-
-                        </div>
-                <p id="addPattern">
-                <b>Name: </b><input type="text" class="input" id="name" value="name"></p>
-                    <p style="text-align:center;" id="renamePatternButton">
-                        <button style="text-align:center;" class="button add" onclick="renamePattern()">Rename Pattern</button>
-                    </p>
-                    <p style="text-align:center;" id="addPatternButton">
-                        <button style="text-align:center;" class="button add" onclick="addPattern()">Add Pattern</button>
-                    </p>
-                    <p style="text-align:center;" id="removePatternButton">
-                        <button style="text-align:center;" class="button reset" onclick="removePattern()">Remove Pattern</button>
-                    </p>
-                <p style="text-align:center;" id="uploadDisp">
-                        <b>Upload patterns:            </b><input type="file" id="scene-disp-input" accept=".json" multiple>
-                    </p>
-
-                        
-                <p style="text-align:center;" id="saveSelectedPatterns">
-                    <button style="text-align:center;" class="button add" onclick="saveSelected()">Save Selected Patterns</button>
-                </p>
-            </div>
-                     </div>-->
         </div>
         <div id="directions">
         <button type="button" class="collapsible" id="directionsCollapse" style="width:100%;height:100%;"  title="Click for help" onclick="window.open('https://github.com/brendanc490/WebVR-Test-Patterns/blob/main/Custom/README.md','_blank')"><i class="fa-solid fa-circle-info"></i></button>
@@ -494,6 +365,7 @@
         <script src="pastebinInterface.js" type="text/javascript"></script>
         <script src="load.js" type="module"></script>
         <script src="ControllerInputMapping.js" type="module"></script>
+        <script src="sharing.js" type="text/javascript"></script>
 
         
     </body>

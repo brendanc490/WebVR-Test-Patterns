@@ -296,7 +296,7 @@ function drawBullseye(pitch,rings,color1,parent){
     while(r <= rings){
         let elChild = document.createElement("a-entity");
         elChild.setAttribute("id",parent.id+"-"+"ring-"+r);
-        elChild.setAttribute("geometry",{primitive: "ring", radiusOuter: (pitch)*r+pitch/2, radiusInner: (pitch)*r, segmentsTheta: 100});
+        elChild.setAttribute("geometry",{primitive: "ring", radiusOuter: (pitch*2)*r+(pitch/2), radiusInner: (pitch*2)*r-(pitch/2), segmentsTheta: 100});
         elChild.setAttribute("position",{x: 0, y: 0, z: 0});
         elChild.setAttribute("material",{shader: "flat", color: color1});
         parent.append(elChild);
