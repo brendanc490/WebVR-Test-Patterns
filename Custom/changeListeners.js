@@ -373,7 +373,6 @@ window.addEventListener("pointerup", function(e) {
 });*/
 
 
-var scenes = {default: {}}
 finished = false
 var ind = 0
 var block = false
@@ -398,15 +397,30 @@ scene_display_input.addEventListener("change", function() {
 
             reader.onload = function() {
                 fileContent = JSON.parse(reader.result);
+                for (const [name, value] of Object.entries(fileContent['scenes'])) {
+                    const re = /^[a-zA-Z0-9-_ ]+( \([0-9]+\))?$/
+                    if(!re.test(fileName)){
+                        alert('Pattern name is invalid. '+name+' Limit names to only alphanumerics, -, _, or spaces.')
+                        delete names[fileContent['filename']]
+                        reader.abort()
+                    }
+                    currName = name.split(' (')[0];
+                    if(names[fileContent['filename']][currName]){
+                        currName = currName + ' ('+names[fileContent['filename']][currName]+')'
+                        names[fileContent['filename']][name.split(' (')[0]] = names[fileContent['filename']][name.split(' (')[0]] + 1
+                    } else {
+                        names[fileContent['filename']][currName] = 1
+                    }
+                  }
                 scenes[fileName] = fileContent['scenes']
                 names[fileName] = {}
-                Object.keys(fileContent['scenes']).forEach( currName => {
+                /*Object.keys(fileContent['scenes']).forEach( currName => {
                     if(names[fileName] == null){
                         names[fileName][currName] = names[fileName][currName] + 1
                     } else {
                         names[fileName][currName] = 1
                     }
-                });
+                });*/
                 textures = fileContent['textures']['textureValues']
                 uploadedTextureFormats = fileContent['textures']['uploadedTextureFormats']
                 cb();
@@ -414,6 +428,7 @@ scene_display_input.addEventListener("change", function() {
 
             reader.onabort = function() {
                 console.log('aborted')
+                return false;
             };
             reader.addEventListener("error", (event) => {
                 console.log('error:')
@@ -423,7 +438,7 @@ scene_display_input.addEventListener("change", function() {
             if(itm.name.split(".")[1] != "JSON"){
                 alert("Invalid file type");
                 scene_display_input.value = ""
-                return;
+                return false;
             }
             if(Object.keys(scenes).indexOf(itm.name.split(".")[0]) != -1){
                 itm.name = itm.name.split(".")[0]+"1"+itm.name.split(".")[1]
@@ -431,9 +446,14 @@ scene_display_input.addEventListener("change", function() {
 
             }
             fileName = itm.name.split(".")[0];
+            const re = /^[a-zA-Z0-9-_ ]+$/
+            if(!re.test(itm.name.split(".")[0])){
+                alert('Package name is invalid. '+packages[fileContent['filename']]+' Limit names to only alphanumerics, -, _, or spaces.')
+                return false;
+            }
             if(scenes[fileName] != null){
                 alert('A package with this name already exists');
-                return;
+                return false;
             }
             reader.readAsText(itm);
             console.log(fileName)
