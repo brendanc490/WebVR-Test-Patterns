@@ -349,7 +349,8 @@ var colorChange = true;
 
 /* handles switches to advanced mode */
 val = false;
-function switchToAdvanced(switchVal){
+function switchToAdvanced(e){
+    e.stopPropagation()
     newVal = !selectedEntity.getAttribute('advanced').val
     selectedEntity.setAttribute('advanced', {val: newVal});
     advanced.style.backgroundColor == '' ? advanced.style.backgroundColor = '#00FF00' : advanced.style.backgroundColor =''
