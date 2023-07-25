@@ -132,6 +132,7 @@ function duplicateEntity(){
 
     els.push(el);/* adds entity to list of created entities */
     pool.push(el.object3D);
+    updateJSON();
     setTimeout(() => {  selectNew(el) }, 100);
 }
 
@@ -244,7 +245,7 @@ function addPattern(){
         return
     }
     let patternName = prompt("Enter a pattern name: ")
-    while(patternName == ""){
+    while(patternName == ""  || patternName == null){
         patternName = prompt("Enter a valid pattern name: ")
     }
     const re = /^[a-zA-Z0-9-_ ]+$/
@@ -379,7 +380,8 @@ async function highlightSelection(ent){
     }
     newPos = {x: 0, y: 0, z: -5};
     if(ent.id.includes("plane")){
-        newGeom = {primitive: 'plane', width: ent.getAttribute('geometry').width*1.5, height: ent.getAttribute('geometry').height*1.5};
+        let width = (ent.children.length == 0 ? ent.components.geometry.attrValue.width : ent.children[2].components.geometry.attrValue.width)
+        newGeom = {primitive: 'plane', width: width*1.5, height: ent.getAttribute('geometry').height*1.5};
     } else if(selectedEntity.id.includes("circle")){
         newGeom = {primitive: 'ring', radiusOuter: ent.getAttribute('geometry').radiusOuter*1.5, radiusInner: 0};
     } else if(selectedEntity.id.includes("triangle")){
@@ -451,7 +453,7 @@ function renamePattern(){
         return
     }
     let patternName = prompt("Enter a pattern name: ")
-    while(patternName == ""){
+    while(patternName == ""  || patternName == null){
         patternName = prompt("Enter a valid pattern name: ")
     }
     const re = /^[a-zA-Z0-9-_ ]+$/
@@ -507,7 +509,7 @@ function addPackage(){
         return;
     }
     let packageName = prompt("Enter a package name: ");
-    while(packageName == ""){
+    while(packageName == ""  || packageName == null){
         packageName = prompt('Please enter a valid package name');
     }
     const re = /^[a-zA-Z0-9-_ ]+$/
@@ -566,6 +568,9 @@ function removePackage(){
         let newURL = window.location.href.replace(","+encodeURIComponent(packages[packageName]),'')
         newURL = newURL.replace(encodeURIComponent(packages[packageName])+",",'')
         newURL = newURL.replace(encodeURIComponent(packages[packageName]),'')
+        if(newURL.split("?id=")[1] == ''){
+            newURL = newURL.split("?id=")[0]
+        }
         window.history.pushState('object', document.title, newURL);
     }
     delete packages[packageName]
@@ -596,10 +601,15 @@ function changePackage(){
 }
 
 function renamePackage(){
+    if(packageSelect.options.length == 0){
+        alert('No package selected')
+        return
+    }
     let packageName = prompt("Enter a package name: ");
-    while(packageName == ""){
+    while(packageName == "" || packageName == null){
         packageName = prompt('Please enter a valid package name');
     }
+    console.log(packageName)
     const re = /^[a-zA-Z0-9-_ ]+$/
     if(!re.test(packageName)){
         alert('Package name is invalid. '+ packageName +' Limit names to only alphanumerics, -, _, or spaces.')
