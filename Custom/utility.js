@@ -245,7 +245,10 @@ function addPattern(){
         return
     }
     let patternName = prompt("Enter a pattern name: ")
-    while(patternName == ""  || patternName == null){
+    if(patternName == null){
+        return
+    }
+    while(patternName == ""){
         patternName = prompt("Enter a valid pattern name: ")
     }
     const re = /^[a-zA-Z0-9-_ ]+$/
@@ -453,7 +456,10 @@ function renamePattern(){
         return
     }
     let patternName = prompt("Enter a pattern name: ")
-    while(patternName == ""  || patternName == null){
+    if(patternName == null){
+        return
+    }
+    while(patternName == "" ){
         patternName = prompt("Enter a valid pattern name: ")
     }
     const re = /^[a-zA-Z0-9-_ ]+$/
@@ -509,7 +515,10 @@ function addPackage(){
         return;
     }
     let packageName = prompt("Enter a package name: ");
-    while(packageName == ""  || packageName == null){
+    if(packageName == null){
+        return
+    }
+    while(packageName == ""){
         packageName = prompt('Please enter a valid package name');
     }
     const re = /^[a-zA-Z0-9-_ ]+$/
@@ -606,7 +615,10 @@ function renamePackage(){
         return
     }
     let packageName = prompt("Enter a package name: ");
-    while(packageName == "" || packageName == null){
+    if(packageName == null){
+        return
+    }
+    while(packageName == ""){
         packageName = prompt('Please enter a valid package name');
     }
     console.log(packageName)
