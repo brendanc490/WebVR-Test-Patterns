@@ -27,6 +27,11 @@ Scenes are grouped together in packages that can be downloaded and shared.
 
 
 # Directions For Use #
+1. Creating a Package
+2. Editing a Package
+3. Saving a Package
+4. Sharing a Package
+
 ## Displaying Patterns
 
 
