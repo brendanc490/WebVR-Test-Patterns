@@ -2,11 +2,13 @@
 ## Summary
 The Pattern Generation Tool provides a user interface for creating, editing, and displaying [WebXR](https://immersiveweb.dev/) scenes.  
 Scenes consist of 2 and 3 dimensional entities taken from [A-Frame](https://aframe.io/docs/1.4.0/core/entity.html).  
-These entities can be manipulated in a variety of different ways to create flexible patterns.  
+These entities can be manipulated in a variety of different ways to create flexible patterns. 
+Scenes can be grouped together in packages that can be downloaded and shared.
 
 ## Features
-- Scenes can be downloaded and uploaded in collections or by themselves.  
-- Scenes that are uploaded can still be edited and saved like normal.  
+- Create packages of scenes that can be shared via a file or a link.
+- Order of scenes within the package can be easily changed.
+- Scenes are fully editable upon uploading or downloading.  
 - Scenes can be switched between using arrow keys or when in immersive mode, the buttons on the left and right controllers.  
 
 ## Displaying Patterns
