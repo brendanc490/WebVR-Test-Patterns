@@ -225,11 +225,13 @@ async function pastebinPost(){
             window.history.pushState('object', document.title, newURL);
         } else {
             let newURL = '';
-            if(tmp != null || tmp != ''){
+            if(tmp != null && tmp != ''){
                 newURL = window.location.href.replace(tmp,text)
+                console.log('test')
             } else {
                 newURL = window.location.href + "," +text
             }
+            console.log(newURL)
             window.history.pushState('object', document.title, newURL);
         }
       } catch (err) {
