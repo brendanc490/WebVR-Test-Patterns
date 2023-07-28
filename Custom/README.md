@@ -26,6 +26,7 @@ Scenes are grouped together in packages that can be downloaded and shared.
    - Ring_w5: A bullseye with a low pitch
 
 
+# Directions For Use #
 ## Displaying Patterns
 
 
