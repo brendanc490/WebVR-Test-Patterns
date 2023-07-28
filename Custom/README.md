@@ -4,7 +4,7 @@ Scenes consist of 2 and 3 dimensional entities taken from [A-Frame](https://afra
 These entities can be manipulated in a variety of different ways to create flexible patterns. 
 Scenes are grouped together in packages that can be downloaded and shared.
 
-## Features
+### Features
 - Create packages of scenes that can be shared via a file or a link.
 - Order of scenes within the package can be easily changed.
 - Scenes are fully editable upon uploading or downloading.  
