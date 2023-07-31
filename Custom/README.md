@@ -27,10 +27,39 @@ Scenes are grouped together in packages that can be downloaded and shared.
 
 
 # Directions For Use #
-1. Creating a Package
-2. Editing a Package
-3. Saving a Package
-4. Sharing a Package
+### Packages
+1. [Create a Package](#createPackage)
+2. Edit a Package
+3. Display a Package
+4. Save a Package
+5. Share a Package
+
+### Patterns
+1. Create a Pattern
+2. Edit a Pattern
+3. Display a Pattern
+4. Save a Pattern
+5. Share a Pattern
+
+
+<div id='createPackage'/>
+## Create a Package
+
+## Edit a Package
+
+## Display a Package
+
+## Save a Package
+
+## Share a Package
+
+
+
+
+
+
+
+
 
 ## Displaying Patterns
 
