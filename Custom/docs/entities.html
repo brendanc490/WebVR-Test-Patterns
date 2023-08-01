@@ -1,0 +1,549 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Entities &#8212; Pattern Generation Tool  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Extra" href="extra.html" />
+    <link rel="prev" title="Pattern Content" href="patterns.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="extra.html" title="Extra"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="patterns.html" title="Pattern Content"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Pattern Generation Tool  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Entities</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="entities">
+<h1>Entities<a class="headerlink" href="#entities" title="Permalink to this heading">¶</a></h1>
+<section id="universal-settings">
+<h2>Universal Settings<a class="headerlink" href="#universal-settings" title="Permalink to this heading">¶</a></h2>
+<ul>
+<li><dl>
+<dt>Position</dt><dd><p>The position of an entity refers to where its center point is located. Positional data is calculated based on a cylinder that encompasses the camera. The radius of this cylinder can be changed and the cylinder has an infinite height.</p>
+<a class="reference internal image-reference" href="../../Images/cylinderRadius.PNG"><img alt="../../Images/cylinderRadius.PNG" src="../../Images/cylinderRadius.PNG" style="width: 600px;" /></a>
+<ul class="simple">
+<li><dl class="simple">
+<dt><span class="math notranslate nohighlight">\({\alpha}\)</span> (deg)</dt><dd><ul>
+<li><p>The horizontal position in the fov, calculated as an offset from the center point</p></li>
+<li><p>1 degree represents 1 degree of clockwise rotation away from the fixed camera center on the cylinder</p></li>
+<li><p>Moving an entity horizontally will rotate it to face the camera</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>y (m)</dt><dd><ul>
+<li><p>The vertical position in the fov</p></li>
+<li><p>This axis is in terms of <strong>world units</strong> where 1 world unit is equal to 1 meter in 3D space</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>z (m)</dt><dd><ul>
+<li><p>The distance from the camera</p></li>
+<li><p>This axis is in terms of <strong>world units</strong> where 1 world unit is equal to 1 meter in 3D space</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Rotation (deg)</dt><dd><p>The axis of rotation is located at the position coordinate of the entity and faces the camera</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Color</dt><dd><p>The primary color of the entity</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="advanced-universal-settings">
+<h2>Advanced Universal Settings<a class="headerlink" href="#advanced-universal-settings" title="Permalink to this heading">¶</a></h2>
+<p>Advanced mode offers more freedom with position and rotation than standard mode. Entities no longer move around a cylindircal plane, but instead move in 3D space.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Position</dt><dd><p>The position of an entity refers to where its center point is located. The location of the camera is noted as <span class="math notranslate nohighlight">\((0,0,0)\)</span></p>
+<ul>
+<li><dl class="simple">
+<dt>x (m)</dt><dd><ul>
+<li><p>The horizontal position in the fov</p></li>
+<li><p>This axis is in terms of <strong>world units</strong> where 1 world unit is equal to 1 meter in 3D space</p></li>
+<li><p>Moving an entity horizontally will <strong>no longer</strong> rotate it to face the camera</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>y (m)</dt><dd><ul>
+<li><p>The vertical position in the fov</p></li>
+<li><p>This axis is in terms of <strong>world units</strong> where 1 world unit is equal to 1 meter in 3D space</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>z (m)</dt><dd><ul>
+<li><p>The distance from the camera</p></li>
+<li><p>This axis is in terms of <strong>world units</strong> where 1 world unit is equal to 1 meter in 3D space</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Rotation</dt><dd><p>The axis of rotation is located at the position coordinate of the entity and faces the camera</p>
+<ul>
+<li><dl class="simple">
+<dt>x (deg)</dt><dd><ul>
+<li><p>rotation about the x axis</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>y (deg)</dt><dd><ul>
+<li><p>rotation about the y axis</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>z (deg)</dt><dd><ul>
+<li><p>rotation about the z axis</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Color</dt><dd><p>The primary color of the entity</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="circle">
+<h2>Circle<a class="headerlink" href="#circle" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Radius (m):</dt><dd><ul>
+<li><p>Radius of the circle</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Border Size (m):</dt><dd><ul>
+<li><p>Amount of fill</p></li>
+<li><p>By default, the border size is set to be equal to the radius of the circle so the circle is filled in</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="plane">
+<h2>Plane<a class="headerlink" href="#plane" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Height (m):</dt><dd><ul>
+<li><p>Height of the plane</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Width (m):</dt><dd><ul>
+<li><p>Width of the plane</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Border Size (m):</dt><dd><ul>
+<li><p>Amount of fill</p></li>
+<li><p>By default, the border size is set to be equal to the radius to the smallest dimension present of the plane, meaning the entity is entirely filled in.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Texture:</dt><dd><ul>
+<li><p>There are some textures built into the site. <a class="reference external" href="https://github.com/DIDSR/WebXR-tools/tree/main/Custom/textures">They can be found here.</a> Textures can also be uploaded as JPGs, PNGs or TIFFs and added to the list of available textures.</p></li>
+<li><p>Applying a texture will automatically scale the plane to fit the aspect ratio.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="triangle">
+<h2>Triangle<a class="headerlink" href="#triangle" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Vertex A (x (m),y (m)):</dt><dd><ul>
+<li><p>Position of vertex A in relation to the center point (position) of the entity</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Vertex B (x (m),y (m)):</dt><dd><ul>
+<li><p>Position of vertex B in relation to the center point (position) of the entity</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Vertex C (x (m),y (m)):</dt><dd><ul>
+<li><p>Position of vertex C in relation to the center point (position) of the entity</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<a class="reference internal image-reference" href="../../Images/triangle.PNG"><img alt="../../Images/triangle.PNG" src="../../Images/triangle.PNG" style="width: 300px;" /></a>
+</section>
+<section id="gradient">
+<h2>Gradient<a class="headerlink" href="#gradient" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Individual Bar Height (m):</dt><dd><ul>
+<li><p>Height of each bar</p></li>
+<li><p>Default is 18.75</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Indivdual Bar Width (m):</dt><dd><ul>
+<li><p>Width of each bar</p></li>
+<li><p>Default is 6.25</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Number of Bars:</dt><dd><ul>
+<li><p>The number of bars in the gradient</p></li>
+<li><p>Default is 32</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Secondary Color:</dt><dd><ul>
+<li><p>The color that the gradient fades to</p></li>
+<li><p>Default is black</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="checkerboard">
+<h2>Checkerboard<a class="headerlink" href="#checkerboard" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Tile size (m):</dt><dd><ul>
+<li><p>Width and height of each tile</p></li>
+<li><p>Default is 5</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Number of Columns:</dt><dd><ul>
+<li><p>Number of columns in the checkerboard</p></li>
+<li><p>Default is 16</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Number of Rows:</dt><dd><ul>
+<li><p>Number of rows in the checkerboard</p></li>
+<li><p>Default is 17</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Secondary Color:</dt><dd><ul>
+<li><p>The color of the alternate tiles</p></li>
+<li><p>Default is black</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="grille">
+<h2>Grille<a class="headerlink" href="#grille" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Individual Bar Height (m):</dt><dd><ul>
+<li><p>Height of each bar</p></li>
+<li><p>Default is 31.25</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Indivdual Bar Width (m):</dt><dd><ul>
+<li><p>Width of each bar</p></li>
+<li><p>Default is 6.25</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Number of Bars:</dt><dd><ul>
+<li><p>The number of bars in the grille</p></li>
+<li><p>Default is 32</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Secondary Color:</dt><dd><ul>
+<li><p>The color of the alternate bars</p></li>
+<li><p>Default is black</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="dot-array">
+<h2>Dot Array<a class="headerlink" href="#dot-array" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Number of columns:</dt><dd><ul>
+<li><p>Number of columns in the dot array</p></li>
+<li><p>Default is 5</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Number of rows:</dt><dd><ul>
+<li><p>Number of rows in the dot array</p></li>
+<li><p>Default is 5</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Radius of dots (m):</dt><dd><ul>
+<li><p>Radius of each dot</p></li>
+<li><p>Default is 2</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Spacing of dots (m):</dt><dd><ul>
+<li><p>Space between each dot</p></li>
+<li><p>Default is 10</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Fill center dot:</dt><dd><ul>
+<li><p>Whether center dot is filled or hollow</p></li>
+<li><p>Default is hollow</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="circular-dot-array">
+<h2>Circular Dot Array<a class="headerlink" href="#circular-dot-array" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Number of dots:</dt><dd><ul>
+<li><p>Number of dots in each circle</p></li>
+<li><p>Default is 10</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Number of circles:</dt><dd><ul>
+<li><p>Number of circles in circular dot array</p></li>
+<li><p>Default is 5</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Radius of dots (m):</dt><dd><ul>
+<li><p>Radius of each dot</p></li>
+<li><p>Default is 2</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Spacing of circles (m):</dt><dd><ul>
+<li><p>Space between each circle</p></li>
+<li><p>Default is 10</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Fill center dot:</dt><dd><ul>
+<li><p>Whether center dot is filled or hollow</p></li>
+<li><p>Default is hollow</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="bullseye">
+<h2>Bullseye<a class="headerlink" href="#bullseye" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Number of rings:</dt><dd><ul>
+<li><p>Number of rings in the bullseye</p></li>
+<li><p>Default is 5</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Ring pitch (m):</dt><dd><ul>
+<li><p>Pitch of rings</p></li>
+<li><p>Default is 5</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Entities</a><ul>
+<li><a class="reference internal" href="#universal-settings">Universal Settings</a></li>
+<li><a class="reference internal" href="#advanced-universal-settings">Advanced Universal Settings</a></li>
+<li><a class="reference internal" href="#circle">Circle</a></li>
+<li><a class="reference internal" href="#plane">Plane</a></li>
+<li><a class="reference internal" href="#triangle">Triangle</a></li>
+<li><a class="reference internal" href="#gradient">Gradient</a></li>
+<li><a class="reference internal" href="#checkerboard">Checkerboard</a></li>
+<li><a class="reference internal" href="#grille">Grille</a></li>
+<li><a class="reference internal" href="#dot-array">Dot Array</a></li>
+<li><a class="reference internal" href="#circular-dot-array">Circular Dot Array</a></li>
+<li><a class="reference internal" href="#bullseye">Bullseye</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="patterns.html"
+                          title="previous chapter">Pattern Content</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="extra.html"
+                          title="next chapter">Extra</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/entities.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="extra.html" title="Extra"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="patterns.html" title="Pattern Content"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Pattern Generation Tool  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Entities</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, Brendan Collins, Miguel Lago, Ryan Beams.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+    </div>
+  </body>
+</html>
