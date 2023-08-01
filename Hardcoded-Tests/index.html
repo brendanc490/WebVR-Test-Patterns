@@ -1,0 +1,110 @@
+<html>
+    <head>
+        <link href="../style.css" rel="stylesheet">
+        <script src="../lib/jquery-3.6.0.min.js" type="text/javascript"> </script>
+        <script src="../lib/aframe.min.js" type="text/javascript"> </script>
+        <script>        
+            AFRAME.registerComponent('button-listener', {
+            init: function () {
+                var el = this.el;
+
+                el.addEventListener('gripdown', function (evt) {
+                        document.querySelector('a-scene').exitVR();
+                        location.reload();
+                    });
+                }
+            });
+        </script>
+        <script src="./ControllerComponents.js" type="text/javascript"></script>
+    </head>
+
+    <body>
+        <a-scene>
+            <a-entity id="con-left" laser-controls="hand: left" model="true" button-listener-l thumbstick-left trackpad-left position-updates-left></a-entity>
+            <a-entity id="con-right" laser-controls="hand: right" model="true" button-listener-r thumbstick-right trackpad-right position-updates-right></a-entity>
+            <a-text id="pixelRatio" value="Pixel Ratio: " position="0 3 -2" color="white" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="center" side="double"></a-text>
+            <a-text id="size" value="Width: \nHeight:" position="0 2.7 -2" color="white" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="center" side="double"></a-text>
+            
+            <a-entity id="calibrationscene"  visible="true">
+                <a-sky color="#797979" ></a-sky>
+                <a-camera>
+                    <a-entity id="whitecircle1" geometry="primitive:circle; radius: 0.2" material="shader: flat; color: #FFFFFF" position=".75 .5 -1"></a-entity>
+                    <a-entity id="whitecircle2" geometry="primitive:circle; radius: 0.13" material="shader: flat; color: #F8F8F8" position=".75 .5 -1"></a-entity>
+                    <a-entity id="whitecircle3" geometry="primitive:circle; radius: 0.05" material="shader: flat; color: #EFEFEF" position=".75 .5 -1"></a-entity>
+                    <a-entity id="whiteplane" geometry="primitive:plane; width: 0.4; height: .9" material="shader: flat; color: #FFFFFF" position=".75 -.3 -1"></a-entity>
+                    <a-entity id="whiteplane2" geometry="primitive:plane; width: 0.3; height: .075" material="shader: flat; color: #F8F8F8" position=".75 .075 -1"></a-entity>
+                    <a-entity id="whiteplane3" geometry="primitive:plane; width: 0.3; height: .075" material="shader: flat; color: #F8F8F8" position=".75 -.075 -1"></a-entity>
+                    <a-entity id="whiteplane4" geometry="primitive:plane; width: 0.3; height: .075" material="shader: flat; color: #F8F8F8" position=".75 -.225 -1"></a-entity>
+                    <a-entity id="whiteplane5" geometry="primitive:plane; width: 0.3; height: .075" material="shader: flat; color: #F8F8F8" position=".75 -.375 -1"></a-entity>
+                    <a-entity id="whiteplane6" geometry="primitive:plane; width: 0.3; height: .075" material="shader: flat; color: #F8F8F8" position=".75 -.525 -1"></a-entity>
+                    <a-entity id="whiteplane7" geometry="primitive:plane; width: 0.3; height: .075" material="shader: flat; color: #F8F8F8" position=".75 -.675 -1"></a-entity>
+                    
+
+                    <a-entity id="blackcircle1" geometry="primitive:circle; radius: 0.2" material="shader: flat; color: #000000" position="-.75 .5 -1"></a-entity>
+                    <a-entity id="blackcircle2" geometry="primitive:circle; radius: 0.13" material="shader: flat; color: #101010" position="-.75 .5 -1"></a-entity>
+                    <a-entity id="blackcircle3" geometry="primitive:circle; radius: 0.05" material="shader: flat; color: #191919" position="- .75.5 -1"></a-entity>
+                    <a-entity id="blackplane" geometry="primitive:plane; width: 0.4; height: .9" material="shader: flat; color: #000000" position="-.75 -.3 -1"></a-entity>
+                    <a-entity id="blackplane2" geometry="primitive:plane; width: 0.3; height: .075" material="shader: flat; color: #101010" position="-.75 .075 -1"></a-entity>
+                    <a-entity id="blackplane3" geometry="primitive:plane; width: 0.3; height: .075" material="shader: flat; color: #101010" position="-.75 -.075 -1"></a-entity>
+                    <a-entity id="blackplane4" geometry="primitive:plane; width: 0.3; height: .075" material="shader: flat; color: #101010" position="-.75 -.225 -1"></a-entity>
+                    <a-entity id="blackplane5" geometry="primitive:plane; width: 0.3; height: .075" material="shader: flat; color: #101010" position="-.75 -.375 -1"></a-entity>
+                    <a-entity id="blackplane6" geometry="primitive:plane; width: 0.3; height: .075" material="shader: flat; color: #101010" position="-.75 -.525 -1"></a-entity>
+                    <a-entity id="blackplane7" geometry="primitive:plane; width: 0.3; height: .075" material="shader: flat; color: #101010" position="-.75 -.675 -1"></a-entity>
+                </a-camera>
+            </a-entity>
+
+            <a-entity id="contrast" visible="false">
+                <a-sky color="#000000"></a-sky>
+                <a-camera>
+                    <a-entity id="contrastSetup"></a-entity>
+                    <!--<a-entity id="whiteplane32" geometry="primitive:plane; width: 0.05; height: .15" material="shader: flat; color: #FFFFFF" position="1 0 -1"></a-entity>
+                    <a-entity id="whiteplane31" geometry="primitive:plane; width: 0.05; height: .15" material="shader: flat; color: #F7F7F7" position=".95 0 -1"></a-entity>
+                    <a-entity id="whiteplane30" geometry="primitive:plane; width: 0.05; height: .15" material="shader: flat; color: #FFFFFF" position="1 0 -1"></a-entity>
+                    <a-entity id="whiteplane29" geometry="primitive:plane; width: 0.05; height: .15" material="shader: flat; color: #F7F7F7" position=".95 0 -1"></a-entity>-->
+
+                </a-camera>
+            </a-entity>
+        </a-scene>
+
+        <div id="info">
+            <!-- Text input to determine size of each step -->
+            <p>Select desired test pattern: <select name="patterns" id="patterns" onchange="drawPattern()">
+                <option value="calibration">Calibration</option>
+                <option value="contrast">Contrast</option>
+              </select></p>
+              <p>Max Canvas Width: <input type="text" class="input" id="maxWidth" value="1920"></p>
+              <p>Max Canvas Height: <input type="text" class="input" id="maxHeight" value="1920"></p>
+              <p>Foveation Level: <input type="text" class="input" id="foveationInput" value="0"> <div class="slidecontainer">
+                <input type="range" min="0" max="3" value="0" class="slider2" id="foveationRange" step=".01">
+                </div></p>
+            <p>Precision (low, medium, high): <input type="text" class="input" id="precisionInput" value="high"> <div class="slidecontainer">
+                    <input type="range" min="0" max="2" value="2" class="slider2" id="precisionRange" step="1">
+                    </div></p>
+                <p>
+                    <input type="checkbox" id="antialias"
+                    onclick="setAA(this)"/>
+                    <label for="antialias"> anti-alias</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="alpha"
+                    onclick="setAlpha(this)" Checked/>
+                    <label for="alpha"> alpha</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="log"
+                    onclick="setLog(this)"/>
+                    <label for="log"> logarithmic depth buffer</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="colorMgmt"
+                    onclick="setColorMgmt(this)"/>
+                    <label for="colorMgmt"> color management</label>
+                </p>
+            <p style="text-align:center;" id="findRendererInfo"><button class="button add" onclick="updateInfo()">Find Renderer Info</button></p>
+        </div>
+
+    </body>
+
+    <script src="script.js" type="text/javascript"></script>
+
+</html>

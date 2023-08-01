@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="style.css" rel="stylesheet">
+    <title>WebXR Tools | DIDSR</title>
+</head>
+
+<body>
+    <h1>WebXR Test Patterns by DIDSR</h1>
+    <div style="margin:auto;width: fit-content;">
+        <script>
+        function navigateToCustom(){
+            window.location = window.location.href.includes('github') ? window.location.href+"Custom/" : window.location.origin+"/Custom/"
+        }
+        function navigateToCompatibility(){
+            window.location = window.location.href.includes('github') ? window.location.href+"Compatibility/" : window.location.origin+"/Compatibility/"
+        }
+        function navigateToTCA(){
+            window.location = window.location.href.includes('github') ? window.location.href+"TCA/" : window.location.origin+"/TCA/"
+        }
+        function navigateToHardcoded(){
+            window.location = window.location.href.includes('github') ? window.location.href+"Hardcoded-Tests/" : window.location.origin+"/Hardcoded-Tests/"
+        }
+        function navigateToImageBased(){
+            window.location = window.location.href.includes('github') ? window.location.href+"Image-Based-Tests/" : window.location.origin+"/Image-Based-Tests/"
+        }
+        </script>
+        <form>
+            <input type="button" value="Create a Pattern" onclick="navigateToCustom()"/>
+        </form>
+        <form>
+            <input type="button" value="Check Device Compatibility" onclick="navigateToCompatibility()" />
+        </form>
+        <form>
+            <input type="button" value="TCA Test" onclick="navigateToTCA()"/>
+        </form>
+        <form>
+            <input type="button" value="Dropdown Change Tests" onclick="navigateToHardcoded()"/>
+        </form>
+        <form>
+            <input type="button" value="Texture Based Tests" onclick="navigateToImageBased()"/>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,271 @@
+<html>
+  <head>
+    <link href="../style.css" rel="stylesheet">
+    <script src="../lib/jquery-3.6.0.min.js" type="text/javascript"> </script>
+    <script src="../lib/aframe.min.js" type="text/javascript"> </script>
+    <script>
+        /* Code to register the orthographic camera as parent camera and remove original camera */
+        AFRAME.registerComponent('ortho', {
+            init: function () {
+                /* Save original camera */
+                var sceneEl = this.el.sceneEl;
+                this.originalCamera = sceneEl.camera;
+                this.cameraParent = sceneEl.camera.parent;
+                /* Create orthographic camera using three.js */
+                /*this.orthoCamera = new THREE.OrthographicCamera((window.innerWidth*-1)/1000, window.innerWidth/1000, window.innerHeight/1000, (window.innerHeight*-1)/1000*/
+
+                this.orthoCamera = new THREE.OrthographicCamera(-2, 2, 1, -1);
+                /* Makes this the parent camera and add it to scene */
+                this.cameraParent.add(this.orthoCamera);
+                sceneEl.camera = this.orthoCamera;
+            },
+            /* Removes orthographic camera and replaces it with original camera upon termination */
+            remove: function () {
+            this.cameraParent.remove(this.orthoCamera);
+            sceneEl.camera = this.originalCamera;
+            }
+        });
+        /* Code to register thumbstick behavior for left hand */
+        AFRAME.registerComponent('thumbstick-logging-right',{
+            init: function () {
+                this.el.addEventListener('thumbstickmoved', this.logThumbstickRight);
+            },
+            logThumbstickRight: function (evt) {
+                /* calls movement function with key that corresponds */
+                /*if (evt.detail.y > 0.95) { movement(new KeyboardEvent("keydown", {key : "w"})); }
+                if (evt.detail.y < -0.95) { movement(new KeyboardEvent("keydown", {key : "s"})); }
+                if (evt.detail.y > 0.95) { movement(new KeyboardEvent("keydown", {key : "ArrowUp"})); }
+                if (evt.detail.y < -0.95) { movement(new KeyboardEvent("keydown", {key : "ArrowDown"})); }
+                if (evt.detail.x < -0.95) { movement(new KeyboardEvent("keydown", {key : "a"})); }
+                if (evt.detail.x > 0.95) { movement(new KeyboardEvent("keydown", {key : "d"})); }*/
+            }
+        });
+
+        /* code to register thumbstick behavior for right hand */
+        AFRAME.registerComponent('thumbstick-logging-left',{
+            init: function () {
+                this.el.addEventListener('thumbstickmoved', this.logThumbstickLeft);
+            },
+            logThumbstickLeft: function (evt) {
+                /* calls movement function with key that corresponds */
+                if (evt.detail.y > 0.95) { movement(new KeyboardEvent("keydown", {key : "ArrowUp"})); }
+                if (evt.detail.y < -0.95) { movement(new KeyboardEvent("keydown", {key : "ArrowDown"})); }
+            }
+        }); 
+
+        AFRAME.registerComponent('button-listener-r-quest', {
+            init: function () {
+                var el = this.el;
+
+                el.addEventListener('gripdown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "ArrowDown"}));
+                });
+
+                el.addEventListener('triggerdown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "ArrowUp"}));
+                });
+
+                el.addEventListener('abuttondown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "a"}));
+                });
+
+                el.addEventListener('bbuttondown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "d"}));
+                });
+
+                el.addEventListener('menudown', function (evt) {
+                    document.querySelector('a-scene').exitVR();
+                });
+
+                el.addEventListener('thumbstickdown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key: " "}));
+                });
+
+
+            }
+        });
+
+        /*AFRAME.registerComponent('button-listener-l-quest', {
+            init: function () {
+                var el = this.el;
+
+                el.addEventListener('thumbstickdown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "ArrowLeft"}));
+                });
+
+                el.addEventListener('triggerdown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "ArrowRight"}));
+                });
+
+                el.addEventListener('xbuttondown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "j"}));
+                });
+
+                el.addEventListener('ybuttondown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "l"}));
+                });
+
+                el.addEventListener('gripdown', function (evt) {
+                    document.querySelector('a-scene').exitVR();
+                    location.reload();
+                });
+
+
+            }
+        });*/
+
+        AFRAME.registerComponent('button-listener-l-quest', {
+            init: function () {
+                var el = this.el;
+
+                el.addEventListener('thumbstickdown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "x"}));
+                });
+
+                el.addEventListener('triggerdown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "c"}));
+                });
+
+                el.addEventListener('xbuttondown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "n"}));
+                });
+
+                el.addEventListener('ybuttondown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "m"}));
+                });
+
+                el.addEventListener('menudown', function (evt) {
+                    document.querySelector('a-scene').exitVR();
+                });
+
+                el.addEventListener('gripdown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key: "z"}));
+                });
+
+
+            }
+        });
+
+        AFRAME.registerComponent('reverb-buttons-r', {
+            init: function () {
+                var el = this.el;
+
+                el.addEventListener('thumbstickchanged', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "ArrowDown"}));
+                });
+
+                el.addEventListener('triggerchanged', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "ArrowUp"}));
+                });
+
+                el.addEventListener('trackpadchanged', function (evt) {
+                    console.log("trackpad menu");
+                    movement(new KeyboardEvent("keydown", {key : "a"}));
+                });
+
+                el.addEventListener('menuchanged', function (evt) {
+                    console.log("pressed menu");
+                    movement(new KeyboardEvent("keydown", {key : "d"}));
+                });
+
+                el.addEventListener('gripchanged', function (evt) {
+                    document.querySelector('a-scene').exitVR();
+                });
+
+
+            }
+        });
+
+        AFRAME.registerComponent('reverb-buttons-l', {
+            init: function () {
+                var el = this.el;
+
+                el.addEventListener('thumbstickdown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "ArrowLeft"}));
+                });
+
+                el.addEventListener('triggerdown', function (evt) {
+                    movement(new KeyboardEvent("keydown", {key : "ArrowRight"}));
+                });
+
+                el.addEventListener('trackpaddown', function (evt) {
+                    console.log("pressed trackpad");
+                    movement(new KeyboardEvent("keydown", {key : "j"}));
+                });
+
+                el.addEventListener('menudown', function (evt) {
+                    console.log("pressed menu");
+                    movement(new KeyboardEvent("keydown", {key : "l"}));
+                });
+
+                el.addEventListener('gripdown', function (evt) {
+                    document.querySelector('a-scene').exitVR();
+                    location.reload(true);
+                });
+
+
+            }
+        });
+    </script>
+  </head>
+  <body>
+    <!-- Includes orthographic camera in scene -->
+    
+    <a-scene>
+        <!-- Oculus controls -->
+        <a-entity oculus-touch-controls="hand: left" button-listener-l-quest></a-entity>
+        <a-entity oculus-touch-controls="hand: right" button-listener-r-quest></a-entity>
+        <!-- Reverb controls -->
+        <a-entity windows-motion-controls="hand: left" reverb-buttons-l></a-entity>
+        <a-entity windows-motion-controls="hand: right" reverb-buttons-r></a-entity>
+
+        <a-camera wasd-controls-enabled="false">-->
+            <!-- Sphere entity to signify the position of the camera -->
+            <!-- Creates 3 bars to be used in test, positioning done in script -->
+            <a-entity id="redBar" geometry="primitive: box;  width: .3, height: 1" material="color: #FF0000"></a-entity>
+            <a-entity id="greenBar" geometry="primitive: box;  width: .3, height: 1" material="color: #00FF00"></a-entity>
+            <a-entity id="blueBar" geometry="primitive: box;  width: .3, height: 1" material="color: #0000FF"></a-entity>
+
+            <a-entity id="centerDot" geometry="primitive: circle; radius: .01" position="0 0 -1" material="color: #FFFFFF"></a-entity>
+
+            <a-entity id="redBar2" geometry="primitive: box;  width: .3, height: 1" material="color: #FF0000"></a-entity>
+            <a-entity id="greenBar2" geometry="primitive: box;  width: .3, height: 1" material="color: #00FF00"></a-entity>
+            <a-entity id="blueBar2" geometry="primitive: box;  width: .3, height: 1" material="color: #0000FF"></a-entity>
+        </a-camera>
+        <!-- Creates black background -->
+        <a-sky color="black"></a-sky>
+
+    </a-scene>
+
+    <!-- Fixed settings area -->
+    <div id="info">
+        <b>Settings</b>
+        <!-- Text input to determine size of each step -->
+        <p>Size of step (degrees): <input type="text" class="input" id="step-size" value="0.1"></p>
+
+        <p>Position of center (deg): <input type="text" class="input" id="centerPos" value="0"> <div class="slidecontainer">
+            <input type="range" min="-80" max="80" value="0" class="slider" id="centerRange"step=".1">
+        </div></p>
+        <!-- Text input to determine size of each step -->
+        <p>Offset from center (deg): <input type="text" class="input" id="offset" value="20"> <div class="slidecontainer">
+            <input type="range" min="0" max="80" value="20" class="slider" id="offsetRange"step=".1">
+        </div></p>
+        <!-- Slider/text input to determine the height of bars -->
+        <p>Height of bars (m): <input type="text" class="input" id="height" value=".05"><div class="slidecontainer">
+        <input type="range" min="0" max=".1" value=".05" class="slider" id="heightRange"step=".001">
+        </div></p>
+        <!-- Slider/text input to determine the width of bars -->
+        <p>Width of bars (m): <input type="text" class="input" id="width" value=".005"> <div class="slidecontainer">
+        <input type="range" min="0" max=".02" value=".005" class="slider2" id="widthRange" step=".001">
+        </div></p>
+        <b>Results</b>
+        <p id="edit1">Deg Translated Left Bar (RGB):<input type="text" class="input" id="xBlue1" value="0"><input type="text" class="input" id="xGreen1" value="0"><input type="text" class="input" id="xRed1" value="0"></p>
+            
+        <p id="edit1">Degrees Translated Right Bar (RGB):<input type="text" class="input" id="xBlue2" value="0"><input type="text" class="input" id="xGreen2" value="0"><input type="text" class="input" id="xRed2" value="0"></p>
+            
+    </div>
+    <!-- Script that handles movement, positioning, and drawing of bars -->
+    <script src="movement.js"></script>
+    <script src="../Custom/ControllerInputMapping.js" type="module"></script>
+  </body>
+</html>

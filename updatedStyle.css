@@ -1,0 +1,446 @@
+h1 {
+    color:white;
+    text-align: center;
+}
+
+body {
+    margin:0;
+    background-color: rgb(26, 26, 26);
+    font-family: 'Segoe UI', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  .center-block {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+
+  #info{
+    position: absolute;
+    max-height: 90vh;
+    max-width: 400px;
+    left: 10px;
+    top: 10px;
+    background-color: rgba(211,211,211, 1);
+    color: Black;
+    padding: 1em;
+    overflow-y:auto;
+    overflow-x:auto;
+  }
+
+  .scrollable{
+    max-height: 15vh;
+    overflow-y:scroll;
+    overflow-x:auto;
+  }
+
+  #directions{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: rgba(211,211,211, 1);
+    color: Black;
+    padding: 1em;
+    overflow-y:auto;
+    overflow-x:auto;
+  }
+
+  #debug{
+    display: none;
+    position: absolute;
+    width: 70vw;
+    height: 50vh;
+    right: 10px;
+    top: 10px;
+    background-color: rgba(211,211,211, 1);
+    color: Black;
+    padding: 1em;
+    overflow-y:scroll;
+    overflow-x:auto;
+  }
+
+  .toggle {
+    position : relative ;
+    display : inline-block;
+    max-height: 100vh;
+    width : 50px;
+    height : 27px;
+    background-color: #efefef;
+    border-radius: 30px;
+    border-style: groove;
+    vertical-align: middle;
+    border: 2px solid #3b75ba;
+}
+       
+/* After slide changes */
+.toggle:after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: rgba(0,117,255,255);
+    top: 1px;
+    left: 1px;
+    transition:  all 0.5s;
+}
+
+.checkbox:checked + .toggle::after {
+    left : 24px;
+}
+       
+/* Checkbox checked toggle label bg color */
+.checkbox:checked + .toggle {
+    background-color: #efefef;
+}
+       
+/* Checkbox vanished */
+.checkbox {
+    display : none;
+}
+
+input[type=text]{
+  width:70px;
+  text-align: center;
+  background:rgb(255,255,255);
+  border: 1px solid rgb(138, 138, 138);
+  color:black;
+  /*float:right;
+  top: 50%;
+  left:50%;*/
+}
+
+  input[type=file]{
+    position: relative;
+    text-align: center;
+    left: 0%;
+    top: 0%;
+  }
+
+
+  .select{
+    width: 100px;
+    font-size: 16px;
+    text-align: center;
+    top: 50%;
+    left:50%;
+  }
+
+.button{
+    cursor: pointer;
+    border-radius: 4px;
+    border-style: groove;
+    border-color: rgba(150,150,150, 1);
+    color: black;
+    padding: 5px;
+    width:60%;
+    font-size: 15px;
+    top: 50%;
+    left:50%;
+  }
+
+.reset:hover {
+    background-color: #f44336;
+    color: white;
+  }
+
+.add:hover {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 22px;
+  }
+  
+  .active, .collapsible:hover {
+    background-color: #555;
+  }
+  
+  .content {
+    padding: 0 10px;
+    display: block;
+    overflow-y: auto;
+    background-color: #f1f1f1;
+  }
+  .hide { grid-area: Hide; text-align: center;}
+  .swap { grid-area: Toggle; text-align: center;}
+  .content{ grid-area: Content;}
+  .settings{ 
+    grid-area: Settings;
+  }
+  .core-container {
+    display: grid;
+     grid-template-areas:
+       'Hide Hide'
+       'Toggle Toggle'
+       'Content Settings';
+     grid-template-columns: 65% 35%;
+     grid-template-rows: 7% 7% 86%;
+     background-color: #000000;
+     height: 90vh;
+     width: 400px;
+     overflow-y:auto;
+     overflow-x:auto;
+   }
+   
+   .core-container > div {
+     background-color: rgba(255, 255, 255, 0.8);
+   }
+
+.packageSettingsHeader {grid-area: PackageSettingsHeader; text-align: center;}
+.renamePackage { grid-area: RenamePackage; text-align: center;} 
+.export { grid-area: Export; text-align: center;}
+.import { grid-area: Import; text-align: center;}
+.package-settings-container{
+  display: grid;
+  grid-template-areas:
+    'PackageSettingsHeader'
+    'RenamePackage'
+    'Export'
+    'Import';
+    grid-template-columns: 100%;
+    grid-template-rows: 25% 25% 25% 25%;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.patternSettingsHeader {grid-area: PatternSettingsHeader; text-align: center;}
+.renamePattern { grid-area: RenamePattern; text-align: center;} 
+.cut { grid-area: Cut; text-align: center;}
+.copy { grid-area: Copy; text-align: center;}
+.paste { grid-area: Paste; text-align: center;}
+.pattern-settings-container{
+  display: grid;
+  grid-template-areas:
+    'PatternSettingsHeader'
+    'RenamePattern'
+    'Cut'
+    'Copy'
+    'Paste';
+    grid-template-columns: 100%;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+}
+
+  .settings-container {
+    display: grid;
+    grid-template-areas:
+    'PackageSettings'
+    'PatternSettings';
+    grid-template-columns: 100%;
+    grid-template-rows: 30% 70%;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+  }
+
+.display-grid {
+  display: grid;
+  grid-template-areas:
+  'Packages'
+  'Patterns';
+  grid-template-columns: 100%;
+  grid-template-rows: 30% 70%;
+  height: 100%;
+  width: 100%;
+}
+
+.packages {grid-area: Packages; text-align: left; padding-left: 5px;}
+.packageSettings {grid-area: PackageSettings; text-align: left; padding-left: 5px;}
+.patterns {grid-area: Patterns; text-align: left; padding-left: 5px;}
+.patternSettings {grid-area: PatternSettings; text-align: left; padding-left: 5px;}
+
+.item1 { grid-area: Select; text-align: center;}
+.item2 { grid-area: Patterns; text-align: center; padding-top: 5%;}
+.item3 { grid-area: AddPackage; text-align: center;}
+.item4 { grid-area: RenamePackage; text-align: center;}
+.item5 { grid-area: AddPattern; text-align: center;}
+.item6 { grid-area: RenamePattern; text-align: center;}
+.item7 { grid-area: DeletePattern; text-align: center;}
+.item8 { grid-area: SavePackage; text-align: center;}
+.item9 {grid-area: UploadPackage; text-align: center; font-size: 15px; padding-top: 5%;}
+.item10 { grid-area: PastebinGET; text-align: center;}
+.item11 { grid-area: PastebinPOST; text-align: center;}
+
+
+.universalHeader {grid-area: UniversalHeader; text-align: center; cursor: pointer; padding-top: 12px;}
+.universalHeader:hover {background-color: #888;}
+.position {grid-area: Position; text-align: left;}
+.rotation {grid-area: Rotation; text-align: left;}
+.x {grid-area: x; text-align: center;}
+.y {grid-area: y; text-align: center;}
+.z {grid-area: z; text-align: center;}
+.pitch {grid-area: pitch; text-align: center;}
+.yaw {grid-area: yaw; text-align: center;}
+.roll {grid-area: roll; text-align: center;}
+.entColor {grid-area: EntColor; text-align: left;}
+
+.universal {
+  grid-area: Universal; 
+  text-align: center; 
+  border-top: #000 solid 1px;
+  border-bottom: 1px solid #999; 
+  display: grid; 
+  grid-template-areas: 
+  'UniversalHeader UniversalHeader UniversalHeader'
+  'Position Position Position'
+  'x y z'
+  'Rotation Rotation Rotation'
+  'pitch yaw roll'
+  'EntColor EntColor EntColor';
+  grid-template-rows: 17% 17% 16% 17% 16% 17%;
+  grid-template-columns: 33% 33% 34%;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.specificHeader {grid-area: SpecificHeader; text-align: center; cursor: pointer;}
+.specificHeader:hover {background-color: #888;}
+.area1 {grid-area: Area1; text-align: left;}
+.area2 {grid-area: Area2; text-align: left;}
+.area3 {grid-area: Area3; text-align: left;}
+.area4 {grid-area: Area4; text-align: left;}
+.area5 {grid-area: Area5; text-align: left;}
+
+.specific {
+   grid-area: Specific;
+   text-align: center;
+    border-bottom: 1px solid #999;
+    display: grid;
+    grid-template-areas:
+    'SpecificHeader'
+    'Area1'
+    'Area2'
+    'Area3'
+    'Area4'
+    'Area5';
+    grid-template-rows: 13% 17% 17% 17% 17% 17%;
+  }
+
+.removeEnt {grid-area: Buttons; text-align: center; padding-top: 20px;}
+
+.entity-container {
+  display: none;
+  grid-template-areas: 
+  'Universal'
+  'Specific'
+  'Buttons';
+  grid-template-rows: 40% 50% 5%;
+  height: 90%;
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+
+
+  .grid-container {
+    display: none;
+     grid-template-areas:
+       'Select Select'
+       'Patterns Patterns'
+       'UploadPackage UploadPackage'
+       'AddPackage AddPattern'
+       'RenamePackage RenamePattern'
+       'SavePackage DeletePattern'
+       'PastebinPOST PastebinGET' ;
+     grid-template-columns: 50% 50%;
+     grid-template-rows: 9% 46% 9% 9% 9% 9% 9%;
+     background-color: #000000;
+     height: 100%;
+     width: 25vw;
+   }
+   
+   .grid-container > div {
+     background-color: rgba(255, 255, 255, 0.8);
+   }
+
+   [draggable="true"] {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+  
+  
+  ol.moveable {
+    list-style: decimal;
+    margin: 0px;
+    height: 90%;
+    margin-left: 0;
+    margin-right: 0;
+    
+    overflow-x:auto;
+  }
+
+  #items-list .ui-selecting { background: #FECA40; }
+  #items-list .ui-selected { background: #F39814; color: white; }
+  
+   li {
+      position: relative;
+      text-align: center;
+      list-style-image: none;
+      border: 1px solid #000;
+      border-radius: 4px;
+      font-size: 15px;
+      background-color: #FFF;
+      color: #000;
+      cursor: move;
+      margin: 5px;
+      width:80%;
+      height:17px;
+      top:0%;
+      left:5%;
+      padding-bottom: 2%;
+  
+
+   }
+   
+   li:hover {
+    background-color: #eee;
+  }
+  
+
+
+  .item1-EP { grid-area: Toggle; text-align: center;}
+  .item2-EP { grid-area: Select; text-align: center; padding-top: 5%;}
+  .item3-EP { grid-area: Add; text-align: center;}
+  .item4-EP { grid-area: Background; text-align: center;}
+  .item5-EP { grid-area: Color; text-align: center;}
+  .item6-EP { grid-area: Reset; text-align: center;}
+
+  .grid-container-EP {
+    display: none;
+     grid-template-areas:
+       'Toggle2'
+       'Select'
+       'Add'
+       'Background'
+       'Color'
+       'Reset';
+
+     grid-template-columns: 100%;
+     grid-template-rows: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+     background-color: #000000;
+     height: 90vh;
+     width: auto;
+     overflow-y:auto;
+     overflow-x:auto;
+   }
+   
+   .grid-container-EP > div {
+     background-color: rgba(255, 255, 255, 0.8);
+   }
+
