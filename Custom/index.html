@@ -253,19 +253,6 @@
                             <div id="removeEntity" class="removeEnt"><div style="display: inline-block; width: 50%;"><button class="button reset" onclick="removeEntity()" title="Rmove Entity" style="width: 60%;"><i id="settingsIcon" class="fa-solid fa-trash"></i></button></div><div style="display: inline-block; width: 50%;"><button class="button add" onclick="duplicateEntity()" title="Duplicate Entity" style="width: 60%;"><i id="settingsIcon" class="fa-solid fa-clone"></i></button></div></div>
                         </div>
     
-
-
-
-
-
-
-
-
-
-
-
-
-                        
                         <div id="addContent">
                             <p id="addChoice" style="text-align:center; display: flex; justify-content: space-between;"><b>Type of entity:</b>
                                 <select class="select" name="entity" id="entity">
@@ -316,42 +303,6 @@
                     </div>
                 </div>
             </div>
-                    <div id="oldLayout" class="grid-container" style="display:none">
-
-                    <div class="item1"><b>Package Display:</b>
-                        <p style="position: relative; text-align: center; padding-bottom: 2%; top: 0%;"><select class="select" name="packageDisplay" id="packageDisplay" onchange="changePackage(this)">
-                            <option value="default">default</option>
-                            </select></p></div>  
-                    <div class="item2" title="Hold the ctrl button to select multiple"><button style="text-align:center; width:10%" class="button add" onclick="copyPattern()"  title="Copy Patterns"><i class="fa-solid fa-clipboard"></i></button><b style="padding: 15%;">Pattern List:</b><button style="text-align:center; width:10%" class="button add" onclick="pastePattern()"  title="Paste Patterns"><i class="fa-solid fa-paste"></i></button><ol id="items-list" class="moveable" selectedIndex="" multi-select="" style="padding-top: 1%;">
-                        <li>red</li>
-                        <li>green</li>
-                        <li>blue</li>
-                        <li>white</li>
-                        <li>grille</li>
-                        <li>crosshair</li>
-                        <li>line</li>
-                        <li>circular dot array</li>
-                        <li>dot array</li>
-                        <li>checkerboard_w</li>
-                        <li>checkerboard_b</li>
-                        <li>ring_w1</li>
-                        <li>ring_w2</li>
-                        <li>ring_w5</li>
-                        
-                    </ol></div>
-                    <div class="item3"><button style="text-align:center;" class="button add" onclick="addPackage()" title="Add Package"><i class="fa-solid fa-plus"></i> Package</button></div>
-                    <div class="item4"><button style="text-align:center;" class="button add" onclick="renamePackage()">Rename Package</button></div>
-                    <div class="item5"><button style="text-align:center;" class="button add" onclick="addPattern()"  title="Add Pattern"><i class="fa-solid fa-plus"></i> Pattern</button></div>
-                    <div class="item6"><button style="text-align:center;" class="button add" onclick="renamePattern()">Rename Pattern</button></div>
-                    <div class="item7"><button style="text-align:center;" class="button reset" onclick="removePattern()" title="Remove Patterns"><i class="fa-solid fa-trash"></i></button></div>
-                    <div class="item8"><button style="text-align:center;" class="button add" onclick="saveSelected()"  title="Save Package"><i class="fa-solid fa-download"></i></button></div>
-                    <div class="item9">
-                            <b>Upload patterns:            </b><input type="file" id="scene-disp-input" accept=".json" multiple>
-                    </div>
-                    <div class="item10"><button style="text-align:center;" class="button add" onclick="handleImport()"  title="Pastebin Import"><i class="fa-solid fa-cloud-arrow-up"></i></button></div>
-                    <div class="item11"><button style="text-align:center;" class="button add" onclick="pastebinPost()"  title="Pastebin Export"><i class="fa-solid fa-cloud-arrow-down"></i></button></div>
-                        
-                    </div>
         </div>
         <div id="directions">
         <button type="button" class="collapsible" id="directionsCollapse" style="width:100%;height:100%;"  title="Click for help" onclick="window.open('https://github.com/DIDSR/WebXR-tools/blob/main/Custom/README.md','_blank')"><i class="fa-solid fa-circle-info"></i></button>

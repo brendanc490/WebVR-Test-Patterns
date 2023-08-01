@@ -413,6 +413,7 @@ scene_display_input.addEventListener("change", function() {
                         names[fileName][currName] = 1
                     }
                   }
+                packageSelect.options.add(new Option(fileName,fileName))
                 scenes[fileName] = fileContent['scenes']
                 names[fileName] = {}
                 /*Object.keys(fileContent['scenes']).forEach( currName => {
@@ -514,15 +515,8 @@ scene_display_input.addEventListener("change", function() {
         uploadedTextureFormat = tmp
         flag = false;
         i = 0;
-        while(i < packageSelect.options.length){
-            if(packageSelect.options[i].value == fileName){
-                alert('A package with this name already exists');
-                return
-            }
-            i++;
-        }
     
-        packageSelect.options.add(new Option(fileName,fileName))
+        
         packageSelect.value = fileName
         changePackage()
         /*i = 0;
