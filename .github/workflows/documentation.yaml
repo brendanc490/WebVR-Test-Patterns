@@ -21,7 +21,7 @@ jobs:
       run: |
         git clone https://github.com/brendanc490/WebVR-Test-Patterns.git --branch gh-pages --single-branch gh-pages
         mkdir -p gh-pages/Custom/doc
-        cp -r doc/_build/html/* gh-pages/doc
+        cp -r doc/_build/html/* gh-pages/Custom/doc
         cp index.html gh-pages
         cp style.css gh-pages
         cp updatedStyle.css gh-pages
