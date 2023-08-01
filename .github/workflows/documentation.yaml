@@ -20,24 +20,24 @@ jobs:
     - name: Commit documentation changes
       run: |
         git clone https://github.com/brendanc490/WebVR-Test-Patterns.git --branch gh-pages --single-branch gh-pages
-        mkdir gh-pages/doc
+        mkdir -p gh-pages/doc
         cp -r doc/_build/html/* gh-pages/doc
         cp index.html gh-pages
         cp style.css gh-pages
         cp updatedStyle.css gh-pages
-        mkdir gh-pages/Compatibility
+        mkdir -p  gh-pages/Compatibility
         cp -r Compatibility/* gh-pages/Compatibility
-        mkdir gh-pages/Custom
+        mkdir -p  gh-pages/Custom
         cp -r Custom/* gh-pages/Custom
-        mkdir gh-pages/Hardcoded-Tests
+        mkdir -p  gh-pages/Hardcoded-Tests
         cp -r Hardcoded-Tests/* gh-pages/Hardcoded-Tests
-        mkdir gh-pages/Image-Based-Tests
+        mkdir -p  gh-pages/Image-Based-Tests
         cp -r Image-Based-Tests/* gh-pages/Image-Based-Tests
-        mkdir gh-pages/Images
+        mkdir -p  gh-pages/Images
         cp -r Images/* gh-pages/Images
-        mkdir gh-pages/TCA
+        mkdir -p  gh-pages/TCA
         cp -r TCA/* gh-pages/TCA
-        mkdir gh-pages/lib
+        mkdir -p  gh-pages/lib
         cp -r lib/* gh-pages/lib
         cd gh-pages
         touch .nojekyll
