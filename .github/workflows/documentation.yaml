@@ -26,19 +26,19 @@ jobs:
         cp style.css gh-pages
         cp updatedStyle.css gh-pages
         mkdir gh-pages/Compatibility
-        cp Compatibility/* gh-pages/Compatibility
+        cp -r Compatibility/* gh-pages/Compatibility
         mkdir gh-pages/Custom
-        cp Custom/* gh-pages/Custom
+        cp -r Custom/* gh-pages/Custom
         mkdir gh-pages/Hardcoded-Tests
-        cp Hardcoded-Tests/* gh-pages/Hardcoded-Tests
+        cp -r Hardcoded-Tests/* gh-pages/Hardcoded-Tests
         mkdir gh-pages/Image-Based-Tests
-        cp Image-Based-Tests/* gh-pages/Image-Based-Tests
+        cp -r Image-Based-Tests/* gh-pages/Image-Based-Tests
         mkdir gh-pages/Images
-        cp Images/* gh-pages/Images
+        cp -r Images/* gh-pages/Images
         mkdir gh-pages/TCA
-        cp TCA/* gh-pages/TCA
+        cp -r TCA/* gh-pages/TCA
         mkdir gh-pages/lib
-        cp lib/* gh-pages/lib
+        cp -r lib/* gh-pages/lib
         cd gh-pages
         touch .nojekyll
         git config --local user.email "action@github.com"
