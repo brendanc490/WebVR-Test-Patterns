@@ -1,7 +1,8 @@
 Introduction
 ================
-`Access to Pattern Creation Tool<https://brendanc490.github.io/WebVR-Test-Patterns/Custom/>`_
------------------------------------------------------------------------------------------
+
+`Access to Pattern Creation Tool <https://brendanc490.github.io/WebVR-Test-Patterns/Custom/>`_
+-----------------------------------------------------------------------------------------------
 
 Features
 -------------
