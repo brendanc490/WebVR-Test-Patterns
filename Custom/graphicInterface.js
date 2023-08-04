@@ -358,7 +358,6 @@ function collapseTab(){
     }
 }
 
-hideUniversal()
 function hideUniversal(){
 
     if(uni.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%"){
