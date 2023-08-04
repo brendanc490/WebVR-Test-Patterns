@@ -30,4 +30,6 @@ Features
 Demo
 ------------
 
-.. video:: _static/demoVid.webm
+.. image:: ../../Images/custom.PNG
+    :alt: IMAGE ALT TEXT HERE
+    :target: ./_static/demoVid.webm
