@@ -15,9 +15,14 @@ function selectNew(clickedEntity){
 
     }
     /* Update stats in edit section */
+    if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
+        console.log('test')
+        hideSpecific();
+    }
     hideEditStats(); /* hide section briefly */
     updateStats(); /* update stats */
     toggleAddEdit(null); /* re-display section */
+
     highlightSelection(selectedEntity);
 }
 
