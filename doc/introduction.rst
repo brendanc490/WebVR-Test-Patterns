@@ -29,3 +29,4 @@ Features
 
 Demo
 ------------
+.. video:: _static/demoVid.webm
