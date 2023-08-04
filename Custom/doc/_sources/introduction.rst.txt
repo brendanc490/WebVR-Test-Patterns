@@ -30,6 +30,14 @@ Features
 Demo
 ------------
 
-.. image:: ../../Images/custom.PNG
+.. image:: ../Images/custom.PNG
     :alt: IMAGE ALT TEXT HERE
     :target: https://youtu.be/FnD2dtbyEUU
+
+.. raw:: html
+
+ 
+
+           <video controls src="_static/demoVid.webm" width="620" height="620">
+
+           </video>  
