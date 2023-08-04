@@ -25,6 +25,7 @@ function saveScene(){
 
 /* saves package of scenes in JSON format */
 function saveSelected(){
+    let useTextures = confirm("Include textures?")
     let data = {scenes: {}, textures: {uploadedTextureFormats: {}, textureValues: []}, date: ""}
     let i = 0;
     textures = []
@@ -33,11 +34,24 @@ function saveSelected(){
         textures.push({val: texture.options[i].value, text: texture.options[i].text});
         i++;
     }
+    // add textures
+    if(useTextures){
+        data['textures']['textureValues'] = textures
+        data['textures']['uploadedTextureFormats'] = uploadedTextureFormat
+    } else {
+        console.log('made it')
+        for (const pattern of Object.keys(scenes[packageSelect.value])){
+            for (const ent of Object.keys(scenes[packageSelect.value][pattern])){
+                if(ent.includes('plane')){
+                    scenes[packageSelect.value][pattern][ent].material = {shader: scenes[packageSelect.value][pattern][ent].material.shader, color: scenes[packageSelect.value][pattern][ent].material.color, src: ''}
+                }
+            }
+        }
+    }
+
     // get all scenes
     data['scenes'] = scenes[packageSelect.value]
-    // add textures
-    data['textures']['textureValues'] = textures
-    data['textures']['uploadedTextureFormats'] = uploadedTextureFormat
+
     // add date
     data['date'] = new Date().toLocaleString();
     download(data,packageSelect.value+".JSON","text/plain;charset=utf-8");

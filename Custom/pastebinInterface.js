@@ -183,7 +183,7 @@ function compressTextures(textures){
 
 /* Posts content to pastebin.
    Navigates to new link on success and returns false on failure. */
-async function pastebinPost(){
+async function pastebinPost(useTextures){
     textures = []
     // get all textures
     i = 0;
@@ -191,11 +191,24 @@ async function pastebinPost(){
         textures.push({val: texture.options[i].value, text: texture.options[i].text});
         i++;
     }
-    let code = {filename: packageSelect.value, scenes: scenes[packageSelect.value], textures: {uploadedTextureFormats: {}, textureValues: []}, date: ""}
+    let code = {filename: packageSelect.value, scenes: {}, textures: {uploadedTextureFormats: {}, textureValues: []}, date: ""}
     
     //let compressedTextures = compressTextures(textures);
-    code['textures']['textureValues'] = textures
-    code['textures']['uploadedTextureFormats'] = uploadedTextureFormat
+    if(useTextures){
+        code['textures']['textureValues'] = textures
+        code['textures']['uploadedTextureFormats'] = uploadedTextureFormat
+    } else {
+        console.log('made it')
+        for (const pattern of Object.keys(scenes[packageSelect.value])){
+            for (const ent of Object.keys(scenes[packageSelect.value][pattern])){
+                if(ent.includes('plane')){
+                    scenes[packageSelect.value][pattern][ent].material = {shader: scenes[packageSelect.value][pattern][ent].material.shader, color: scenes[packageSelect.value][pattern][ent].material.color, src: ''}
+                }
+            }
+        }
+    }
+    code['scenes'] = scenes[packageSelect.value]
+
     // add date
     code['date'] = new Date().toLocaleString();
     const size = new TextEncoder().encode(JSON.stringify(code)).length
