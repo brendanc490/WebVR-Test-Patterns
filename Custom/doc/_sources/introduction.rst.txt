@@ -30,10 +30,6 @@ Features
 Demo
 ------------
 
-.. image:: ../Images/custom.PNG
-    :alt: IMAGE ALT TEXT HERE
-    :target: https://youtu.be/FnD2dtbyEUU
-
 .. raw:: html
 
  
