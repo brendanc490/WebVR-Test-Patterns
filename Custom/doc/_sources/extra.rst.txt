@@ -3,13 +3,13 @@ Extra
 
 JSON Package Format
 --------------------
-{  
-"scenes": { map of scenes },  
-"textures": {  
-  "uploadedTextureFormats":  { map of image sizes for uploaded textures },  
-  "textureValues":  [ list of textures present when package was saved],  }  
-"date": "<datetime of save>"  
-}  
+| {  
+| "scenes": { map of scenes },  
+| "textures": {  
+|  "uploadedTextureFormats":  { map of image sizes for uploaded textures },  
+|  "textureValues":  [ list of textures present when package was saved],  }  
+| "date": "<datetime of save>"  
+| }  
 
 Z-Fighting
 -----------
