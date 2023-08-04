@@ -29,3 +29,11 @@ Features
 
 Demo
 ------------
+
+.. raw:: html
+
+ 
+
+           <video controls src="_static/demoVid.webm" width="620" height="620">
+
+           </video>  
