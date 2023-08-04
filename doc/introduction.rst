@@ -10,7 +10,7 @@ Features
 - Order of scenes within the package can be easily changed.
 - Scenes are fully editable upon uploading or downloading.  
 - Scenes can be switched between using arrow keys or when in immersive mode, the buttons on the left and right controllers.
-- Default package available containing commonly used patterns:
+- Default package available containing commonly used patterns
    - Red: A solid red background
    - Green: A solid green background
    - Blue: A solid blue background
