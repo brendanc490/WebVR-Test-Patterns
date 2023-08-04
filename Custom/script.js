@@ -246,7 +246,7 @@ function selectPattern (e){
     patternList.setAttribute("selectedIndex","")
     patternList.setAttribute("multi-select",false);
     revertChanges()
-    nameIn.value = packageSelect.value;
+    //nameIn.value = packageSelect.value;
     return;
   }
   e.target.style.background = '#F39814' // highlights selected pattern
