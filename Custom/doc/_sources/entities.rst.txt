@@ -7,7 +7,7 @@ Universal Settings
 - Position
     The position of an entity refers to where its center point is located. Positional data is calculated based on a cylinder that encompasses the camera. The radius of this cylinder can be changed and the cylinder has an infinite height.
 
-    .. image:: ../../Images/cylinderRadius.PNG
+    .. image:: ../Images/cylinderRadius.PNG
         :width: 600
 
     - :math:`{\alpha}` (deg)
@@ -89,7 +89,7 @@ Triangle
 - Vertex C (x (m),y (m)):
    - Position of vertex C in relation to the center point (position) of the entity
 
-.. image:: ../../Images/triangle.PNG
+.. image:: ../Images/triangle.PNG
    :width: 300
 
 Gradient
