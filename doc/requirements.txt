@@ -1,3 +1,4 @@
 sphinx_rtd_theme
 sphinx_pdj_theme
+groundwork-sphinx-theme
 sphinxcontrib-video
