@@ -59,6 +59,22 @@ Advanced mode offers more freedom with position and rotation than standard mode.
 - Color
     The primary color of the entity
 
+
+Entity Chart
+-------------
+
+| Entity Name        |  Attribute 1     |  Attribute 2      | Attribute 3     | Attribute 4        | Attribute 5       |
+| :----------:       | :-----------:    | :-----------:     | :----------:    | :---------:        | :---------:       |
+| Circle             | Radius           | Border Size       | n/a             | n/a                | n/a               |
+| Plane              | Height           | Width             | Border Size     | Textures           | n/a               |
+| Triangle           | Vertex A         | Vertex B          | Vertex C        | n/a                | n/a               |
+| Gradient           | Bar Height       | Bar Width         | Number of Bars  | Secondary Color    | n/a               |
+| Checkerboard       | Tile Size        | Number of Cols    | Number of Rows  | Secondary Color    | n/a               |
+| Grille             | Bar Height       | Bar Width         | Number of Bars  | Secondary Color    | n/a               |
+| Dot Array          | Number of Cols   | Number of Rows    | Radius of Dots  | Spacing of Dots    | Toggle Center Dot |
+| Circular Dot Array | Number of Dots   | Number of Circles | Radius of Dots  | Spacing of Dots    | Toggle Center Dot |
+| Bullseye           | Number of Rings  | Ring Pitch        | n/a             | n/a                | n/a               |
+
 Circle
 -----------
 - Radius (m): 
