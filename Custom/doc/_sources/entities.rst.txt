@@ -98,7 +98,7 @@ Entity Chart
 |                                   |  - Height/width each tile       |  - Number of columns in the board    |  - Number of rows in the board |  - Color of secondary tiles          |                                 | 
 |                                   |  - Default: 5                   |  - Default: 16                       |  - Default: 17                 |  - Default: Black (#000000)          |                                 |
 +-----------------------------------+---------------------------------+--------------------------------------+--------------------------------+--------------------------------------+---------------------------------+
-| .. _Grille:                        |                                 |                                      |                                |                                      |                                 |
+| .. _Grille:                       |                                 |                                      |                                |                                      |                                 |
 |                                   |                                 |                                      |                                |                                      |                                 |
 | Grille                            | Bar Height (m)                  | Bar Width (m)                        | Number of Bars                 | Secondary Color                      | n/a                             |
 |                                   |  - Height of each bar           |  - Width of each bar                 |  - Number of bars in grille    |  - Color of secondary bars           |                                 | 
