@@ -29,7 +29,7 @@ Universal Settings
 
 Advanced Universal Settings
 ---------------------------
-Advanced mode offers more freedom with position and rotation than standard mode. Entities no longer move around a cylindircal plane, but instead move in 3D space.
+Advanced mode offers more freedom with position and rotation than standard mode. Entities no longer move around a cylindrical plane, but instead move in 3D space.
 
 - Position
     The position of an entity refers to where its center point is located. The location of the camera is noted as :math:`(0,0,0)`
