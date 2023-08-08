@@ -72,7 +72,7 @@ Entity Chart
 |                                   |  - Radius of the circle         |  - Amount of fill                    |                                |                                      |                                 |
 |                                   |  - Default: 31.25 m             |  - Default: 31.25 m                  |                                |                                      |                                 |
 +-----------------------------------+---------------------------------+--------------------------------------+--------------------------------+--------------------------------------+---------------------------------+
-| .. _Plane:                         |                                 |                                      |                                |                                      |                                 |
+| .. _Plane:                        |                                 |                                      |                                |                                      |                                 |
 |                                   |                                 |                                      |                                |                                      |                                 |
 | Plane                             | Height (m)                      | Width (m)                            | Border Size (m)                | Textures                             | n/a                             |
 |                                   |  - Height of the plane          |  - Width of the plane                |  - Amount of fill              |  - :ref:`Using Textures <TexLabel>`  |                                 |
