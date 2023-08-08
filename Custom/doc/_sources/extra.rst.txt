@@ -19,7 +19,7 @@ Easy Debugging
 ---------------
 If you would like to inspect the HTML or JavaScript data of the selected entity:  
 - Open the inspector with Ctrl + Shift + i
-  - On headsets, a limited console can be opened with Crtl+i. This console does not take inputs but will display errors.
+  - On headsets, a limited console can be opened with Ctrl+i. This console does not take inputs but will display errors.
 - Enter "selectedEntity" into the command prompt, this will bring up all associated HTML code
 - Enter "selectedEntity.getAttribute("\<desired component\>") to see the associated JavaScript data for the desired component
    - Ex: selectedEntity.getAttribute("position") to view position or selectedEntity.getAttribute("material") to view texture and color
