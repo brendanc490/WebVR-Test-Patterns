@@ -66,17 +66,17 @@ Entity Chart
 +--------------------+---------------------------------+--------------------------------------+--------------------------------+--------------------------------------+---------------------------------+
 | **Entity Name**    |  **Attribute 1**                |  **Attribute 2**                     | **Attribute 3**                | **Attribute 4**                      | **Attribute 5**                 |
 +--------------------+---------------------------------+--------------------------------------+--------------------------------+--------------------------------------+---------------------------------+
-| Circle             | Radius (m)                      | Border Size (m)                      | n/a                            | Diagram                              | n/a                             |
-|                    |  - Radius of the circle         |  - Amount of fill                    |                                | .. image:: ../Images/triangle.PNG    |                                 |
-|                    |  - Default: 31.25 m             |  - Default: 31.25 m                  |                                |    :width: 300                       |                                 |
+| Circle             | Radius (m)                      | Border Size (m)                      | n/a                            | n/a                                  | n/a                             |
+|                    |  - Radius of the circle         |  - Amount of fill                    |                                |                                      |                                 |
+|                    |  - Default: 31.25 m             |  - Default: 31.25 m                  |                                |                                      |                                 |
 +--------------------+---------------------------------+--------------------------------------+--------------------------------+--------------------------------------+---------------------------------+
 | Plane              | Height (m)                      | Width (m)                            | Border Size (m)                | Textures                             | n/a                             |
 |                    |  - Height of the plane          |  - Width of the plane                |  - Amount of fill              |  - :ref:`Using Textures <TexLabel>`  |                                 |
 |                    |  - Default: 62.5 m              |  - Default: 31.25 m                  |  - Default: 31.25 m            |  - Default: none                     |                                 |
 +--------------------+---------------------------------+--------------------------------------+--------------------------------+--------------------------------------+---------------------------------+
-| Triangle           | Vertex A (x (m),y (m))          | Vertex B (x (m),y (m))               | Vertex C (x (m),y (m))         | n/a                                  | n/a                             |
-|                    |  - Height of the plane          |  - Width of the plane                |  - Amount of fill              |                                      |                                 |
-|                    |  - Default: (0, 23.438)         |  - Default: (-31.25, -31.25)         |  - Default: (31.25, -31.25)    |                                      |                                 |
+| Triangle           | Vertex A (x (m),y (m))          | Vertex B (x (m),y (m))               | Vertex C (x (m),y (m))         |                                      | n/a                             |
+|                    |  - Height of the plane          |  - Width of the plane                |  - Amount of fill              | .. image:: ../Images/triangle.PNG    |                                 |
+|                    |  - Default: (0, 23.438)         |  - Default: (-31.25, -31.25)         |  - Default: (31.25, -31.25)    |    :width: 300                       |                                 |
 +--------------------+---------------------------------+--------------------------------------+--------------------------------+--------------------------------------+---------------------------------+
 | Gradient           | Bar Height (m)                  | Bar Width (m)                        | Number of Bars                 | Secondary Color                      | n/a                             |
 |                    |  - Height of each bar           |  - Width of each bar                 |  - Number of bars in gradient  |  - Color to fade into                |                                 | 
