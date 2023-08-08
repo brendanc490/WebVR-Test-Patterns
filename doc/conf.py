@@ -29,7 +29,7 @@ author = 'Brendan Collins, Miguel Lago, Ryan Beams'
 # ones.
 extensions = ['sphinx.ext.intersphinx',"sphinx_rtd_theme","sphinxcontrib.video"
 ]
-import sphinx_pdj_theme
+#import sphinx_pdj_theme
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
