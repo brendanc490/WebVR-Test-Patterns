@@ -87,7 +87,7 @@ Plane
 .. _TexLabel:
 
 Using Textures
-===============
+~~~~~~~~~~~~~~~~~
 - There are some textures built into the site. `They can be found here. <https://github.com/DIDSR/WebXR-tools/tree/main/Custom/textures>`_ 
 - Textures can also be uploaded as JPGs, PNGs or TIFFs and added to the list of available textures. 
 - Applying a texture will automatically scale the plane to fit the aspect ratio.
