@@ -202,6 +202,329 @@
 </div>
 <div class="section" id="entity-chart">
 <h2>Entity Chart<a class="headerlink" href="#entity-chart" title="Permalink to this headline"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 16%" />
+<col style="width: 18%" />
+<col style="width: 15%" />
+<col style="width: 18%" />
+<col style="width: 16%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Entity Name</strong></p></td>
+<td><p><strong>Attribute 1</strong></p></td>
+<td><p><strong>Attribute 2</strong></p></td>
+<td><p><strong>Attribute 3</strong></p></td>
+<td><p><strong>Attribute 4</strong></p></td>
+<td><p><strong>Attribute 5</strong></p></td>
+</tr>
+<tr class="row-even"><td><p id="circle">Circle</p>
+</td>
+<td><dl class="simple">
+<dt>Radius (m)</dt><dd><ul class="simple">
+<li><p>Radius of the circle</p></li>
+<li><p>Default: 31.25 m</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Border Size (m)</dt><dd><ul class="simple">
+<li><p>Amount of fill</p></li>
+<li><p>Default: 31.25 m</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-odd"><td><p id="plane">Plane</p>
+</td>
+<td><dl class="simple">
+<dt>Height (m)</dt><dd><ul class="simple">
+<li><p>Height of the plane</p></li>
+<li><p>Default: 62.5 m</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Width (m)</dt><dd><ul class="simple">
+<li><p>Width of the plane</p></li>
+<li><p>Default: 31.25 m</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Border Size (m)</dt><dd><ul class="simple">
+<li><p>Amount of fill</p></li>
+<li><p>Default: 31.25 m</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Textures</dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="#texlabel"><span class="std std-ref">Using Textures</span></a></p></li>
+<li><p>Default: none</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p id="triangle">Triangle</p>
+<a class="reference internal image-reference" href="_images/triangle.PNG"><img alt="_images/triangle.PNG" src="_images/triangle.PNG" style="width: 300px;" /></a>
+</td>
+<td><p>Vertex A (x (m),y (m))</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Height of the plane</p></li>
+<li><p>Default: (0, 23.438)</p></li>
+</ul>
+</div></blockquote>
+</td>
+<td><p>Vertex B (x (m),y (m))</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Width of the plane</p></li>
+<li><p>Default: (-31.25, -31.25)</p></li>
+</ul>
+</div></blockquote>
+</td>
+<td><p>Vertex C (x (m),y (m))</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Amount of fill</p></li>
+<li><p>Default: (31.25, -31.25)</p></li>
+</ul>
+</div></blockquote>
+</td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-odd"><td><p id="gradient">Gradient</p>
+</td>
+<td><dl class="simple">
+<dt>Bar Height (m)</dt><dd><ul class="simple">
+<li><p>Height of each bar</p></li>
+<li><p>Default: 18.75</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Bar Width (m)</dt><dd><ul class="simple">
+<li><p>Width of each bar</p></li>
+<li><p>Default: 6.25</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Number of Bars</dt><dd><ul class="simple">
+<li><p>Number of bars in gradient</p></li>
+<li><p>Default: 32</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Secondary Color</dt><dd><ul class="simple">
+<li><p>Color to fade into</p></li>
+<li><p>Default: Black (#000000)</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p id="checkerboard">Checkerboard</p>
+</td>
+<td><dl class="simple">
+<dt>Tile Size (m)</dt><dd><ul class="simple">
+<li><p>Height/width each tile</p></li>
+<li><p>Default: 5</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Number of Columns</dt><dd><ul class="simple">
+<li><p>Number of columns in the board</p></li>
+<li><p>Default: 16</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Number of Rows</dt><dd><ul class="simple">
+<li><p>Number of rows in the board</p></li>
+<li><p>Default: 17</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Secondary Color</dt><dd><ul class="simple">
+<li><p>Color of secondary tiles</p></li>
+<li><p>Default: Black (#000000)</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-odd"><td><p id="grille">Grille</p>
+</td>
+<td><dl class="simple">
+<dt>Bar Height (m)</dt><dd><ul class="simple">
+<li><p>Height of each bar</p></li>
+<li><p>Default: 18.75</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Bar Width (m)</dt><dd><ul class="simple">
+<li><p>Width of each bar</p></li>
+<li><p>Default: 6.25</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Number of Bars</dt><dd><ul class="simple">
+<li><p>Number of bars in grille</p></li>
+<li><p>Default: 32</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Secondary Color</dt><dd><ul class="simple">
+<li><p>Color of secondary bars</p></li>
+<li><p>Default: Black (#000000)</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p id="dotarray">Dot Array</p>
+</td>
+<td><dl class="simple">
+<dt>Number of Columns</dt><dd><ul class="simple">
+<li><p>Number of columns in array</p></li>
+<li><p>Default: 5</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Number of Rows</dt><dd><ul class="simple">
+<li><p>Number of rows in array</p></li>
+<li><p>Default: 5</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Radius of Dots (m)</dt><dd><ul class="simple">
+<li><p>Radius of each dot</p></li>
+<li><p>Default: 2</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Spacing of Dots (m)</dt><dd><ul class="simple">
+<li><p>Space between dots</p></li>
+<li><p>Default: 10</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Toggle Center Dot</dt><dd><ul class="simple">
+<li><p>Whether center dot is filled</p></li>
+<li><p>Default: No</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-odd"><td><p id="circulardotarray">Circular Dot Array</p>
+</td>
+<td><dl class="simple">
+<dt>Number of Dots</dt><dd><ul class="simple">
+<li><p>Number of dots in circles</p></li>
+<li><p>Default: 10</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Number of Circles</dt><dd><ul class="simple">
+<li><p>Number of circles in array</p></li>
+<li><p>Default: 5</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Radius of Dots (m)</dt><dd><ul class="simple">
+<li><p>Radius of each dot</p></li>
+<li><p>Default: 2</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Spacing of Dots (m)</dt><dd><ul class="simple">
+<li><p>Space between dots</p></li>
+<li><p>Default: 10</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Toggle Center Dot</dt><dd><ul class="simple">
+<li><p>Whether center dot is filled</p></li>
+<li><p>Default: No</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-even"><td><p id="bullseye">Bullseye</p>
+</td>
+<td><dl class="simple">
+<dt>Number of Rings</dt><dd><ul class="simple">
+<li><p>Number of rings in bullseye</p></li>
+<li><p>Default: 5</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Ring Pitch (m)</dt><dd><ul class="simple">
+<li><p>Pitch of rings in bullseye</p></li>
+<li><p>Default: 5</p></li>
+</ul>
+</dd>
+</dl>
+</td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="using-textures">
 <span id="texlabel"></span><h2>Using Textures<a class="headerlink" href="#using-textures" title="Permalink to this headline"></a></h2>
