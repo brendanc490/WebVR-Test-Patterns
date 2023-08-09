@@ -55,7 +55,7 @@ function saveSelected(){
     // add date
     data['date'] = new Date().toLocaleString();
     download(data,packageSelect.value+".JSON","text/plain;charset=utf-8");
-    pastebinPost()
+    pastebinPost(useTextures)
 }
 
 function download(content, fileName, contentType) {

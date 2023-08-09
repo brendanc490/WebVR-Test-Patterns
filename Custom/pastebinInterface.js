@@ -13,9 +13,9 @@ window.onload = async function() {
             for (const id of thisPage.searchParams.get('id').split(',')) {
             //console.log(id)
                 if(decodeURIComponent(id) == id){
-                    const res = await pastebinFetch('https://pastebin.run/'+id+'.txt');
+                    const res = await pastebinFetch('https://pastebin.run/'+id+'.txt',true);
                 } else {
-                    const res = await pastebinFetch(decodeURIComponent(id));
+                    const res = await pastebinFetch(decodeURIComponent(id),true);
             }
         }
     }
@@ -36,7 +36,7 @@ window.onload = async function() {
 
 /* Fetches content from pastebin or another valid JSON link.
    Returns true on success and false on failure. */
-async function pastebinFetch(url){
+async function pastebinFetch(url,onload){
 var fileContent = await fetch(url).then((res) => {
         if(res.ok != true){
             return null
@@ -58,8 +58,12 @@ var fileContent = await fetch(url).then((res) => {
         return false;
     }
     if(packages[fileContent['filename']] != null){
-        alert('A package with this name already exists')
-        return false;
+        if(onload && fileContent['filename'] == 'default'){
+            fileContent['filename'] = 'default (1)'
+        } else {
+            alert('A package with this name already exists')
+            return false;
+        }
     }
     names[fileContent['filename']] = {}
     for (const [name, value] of Object.entries(fileContent['scenes'])) {
