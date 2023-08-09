@@ -36,6 +36,7 @@ window.onload = async function() {
 
 /* Fetches content from pastebin or another valid JSON link.
    Returns true on success and false on failure. */
+   defaultNum = 1;
 async function pastebinFetch(url,onload){
 var fileContent = await fetch(url).then((res) => {
         if(res.ok != true){
@@ -59,7 +60,7 @@ var fileContent = await fetch(url).then((res) => {
     }
     if(packages[fileContent['filename']] != null){
         if(onload && fileContent['filename'] == 'default'){
-            fileContent['filename'] = 'default (1)'
+            fileContent['filename'] = 'default ('+ defaultNum++ +')'
         } else {
             alert('A package with this name already exists')
             return false;
