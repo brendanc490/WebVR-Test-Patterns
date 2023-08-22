@@ -76,10 +76,12 @@ AFRAME.registerComponent('trackpad-left',{
         this.el.addEventListener('trackpadmoved', this.logTrackpad);
     },
         logTrackpad: function (evt) {
-            if (evt.detail.y > 0.2) {
+            trackpadDetail.x = evt.detail.x
+            trackpadDetail.y = evt.detail.y
+            if (evt.detail.y > 0.5) {
 
             }
-            if (evt.detail.y < -0.2) { 
+            if (evt.detail.y < -0.5) { 
 
             }
             if (evt.detail.x < -0.2) { 
@@ -98,31 +100,63 @@ init: function () {
 
     el.addEventListener('gripdown', function (evt) {
         displayNext(true);
+        buttonsDownR['grip'] = true;
     });
-    /*el.addEventListener('gripup', function (evt) {
-
-    });*/
+    
+    el.addEventListener('gripup', function (evt) {
+        buttonsDownR['grip'] = false;
+    });
 
     el.addEventListener('triggerdown', function (evt) {
-        displayNext(true);
-    });
-    /*el.addEventListener('triggerup', function (evt) {
+        buttonsDownR['trigger'] = true;
 
-    });*/
+        if(buttonsDownR['trigger'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y > .5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y > .5))){
+            let i = 0;
+            while(i < entityCanvas.children.length){
+                mov = entityCanvas.children[i].getAttribute('mov')
+                if(mov.status != 0){
+                    break;
+                }
+                i++;
+            }
+            if(i != entityCanvas.children.length){
+                stopAllMovement()
+            } else {
+                startAllMovement()
+            }
+        } else if(buttonsDownR['trigger'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y < -.5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y < -.5))){
+            stopAllMovement();
+            let i = 0;
+            while(i < entityCanvas.children.length){
+                mov = entityCanvas.children[i].getAttribute('mov')
+                entityCanvas.children[i].setAttribute('position',mov.startPoint)
+                entityCanvas.children[i].setAttribute('rotation',mov.startRotation)
+                i++;
+            }
+        } else {
+            displayNext(true);
+        }
+    });
+    
+    el.addEventListener('triggerup', function (evt) {
+        buttonsDownR['grip'] = false;
+    });
 
     el.addEventListener('abuttondown', function (evt) {
         displayNext(true);
+        buttonsDownR['abutton'] = true;
     });
-    /*el.addEventListener('abuttonup', function (evt) {
-
-    });*/
+    el.addEventListener('abuttonup', function (evt) {
+        buttonsDownR['abutton'] = false;
+    });
 
     el.addEventListener('bbuttondown', function (evt) {
         displayNext(true);
+        buttonsDownR['bbutton'] = true;
     });
-    /*el.addEventListener('bbuttonup', function (evt) {
-
-    });*/
+    el.addEventListener('bbuttonup', function (evt) {
+        buttonsDownR['bbutton'] = false;
+    });
 
     /*el.addEventListener('menudown', function (evt) {
         menuRightPressed = true;
@@ -130,21 +164,72 @@ init: function () {
     });*/
 
     el.addEventListener('thumbstickdown', function (evt) {
-        displayNext(true);
+        buttonsDownR['thumbstick'] = true;
+        if(buttonsDownR['trigger'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y > .5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y > .5))){
+            let i = 0;
+            while(i < entityCanvas.children.length){
+                mov = entityCanvas.children[i].getAttribute('mov')
+                if(mov.status != 0){
+                    break;
+                }
+                i++;
+            }
+            if(i != entityCanvas.children.length){
+                stopAllMovement()
+            } else {
+                startAllMovement()
+            }
+        } else if(buttonsDownR['trigger'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y < -.5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y < -.5))){
+            stopAllMovement();
+            let i = 0;
+            while(i < entityCanvas.children.length){
+                mov = entityCanvas.children[i].getAttribute('mov')
+                entityCanvas.children[i].setAttribute('position',mov.startPoint)
+                entityCanvas.children[i].setAttribute('rotation',mov.startRotation)
+                i++;
+            }
+        } else {
+            displayNext(true);
+        }
     });
-    /*el.addEventListener('thumbstickup', function (evt) {
-        
-    });*/
+    el.addEventListener('thumbstickup', function (evt) {
+        buttonsDownR['thumbstick'] = false;
+    });
 
     el.addEventListener('trackpaddown', function (evt) {
-        displayNext(true);
-    });
-/*
-    el.addEventListener('trackpadup', function (evt) {
-        
+        buttonsDownR['trackpad'] = true;
+        if(buttonsDownR['trigger'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y > .5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y > .5))){
+            let i = 0;
+            while(i < entityCanvas.children.length){
+                mov = entityCanvas.children[i].getAttribute('mov')
+                if(mov.status != 0){
+                    break;
+                }
+                i++;
+            }
+            if(i != entityCanvas.children.length){
+                stopAllMovement()
+            } else {
+                startAllMovement()
+            }
+        } else if(buttonsDownR['trigger'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y < -.5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y < -.5))){
+            stopAllMovement();
+            let i = 0;
+            while(i < entityCanvas.children.length){
+                mov = entityCanvas.children[i].getAttribute('mov')
+                entityCanvas.children[i].setAttribute('position',mov.startPoint)
+                entityCanvas.children[i].setAttribute('rotation',mov.startRotation)
+                i++;
+            }
+        } else {
+            displayNext(true);
+        }
     });
 
-    el.addEventListener('trackpadtouchstart', function (evt) {
+    el.addEventListener('trackpadup', function (evt) {
+        buttonsDownR['trackpad'] = false;
+    });
+    /*el.addEventListener('trackpadtouchstart', function (evt) {
         
     });
 
@@ -160,35 +245,64 @@ init: function () {
 
     el.addEventListener('gripdown', function (evt) {
         displayNext(false);
+        buttonsDownL['grip'] = true;
     });
-    /*
+    
     el.addEventListener('gripup', function (evt) {
-
-    });*/
+        buttonsDownL['grip'] = false;
+    });
 
     el.addEventListener('triggerdown', function (evt) {
-        displayNext(false);
+        buttonsDownL['trigger'] = true;
+        if(buttonsDownL['trigger'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y > .5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y > .5))){
+            let i = 0;
+            while(i < entityCanvas.children.length){
+                mov = entityCanvas.children[i].getAttribute('mov')
+                if(mov.status != 0){
+                    break;
+                }
+                i++;
+            }
+            if(i != entityCanvas.children.length){
+                stopAllMovement()
+            } else {
+                startAllMovement()
+            }
+        } else if(buttonsDownL['trigger'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y < -.5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y < -.5))){
+            stopAllMovement();
+            let i = 0;
+            while(i < entityCanvas.children.length){
+                mov = entityCanvas.children[i].getAttribute('mov')
+                entityCanvas.children[i].setAttribute('position',mov.startPoint)
+                entityCanvas.children[i].setAttribute('rotation',mov.startRotation)
+                i++;
+            }
+        }  else {
+            displayNext(false);
+        }
     });
-    /*
+    
     el.addEventListener('triggerup', function (evt) {
-
-    });*/
+        buttonsDownL['grip'] = false;
+    });
 
     el.addEventListener('xbuttondown', function (evt) {
         displayNext(false);
+        buttonsDownL['xbutton'] = true;
     });
     
-    /*el.addEventListener('xbuttonup', function (evt) {
-
-    });*/
+    el.addEventListener('xbuttonup', function (evt) {
+        buttonsDownL['xbutton'] = false;
+    });
 
     el.addEventListener('ybuttondown', function (evt) {
         displayNext(false);
+        buttonsDownL['ybutton'] = true;
     });
     
-    /*el.addEventListener('ybuttonup', function (evt) {
-
-    });*/
+    el.addEventListener('ybuttonup', function (evt) {
+        buttonsDownL['ybutton'] = false;
+    });
 
     /*el.addEventListener('menudown', function (evt) {
         menuLeftPressed = true;
@@ -196,20 +310,72 @@ init: function () {
     });*/
 
     el.addEventListener('thumbstickdown', function (evt) {
-        displayNext(false);
+        buttonsDownL['thumbstick'] = true;
+        if(buttonsDownL['trigger'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y > .5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y > .5))){
+            let i = 0;
+            while(i < entityCanvas.children.length){
+                mov = entityCanvas.children[i].getAttribute('mov')
+                if(mov.status != 0){
+                    break;
+                }
+                i++;
+            }
+            if(i != entityCanvas.children.length){
+                stopAllMovement()
+            } else {
+                startAllMovement()
+            }
+        } else if(buttonsDownL['trigger'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y < -.5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y < -.5))){
+            stopAllMovement();
+            let i = 0;
+            while(i < entityCanvas.children.length){
+                mov = entityCanvas.children[i].getAttribute('mov')
+                entityCanvas.children[i].setAttribute('position',mov.startPoint)
+                entityCanvas.children[i].setAttribute('rotation',mov.startRotation)
+                i++;
+            }
+        }  else {
+            displayNext(false);
+        }
     });
-    /*el.addEventListener('thumbstickup', function (evt) {
-
-    });*/
+    el.addEventListener('thumbstickup', function (evt) {
+        buttonsDownL['thumbstick'] = false;
+    });
 
     el.addEventListener('trackpaddown', function (evt) {
-        displayNext(false);
+        buttonsDownL['trackpad'] = true;
+        if(buttonsDownL['trigger'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y > .5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y > .5))){
+            let i = 0;
+            while(i < entityCanvas.children.length){
+                mov = entityCanvas.children[i].getAttribute('mov')
+                if(mov.status != 0){
+                    break;
+                }
+                i++;
+            }
+            if(i != entityCanvas.children.length){
+                stopAllMovement()
+            } else {
+                startAllMovement()
+            }
+        } else if(buttonsDownL['trigger'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y < -.5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y < -.5))){
+            stopAllMovement();
+            let i = 0;
+            while(i < entityCanvas.children.length){
+                mov = entityCanvas.children[i].getAttribute('mov')
+                entityCanvas.children[i].setAttribute('position',mov.startPoint)
+                entityCanvas.children[i].setAttribute('rotation',mov.startRotation)
+                i++;
+            }
+        } else {
+            displayNext(false);
+        }
     });
 
-    /*el.addEventListener('trackpadup', function (evt) {
-
+    el.addEventListener('trackpadup', function (evt) {
+        buttonsDownL['trackpad'] = false;
     });
-
+    /*
     el.addEventListener('trackpadtouchstart', function (evt) {
 
     });
@@ -219,3 +385,11 @@ init: function () {
     });*/
 }
 });
+
+thumbstickDetailL = {x: 0, y: 0}
+trackpadDetailL = {x: 0, y: 0}
+buttonsDownL = {trigger: false, grip: false, trackpad: false, thumbstick: false, abutton: false, bbutton: false}
+
+thumbstickDetailR = {x: 0, y: 0}
+trackpadDetailR = {x: 0, y: 0}
+buttonsDownR = {trigger: false, grip: false, trackpad: false, thumbstick: false, xbutton: false, ybutton: false}

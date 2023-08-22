@@ -187,6 +187,24 @@ const editPatternLayout = document.getElementById('editPatternLayout');
 const packageSelect = document.getElementById('packageDisplay')
 const recentPackages = document.getElementById('recentPackages')
 
+const movement = document.getElementById('movementSettings');
+const movementButton = document.getElementById('movementButton');
+const movementIcon = document.getElementById('movementIcon');
+const movementType = document.getElementById('movementType');
+const movementTypeIn = document.getElementById('movementTypeIn');
+const movementHeader = document.getElementById('movementHeader');
+const endHeader = document.getElementById('endHeader');
+const endX = document.getElementById('endX');
+const endY = document.getElementById('endY');
+const endZ = document.getElementById('endZ');
+const speedHeader = document.getElementById('speedHeader');
+const accelerationHeader = document.getElementById('accelerationHeader');
+const keyHeader = document.getElementById('keyHeader');
+const speed = document.getElementById('speed');
+const acceleration = document.getElementById('acceleration');
+const keyBind = document.getElementById('key');
+
+
 /* Local Variables */
 var el = null; /* recently created entity */
 var els = new Array(); /* array of all created entities */
