@@ -50,6 +50,7 @@ function hideEditStats(){
     ringPitch.style.display = "none";
     numRings.style.display = "none";
     toggleCenterDot.style.display = "none";
+
 }
  var flag = false;
 /* updates values in edit section */
@@ -59,47 +60,44 @@ function updateStats(){
     $('#skyCol').minicolors("value",sky.components.material.attrValue.color);
     entity = selectedEntity;
     if(selectedEntity.getAttribute('advanced').val){
+        endZ.disabled = false
+        advanced.style.backgroundColor = '#00FF00'
+        console.log('advanced')
         posIn.innerHTML = 'Position (x: m, y: m, z: m):'
+        endHeader.innerHTML = 'End Point (x: m, y: m, z: m)'
         rotationY.style.display = 'block'
         rotationX.style.display = 'block'
-    
-        $("#x").change(function() {
-            editEntity();
-        });
-    
-        /* If the textbox for y value is changed */
-        $("#y").change(function() {
-            editEntity();
-        });
-    
-        /* If the textbox for z value is changed */
-        $("#z").change(function() {
-            editEntity();
-        });
+
         xIn.value = (entity.components.position.attrValue.x).toFixed(3);
         yIn.value = (entity.components.position.attrValue.y).toFixed(3);
         zIn.value = (-entity.components.position.attrValue.z).toFixed(3);
+        endX.value = entity.components.mov.attrValue.endPoint.x
+        endY.value = entity.components.mov.attrValue.endPoint.y
+        endZ.value = -entity.components.mov.attrValue.endPoint.z
     } else {
+        endZ.disabled = true
+        advanced.style.backgroundColor =''
         posIn.innerHTML = 'Position (\u03B1: deg, y: m, r: m):'
+        endHeader.innerHTML = 'End Point (\u03B1: deg, y: m, r: m):'
         rotationY.style.display = 'none'
         rotationX.style.display = 'none'
-    
-        $("#x").change(function() {
-            editEntity();
-        });
-    
-        /* If the textbox for y value is changed */
-        $("#y").change(function() {
-            editEntity();
-        });
-    
-        /* If the textbox for z value is changed */
-        $("#z").change(function() {
-            editEntity();
-        });
+
         xIn.value = (-entity.components.angle.attrValue.x).toFixed(3);
         yIn.value = (entity.components.position.attrValue.y).toFixed(3);
         zIn.value = (-entity.components.angle.attrValue.z).toFixed(3);
+        endX.value = entity.components.mov.attrValue.endPoint.theta
+        endY.value = entity.components.mov.attrValue.endPoint.y
+        endZ.value = -entity.components.mov.attrValue.endPoint.r
+    }
+    movementTypeIn.value = entity.components.mov.attrValue.type
+    acceleration.value = entity.components.mov.attrValue.acceleration
+    speed.value = entity.components.mov.attrValue.speed
+    keyBind.value = entity.components.mov.attrValue.keyBind
+
+    if(entity.components.mov.attrValue.status == 0){
+        movementIcon.className = "fa-solid fa-play"
+    } else {
+        movementIcon.className = "fa-solid fa-pause"
     }
 
     rotationZ.value = (entity.components.rotation.attrValue.z).toFixed(3);
@@ -376,10 +374,14 @@ function hideUniversal(){
         //universalHeader.style.display = "none";
         //uni.style.borderBottom = "0px solid #999";
         uni.style.gridTemplateRows = "100% 0% 0% 0% 0% 0%"
-        if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
-            editContent.style.gridTemplateRows = "8% 8% 5%"
+        if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
+            editContent.style.gridTemplateRows = "8% 8% 8% 8%"
+        } else if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "8% 8% 50% 8%"
+        } else if(specificSettings.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "8% 50% 8% 8%"
         } else {
-            editContent.style.gridTemplateRows = "8% 50% 5%"
+            editContent.style.gridTemplateRows = "8% 50% 50% 8%"
         }
         
     } else {
@@ -398,13 +400,18 @@ function hideUniversal(){
         //universalHeader.style.display = "block";
         //uni.style.borderBottom = "1px solid #999";
         uni.style.gridTemplateRows = "17% 17% 16% 17% 16% 17%"
-        if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
-            editContent.style.gridTemplateRows = "40% 8% 5%"
+        if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
+            editContent.style.gridTemplateRows = "50% 8% 8% 8%"
+        } else if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "50% 8% 50% 8%"
+        } else if(specificSettings.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "50% 50% 8% 8%"
         } else {
-            editContent.style.gridTemplateRows = "40% 50% 5%"
+            editContent.style.gridTemplateRows = "50% 50% 50% 8%"
         }
     }
 }
+
 var oldSize = null;
 function hideSpecific(){
     if(specificSettings.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%"){
@@ -417,10 +424,14 @@ function hideSpecific(){
         area4.style.display = "none"
         area5.style.display = "none"
         specificSettings.style.gridTemplateRows = "100% 0% 0% 0% 0% 0%"
-        if(uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
-            editContent.style.gridTemplateRows = "8% 8% 5%"
+        if(uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
+            editContent.style.gridTemplateRows = "8% 8% 8% 8%"
+        } else if(uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "8% 8% 50% 8%"
+        } else if(uni.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "50% 8% 8% 8%"
         } else {
-            editContent.style.gridTemplateRows = "40% 8% 5%"
+            editContent.style.gridTemplateRows = "50% 8% 50% 8%"
         }
         
     } else {
@@ -430,10 +441,74 @@ function hideSpecific(){
         specificSettings.style.gridTemplateRows = oldSize
         //universalHeader.style.display = "block";
         //uni.style.borderBottom = "1px solid #999";
-        if(uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
-            editContent.style.gridTemplateRows = "8% 50% 5%"
+        if(uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
+            editContent.style.gridTemplateRows = "8% 50% 8% 8%"
+        } else if(uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "8% 50% 50% 8%"
+        } else if(uni.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "50% 50% 8% 8%"
         } else {
-            editContent.style.gridTemplateRows = "40% 50% 5%"
+            editContent.style.gridTemplateRows = "50% 50% 50% 8%"
+        }
+    }
+}
+
+function hideMovement(){
+
+    if(movement.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%"){
+        // hide
+        //hideUniversalIcon.className = "fa-solid fa-chevron-right"
+        movementType.style.display = "none"
+        endHeader.style.display = "none"
+        endX.style.display = "none"
+        endY.style.display = "none"
+        endZ.style.display = "none"
+        speedHeader.style.display = "none"
+        accelerationHeader.style.display = "none"
+        keyHeader.style.display = "none"
+        speed.style.display = "none"
+        acceleration.style.display = "none"
+        key.style.display = "none"
+        movementButton.style.display = "none"
+        //universalHeader.style.display = "none";
+        //uni.style.borderBottom = "0px solid #999";
+        movement.style.gridTemplateRows = "100% 0% 0% 0% 0% 0%"
+        if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
+            editContent.style.gridTemplateRows = "8% 8% 8% 8%"
+        } else if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && uni.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "50% 8% 8% 8%"
+        } else if(specificSettings.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%" && uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "8% 50% 8% 8%"
+        } else {
+            editContent.style.gridTemplateRows = "50% 50% 8% 8%"
+        }
+        
+    } else {
+        // show
+        //hideUniversalIcon.className = "fa-solid fa-chevron-down"
+        movementType.style.display = "block"
+        endHeader.style.display = "block"
+        endX.style.display = "block"
+        endY.style.display = "block"
+        endZ.style.display = "block"
+        speedHeader.style.display = "block"
+        accelerationHeader.style.display = "block"
+        keyHeader.style.display = "block"
+        speed.style.display = "block"
+        acceleration.style.display = "block"
+        key.style.display = "block"
+        movementButton.style.display = "block"
+        //universalHeader.style.display = "block";
+        //uni.style.borderBottom = "1px solid #999";
+        movement.style.gridTemplateRows = "13% 18% 16% 18% 17% 18%"
+        if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
+            editContent.style.gridTemplateRows = "8% 8% 50% 8%"
+        } else if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && uni.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "50% 8% 50% 8%"
+        } else if(specificSettings.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%" && uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "8% 50% 50% 8%"
+        } else {
+            editContent.style.gridTemplateRows = "50% 50% 50% 8%"
         }
     }
 }
@@ -467,7 +542,6 @@ let list;
           indexDrop = i;
         }
       }
-      console.log(index, indexDrop);
       if(index > indexDrop) {
         target.before( dragged );
       } else {

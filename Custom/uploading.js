@@ -191,9 +191,16 @@ function addEntitiesFromScene(scene){
             el.setAttribute("position", {x: scene[key].position.x, y: scene[key].position.y, z: scene[key].position.z});
             el.setAttribute("material", scene[key].material);
             el.setAttribute("rotation", scene[key].rotation);
+            el.setAttribute("mov",scene[key].mov)
             el.setAttribute("click-checker","");
             numAdded++;
             entityCanvas.appendChild(el); /* adds entity to scene */
+            if(el.getAttribute("mov").keyBind != ""){
+                if(movementKeyBinds[el.getAttribute("mov").keyBind] == null){
+                    movementKeyBinds[el.getAttribute("mov").keyBind] = []
+                }
+                movementKeyBinds[el.getAttribute("mov").keyBind].push(entityCanvas.children.length-1);
+            }
 
             /* adds option to dropdown */
             var option = document.createElement("option");

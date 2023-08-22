@@ -37,7 +37,7 @@ function removeEntity(){
     }
     els.splice(els.indexOf(selectedEntity),1);
     pool.splice(pool.indexOf(selectedEntity.object3D),1);
-    if(selectedEntity.id.includes("plane")){
+    /*if(selectedEntity.id.includes("plane")){
         planeNum--;
     } else if(selectedEntity.id.includes("circle")){
         circleNum--;
@@ -53,7 +53,7 @@ function removeEntity(){
         circularDotarrayNum--;
     } else if(selectedEntity.id.includes("dotarray")){
         dotarrayNum--;
-    }
+    }*/
     entityCanvas.removeChild(selectedEntity);
     for (var i=0; i<entitySelector.length; i++) {
         if (entitySelector.options[i].value == selectedEntity.id)
@@ -62,7 +62,7 @@ function removeEntity(){
     if(els.length == 0){
         utility.checked = false;
         toggleAddEdit(true);
-        
+        selectedEntity = null;
     } else {
         selectNew(null);
     }
@@ -122,12 +122,20 @@ function duplicateEntity(){
     /* sets stats */
     el.setAttribute("angle", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].angle);
     el.setAttribute("advanced", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].advanced);
-    el.setAttribute("position", {x: scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].position.x, y: scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].position.y, z: scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].position.z});
+    el.setAttribute("position", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].mov.startPoint);
     el.setAttribute("material", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material);
     el.setAttribute("rotation", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].rotation);
+    el.setAttribute("mov", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].mov);
+
     el.setAttribute("click-checker","");
     numAdded++;
     entityCanvas.appendChild(el); /* adds entity to scene */
+    if(el.getAttribute("mov").keyBind != ""){
+        if(movementKeyBinds[el.getAttribute("mov").keyBind] == null){
+            movementKeyBinds[el.getAttribute("mov").keyBind] = []
+        }
+        movementKeyBinds[el.getAttribute("mov").keyBind].push(entityCanvas.children.length-1);
+    }
 
     /* adds option to dropdown */
     var option = document.createElement("option");
@@ -198,6 +206,8 @@ function resetScene(){
     dotarrayNum = 0;
     circularDotarrayNum = 0;
     bullseyeNum = 0;
+    stopAllMovement();
+    movementKeyBinds = {}
     while(entityCanvas.childElementCount != 0){
         entityCanvas.removeChild(entityCanvas.children[0])
     } 
@@ -207,6 +217,7 @@ function resetScene(){
     $('#skyCol').minicolors('value', '#000000');
     els = []
     updateJSON()
+    selectedEntity = null
 }
 
 /* used to click through current pattern */
@@ -331,6 +342,7 @@ function removePattern(){
 /* function used to remove changes made to a scene */
 function revertChanges(){
     sky.setAttribute('material',{color: '#000000'})
+    stopAllMovement()
     while(entityCanvas.childElementCount != 0){
         entityCanvas.removeChild(entityCanvas.children[0])
        }
@@ -350,6 +362,8 @@ function revertChanges(){
         bullseyeNum = 0;
         textureNum = 0;
         numAdded = 0;
+        selectedEntity = null;
+        movementKeyBinds = {}
 }
 
 names = {'default' : {'red':1,'green':1,'blue':1,'white':1,'grille':1,'crosshair':1,'line':1,'circular dot array':1,'dot array':1,'checkerboard (w)':1,'checkerboard (b)':1,'ring_w5':1,'ring_w10':1,'ring_w20':1,'bullseye':1}}
@@ -361,9 +375,22 @@ function switchToAdvanced(e){
     e.stopPropagation()
     newVal = !selectedEntity.getAttribute('advanced').val
     selectedEntity.setAttribute('advanced', {val: newVal});
+    mov = selectedEntity.getAttribute('mov')
+    if(newVal){
+        if(mov.endPoint.r != null){
+            mov.endPoint = {x: -mov.endPoint.r*Math.sin((mov.endPoint.theta*Math.PI)/180), y: mov.endPoint.y, z: mov.endPoint.r * Math.cos((mov.endPoint.theta*Math.PI)/180)}
+            selectedEntity.setAttribute('mov',mov)
+        }
+    } else {
+        if(mov.endPoint.r == null){
+            mov.endPoint = {r: Math.sqrt(mov.endPoint.x*mov.endPoint.x+mov.endPoint.z*mov.endPoint.z), theta: Math.atan(mov.endPoint.z/mov.endPoint.x), y: mov.endPoint.y}
+            selectedEntity.setAttribute('mov',mov)
+        }
+    }
+    endZ.disabled = !endZ.disabled
     advanced.style.backgroundColor == '' ? advanced.style.backgroundColor = '#00FF00' : advanced.style.backgroundColor =''
     updateStats()
-    editEntity()
+    //editEntity()
   }
 
 /* listens for entering vr and removes restrictions on clicking through patterns */
