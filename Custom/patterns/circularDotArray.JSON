@@ -33,27 +33,6 @@
 					"x": 0,
 					"y": 0,
 					"z": 0
-				},
-				"mov": {
-					"startPoint": {
-						"x": 0,
-						"y": 0,
-						"z": -250
-						},
-					"endPoint": {
-						"theta": 0,
-						"y": 0,
-						"r": -250
-						},
-					"speed": 10,
-					"acceleration": 0,
-					"status": 0,
-					"type": "None",
-					"startRotation": {
-						"x": 0,
-						"y": 0,
-						"z": 0
-					}
 				}
 			}
 		}

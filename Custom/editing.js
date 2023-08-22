@@ -9,7 +9,7 @@ function editEntity(){
     /* checks for valid entries of universal changes */
     if(isNaN(parseFloat($("#x").val())) || isNaN(parseFloat($("#y").val())) || isNaN(parseFloat($("#z").val()))){
         alert("Please enter a valid position");
-        return false;
+        return;
     }
     if(hexToRgb($("#color").val()) == null){
         alert("Invalid color (check that the color was entered in hexadecimal format)");
@@ -30,16 +30,11 @@ function editEntity(){
         d = (-Math.round(Math.sqrt((parseFloat($("#x").val()))*(parseFloat($("#x").val()))+(parseFloat($("#z").val()))*(parseFloat($("#z").val())))))
         selectedEntity.setAttribute("angle",{x: ((Math.asin(parseFloat($("#x").val())/d))*180)/Math.PI, z: d});
         selectedEntity.setAttribute("rotation",{x: parseFloat($("#rotationX").val()), y: parseFloat($("#rotationY").val()), z: parseFloat($("#rotationZ").val())});
-        stopMovement(selectedEntity);
-        selectedEntity.setAttribute("mov",{startPoint: {x: parseFloat($("#x").val()), y: parseFloat($("#y").val()), z: -parseFloat($("#z").val())},endPoint: {x: parseFloat($("#endX").val()), y: parseFloat($("#endY").val()), z: -parseFloat($("#endZ").val())}, speed: parseFloat($("#speed").val()), acceleration: parseFloat($("#acceleration").val()), status: 0, type: movementTypeIn.value, startRotation: {x: parseFloat($("#rotationX").val()), y: parseFloat($("#rotationY").val()), z: parseFloat($("#rotationZ").val())}})
-        
     } else {
         /* Updates universal settings if not advanced */
         selectedEntity.setAttribute("position",{x: -parseFloat($("#z").val()) * Math.sin((-parseFloat($("#x").val())*Math.PI)/180), y: parseFloat($("#y").val()), z: -parseFloat($("#z").val()) * Math.cos((-parseFloat($("#x").val())*Math.PI)/180)});
         selectedEntity.setAttribute("angle",{x: -parseFloat($("#x").val()), z: -parseFloat($("#z").val())})
         selectedEntity.setAttribute("rotation",{x: 0, y: selectedEntity.getAttribute('angle').x, z: parseFloat($("#rotationZ").val())});
-        stopMovement(selectedEntity);
-        selectedEntity.setAttribute("mov",{startPoint: {x: -parseFloat($("#z").val()) * Math.sin((-parseFloat($("#x").val())*Math.PI)/180), y: parseFloat($("#y").val()), z: -parseFloat($("#z").val()) * Math.cos((-parseFloat($("#x").val())*Math.PI)/180)}, endPoint: {theta: parseFloat($("#endX").val()), y: parseFloat($("#endY").val()), r: -parseFloat($("#endZ").val())}, speed: parseFloat($("#speed").val()), acceleration: parseFloat($("#acceleration").val()), status: 0, type: movementTypeIn.value, startRotation: {x: 0, y: selectedEntity.getAttribute('angle').x, z: parseFloat($("#rotationZ").val())}})
     }
     
     /* Adds a texture if a texture input is selected */

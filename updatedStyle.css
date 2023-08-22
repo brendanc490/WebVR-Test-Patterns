@@ -276,7 +276,7 @@ input[type=text]{
 .item11 { grid-area: PastebinPOST; text-align: center;}
 
 
-.universalHeader {grid-area: UniversalHeader; text-align: center; cursor: pointer; padding-top: 3px;}
+.universalHeader {grid-area: UniversalHeader; text-align: center; cursor: pointer; padding-top: 12px;}
 .universalHeader:hover {background-color: #888;}
 .position {grid-area: Position; text-align: left;}
 .rotation {grid-area: Rotation; text-align: left;}
@@ -331,47 +331,18 @@ input[type=text]{
     grid-template-rows: 13% 17% 17% 17% 17% 17%;
   }
 
-.removeEnt {grid-area: Buttons; text-align: center; padding-top: 10px; border-bottom: 1px solid black;}
-
-
-.movementHeader {grid-area: MovementHeader;  text-align: center; padding-top: 3px;}
-.movementType {grid-area: MovementType;  text-align: center; padding-top: 10px;}
-.endHeader {grid-area: endHeader; text-align: center;}
-.endX {grid-area: endX; text-align: center;}
-.endY {grid-area: endY; text-align: center;}
-.endZ {grid-area: endZ; text-align: center;}
-.speedHeader {grid-area: speedHeader; text-align: center;}
-.accelerationHeader {grid-area: accelerationHeader; text-align: center;}
-.keyHeader {grid-area: keyHeader; text-align: center;}
-.speed {grid-area: speed; text-align: center; padding-top: 13px;}
-.acceleration {grid-area: acceleration; text-align: center; padding-top: 13px;}
-.key {grid-area: key; text-align: center; padding-top: 13px;}
-
-.movement {grid-area: Movement;
-  text-align: center;
-  border-bottom: 1px solid #999;
-  display: grid;
-  grid-template-areas:
-  'MovementHeader MovementHeader MovementHeader'
-  'MovementType MovementType MovementType'
-  'endHeader endHeader endHeader'
-  'endX endY endZ'
-  'speedHeader accelerationHeader keyHeader'
-  'speed acceleration key';
-  grid-template-rows: 13% 18% 16% 18% 17% 18%;
-  grid-template-columns: 33% 34% 33%;
-}
+.removeEnt {grid-area: Buttons; text-align: center; padding-top: 20px;}
 
 .entity-container {
   display: none;
   grid-template-areas: 
   'Universal'
   'Specific'
-  'Movement'
   'Buttons';
-  grid-template-rows: 50% 50% 50% 8%;
+  grid-template-rows: 40% 50% 5%;
   height: 90%;
   width: 100%;
+  border-bottom: 1px solid black;
 }
 
 
