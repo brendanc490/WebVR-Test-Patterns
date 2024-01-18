@@ -50,7 +50,97 @@ function hideEditStats(){
     ringPitch.style.display = "none";
     numRings.style.display = "none";
     toggleCenterDot.style.display = "none";
+
 }
+
+function updateMovementSettings(){
+    if(movementTypeIn.value == "Pause"){
+        //
+        startHeader.style.display = "block"
+        startHeader.textContent = 'Time (ms)'
+        startX.style.display = "none"
+        startY.style.display = "block"
+        startZ.style.display = "none"
+        endHeader.style.display = "none"
+        endX.style.display = "none"
+        endY.style.display = "none"
+        endZ.style.display = "none"
+        speedHeader.style.display = "none"
+        //speedHeader.textContent = 'Time (ms)'
+        accelerationHeader.style.display = "none"
+        keyHeader.style.display = "none"
+        speed.style.display = "none"
+        acceleration.style.display = "none"
+        keyBind.style.display = "none"
+        movementButton.style.display = "none"
+    } else if(movementTypeIn.value == "None"){
+        if(selectedEntity.getAttribute('advanced').val){
+            startHeader.innerHTML = 'Start Point (x: m, y: m, z: m)'
+        } else {
+            startHeader.innerHTML = 'Start Point (\u03B1: deg, y: m, r: m):'
+        }
+        startHeader.style.display = "none"
+        startX.style.display = "none"
+        startY.style.display = "none"
+        startZ.style.display = "none"
+        endHeader.style.display = "none"
+        endX.style.display = "none"
+        endY.style.display = "none"
+        endZ.style.display = "none"
+        speedHeader.style.display = "none"
+        accelerationHeader.style.display = "none"
+        keyHeader.style.display = "none"
+        speed.style.display = "none"
+        acceleration.style.display = "none"
+        keyBind.style.display = "none"
+        movementButton.style.display = "none"
+    } else if(movementTypeIn.value == "Start" || movementTypeIn.value == "Rubberband"){
+        if(selectedEntity.getAttribute('advanced').val){
+            startHeader.innerHTML = 'Start Point (x: m, y: m, z: m)'
+        } else {
+            startHeader.innerHTML = 'Start Point (\u03B1: deg, y: m, r: m):'
+        }
+        startHeader.style.display = "block"
+        startX.style.display = "block"
+        startY.style.display = "block"
+        startZ.style.display = "block"
+        endHeader.style.display = "block"
+        endX.style.display = "block"
+        endY.style.display = "block"
+        endZ.style.display = "block"
+        speedHeader.style.display = "block"
+        speedHeader.innerText = "Speed (m/s)"
+        accelerationHeader.style.display = "block"
+        //keyHeader.style.display = "block"
+        speed.style.display = "block"
+        acceleration.style.display = "block"
+        //key.style.display = "block"
+        movementButton.style.display = "block"
+    } else {
+        if(selectedEntity.getAttribute('advanced').val){
+            startHeader.innerHTML = 'Start Point (x: m, y: m, z: m)'
+        } else {
+            startHeader.innerHTML = 'Start Point (\u03B1: deg, y: m, r: m):'
+        }
+        startHeader.style.display = "block"
+        startX.style.display = "block"
+        startY.style.display = "block"
+        startZ.style.display = "block"
+        endHeader.style.display = "block"
+        endX.style.display = "block"
+        endY.style.display = "block"
+        endZ.style.display = "block"
+        speedHeader.style.display = "block"
+        speedHeader.innerText = "Time (ms)"
+        accelerationHeader.style.display = "none"
+        //keyHeader.style.display = "block"
+        speed.style.display = "block"
+        acceleration.style.display = "none"
+        //key.style.display = "block"
+        movementButton.style.display = "block"
+    }
+}
+
  var flag = false;
 /* updates values in edit section */
 function updateStats(){
@@ -59,47 +149,78 @@ function updateStats(){
     $('#skyCol').minicolors("value",sky.components.material.attrValue.color);
     entity = selectedEntity;
     if(selectedEntity.getAttribute('advanced').val){
+        endZ.disabled = false
+        advanced.style.backgroundColor = '#00FF00'
+        console.log('advanced')
         posIn.innerHTML = 'Position (x: m, y: m, z: m):'
+        startHeader.innerHTML = 'Start Point (x: m, y: m, z: m)'
+        endHeader.innerHTML = 'End Point (x: m, y: m, z: m)'
         rotationY.style.display = 'block'
         rotationX.style.display = 'block'
-    
-        $("#x").change(function() {
-            editEntity();
-        });
-    
-        /* If the textbox for y value is changed */
-        $("#y").change(function() {
-            editEntity();
-        });
-    
-        /* If the textbox for z value is changed */
-        $("#z").change(function() {
-            editEntity();
-        });
         xIn.value = (entity.components.position.attrValue.x).toFixed(3);
         yIn.value = (entity.components.position.attrValue.y).toFixed(3);
         zIn.value = (-entity.components.position.attrValue.z).toFixed(3);
+        updateAnimationList(entity)
+
+        if(animationList.getAttribute('selectedIndex') == ""){
+            movementTypeIn.value = 'None'
+        } else {   
+            movementTypeIn.value = entity.components.movement.attrValue.types[0]
+            updateMovementSettings()
+
+            if(entity.components.movement.attrValue.startPoints.length != 0){
+
+                startX.value = entity.components.movement.attrValue.startPoints[0].x
+                startY.value = entity.components.movement.attrValue.startPoints[0].y
+                startZ.value = -entity.components.movement.attrValue.startPoints[0].z
+                endX.value = entity.components.movement.attrValue.endPoints[0].x
+                endY.value = entity.components.movement.attrValue.endPoints[0].y
+                endZ.value = -entity.components.movement.attrValue.endPoints[0].z
+                acceleration.value = entity.components.movement.attrValue.accelerations[0]
+                speed.value = entity.components.movement.attrValue.initialVelocities[0]
+            }
+
+
+        }
+
     } else {
+        endZ.disabled = true
+        advanced.style.backgroundColor =''
         posIn.innerHTML = 'Position (\u03B1: deg, y: m, r: m):'
+        startHeader.innerHTML = 'Start Point (\u03B1: deg, y: m, r: m):'
+        endHeader.innerHTML = 'End Point (\u03B1: deg, y: m, r: m):'
         rotationY.style.display = 'none'
         rotationX.style.display = 'none'
-    
-        $("#x").change(function() {
-            editEntity();
-        });
-    
-        /* If the textbox for y value is changed */
-        $("#y").change(function() {
-            editEntity();
-        });
-    
-        /* If the textbox for z value is changed */
-        $("#z").change(function() {
-            editEntity();
-        });
         xIn.value = (-entity.components.angle.attrValue.x).toFixed(3);
         yIn.value = (entity.components.position.attrValue.y).toFixed(3);
         zIn.value = (-entity.components.angle.attrValue.z).toFixed(3);
+
+        if(animationList.getAttribute('selectedIndex') == ""){
+            console.log('test 2')
+            movementTypeIn.value = 'None'
+        } else {  
+            movementTypeIn.value = entity.components.movement.attrValue.types[0]
+            updateMovementSettings()
+
+            if(entity.components.movement.attrValue.startPoints.length != 0){
+
+                startX.value = entity.components.movement.attrValue.startPoints[0].theta
+                startY.value = entity.components.movement.attrValue.startPoints[0].y
+                startZ.value = -entity.components.movement.attrValue.startPoints[0].r
+                endX.value = entity.components.movement.attrValue.endPoints[0].theta
+                endY.value = entity.components.movement.attrValue.endPoints[0].y
+                endZ.value = -entity.components.movement.attrValue.endPoints[0].r
+                acceleration.value = entity.components.movement.attrValue.accelerations[0]
+                speed.value = entity.components.movement.attrValue.initialVelocities[0]
+            }
+        }
+
+    }
+
+    if(entity.components.movement.attrValue.status == -1){
+        movementIcon.className = "fa-solid fa-play"
+    } else {
+        movementIcon.className = "fa-solid fa-pause"
     }
 
     rotationZ.value = (entity.components.rotation.attrValue.z).toFixed(3);
@@ -187,6 +308,9 @@ function toggleDisplayEdit(swap){
     addEditContent.style.display = "none"
     packageLayout.style.display = "grid"
     swapContainer.style.width = ""
+    animationListButtonContainer.style.display = "none"
+    openAnimationList(true)
+    //settingsButton.setAttribute('')
         //scene_input.value = ""
         //toggleAddEdit(false);
     } else { /* if add */
@@ -197,10 +321,11 @@ function toggleDisplayEdit(swap){
             settingsButtonContainer.style.display = "none"
             addEditContent.style.display = "block"
             packageLayout.style.display = "none"
-            swapContainer.style.textAlign = "center"
-            swapContainer.style.width = "224px"
-            swapContainer.style.paddingTop = "10px"
-            swapContainer.style.paddingLeft = "9px"
+            swapContainer.style.float = "left";
+            swapContainer.style.paddingTop = "12px"
+            swapContainer.style.paddingLeft = "18px"
+            swapContainer.style.textAlign = ""
+            //animationListButtonContainer.style.display = "inline-block"
             //$('#skyCol').minicolors('value', scenes[patternDisplay.value]['sky'].skyColor);
         } else {
             alert("You must select a pattern");
@@ -210,6 +335,7 @@ function toggleDisplayEdit(swap){
             swapContainer.style.paddingTop = "12px"
             swapContainer.style.paddingLeft = "18px"
             swapContainer.style.textAlign = ""
+            animationListButtonContainer.style.display = "none"
         }
     }
 }
@@ -240,7 +366,7 @@ function toggleAddEdit(swap){
         addContent.style.display = 'none';
         background.style.display = "none";
         skyIn.style.display = "none";
-
+        animationListButtonContainer.style.display = 'inline-block'
         
 
         /* check geometry of object */
@@ -318,6 +444,13 @@ function toggleAddEdit(swap){
             area2.style.display = "block";
             ringPitch.style.display = "flex";
         }
+        updateAnimationList(entity)
+        if(animationList.childElementCount == 0){
+            updateAnimationUI(entity,-1) 
+        } else {
+            updateAnimationUI(entity,0)
+        }
+        
     } else { /* if add */
         editContent.style.display = 'none'
         addContent.style.display = 'block'
@@ -325,17 +458,23 @@ function toggleAddEdit(swap){
         background.style.display = 'block'
         entitySelectorText.style.display = 'flex'
         skyIn.style.display = 'block'
+        animationListButtonContainer.style.display = 'none'
+        openAnimationList(true)
     }
 }
 
 function openSettings(){
     if(coreLayout.style.gridTemplateColumns == "100% 0%"){
-        coreLayout.style.width = "400px"
-        coreLayout.style.gridTemplateColumns = "65% 35%"
+        coreLayout.style.width = "500px"
+        coreLayout.style.gridTemplateColumns = "52% 48%"
         settingsButtonContainer.style.paddingRight = "40px"
         settingsButton.className = "button reset"
         settingsButton.title = "Close settings"
         settingsIcon.className = "fa-solid fa-close"
+        settingsButtonContainer.style.position = 'relative'
+        settingsButtonContainer.style.float = 'none'
+        settingsButtonContainer.style.right = '-50px'
+        
     } else {
         coreLayout.style.width = "260px"
         coreLayout.style.gridTemplateColumns = "100% 0%"
@@ -343,6 +482,48 @@ function openSettings(){
         settingsButton.className = "button add"
         settingsButton.title = "Open settings"
         settingsIcon.className = "fa-solid fa-gear"
+        settingsButtonContainer.style.float = 'right'
+        settingsButtonContainer.style.right = ''
+        settingsButtonContainer.style.position = ''
+    }
+}
+
+function openAnimationList(forceClose){
+    if(forceClose){
+        coreLayout.style.width = "260px"
+        coreLayout.style.gridTemplateColumns = "100% 0%"
+        settingsButtonContainer.style.paddingRight = "14px"
+        animationListButton.className = "button add"
+        animationListButton.title = "Open animation list"
+        animationListIcon.className = "fa-solid fa-wand-sparkles"
+        animationListButtonContainer.style.float = 'right'
+        animationListButtonContainer.style.right = ''
+        animationListButtonContainer.style.position = ''
+        settingsLayout.style.gridTemplateRows = '30% 70% 100%'
+        settingsLayout.style.overflowY = 'hidden'
+        return
+    }
+    if(coreLayout.style.gridTemplateColumns == "100% 0%"){
+        coreLayout.style.width = "500px"
+        coreLayout.style.gridTemplateColumns = "55% 45%"
+        settingsButtonContainer.style.paddingRight = "40px"
+        animationListButton.className = "button reset"
+        animationListButton.title = "Close animation list"
+        animationListIcon.className = "fa-solid fa-close"
+        animationListButtonContainer.style.position = 'relative'
+        animationListButtonContainer.style.float = 'none'
+        animationListButtonContainer.style.right = '-40px'
+        settingsLayout.style.gridTemplateRows = '0% 0% 100%'
+    } else {
+        coreLayout.style.width = "260px"
+        coreLayout.style.gridTemplateColumns = "100% 0%"
+        settingsButtonContainer.style.paddingRight = "14px"
+        animationListButton.className = "button add"
+        animationListButton.title = "Open animation list"
+        animationListIcon.className = "fa-solid fa-wand-sparkles"
+        animationListButtonContainer.style.float = 'right'
+        animationListButtonContainer.style.right = ''
+        animationListButtonContainer.style.position = ''
     }
 }
 
@@ -376,10 +557,14 @@ function hideUniversal(){
         //universalHeader.style.display = "none";
         //uni.style.borderBottom = "0px solid #999";
         uni.style.gridTemplateRows = "100% 0% 0% 0% 0% 0%"
-        if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
-            editContent.style.gridTemplateRows = "8% 8% 5%"
+        if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
+            editContent.style.gridTemplateRows = "8% 8% 8% 8%"
+        } else if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "8% 8% 50% 8%"
+        } else if(specificSettings.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "8% 50% 8% 8%"
         } else {
-            editContent.style.gridTemplateRows = "8% 50% 5%"
+            editContent.style.gridTemplateRows = "8% 50% 50% 8%"
         }
         
     } else {
@@ -398,13 +583,18 @@ function hideUniversal(){
         //universalHeader.style.display = "block";
         //uni.style.borderBottom = "1px solid #999";
         uni.style.gridTemplateRows = "17% 17% 16% 17% 16% 17%"
-        if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
-            editContent.style.gridTemplateRows = "40% 8% 5%"
+        if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
+            editContent.style.gridTemplateRows = "50% 8% 8% 8%"
+        } else if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "50% 8% 50% 8%"
+        } else if(specificSettings.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "50% 50% 8% 8%"
         } else {
-            editContent.style.gridTemplateRows = "40% 50% 5%"
+            editContent.style.gridTemplateRows = "50% 50% 50% 8%"
         }
     }
 }
+
 var oldSize = null;
 function hideSpecific(){
     if(specificSettings.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%"){
@@ -417,10 +607,14 @@ function hideSpecific(){
         area4.style.display = "none"
         area5.style.display = "none"
         specificSettings.style.gridTemplateRows = "100% 0% 0% 0% 0% 0%"
-        if(uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
-            editContent.style.gridTemplateRows = "8% 8% 5%"
+        if(uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
+            editContent.style.gridTemplateRows = "8% 8% 8% 8%"
+        } else if(uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "8% 8% 50% 8%"
+        } else if(uni.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "50% 8% 8% 8%"
         } else {
-            editContent.style.gridTemplateRows = "40% 8% 5%"
+            editContent.style.gridTemplateRows = "50% 8% 50% 8%"
         }
         
     } else {
@@ -430,10 +624,82 @@ function hideSpecific(){
         specificSettings.style.gridTemplateRows = oldSize
         //universalHeader.style.display = "block";
         //uni.style.borderBottom = "1px solid #999";
-        if(uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
-            editContent.style.gridTemplateRows = "8% 50% 5%"
+        if(uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
+            editContent.style.gridTemplateRows = "8% 50% 8% 8%"
+        } else if(uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "8% 50% 50% 8%"
+        } else if(uni.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%" && movement.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "50% 50% 8% 8%"
         } else {
-            editContent.style.gridTemplateRows = "40% 50% 5%"
+            editContent.style.gridTemplateRows = "50% 50% 50% 8%"
+        }
+    }
+}
+
+function hideMovement(){
+
+    if(movement.style.gridTemplateRows != "100% 0% 0% 0% 0% 0% 0% 0%"){
+        // hide
+        //hideUniversalIcon.className = "fa-solid fa-chevron-right"
+        movementType.style.display = "none"
+        startHeader.style.display = "none"
+        startX.style.display = "none"
+        startY.style.display = "none"
+        startZ.style.display = "none"
+        endHeader.style.display = "none"
+        endX.style.display = "none"
+        endY.style.display = "none"
+        endZ.style.display = "none"
+        speedHeader.style.display = "none"
+        accelerationHeader.style.display = "none"
+        keyHeader.style.display = "none"
+        speed.style.display = "none"
+        acceleration.style.display = "none"
+        keyBind.style.display = "none"
+        movementButton.style.display = "none"
+        //universalHeader.style.display = "none";
+        //uni.style.borderBottom = "0px solid #999";
+        movement.style.gridTemplateRows = "100% 0% 0% 0% 0% 0% 0% 0%"
+        if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
+            editContent.style.gridTemplateRows = "8% 8% 8% 8%"
+        } else if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && uni.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "50% 8% 8% 8%"
+        } else if(specificSettings.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%" && uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "8% 50% 8% 8%"
+        } else {
+            editContent.style.gridTemplateRows = "50% 50% 8% 8%"
+        }
+        
+    } else {
+        // show
+        //hideUniversalIcon.className = "fa-solid fa-chevron-down"
+        movementType.style.display = "block"
+        startHeader.style.display = "block"
+        startX.style.display = "block"
+        startY.style.display = "block"
+        startZ.style.display = "block"
+        endHeader.style.display = "block"
+        endX.style.display = "block"
+        endY.style.display = "block"
+        endZ.style.display = "block"
+        speedHeader.style.display = "block"
+        accelerationHeader.style.display = "block"
+        //keyHeader.style.display = "block"
+        speed.style.display = "block"
+        acceleration.style.display = "block"
+        //key.style.display = "block"
+        movementButton.style.display = "block"
+        //universalHeader.style.display = "block";
+        //uni.style.borderBottom = "1px solid #999";
+        movement.style.gridTemplateRows = "11% 13% 11% 13% 11% 13% 12% 12%"
+        if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%"){
+            editContent.style.gridTemplateRows = "8% 8% 50% 8%"
+        } else if(specificSettings.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%" && uni.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "50% 8% 50% 8%"
+        } else if(specificSettings.style.gridTemplateRows != "100% 0% 0% 0% 0% 0%" && uni.style.gridTemplateRows == "100% 0% 0% 0% 0% 0%") {
+            editContent.style.gridTemplateRows = "8% 50% 50% 8%"
+        } else {
+            editContent.style.gridTemplateRows = "50% 50% 50% 8%"
         }
     }
 }
@@ -467,7 +733,6 @@ let list;
           indexDrop = i;
         }
       }
-      console.log(index, indexDrop);
       if(index > indexDrop) {
         target.before( dragged );
       } else {
@@ -475,3 +740,44 @@ let list;
       }
     }
   });
+
+  function updateAnimationList(entity){
+    if(entity == null){
+        animationList.innerHTML = ""
+        animationList.setAttribute('selectedIndex',"")
+        return
+    }
+
+    console.log(entity)
+    let anims = entity.getAttribute('movement').types;
+    out = []
+    let i = 0;
+    animationList.innerHTML = ""
+    animationList.setAttribute('selectedIndex',"")
+    while(i < anims.length){
+        if(anims[i] != 'Rebound'){
+            let el = document.createElement('li');
+            el.innerText = anims[i]
+            if(i == 0){
+                el.style.background ='#F39814'
+                animationList.setAttribute('selectedIndex',0)
+            }
+        
+            el.setAttribute('draggable',true)
+            el.addEventListener('dragstart', dragStart)
+            el.addEventListener('drop', droppedAnim)
+            el.addEventListener('dragenter', cancelDefault)
+            el.addEventListener('dragover', cancelDefault)
+            el.addEventListener('click',selectAnimation)
+        
+            animationList.appendChild(el)
+            animationList.scrollTo({
+                top: 1000000000,
+                left: 0,
+                behavior: "smooth",
+            });
+        }
+        i++;
+    }
+   
+  }

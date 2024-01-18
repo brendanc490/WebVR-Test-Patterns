@@ -21,6 +21,12 @@ function selectNew(clickedEntity){
     hideEditStats(); /* hide section briefly */
     updateStats(); /* update stats */
     toggleAddEdit(null); /* re-display section */
+    updateAnimationList(selectedEntity)
+    if(animationList.childElementCount == 0){
+        animationList.setAttribute('selectedIndex',"")
+    } else {
+        animationList.setAttribute('selectedIndex',0)
+    }
 
     highlightSelection(selectedEntity);
 }
@@ -37,7 +43,7 @@ function removeEntity(){
     }
     els.splice(els.indexOf(selectedEntity),1);
     pool.splice(pool.indexOf(selectedEntity.object3D),1);
-    if(selectedEntity.id.includes("plane")){
+    /*if(selectedEntity.id.includes("plane")){
         planeNum--;
     } else if(selectedEntity.id.includes("circle")){
         circleNum--;
@@ -53,7 +59,7 @@ function removeEntity(){
         circularDotarrayNum--;
     } else if(selectedEntity.id.includes("dotarray")){
         dotarrayNum--;
-    }
+    }*/
     entityCanvas.removeChild(selectedEntity);
     for (var i=0; i<entitySelector.length; i++) {
         if (entitySelector.options[i].value == selectedEntity.id)
@@ -62,7 +68,7 @@ function removeEntity(){
     if(els.length == 0){
         utility.checked = false;
         toggleAddEdit(true);
-        
+        selectedEntity = null;
     } else {
         selectNew(null);
     }
@@ -122,12 +128,21 @@ function duplicateEntity(){
     /* sets stats */
     el.setAttribute("angle", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].angle);
     el.setAttribute("advanced", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].advanced);
-    el.setAttribute("position", {x: scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].position.x, y: scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].position.y, z: scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].position.z});
+    el.setAttribute("position", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].movement.origin);
     el.setAttribute("material", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material);
     el.setAttribute("rotation", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].rotation);
+
+    el.setAttribute("movement", JSON.parse(JSON.stringify(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].movement)));
+
     el.setAttribute("click-checker","");
     numAdded++;
     entityCanvas.appendChild(el); /* adds entity to scene */
+    /*if(el.getAttribute("mov").keyBind != ""){
+        if(movementKeyBinds[el.getAttribute("mov").keyBind] == null){
+            movementKeyBinds[el.getAttribute("mov").keyBind] = []
+        }
+        movementKeyBinds[el.getAttribute("mov").keyBind].push(entityCanvas.children.length-1);
+    }*/
 
     /* adds option to dropdown */
     var option = document.createElement("option");
@@ -198,6 +213,8 @@ function resetScene(){
     dotarrayNum = 0;
     circularDotarrayNum = 0;
     bullseyeNum = 0;
+    stopAllMovement();
+    movementKeyBinds = {}
     while(entityCanvas.childElementCount != 0){
         entityCanvas.removeChild(entityCanvas.children[0])
     } 
@@ -207,6 +224,7 @@ function resetScene(){
     $('#skyCol').minicolors('value', '#000000');
     els = []
     updateJSON()
+    selectedEntity = null
 }
 
 /* used to click through current pattern */
@@ -295,6 +313,77 @@ function addPattern(){
       patternList.children[patternList.children.length-1].dispatchEvent(new Event('click',{target: patternList.children[parseInt(patternList.getAttribute('selectedIndex'))+1]}));
 }
 
+function addMovementAnim(){
+    var toggle_button = '<li>Pause</li>';
+    let el = document.createElement('li');
+    el.innerText = "Pause"
+
+    el.setAttribute('draggable',true)
+    el.addEventListener('dragstart', dragStart)
+    el.addEventListener('drop', droppedAnim)
+    el.addEventListener('dragenter', cancelDefault)
+    el.addEventListener('dragover', cancelDefault)
+    el.addEventListener('click',selectAnimation)
+
+    animationList.appendChild(el)
+
+
+    
+
+    
+    animationList.scrollTo({
+        top: 1000000000,
+        left: 0,
+        behavior: "smooth",
+    });
+    let movementComponent = selectedEntity.getAttribute('movement');
+    if(selectedEntity.getAttribute('advanced').val){
+        movementComponent.startPoints.push({x: 0, y: 0, z: -250});
+        movementComponent.endPoints.push({x: 0, y: 0, z: -250});
+        movementComponent.initialVelocities.push(0);
+        movementComponent.accelerations.push(0);
+        movementComponent.types.push('Pause');
+    } else {
+        movementComponent.startPoints.push({theta: 0, y: 0, r: -250});
+        movementComponent.endPoints.push({theta: 0, y: 0, r: -250});
+        movementComponent.initialVelocities.push(0);
+        movementComponent.accelerations.push(0);
+        movementComponent.types.push('Pause');
+    }
+    
+
+    
+}
+
+function removeMovementAnim(){
+    // remove animation from entity
+    if(animationList.childElementCount == 0){
+        return
+    }
+    stopMovement(selectedEntity)
+    let index = parseInt(animationList.getAttribute('selectedIndex'))
+    console.log(index)
+    let movementComponent = selectedEntity.getAttribute('movement');
+    if(movementComponent.types[index] == 'Rubberband'){
+        // need to remove this and also and rebound entry
+        movementComponent.types.splice(index,2)
+        movementComponent.startPoints.splice(index,2)
+        movementComponent.endPoints.splice(index,2)
+        movementComponent.initialVelocities.splice(index,2)
+        movementComponent.accelerations.splice(index,2)
+    } else {
+        movementComponent.types.splice(index,1)
+        movementComponent.startPoints.splice(index,1)
+        movementComponent.endPoints.splice(index,1)
+        movementComponent.initialVelocities.splice(index,1)
+        movementComponent.accelerations.splice(index,1)
+    }
+    animationList.removeChild(animationList.children[index])
+    animationList.setAttribute('selectedIndex',"")
+    updateAnimationUI(selectedEntity,-1)
+    movementTypeIn.disabled = true
+}
+
 /* removes current pattern from pattern list */
 function removePattern(){
     if(patternList.childElementCount == 0 || isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
@@ -331,6 +420,7 @@ function removePattern(){
 /* function used to remove changes made to a scene */
 function revertChanges(){
     sky.setAttribute('material',{color: '#000000'})
+    stopAllMovement()
     while(entityCanvas.childElementCount != 0){
         entityCanvas.removeChild(entityCanvas.children[0])
        }
@@ -350,6 +440,8 @@ function revertChanges(){
         bullseyeNum = 0;
         textureNum = 0;
         numAdded = 0;
+        selectedEntity = null;
+        movementKeyBinds = {}
 }
 
 names = {'default' : {'red':1,'green':1,'blue':1,'white':1,'grille':1,'crosshair':1,'line':1,'circular dot array':1,'dot array':1,'checkerboard (w)':1,'checkerboard (b)':1,'ring_w5':1,'ring_w10':1,'ring_w20':1,'bullseye':1}}
@@ -361,9 +453,27 @@ function switchToAdvanced(e){
     e.stopPropagation()
     newVal = !selectedEntity.getAttribute('advanced').val
     selectedEntity.setAttribute('advanced', {val: newVal});
+    mov = selectedEntity.getAttribute('movement')
+    let i = 0;
+    while(i < mov.types.length){
+        if(newVal){
+            if(mov.endPoints[i].r != null){
+                mov.endPoints[i] = {x: -mov.endPoints[i].r*Math.sin((mov.endPoints[i].theta*Math.PI)/180), y: mov.endPoints[i].y, z: mov.endPoints[i].r * Math.cos((mov.endPoints[i].theta*Math.PI)/180)}
+                mov.startPoints[i] = {x: -mov.startPoints[i].r*Math.sin((mov.startPoints[i].theta*Math.PI)/180), y: mov.startPoints[i].y, z: mov.startPoints[i].r * Math.cos((mov.startPoints[i].theta*Math.PI)/180)}
+            }
+        } else {
+            if(mov.endPoint.r == null){
+                mov.endPoints[i] = {r: Math.sqrt(mov.endPoints[i].x*mov.endPoints[i].x+mov.endPoints[i].z*mov.endPoints[i].z), theta: Math.atan(mov.endPoints[i].z/mov.endPoints[i].x), y: mov.endPoints[i].y}
+                mov.startPoints[i] = {r: Math.sqrt(mov.startPoints[i].x*mov.startPoints[i].x+mov.startPoints[i].z*mov.startPoints[i].z), theta: Math.atan(mov.startPoints[i].z/mov.startPoints[i].x), y: mov.startPoints[i].y}
+            }
+        }
+        i++;
+    }
+    selectedEntity.setAttribute('movement',mov)
+    endZ.disabled = !endZ.disabled
     advanced.style.backgroundColor == '' ? advanced.style.backgroundColor = '#00FF00' : advanced.style.backgroundColor =''
     updateStats()
-    editEntity()
+    //editEntity()
   }
 
 /* listens for entering vr and removes restrictions on clicking through patterns */
