@@ -32,6 +32,21 @@ $("#z").change(function() {
   });
 
 /* If the textbox for endX value is changed */
+$("#startX").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endY value is changed */
+$("#startY").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endZ value is changed */
+$("#startZ").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endX value is changed */
 $("#endX").change(function() {
     editEntity();
   });
@@ -47,17 +62,17 @@ $("#endZ").change(function() {
   });
 
   /* If the textbox for endX value is changed */
-$("#speed").change(function() {
+$("#speedIn").change(function() {
     editEntity();
   });
 
 /* If the textbox for endY value is changed */
-$("#acceleration").change(function() {
+$("#accelerationIn").change(function() {
     editEntity();
   });
 
 /* If the textbox for endZ value is changed */
-$("#key").change(function(e) {
+/*$("#key").change(function(e) {
     if(keyBind.value.length > 1 || keyBind.value == 'm'){
         alert('Invalid key, please choose a key other than \'m\' or leave this blank.')
         return
@@ -79,7 +94,7 @@ $("#key").change(function(e) {
         movementKeyBinds[mov.keyBind].splice(movementKeyBinds[mov.keyBind].indexOf(i), 1);
     }
     mov.keyBind = keyBind.value
-  });
+  });*/
 
 /* If the textbox for endZ value is changed */
 $("#movementTypeIn").change(function() {

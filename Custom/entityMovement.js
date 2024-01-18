@@ -128,14 +128,14 @@ function toggleMovement(entPos){
 }
 
 function stopMovement(el){
-    mov = el.getAttribute('mov')
+    mov = el.getAttribute('movement')
     clearInterval(mov.status)
-    mov.status = 0
-    el.setAttribute('mov',mov)
+    mov.status = -1
+    el.setAttribute('movement',mov)
     movementIcon.className = "fa-solid fa-play";
 }
 
-function handleMovementToggle(e){
+/*function handleMovementToggle(e){
     e.stopPropagation()
     if(selectedEntity.getAttribute('mov').type == 'None'){
         return
@@ -154,15 +154,25 @@ function handleMovementToggle(e){
         stopMovement(selectedEntity);
         movementIcon.className = "fa-solid fa-play"
     }
+}*/
+
+function handleMovementToggle(e){
+    e.stopPropagation()
+    if(movementIcon.className == "fa-solid fa-play"){
+        selectedEntity.getAttribute('movement').status = 1
+        movementIcon.className = "fa-solid fa-pause"
+    } else {
+        selectedEntity.getAttribute('movement').status = 0
+        movementIcon.className = "fa-solid fa-play"
+    }
+    1
 }
 
   function stopAllMovement(){
     let i = 0;
     while(i < entityCanvas.children.length){
-        mov = entityCanvas.children[i].getAttribute('mov')
-        clearInterval(mov.status)
-        mov.status = 0;
-        entityCanvas.children[i].setAttribute('mov',mov)
+        mov = entityCanvas.children[i].getAttribute('movement')
+        mov.status = -1;
         i++;
     }
   }
@@ -178,3 +188,94 @@ function handleMovementToggle(e){
     }
   }
   
+  function processConsecutiveMovement(entPos, movementArr){
+    let ent = entityCanvas.children[entPos];
+    let i = 0;
+    // movementArr [[startP,endP,speed,acc,type]...]
+
+    if(movementArr[i][1].r == null){
+        p1 = movementArr[i][0]
+        xDelta = Math.abs(movementArr[i][1].x-p1.x)
+        yDelta = Math.abs(movementArr[i][1].y-p1.y)
+        zDelta = Math.abs(movementArr[i][1].z-p1.z)
+        d = Math.sqrt((xDelta)*(xDelta) + (yDelta)*(yDelta) + (zDelta)*(zDelta))
+        steps = d/movementArr[i][2]*60
+    
+    } else {
+        // angle, angle, mov
+        p1 = movementArr[i][0]
+        thetaDelta = (movementArr[i][1].theta-p1.theta)
+        arcLen = Math.abs(thetaDelta*Math.PI/180)*Math.abs(movementArr[i][1].r);
+        yDelta = Math.abs(movementArr[i][1].y-p1.y)
+        d = Math.sqrt((arcLen)*(arcLen) + (yDelta)*(yDelta))
+        steps = d/movementArr[i][2]*60
+    }
+    console.log(d)
+    var prev = p1;
+    var num = 1;
+    var time = 1;
+    var toggle = true;
+    var endPoint = movementArr[i][1]
+    var initialVelocity = movementArr[i][2]
+    var entAcceleration = movementArr[i][3]
+    var tmp = setInterval((entPos,p1,endPoint, movementArr, i) => {
+        console.log(movementArr)
+        let ent = entityCanvas.children[entPos]
+        distanceCovered = (initialVelocity)*(num*(.017)) + 0.5*entAcceleration*((num*(.017))*(num*(.017)))
+        amtCovered = (distanceCovered/d)
+        if(amtCovered > 1){
+            i++;
+            if(i > movementArr.length){
+                clearInterval(tmp)
+            }
+            p1 = movementArr[i][0]
+            num = 1
+            if(movementArr[i][1].r == null){
+                p1 = movementArr[i][0]
+                xDelta = Math.abs(movementArr[i][1].x-p1.x)
+                yDelta = Math.abs(movementArr[i][1].y-p1.y)
+                zDelta = Math.abs(movementArr[i][1].z-p1.z)
+                d = Math.sqrt((xDelta)*(xDelta) + (yDelta)*(yDelta) + (zDelta)*(zDelta))
+                steps = d/movementArr[i][2]*60
+            
+            } else {
+                // angle, angle, mov
+                p1 = {r: movementArr[i][0].z, theta: -movementArr[i][0].x, y: movementArr[i][0].y}
+                thetaDelta = (movementArr[i][1].theta-p1.theta)
+                arcLen = Math.abs(thetaDelta*Math.PI/180)*Math.abs(movementArr[i][1].r);
+                yDelta = Math.abs(movementArr[i][1].y-p1.y)
+                d = Math.sqrt((arcLen)*(arcLen) + (yDelta)*(yDelta))
+                steps = d/movementArr[i][2]*60
+            }
+            endPoint = movementArr[i][1]
+            initialVelocity = movementArr[i][2]
+            entAcceleration = movementArr[i][3]
+            distanceCovered = (initialVelocity)*(num*(.017)) + 0.5*entAcceleration*((num*(.017))*(num*(.017)))
+            amtCovered = (distanceCovered/d)
+
+        }
+
+        res = calcNextPoint(endPoint,p1,amtCovered)
+        
+
+        if(ent.getAttribute('advanced').val){
+            ent.setAttribute('position',{x: res.x, y: res.y, z: res.z})
+            //ent.setAttribute("rotation", {x: 0, y: THETAX, z: 0}); // set rotation to be 0
+        } else {
+            ent.setAttribute('position',{x: -res.r*Math.sin((res.theta*Math.PI)/180), y: res.y, z: res.r * Math.cos((res.theta*Math.PI)/180)})
+            ent.setAttribute("rotation", {x: 0, y: -res.theta, z: 0}); // set rotation to be 0
+        }
+        /*if(toggle){
+            num++
+        } else {
+            num--
+        }*/
+        num++;
+        time++;
+    },17,entPos,p1,endPoint)
+    mov = ent.getAttribute('mov')
+    mov.status = tmp
+    ent.setAttribute('mov',mov)
+
+  }
+

@@ -33,27 +33,18 @@
 					"y": 0,
 					"z": 0
 				},
-				"mov": {
-					"startPoint": {
-						"x": 0,
-						"y": 0,
-						"z": -250
-						},
-					"endPoint": {
-						"theta": 0,
-						"y": 0,
-						"r": -250
-						},
-					"speed": 10,
-					"acceleration": 0,
-					"status": 0,
-					"type": "None",
-					"startRotation": {
-						"x": 0,
-						"y": 0,
-						"z": 0
-					},
-					"keyBind": ""
+				"movement":{
+					"startPoints":[],
+					"endPoints":[],
+					"initialVelocities":[],
+					"accelerations":[],
+					"types":[],
+					"origin":{"x":0,"y":0,"z":-250},
+					"rotationOrigin":{"x":0,"y":0,"z":0},
+					"status":-1,
+					"index":0,
+					"currentVelocity":0,
+					"timeElapsed":0
 				}
 			}
 		}

@@ -193,7 +193,11 @@ const movementIcon = document.getElementById('movementIcon');
 const movementType = document.getElementById('movementType');
 const movementTypeIn = document.getElementById('movementTypeIn');
 const movementHeader = document.getElementById('movementHeader');
+const startHeader = document.getElementById('startHeader');
 const endHeader = document.getElementById('endHeader');
+const startX = document.getElementById('startX');
+const startY = document.getElementById('startY');
+const startZ = document.getElementById('startZ');
 const endX = document.getElementById('endX');
 const endY = document.getElementById('endY');
 const endZ = document.getElementById('endZ');
@@ -203,6 +207,13 @@ const keyHeader = document.getElementById('keyHeader');
 const speed = document.getElementById('speed');
 const acceleration = document.getElementById('acceleration');
 const keyBind = document.getElementById('key');
+
+const animationButton = document.getElementById('animationButton')
+const animationList = document.getElementById('movementAnims-list')
+const animationListIcon = document.getElementById('animationListIcon')
+const animationListButton = document.getElementById('animationListButton')
+const animationListButtonContainer = document.getElementById('animationListButtonContainer')
+const settingsLayout = document.getElementById('settingsLayout')
 
 
 /* Local Variables */
@@ -259,6 +270,7 @@ scenes[packageSelect.value] = reorderedScene
 
 // handles a pattern being selected from the pattern list
 function selectPattern (e){
+  stopAllMovement()
   if(e.target.style.background == 'rgb(243, 152, 20)'){ // if selected pattern is highlighted, unselect it
     e.target.style.background = '#FFF'
     patternList.setAttribute("selectedIndex","")
@@ -287,7 +299,30 @@ function selectPattern (e){
       }
     }
   })
+  /*let i = 0;
+  while(i < els.length){
+    if(!els[i].getAttribute('movement')){
+      els[i].setAttribute("movement",{'startPoints': [],'endPoints': [],'initialVelocities':[],'accelerations':[],'types':[],'origin': els[i].getAttribute('position'), 'rotationOrigin': els[i].getAttribute('rotation'), 'status': -1, 'index': 0, 'currentVelocity': 0, 'timeElapsed': 0})
+    }
+    i++;
+  }*/
+
+  setTimeout(() => {
+    if(els[0] && els[0].getAttribute('movement').types.length > 0){
+      updateAnimationList(els[0])
+      animationList.setAttribute('selectedIndex',0)
+      updateStats()
+      
+    } else {
+      updateAnimationList(els[0])
+    }
+
+  },200)
+
+  
 }
+
+
 
 
 /* Code to make pattern list elements draggable */
@@ -331,6 +366,165 @@ function cancelDefault (e) {
   e.stopPropagation()
   return false
 }
+
+
+// animation list functionality 
+
+let animations = document.querySelectorAll('#movementAnims-list > li');
+
+animations.forEach(item => {
+  $(item).prop('draggable', true)
+  item.addEventListener('dragstart', dragStart)
+  item.addEventListener('drop', droppedAnim)
+  item.addEventListener('dragenter', cancelDefault)
+  item.addEventListener('dragover', cancelDefault)
+  item.addEventListener('click',selectAnimation)
+})
+
+let j = 0;
+
+
+// handles a pattern being selected from the pattern list
+function selectAnimation (e){
+  stopMovement(selectedEntity)
+  if(e.target.style.background == 'rgb(243, 152, 20)'){ // if selected pattern is highlighted, unselect it
+    e.target.style.background = '#FFF'
+    animationList.setAttribute("selectedIndex","")
+    movementTypeIn.disabled = true
+    //revertChanges()
+    //nameIn.value = packageSelect.value;
+    return;
+  }
+  e.target.style.background = '#F39814' // highlights selected pattern
+  items = document.querySelectorAll('#movementAnims-list > li');
+  items.forEach(item => { // changes displayed pattern to selected pattern
+    if(item != e.target){
+      item.style.background = '#FFF'
+    } else {
+      animationList.setAttribute("selectedIndex",$(item).index())
+      movementTypeIn.disabled = false
+      updateAnimationUI(selectedEntity,$(item).index())
+      
+
+      // add in functionality that will update animation info based on selected
+      
+    }
+  })
+}
+
+function updateAnimationUI(entity, ind) {
+  if(ind == -1){
+    movementTypeIn.value = "None"
+    movementTypeIn.disabled = true
+    updateMovementSettings()
+    return
+  }
+  
+  let mov = entity.getAttribute('movement')
+  let i = 0;
+  let counter = -1;
+  console.log(mov)
+  // have to take into account rebounds from rubberband
+  while(i < mov.types.length){
+    if(mov.types[i] != 'Rebound'){
+      counter++;
+      if(counter == ind){
+        break
+      }
+    }
+    i++;
+  }
+  console.log(i)
+
+  if(entity.getAttribute('advanced').val){
+    startX.value = mov.startPoints[i].x
+    startY.value = mov.startPoints[i].y
+    startZ.value = -mov.startPoints[i].z
+    endX.value = mov.endPoints[i].x
+    endY.value = mov.endPoints[i].y
+    endZ.value = -mov.endPoints[i].z
+  } else {
+    startX.value = mov.startPoints[i].theta
+    startY.value = mov.startPoints[i].y
+    startZ.value = -mov.startPoints[i].r
+    endX.value = mov.endPoints[i].theta
+    endY.value = mov.endPoints[i].y
+    endZ.value = -mov.endPoints[i].r
+  }
+
+  movementTypeIn.value = mov.types[i]
+  acceleration.value = mov.accelerations[i]
+  speed.value = mov.initialVelocities[i]
+  movementTypeIn.disabled = false
+  updateMovementSettings()
+
+}
+
+function droppedAnim (e) {
+  cancelDefault(e)
+  stopMovement(selectedEntity)
+  
+  // get new and old index
+  let oldIndex = e.dataTransfer.getData('text/plain')
+  let target = $(e.target)
+  let newIndex = target.index()
+  
+  // remove dropped items at old place
+  if(newIndex != oldIndex){
+    let dropped = $(this).parent().children().eq(oldIndex).remove()
+
+    // insert the dropped items at new place
+    if (newIndex < oldIndex) {
+      target.before(dropped)
+    } else {
+      target.after(dropped)
+    }
+    if(animationList.getAttribute('selectedIndex') == oldIndex){
+      animationList.setAttribute('selectedIndex',newIndex);
+    }
+  } 
+  let movementComponent = selectedEntity.getAttribute('movement')
+  if(movementComponent.types[newIndex] == 'Rubberband'){
+    // insert at newIndex+2
+    newIndex += 1;
+  }
+
+  if(oldIndex < movementComponent.types.length-1 && movementComponent.types[oldIndex+1] == 'Rebound'){
+    // remove both oldIndex and oldIndex+1
+    let points = movementComponent.startPoints.splice(oldIndex,2);
+    let points2 = movementComponent.endPoints.splice(oldIndex,2);
+    let vels = movementComponent.initialVelocities.splice(oldIndex,2);
+    let accelerations = movementComponent.accelerations.splice(oldIndex,2);
+    let types = movementComponent.types.splice(oldIndex,2);
+
+    movementComponent.startPoints.splice(newIndex,0,...points)
+    movementComponent.endPoints.splice(newIndex,0,...points2)
+    movementComponent.initialVelocities.splice(newIndex,0,...vels)
+    movementComponent.accelerations.splice(newIndex,0,...accelerations)
+    movementComponent.types.splice(newIndex,0,...types)
+  
+  } else {
+    let points = movementComponent.startPoints.splice(oldIndex,1);
+    let points2 = movementComponent.endPoints.splice(oldIndex,1);
+    let vels = movementComponent.initialVelocities.splice(oldIndex,1);
+    let accelerations = movementComponent.accelerations.splice(oldIndex,1);
+    let types = movementComponent.types.splice(oldIndex,1);
+
+    movementComponent.startPoints.splice(newIndex,0,...points)
+    movementComponent.endPoints.splice(newIndex,0,...points2)
+    movementComponent.initialVelocities.splice(newIndex,0,...vels)
+    movementComponent.accelerations.splice(newIndex,0,...accelerations)
+    movementComponent.types.splice(newIndex,0,...types)
+
+  }
+
+
+
+  updateJSON()
+  //scenes[packageSelect.value] = reorderedScene
+
+}
+
 
 
 

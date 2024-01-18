@@ -21,6 +21,12 @@ function selectNew(clickedEntity){
     hideEditStats(); /* hide section briefly */
     updateStats(); /* update stats */
     toggleAddEdit(null); /* re-display section */
+    updateAnimationList(selectedEntity)
+    if(animationList.childElementCount == 0){
+        animationList.setAttribute('selectedIndex',"")
+    } else {
+        animationList.setAttribute('selectedIndex',0)
+    }
 
     highlightSelection(selectedEntity);
 }
@@ -122,20 +128,21 @@ function duplicateEntity(){
     /* sets stats */
     el.setAttribute("angle", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].angle);
     el.setAttribute("advanced", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].advanced);
-    el.setAttribute("position", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].mov.startPoint);
+    el.setAttribute("position", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].movement.origin);
     el.setAttribute("material", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material);
     el.setAttribute("rotation", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].rotation);
-    el.setAttribute("mov", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].mov);
+
+    el.setAttribute("movement", JSON.parse(JSON.stringify(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].movement)));
 
     el.setAttribute("click-checker","");
     numAdded++;
     entityCanvas.appendChild(el); /* adds entity to scene */
-    if(el.getAttribute("mov").keyBind != ""){
+    /*if(el.getAttribute("mov").keyBind != ""){
         if(movementKeyBinds[el.getAttribute("mov").keyBind] == null){
             movementKeyBinds[el.getAttribute("mov").keyBind] = []
         }
         movementKeyBinds[el.getAttribute("mov").keyBind].push(entityCanvas.children.length-1);
-    }
+    }*/
 
     /* adds option to dropdown */
     var option = document.createElement("option");
@@ -306,6 +313,77 @@ function addPattern(){
       patternList.children[patternList.children.length-1].dispatchEvent(new Event('click',{target: patternList.children[parseInt(patternList.getAttribute('selectedIndex'))+1]}));
 }
 
+function addMovementAnim(){
+    var toggle_button = '<li>Pause</li>';
+    let el = document.createElement('li');
+    el.innerText = "Pause"
+
+    el.setAttribute('draggable',true)
+    el.addEventListener('dragstart', dragStart)
+    el.addEventListener('drop', droppedAnim)
+    el.addEventListener('dragenter', cancelDefault)
+    el.addEventListener('dragover', cancelDefault)
+    el.addEventListener('click',selectAnimation)
+
+    animationList.appendChild(el)
+
+
+    
+
+    
+    animationList.scrollTo({
+        top: 1000000000,
+        left: 0,
+        behavior: "smooth",
+    });
+    let movementComponent = selectedEntity.getAttribute('movement');
+    if(selectedEntity.getAttribute('advanced').val){
+        movementComponent.startPoints.push({x: 0, y: 0, z: -250});
+        movementComponent.endPoints.push({x: 0, y: 0, z: -250});
+        movementComponent.initialVelocities.push(0);
+        movementComponent.accelerations.push(0);
+        movementComponent.types.push('Pause');
+    } else {
+        movementComponent.startPoints.push({theta: 0, y: 0, r: -250});
+        movementComponent.endPoints.push({theta: 0, y: 0, r: -250});
+        movementComponent.initialVelocities.push(0);
+        movementComponent.accelerations.push(0);
+        movementComponent.types.push('Pause');
+    }
+    
+
+    
+}
+
+function removeMovementAnim(){
+    // remove animation from entity
+    if(animationList.childElementCount == 0){
+        return
+    }
+    stopMovement(selectedEntity)
+    let index = parseInt(animationList.getAttribute('selectedIndex'))
+    console.log(index)
+    let movementComponent = selectedEntity.getAttribute('movement');
+    if(movementComponent.types[index] == 'Rubberband'){
+        // need to remove this and also and rebound entry
+        movementComponent.types.splice(index,2)
+        movementComponent.startPoints.splice(index,2)
+        movementComponent.endPoints.splice(index,2)
+        movementComponent.initialVelocities.splice(index,2)
+        movementComponent.accelerations.splice(index,2)
+    } else {
+        movementComponent.types.splice(index,1)
+        movementComponent.startPoints.splice(index,1)
+        movementComponent.endPoints.splice(index,1)
+        movementComponent.initialVelocities.splice(index,1)
+        movementComponent.accelerations.splice(index,1)
+    }
+    animationList.removeChild(animationList.children[index])
+    animationList.setAttribute('selectedIndex',"")
+    updateAnimationUI(selectedEntity,-1)
+    movementTypeIn.disabled = true
+}
+
 /* removes current pattern from pattern list */
 function removePattern(){
     if(patternList.childElementCount == 0 || isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
@@ -375,18 +453,23 @@ function switchToAdvanced(e){
     e.stopPropagation()
     newVal = !selectedEntity.getAttribute('advanced').val
     selectedEntity.setAttribute('advanced', {val: newVal});
-    mov = selectedEntity.getAttribute('mov')
-    if(newVal){
-        if(mov.endPoint.r != null){
-            mov.endPoint = {x: -mov.endPoint.r*Math.sin((mov.endPoint.theta*Math.PI)/180), y: mov.endPoint.y, z: mov.endPoint.r * Math.cos((mov.endPoint.theta*Math.PI)/180)}
-            selectedEntity.setAttribute('mov',mov)
+    mov = selectedEntity.getAttribute('movement')
+    let i = 0;
+    while(i < mov.types.length){
+        if(newVal){
+            if(mov.endPoints[i].r != null){
+                mov.endPoints[i] = {x: -mov.endPoints[i].r*Math.sin((mov.endPoints[i].theta*Math.PI)/180), y: mov.endPoints[i].y, z: mov.endPoints[i].r * Math.cos((mov.endPoints[i].theta*Math.PI)/180)}
+                mov.startPoints[i] = {x: -mov.startPoints[i].r*Math.sin((mov.startPoints[i].theta*Math.PI)/180), y: mov.startPoints[i].y, z: mov.startPoints[i].r * Math.cos((mov.startPoints[i].theta*Math.PI)/180)}
+            }
+        } else {
+            if(mov.endPoint.r == null){
+                mov.endPoints[i] = {r: Math.sqrt(mov.endPoints[i].x*mov.endPoints[i].x+mov.endPoints[i].z*mov.endPoints[i].z), theta: Math.atan(mov.endPoints[i].z/mov.endPoints[i].x), y: mov.endPoints[i].y}
+                mov.startPoints[i] = {r: Math.sqrt(mov.startPoints[i].x*mov.startPoints[i].x+mov.startPoints[i].z*mov.startPoints[i].z), theta: Math.atan(mov.startPoints[i].z/mov.startPoints[i].x), y: mov.startPoints[i].y}
+            }
         }
-    } else {
-        if(mov.endPoint.r == null){
-            mov.endPoint = {r: Math.sqrt(mov.endPoint.x*mov.endPoint.x+mov.endPoint.z*mov.endPoint.z), theta: Math.atan(mov.endPoint.z/mov.endPoint.x), y: mov.endPoint.y}
-            selectedEntity.setAttribute('mov',mov)
-        }
+        i++;
     }
+    selectedEntity.setAttribute('movement',mov)
     endZ.disabled = !endZ.disabled
     advanced.style.backgroundColor == '' ? advanced.style.backgroundColor = '#00FF00' : advanced.style.backgroundColor =''
     updateStats()
