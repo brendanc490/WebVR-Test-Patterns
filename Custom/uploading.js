@@ -191,9 +191,11 @@ function addEntitiesFromScene(scene){
             el.setAttribute("position", {x: scene[key].position.x, y: scene[key].position.y, z: scene[key].position.z});
             el.setAttribute("material", scene[key].material);
             el.setAttribute("rotation", scene[key].rotation);
+            el.setAttribute("movement",scene[key].movement)
             el.setAttribute("click-checker","");
             numAdded++;
             entityCanvas.appendChild(el); /* adds entity to scene */
+
 
             /* adds option to dropdown */
             var option = document.createElement("option");

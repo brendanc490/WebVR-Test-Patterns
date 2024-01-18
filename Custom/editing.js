@@ -9,7 +9,7 @@ function editEntity(){
     /* checks for valid entries of universal changes */
     if(isNaN(parseFloat($("#x").val())) || isNaN(parseFloat($("#y").val())) || isNaN(parseFloat($("#z").val()))){
         alert("Please enter a valid position");
-        return;
+        return false;
     }
     if(hexToRgb($("#color").val()) == null){
         alert("Invalid color (check that the color was entered in hexadecimal format)");
@@ -23,18 +23,111 @@ function editEntity(){
         return;
     }
 
+    let p1;
+    let p2;
+    let d;
     /* Checks whether the current entity is advanced or not */
+    let animationComponent = selectedEntity.getAttribute('movement')
     if(selectedEntity.getAttribute('advanced').val){
         /* Updates universal settings if advanced */
         selectedEntity.setAttribute("position",{x: parseFloat($("#x").val()), y: parseFloat($("#y").val()), z: -parseFloat($("#z").val())});
         d = (-Math.round(Math.sqrt((parseFloat($("#x").val()))*(parseFloat($("#x").val()))+(parseFloat($("#z").val()))*(parseFloat($("#z").val())))))
         selectedEntity.setAttribute("angle",{x: ((Math.asin(parseFloat($("#x").val())/d))*180)/Math.PI, z: d});
         selectedEntity.setAttribute("rotation",{x: parseFloat($("#rotationX").val()), y: parseFloat($("#rotationY").val()), z: parseFloat($("#rotationZ").val())});
+        stopMovement(selectedEntity);
+        
+        p1 = {x: parseFloat($("#startX").val()), y: parseFloat($("#startY").val()), z: -parseFloat($("#startZ").val())}
+        p2 = {z: parseFloat($("#endX").val()), y: parseFloat($("#endY").val()), z: -parseFloat($("#endZ").val())}
+
+        let xDelta = p2.x-p1.x
+        let yDelta = p2.y-p1.y
+        let zDelta = p2.z-p1.z
+        d = Math.sqrt((xDelta)*(xDelta) + (yDelta)*(yDelta) + (zDelta)*(zDelta))
+        animationComponent.origin = {x: parseFloat($("#x").val()), y: parseFloat($("#y").val()), z: -parseFloat($("#z").val())}
+        animationComponent.rotationOrigin = {x: parseFloat($("#rotationX").val()), y: parseFloat($("#rotationY").val()), z: parseFloat($("#rotationZ").val())}
+
     } else {
         /* Updates universal settings if not advanced */
         selectedEntity.setAttribute("position",{x: -parseFloat($("#z").val()) * Math.sin((-parseFloat($("#x").val())*Math.PI)/180), y: parseFloat($("#y").val()), z: -parseFloat($("#z").val()) * Math.cos((-parseFloat($("#x").val())*Math.PI)/180)});
         selectedEntity.setAttribute("angle",{x: -parseFloat($("#x").val()), z: -parseFloat($("#z").val())})
         selectedEntity.setAttribute("rotation",{x: 0, y: selectedEntity.getAttribute('angle').x, z: parseFloat($("#rotationZ").val())});
+        stopMovement(selectedEntity);
+        
+        //if($('#animationTypeIn').val() == 'position'){
+            p1 = {theta: parseFloat($("#startX").val()), y: parseFloat($("#startY").val()), r: -parseFloat($("#startZ").val())}
+            p2 = {theta: parseFloat($("#endX").val()), y: parseFloat($("#endY").val()), r: -parseFloat($("#endZ").val())}
+            let thetaDelta = (p2.theta-p1.theta)
+            let arcLen = Math.abs(thetaDelta*Math.PI/180)*Math.abs(p2.r);
+            let yDelta = Math.abs(p2.y-p1.y)
+            d = Math.sqrt((arcLen)*(arcLen) + (yDelta)*(yDelta))
+            let animationComponent = selectedEntity.getAttribute('movement')
+            animationComponent.origin = {x: -parseFloat($("#z").val()) * Math.sin((-parseFloat($("#x").val())*Math.PI)/180), y: parseFloat($("#y").val()), z: -parseFloat($("#z").val()) * Math.cos((-parseFloat($("#x").val())*Math.PI)/180)}
+            animationComponent.rotationOrigin = {x: 0, y: selectedEntity.getAttribute('angle').x, z: parseFloat($("#rotationZ").val())}
+
+            
+        //}
+        
+    }
+
+    /* Updates Movement Animation */
+ 
+    let selectedIndex = parseFloat(animationList.getAttribute('selectedIndex'))
+    if(selectedIndex != 0 && animationComponent.types[selectedIndex-1] == 'Rebound'){
+        selectedIndex += 1;
+    }
+    if(selectedIndex < animationComponent.types.length-1 && animationComponent.types[selectedIndex+1] == 'Rebound'){
+        animationComponent.startPoints.splice(selectedIndex+1,1);
+        animationComponent.endPoints.splice(selectedIndex+1,1);
+        animationComponent.initialVelocities.splice(selectedIndex+1,1);
+        animationComponent.accelerations.splice(selectedIndex+1,1);
+        animationComponent.types.splice(selectedIndex+1,1);
+    }
+    if($('#movementTypeIn').val() == 'Pause'){
+        animationComponent.types[selectedIndex] = 'Pause'
+        animationComponent.initialVelocities[selectedIndex] = parseFloat($("#speed").val());
+        animationComponent.accelerations[selectedIndex] = parseFloat($("#acceleration").val());
+        animationComponent.status = -1
+        animationComponent.index = 0
+        animationComponent.timeElapsed = 0
+        animationComponent.currentVelocity = 0
+    } else if($('#movementTypeIn').val() == 'Rubberband'){
+        animationComponent.startPoints[selectedIndex] = p1;
+        animationComponent.startPoints.splice(selectedIndex+1,0,p2);
+        animationComponent.endPoints[selectedIndex] = p2;
+        animationComponent.endPoints.splice(selectedIndex+1,0,p1);
+        animationComponent.initialVelocities[selectedIndex] = parseFloat($("#speed").val());
+        animationComponent.initialVelocities.splice(selectedIndex+1,0,Math.sqrt(parseFloat($("#speed").val())+2*parseFloat($("#acceleration").val())*d));
+        animationComponent.accelerations[selectedIndex] = parseFloat($("#acceleration").val());
+        animationComponent.accelerations.splice(selectedIndex+1,0,parseFloat($("#acceleration").val()));
+        animationComponent.types[selectedIndex] = 'Rubberband'
+        animationComponent.types.splice(selectedIndex+1,0,'Rebound');
+        animationComponent.status = -1
+        animationComponent.index = 0
+        animationComponent.timeElapsed = 0
+        animationComponent.currentVelocity = 0
+        
+        
+        //selectedEntity.setAttribute("animation__loopStart",{'property': 'position','to': p1Conv, 'from':p2Conv,'dur': dur, 'loop': true, 'startEvents': 'animLoopStart', 'pauseEvents': 'animLoopPause','dir': 'alternate', 'easing': 'linear'})
+        //selectedEntity.setAttribute("animation__loopEnd",{'property': 'position','to': p2Conv, 'from':p1Conv,'dur': dur, 'loop': false, 'startEvents': 'animLoopEnd', 'pauseEvents': 'animLoopPause'})
+    } else {
+
+        animationComponent.startPoints[selectedIndex] = p1;
+        animationComponent.endPoints[selectedIndex] = p2;
+        animationComponent.initialVelocities[selectedIndex] = parseFloat($("#speed").val());
+        animationComponent.accelerations[selectedIndex] = parseFloat($("#acceleration").val());
+        animationComponent.types[selectedIndex] = ($('#movementTypeIn').val() == 'Start') ? 'Start' :'Discontinous'
+        animationComponent.status = -1
+        animationComponent.index = 0
+        animationComponent.timeElapsed = 0
+        animationComponent.currentVelocity = 0
+        
+        //selectedEntity.setAttribute("animation__loopStart",{'property': 'position','to': p1Conv, 'from':p2Conv, 'loop': false, 'startEvents': 'animLoopStart', 'pauseEvents': 'animLoopPause', 'easing': 'linear'})
+    }
+    selectedEntity.setAttribute('movement',animationComponent)
+    updateMovementSettings()
+
+    if(animationList.childElementCount != 0){
+        animationList.children[selectedIndex].innerText = $('#movementTypeIn').val()
     }
     
     /* Adds a texture if a texture input is selected */
