@@ -51,7 +51,7 @@ import ring_w5 from './patterns/ring_w5.JSON' assert { type: "json" };
 scenes['default']['ring_w5'] = ring_w5['scenes']['ring_w5']
 
 import flying_spot from './patterns/Flying_Spot.JSON' assert { type: "json" };
-scenes['default']['flying dot'] = flying_spot['scenes']['Flying Spot']
+scenes['default']['Flying Spot'] = flying_spot['scenes']['Flying Spot']
 
 /*let arr = Object.keys(scenes)
     let len = arr.length
