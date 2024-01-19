@@ -261,6 +261,7 @@ init: function () {
             stopAll()
         }  else {
             handleAll()
+            
             //displayNext(false);
         }
     });
