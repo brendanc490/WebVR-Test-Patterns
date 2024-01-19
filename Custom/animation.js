@@ -54,3 +54,18 @@ function stopAll(){
 }
 
 
+function handleMovementToggle(e){
+    e.stopPropagation()
+    if(movementIcon.className == "fa-solid fa-play"){
+        let data = selectedEntity.getAttribute('movement')
+        data.status = 1
+        selectedEntity.setAttribute('movement',data)
+        movementIcon.className = "fa-solid fa-pause"
+    } else {
+        let data = selectedEntity.getAttribute('movement')
+        data.status = 0
+        selectedEntity.setAttribute('movement',data)
+        movementIcon.className = "fa-solid fa-play"
+    }
+    1
+}

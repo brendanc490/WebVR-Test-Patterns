@@ -221,6 +221,7 @@ function resetScene(){
     while(entitySelector.childElementCount != 0){
         entitySelector.remove(entitySelector.children[0])
    }
+    movementIcon.className = "fa-solid fa-play"
     $('#skyCol').minicolors('value', '#000000');
     els = []
     updateJSON()
@@ -420,7 +421,7 @@ function removePattern(){
 /* function used to remove changes made to a scene */
 function revertChanges(){
     sky.setAttribute('material',{color: '#000000'})
-    stopAllMovement()
+    stopAll()
     while(entityCanvas.childElementCount != 0){
         entityCanvas.removeChild(entityCanvas.children[0])
        }

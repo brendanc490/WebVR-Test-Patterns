@@ -153,12 +153,16 @@ AFRAME.registerComponent('movement', {
 
             } else {
                 
+                
                 thetaDelta = Math.abs(endPoint.theta-startPoint.theta)
                 arcLen = Math.abs(thetaDelta*Math.PI/180)*Math.abs(endPoint.r);
                 yDelta = Math.abs(endPoint.y-startPoint.y)
                 d = Math.sqrt((arcLen)*(arcLen) + (yDelta)*(yDelta))
+                
                 distanceCovered = (data.initialVelocities[data.index])*(data.timeElapsed/1000) + 0.5*(data.accelerations[data.index])*((data.timeElapsed/1000)**2)
-                amtCovered = (distanceCovered/d)
+
+                amtCovered = d ? (distanceCovered/d) : 0
+                console.log(amtCovered)
 
 
                 if(amtCovered > 1){
@@ -186,6 +190,7 @@ AFRAME.registerComponent('movement', {
                     thetaDelta = endPoint.theta-startPoint.theta
                     yDelta = endPoint.y-startPoint.y
                     res = {theta: startPoint.theta+(thetaDelta*amtCovered), y: startPoint.y+(yDelta*amtCovered), r: startPoint.r}
+                    
                     this.el.setAttribute('position',{x: -res.r*Math.sin((res.theta*Math.PI)/180), y: res.y, z: res.r * Math.cos((res.theta*Math.PI)/180)})
                     this.el.setAttribute("rotation", {x: 0, y: -res.theta, z: 0}); // set rotation to be 0
                 }
