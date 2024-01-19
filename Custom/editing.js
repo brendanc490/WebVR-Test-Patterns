@@ -30,11 +30,12 @@ function editEntity(){
     let animationComponent = selectedEntity.getAttribute('movement')
     if(selectedEntity.getAttribute('advanced').val){
         /* Updates universal settings if advanced */
-        selectedEntity.setAttribute("position",{x: parseFloat($("#x").val()), y: parseFloat($("#y").val()), z: -parseFloat($("#z").val())});
+        
         d = (-Math.round(Math.sqrt((parseFloat($("#x").val()))*(parseFloat($("#x").val()))+(parseFloat($("#z").val()))*(parseFloat($("#z").val())))))
         selectedEntity.setAttribute("angle",{x: ((Math.asin(parseFloat($("#x").val())/d))*180)/Math.PI, z: d});
         selectedEntity.setAttribute("rotation",{x: parseFloat($("#rotationX").val()), y: parseFloat($("#rotationY").val()), z: parseFloat($("#rotationZ").val())});
         stopMovement(selectedEntity);
+        selectedEntity.setAttribute("position",{x: parseFloat($("#x").val()), y: parseFloat($("#y").val()), z: -parseFloat($("#z").val())});
         
         p1 = {x: parseFloat($("#startX").val()), y: parseFloat($("#startY").val()), z: -parseFloat($("#startZ").val())}
         p2 = {z: parseFloat($("#endX").val()), y: parseFloat($("#endY").val()), z: -parseFloat($("#endZ").val())}
@@ -48,11 +49,11 @@ function editEntity(){
 
     } else {
         /* Updates universal settings if not advanced */
-        selectedEntity.setAttribute("position",{x: -parseFloat($("#z").val()) * Math.sin((-parseFloat($("#x").val())*Math.PI)/180), y: parseFloat($("#y").val()), z: -parseFloat($("#z").val()) * Math.cos((-parseFloat($("#x").val())*Math.PI)/180)});
+        
         selectedEntity.setAttribute("angle",{x: -parseFloat($("#x").val()), z: -parseFloat($("#z").val())})
         selectedEntity.setAttribute("rotation",{x: 0, y: selectedEntity.getAttribute('angle').x, z: parseFloat($("#rotationZ").val())});
         stopMovement(selectedEntity);
-        
+        selectedEntity.setAttribute("position",{x: -parseFloat($("#z").val()) * Math.sin((-parseFloat($("#x").val())*Math.PI)/180), y: parseFloat($("#y").val()), z: -parseFloat($("#z").val()) * Math.cos((-parseFloat($("#x").val())*Math.PI)/180)});
         //if($('#animationTypeIn').val() == 'position'){
             p1 = {theta: parseFloat($("#startX").val()), y: parseFloat($("#startY").val()), r: -parseFloat($("#startZ").val())}
             p2 = {theta: parseFloat($("#endX").val()), y: parseFloat($("#endY").val()), r: -parseFloat($("#endZ").val())}
@@ -72,6 +73,7 @@ function editEntity(){
     /* Updates Movement Animation */
  
     let selectedIndex = parseFloat(animationList.getAttribute('selectedIndex'))
+    console.log(selectedIndex)
     if(selectedIndex != 0 && animationComponent.types[selectedIndex-1] == 'Rebound'){
         selectedIndex += 1;
     }
@@ -109,7 +111,7 @@ function editEntity(){
         
         //selectedEntity.setAttribute("animation__loopStart",{'property': 'position','to': p1Conv, 'from':p2Conv,'dur': dur, 'loop': true, 'startEvents': 'animLoopStart', 'pauseEvents': 'animLoopPause','dir': 'alternate', 'easing': 'linear'})
         //selectedEntity.setAttribute("animation__loopEnd",{'property': 'position','to': p2Conv, 'from':p1Conv,'dur': dur, 'loop': false, 'startEvents': 'animLoopEnd', 'pauseEvents': 'animLoopPause'})
-    } else {
+    } else if($('#movementTypeIn').val() != 'None'){
 
         animationComponent.startPoints[selectedIndex] = p1;
         animationComponent.endPoints[selectedIndex] = p2;
