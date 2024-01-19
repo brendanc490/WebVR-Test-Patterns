@@ -255,28 +255,9 @@ init: function () {
     el.addEventListener('triggerdown', function (evt) {
         buttonsDownL['trigger'] = true;
         if(buttonsDownL['trigger'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y > .5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y > .5))){
-            let i = 0;
-            while(i < entityCanvas.children.length){
-                mov = entityCanvas.children[i].getAttribute('mov')
-                if(mov.status != 0){
-                    break;
-                }
-                i++;
-            }
-            if(i != entityCanvas.children.length){
-                stopAllMovement()
-            } else {
-                startAllMovement()
-            }
+            handleAll()
         } else if(buttonsDownL['trigger'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y < -.5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y < -.5))){
-            stopAllMovement();
-            let i = 0;
-            while(i < entityCanvas.children.length){
-                mov = entityCanvas.children[i].getAttribute('mov')
-                entityCanvas.children[i].setAttribute('position',mov.startPoint)
-                entityCanvas.children[i].setAttribute('rotation',mov.startRotation)
-                i++;
-            }
+            stopAll()
         }  else {
             displayNext(false);
         }
@@ -287,8 +268,8 @@ init: function () {
     });
 
     el.addEventListener('xbuttondown', function (evt) {
-        //displayNext(false);
-        handleAll()
+        displayNext(false);
+        //handleAll()
         buttonsDownL['xbutton'] = true;
     });
     
@@ -297,8 +278,8 @@ init: function () {
     });
 
     el.addEventListener('ybuttondown', function (evt) {
-        //displayNext(false);
-        stopAll()
+        displayNext(false);
+        //stopAll()
         buttonsDownL['ybutton'] = true;
     });
     
