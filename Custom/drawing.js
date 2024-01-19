@@ -311,7 +311,7 @@ function updateJSON(){
     const jsonData = {};
     jsonData["sky"] = {skyColor: sky.getAttribute("material").color};
     els.forEach(element => { 
-        mov = Object.assign({},element.components.movement.attrValue)
+        mov = JSON.parse(JSON.stringify(element.getAttribute('movement')))
         mov.status = -1;
         console.log(mov)
         if(element.id.includes("gradient") || element.id.includes("grille")){
