@@ -287,7 +287,8 @@ init: function () {
     });
 
     el.addEventListener('xbuttondown', function (evt) {
-        displayNext(false);
+        //displayNext(false);
+        handleAll()
         buttonsDownL['xbutton'] = true;
     });
     
@@ -296,7 +297,8 @@ init: function () {
     });
 
     el.addEventListener('ybuttondown', function (evt) {
-        displayNext(false);
+        //displayNext(false);
+        stopAll()
         buttonsDownL['ybutton'] = true;
     });
     
