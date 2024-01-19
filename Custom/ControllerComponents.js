@@ -222,7 +222,8 @@ init: function () {
                 i++;
             }
         } else {
-            displayNext(true);
+            stopAll()
+            //displayNext(true);
         }
     });
 
@@ -259,7 +260,8 @@ init: function () {
         } else if(buttonsDownL['trigger'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y < -.5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y < -.5))){
             stopAll()
         }  else {
-            displayNext(false);
+            handleAll()
+            //displayNext(false);
         }
     });
     
