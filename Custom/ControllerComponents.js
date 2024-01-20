@@ -109,32 +109,12 @@ init: function () {
 
     el.addEventListener('triggerdown', function (evt) {
         buttonsDownR['trigger'] = true;
-
         if(buttonsDownR['trigger'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y > .5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y > .5))){
-            let i = 0;
-            while(i < entityCanvas.children.length){
-                mov = entityCanvas.children[i].getAttribute('mov')
-                if(mov.status != 0){
-                    break;
-                }
-                i++;
-            }
-            if(i != entityCanvas.children.length){
-                stopAllMovement()
-            } else {
-                startAllMovement()
-            }
+            handleAll()
         } else if(buttonsDownR['trigger'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y < -.5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y < -.5))){
-            stopAllMovement();
-            let i = 0;
-            while(i < entityCanvas.children.length){
-                mov = entityCanvas.children[i].getAttribute('mov')
-                entityCanvas.children[i].setAttribute('position',mov.startPoint)
-                entityCanvas.children[i].setAttribute('rotation',mov.startRotation)
-                i++;
-            }
-        } else {
-            displayNext(true);
+            stopAll()
+        }  else {
+            displayNext(false);
         }
     });
     
@@ -165,31 +145,12 @@ init: function () {
 
     el.addEventListener('thumbstickdown', function (evt) {
         buttonsDownR['thumbstick'] = true;
-        if(buttonsDownR['trigger'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y > .5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y > .5))){
-            let i = 0;
-            while(i < entityCanvas.children.length){
-                mov = entityCanvas.children[i].getAttribute('mov')
-                if(mov.status != 0){
-                    break;
-                }
-                i++;
-            }
-            if(i != entityCanvas.children.length){
-                stopAllMovement()
-            } else {
-                startAllMovement()
-            }
-        } else if(buttonsDownR['trigger'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y < -.5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y < -.5))){
-            stopAllMovement();
-            let i = 0;
-            while(i < entityCanvas.children.length){
-                mov = entityCanvas.children[i].getAttribute('mov')
-                entityCanvas.children[i].setAttribute('position',mov.startPoint)
-                entityCanvas.children[i].setAttribute('rotation',mov.startRotation)
-                i++;
-            }
-        } else {
-            displayNext(true);
+        if(buttonsDownR['thumbstick'] && ((buttonsDownR['thumbstick'] && trackpadDetailR.y > .5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y > .5))){
+            handleAll()
+        } else if(buttonsDownR['thumbstick'] && ((buttonsDownR['thumbstick'] && trackpadDetailR.y < -.5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y < -.5))){
+            stopAll()
+        }  else {
+            displayNext(false);
         }
     });
     el.addEventListener('thumbstickup', function (evt) {
@@ -198,32 +159,12 @@ init: function () {
 
     el.addEventListener('trackpaddown', function (evt) {
         buttonsDownR['trackpad'] = true;
-        if(buttonsDownR['trigger'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y > .5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y > .5))){
-            let i = 0;
-            while(i < entityCanvas.children.length){
-                mov = entityCanvas.children[i].getAttribute('mov')
-                if(mov.status != 0){
-                    break;
-                }
-                i++;
-            }
-            if(i != entityCanvas.children.length){
-                stopAllMovement()
-            } else {
-                startAllMovement()
-            }
-        } else if(buttonsDownR['trigger'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y < -.5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y < -.5))){
-            stopAllMovement();
-            let i = 0;
-            while(i < entityCanvas.children.length){
-                mov = entityCanvas.children[i].getAttribute('mov')
-                entityCanvas.children[i].setAttribute('position',mov.startPoint)
-                entityCanvas.children[i].setAttribute('rotation',mov.startRotation)
-                i++;
-            }
-        } else {
+        if(buttonsDownR['trackpad'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y > .5) || (buttonsDownR['trackpad'] && thumbstickDetailR.y > .5))){
+            handleAll()
+        } else if(buttonsDownR['trackpad'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y < -.5) || (buttonsDownR['trackpad'] && thumbstickDetailR.y < -.5))){
             stopAll()
-            //displayNext(true);
+        }  else {
+            displayNext(false);
         }
     });
 
@@ -260,9 +201,7 @@ init: function () {
         } else if(buttonsDownL['trigger'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y < -.5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y < -.5))){
             stopAll()
         }  else {
-            handleAll()
-            
-            //displayNext(false);
+            displayNext(false);
         }
     });
     
@@ -297,29 +236,10 @@ init: function () {
 
     el.addEventListener('thumbstickdown', function (evt) {
         buttonsDownL['thumbstick'] = true;
-        if(buttonsDownL['trigger'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y > .5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y > .5))){
-            let i = 0;
-            while(i < entityCanvas.children.length){
-                mov = entityCanvas.children[i].getAttribute('mov')
-                if(mov.status != 0){
-                    break;
-                }
-                i++;
-            }
-            if(i != entityCanvas.children.length){
-                stopAllMovement()
-            } else {
-                startAllMovement()
-            }
-        } else if(buttonsDownL['trigger'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y < -.5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y < -.5))){
-            stopAllMovement();
-            let i = 0;
-            while(i < entityCanvas.children.length){
-                mov = entityCanvas.children[i].getAttribute('mov')
-                entityCanvas.children[i].setAttribute('position',mov.startPoint)
-                entityCanvas.children[i].setAttribute('rotation',mov.startRotation)
-                i++;
-            }
+        if(buttonsDownL['thumbstick'] && ((buttonsDownL['thumbstick'] && trackpadDetailL.y > .5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y > .5))){
+            handleAll()
+        } else if(buttonsDownL['thumbstick'] && ((buttonsDownL['thumbstick'] && trackpadDetailL.y < -.5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y < -.5))){
+            stopAll()
         }  else {
             displayNext(false);
         }
@@ -330,30 +250,11 @@ init: function () {
 
     el.addEventListener('trackpaddown', function (evt) {
         buttonsDownL['trackpad'] = true;
-        if(buttonsDownL['trigger'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y > .5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y > .5))){
-            let i = 0;
-            while(i < entityCanvas.children.length){
-                mov = entityCanvas.children[i].getAttribute('mov')
-                if(mov.status != 0){
-                    break;
-                }
-                i++;
-            }
-            if(i != entityCanvas.children.length){
-                stopAllMovement()
-            } else {
-                startAllMovement()
-            }
-        } else if(buttonsDownL['trigger'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y < -.5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y < -.5))){
-            stopAllMovement();
-            let i = 0;
-            while(i < entityCanvas.children.length){
-                mov = entityCanvas.children[i].getAttribute('mov')
-                entityCanvas.children[i].setAttribute('position',mov.startPoint)
-                entityCanvas.children[i].setAttribute('rotation',mov.startRotation)
-                i++;
-            }
-        } else {
+        if(buttonsDownL['trackpad'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y > .5) || (buttonsDownL['trackpad'] && thumbstickDetailL.y > .5))){
+            handleAll()
+        } else if(buttonsDownL['trackpad'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y < -.5) || (buttonsDownL['trackpad'] && thumbstickDetailL.y < -.5))){
+            stopAll()
+        }  else {
             displayNext(false);
         }
     });
