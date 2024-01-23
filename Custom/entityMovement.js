@@ -156,17 +156,6 @@ function stopMovement(el){
     }
 }*/
 
-function handleMovementToggle(e){
-    e.stopPropagation()
-    if(movementIcon.className == "fa-solid fa-play"){
-        selectedEntity.getAttribute('movement').status = 1
-        movementIcon.className = "fa-solid fa-pause"
-    } else {
-        selectedEntity.getAttribute('movement').status = 0
-        movementIcon.className = "fa-solid fa-play"
-    }
-    1
-}
 
   function stopAllMovement(){
     let i = 0;

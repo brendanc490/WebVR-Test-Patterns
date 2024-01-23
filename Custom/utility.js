@@ -771,6 +771,7 @@ function pastePattern(){
         if(names[packageSelect.value][currName]){
             currName = currName + ' ('+names[packageSelect.value][currName]+')'
             names[packageSelect.value][name.split(' (')[0]] = names[packageSelect.value][name.split(' (')[0]] + 1
+            
         } else {
             names[packageSelect.value][currName] = 1
         }

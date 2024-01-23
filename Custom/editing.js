@@ -117,7 +117,7 @@ function editEntity(){
         animationComponent.endPoints[selectedIndex] = p2;
         animationComponent.initialVelocities[selectedIndex] = parseFloat($("#speed").val());
         animationComponent.accelerations[selectedIndex] = parseFloat($("#acceleration").val());
-        animationComponent.types[selectedIndex] = ($('#movementTypeIn').val() == 'Start') ? 'Start' :'Discontinous'
+        animationComponent.types[selectedIndex] = ($('#movementTypeIn').val() == 'Start') ? 'Start' :'Discontinuous'
         animationComponent.status = -1
         animationComponent.index = 0
         animationComponent.timeElapsed = 0
