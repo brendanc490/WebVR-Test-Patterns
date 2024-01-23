@@ -73,36 +73,50 @@ function editEntity(){
     /* Updates Movement Animation */
  
     let selectedIndex = parseFloat(animationList.getAttribute('selectedIndex'))
-    console.log(selectedIndex)
-    if(selectedIndex != 0 && animationComponent.types[selectedIndex-1] == 'Rebound'){
-        selectedIndex += 1;
+    let i = 0;
+    let counter = -1;
+    console.log("Value of selected index: "+selectedIndex)
+    // have to take into account rebounds from rubberband
+    while(i < animationComponent.types.length){
+      if(animationComponent.types[i] != 'Rebound'){
+        counter++;
+        if(counter == selectedIndex){
+          break
+        }
+      }
+      i++;
     }
-    if(selectedIndex < animationComponent.types.length-1 && animationComponent.types[selectedIndex+1] == 'Rebound'){
-        animationComponent.startPoints.splice(selectedIndex+1,1);
-        animationComponent.endPoints.splice(selectedIndex+1,1);
-        animationComponent.initialVelocities.splice(selectedIndex+1,1);
-        animationComponent.accelerations.splice(selectedIndex+1,1);
-        animationComponent.types.splice(selectedIndex+1,1);
+
+    
+    console.log("Value of i: "+i)
+
+    if(i < animationComponent.types.length-1 && animationComponent.types[i+1] == 'Rebound'){
+        animationComponent.startPoints.splice(i+1,1);
+        animationComponent.endPoints.splice(i+1,1);
+        animationComponent.initialVelocities.splice(i+1,1);
+        animationComponent.accelerations.splice(i+1,1);
+        animationComponent.types.splice(i+1,1);
     }
     if($('#movementTypeIn').val() == 'Pause'){
-        animationComponent.types[selectedIndex] = 'Pause'
-        animationComponent.initialVelocities[selectedIndex] = parseFloat($("#speed").val());
-        animationComponent.accelerations[selectedIndex] = parseFloat($("#acceleration").val());
+        animationComponent.types[i] = 'Pause'
+        console.log(parseFloat($("#speed").val()))
+        animationComponent.initialVelocities[i] = parseFloat($("#startY").val());
+        animationComponent.accelerations[i] = 0;
         animationComponent.status = -1
         animationComponent.index = 0
         animationComponent.timeElapsed = 0
         animationComponent.currentVelocity = 0
     } else if($('#movementTypeIn').val() == 'Rubberband'){
-        animationComponent.startPoints[selectedIndex] = p1;
-        animationComponent.startPoints.splice(selectedIndex+1,0,p2);
-        animationComponent.endPoints[selectedIndex] = p2;
-        animationComponent.endPoints.splice(selectedIndex+1,0,p1);
-        animationComponent.initialVelocities[selectedIndex] = parseFloat($("#speed").val());
-        animationComponent.initialVelocities.splice(selectedIndex+1,0,Math.sqrt(parseFloat($("#speed").val())+2*parseFloat($("#acceleration").val())*d));
-        animationComponent.accelerations[selectedIndex] = parseFloat($("#acceleration").val());
-        animationComponent.accelerations.splice(selectedIndex+1,0,parseFloat($("#acceleration").val()));
-        animationComponent.types[selectedIndex] = 'Rubberband'
-        animationComponent.types.splice(selectedIndex+1,0,'Rebound');
+        animationComponent.startPoints[i] = p1;
+        animationComponent.startPoints.splice(i+1,0,p2);
+        animationComponent.endPoints[i] = p2;
+        animationComponent.endPoints.splice(i+1,0,p1);
+        animationComponent.initialVelocities[i] = parseFloat($("#speed").val());
+        animationComponent.initialVelocities.splice(i+1,0,Math.sqrt(parseFloat($("#speed").val())**2+2*parseFloat($("#acceleration").val())*d));
+        animationComponent.accelerations[i] = parseFloat($("#acceleration").val());
+        animationComponent.accelerations.splice(i+1,0,parseFloat($("#acceleration").val()));
+        animationComponent.types[i] = 'Rubberband'
+        animationComponent.types.splice(i+1,0,'Rebound');
         animationComponent.status = -1
         animationComponent.index = 0
         animationComponent.timeElapsed = 0
@@ -113,11 +127,11 @@ function editEntity(){
         //selectedEntity.setAttribute("animation__loopEnd",{'property': 'position','to': p2Conv, 'from':p1Conv,'dur': dur, 'loop': false, 'startEvents': 'animLoopEnd', 'pauseEvents': 'animLoopPause'})
     } else if($('#movementTypeIn').val() != 'None'){
 
-        animationComponent.startPoints[selectedIndex] = p1;
-        animationComponent.endPoints[selectedIndex] = p2;
-        animationComponent.initialVelocities[selectedIndex] = parseFloat($("#speed").val());
-        animationComponent.accelerations[selectedIndex] = parseFloat($("#acceleration").val());
-        animationComponent.types[selectedIndex] = ($('#movementTypeIn').val() == 'Start') ? 'Start' :'Discontinuous'
+        animationComponent.startPoints[i] = p1;
+        animationComponent.endPoints[i] = p2;
+        animationComponent.initialVelocities[i] = parseFloat($("#speed").val());
+        animationComponent.accelerations[i] = parseFloat($("#acceleration").val());
+        animationComponent.types[i] = ($('#movementTypeIn').val() == 'Start') ? 'Start' :'Discontinuous'
         animationComponent.status = -1
         animationComponent.index = 0
         animationComponent.timeElapsed = 0

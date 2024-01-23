@@ -424,6 +424,7 @@ function updateAnimationUI(entity, ind) {
   let i = 0;
   let counter = -1;
   console.log(mov)
+
   // have to take into account rebounds from rubberband
   while(i < mov.types.length){
     if(mov.types[i] != 'Rebound'){
@@ -456,6 +457,9 @@ function updateAnimationUI(entity, ind) {
   acceleration.value = mov.accelerations[i]
   speed.value = mov.initialVelocities[i]
   movementTypeIn.disabled = false
+  if(mov.types[i] == 'Pause'){
+    startY.value = mov.initialVelocities[i]
+  }
   updateMovementSettings()
 
 }
