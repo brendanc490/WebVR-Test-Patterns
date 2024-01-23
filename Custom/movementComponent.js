@@ -86,7 +86,7 @@ AFRAME.registerComponent('movement', {
                         }
                     }
 
-            } else if(data.types[data.index] == 'Discontinous'){
+            } else if(data.types[data.index] == 'Discontinuous'){
                 if(data.timeElapsed >= data.initialVelocities[data.index]){
                     this.el.setAttribute('position',endPoint)
                     if(data.index < data.startPoints.length-1){
@@ -137,7 +137,7 @@ AFRAME.registerComponent('movement', {
                         }
                     }
 
-            } else if(data.types[data.index] == 'Discontinous'){
+            } else if(data.types[data.index] == 'Discontinuous'){
                 if(data.timeElapsed >= data.initialVelocities[data.index]){
                     this.el.setAttribute('position',{x: -endPoint.r*Math.sin((endPoint.theta*Math.PI)/180), y: endPoint.y, z: endPoint.r * Math.cos((endPoint.theta*Math.PI)/180)})
                     this.el.setAttribute('rotation',{x: 0, y: -endPoint.theta, z: 0})

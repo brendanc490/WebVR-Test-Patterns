@@ -67,5 +67,4 @@ function handleMovementToggle(e){
         selectedEntity.setAttribute('movement',data)
         movementIcon.className = "fa-solid fa-play"
     }
-    1
 }
