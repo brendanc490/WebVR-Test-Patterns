@@ -178,6 +178,9 @@ function updateStats(){
                 endZ.value = -entity.components.movement.attrValue.endPoints[0].z
                 acceleration.value = entity.components.movement.attrValue.accelerations[0]
                 speed.value = entity.components.movement.attrValue.initialVelocities[0]
+                if(entity.components.movement.attrValue.types[0] == 'Pause'){
+                    startY.value = entity.components.movement.attrValue.initialVelocities[0]
+                }
             }
 
 
@@ -203,7 +206,6 @@ function updateStats(){
             updateMovementSettings()
 
             if(entity.components.movement.attrValue.startPoints.length != 0){
-
                 startX.value = entity.components.movement.attrValue.startPoints[0].theta
                 startY.value = entity.components.movement.attrValue.startPoints[0].y
                 startZ.value = -entity.components.movement.attrValue.startPoints[0].r
@@ -212,6 +214,9 @@ function updateStats(){
                 endZ.value = -entity.components.movement.attrValue.endPoints[0].r
                 acceleration.value = entity.components.movement.attrValue.accelerations[0]
                 speed.value = entity.components.movement.attrValue.initialVelocities[0]
+                if(entity.components.movement.attrValue.types[0] == 'Pause'){
+                    startY.value = entity.components.movement.attrValue.initialVelocities[0]
+                }
             }
         }
 
