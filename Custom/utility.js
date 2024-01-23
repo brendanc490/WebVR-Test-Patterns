@@ -362,24 +362,37 @@ function removeMovementAnim(){
         return
     }
     stopMovement(selectedEntity)
+
     let index = parseInt(animationList.getAttribute('selectedIndex'))
-    console.log(index)
-    let movementComponent = selectedEntity.getAttribute('movement');
-    if(movementComponent.types[index] == 'Rubberband'){
-        // need to remove this and also and rebound entry
-        movementComponent.types.splice(index,2)
-        movementComponent.startPoints.splice(index,2)
-        movementComponent.endPoints.splice(index,2)
-        movementComponent.initialVelocities.splice(index,2)
-        movementComponent.accelerations.splice(index,2)
-    } else {
-        movementComponent.types.splice(index,1)
-        movementComponent.startPoints.splice(index,1)
-        movementComponent.endPoints.splice(index,1)
-        movementComponent.initialVelocities.splice(index,1)
-        movementComponent.accelerations.splice(index,1)
+    let i = 0;
+    let counter = -1;
+    // have to take into account rebounds from rubberband
+    while(i < animationComponent.types.length){
+      if(animationComponent.types[i] != 'Rebound'){
+        counter++;
+        if(counter == index){
+          break
+        }
+      }
+      i++;
     }
-    animationList.removeChild(animationList.children[index])
+
+    let movementComponent = selectedEntity.getAttribute('movement');
+    if(movementComponent.types[i] == 'Rubberband'){
+        // need to remove this and also and rebound entry
+        movementComponent.types.splice(i,2)
+        movementComponent.startPoints.splice(i,2)
+        movementComponent.endPoints.splice(i,2)
+        movementComponent.initialVelocities.splice(i,2)
+        movementComponent.accelerations.splice(i,2)
+    } else {
+        movementComponent.types.splice(i,1)
+        movementComponent.startPoints.splice(i,1)
+        movementComponent.endPoints.splice(i,1)
+        movementComponent.initialVelocities.splice(i,1)
+        movementComponent.accelerations.splice(i,1)
+    }
+    animationList.removeChild(animationList.children[i])
     animationList.setAttribute('selectedIndex',"")
     updateAnimationUI(selectedEntity,-1)
     movementTypeIn.disabled = true
@@ -771,7 +784,7 @@ function pastePattern(){
         if(names[packageSelect.value][currName]){
             currName = currName + ' ('+names[packageSelect.value][currName]+')'
             names[packageSelect.value][name.split(' (')[0]] = names[packageSelect.value][name.split(' (')[0]] + 1
-            
+
         } else {
             names[packageSelect.value][currName] = 1
         }
