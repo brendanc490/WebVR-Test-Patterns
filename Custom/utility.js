@@ -393,7 +393,7 @@ function removeMovementAnim(){
         movementComponent.initialVelocities.splice(i,1)
         movementComponent.accelerations.splice(i,1)
     }
-    animationList.removeChild(animationList.children[i])
+    animationList.removeChild(animationList.children[index])
     animationList.setAttribute('selectedIndex',"")
     updateAnimationUI(selectedEntity,-1)
     movementTypeIn.disabled = true
