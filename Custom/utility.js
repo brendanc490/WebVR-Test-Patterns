@@ -366,9 +366,10 @@ function removeMovementAnim(){
     let index = parseInt(animationList.getAttribute('selectedIndex'))
     let i = 0;
     let counter = -1;
+    let movementComponent = selectedEntity.getAttribute('movement');
     // have to take into account rebounds from rubberband
-    while(i < animationComponent.types.length){
-      if(animationComponent.types[i] != 'Rebound'){
+    while(i < movementComponent.types.length){
+      if(movementComponent.types[i] != 'Rebound'){
         counter++;
         if(counter == index){
           break
@@ -377,7 +378,7 @@ function removeMovementAnim(){
       i++;
     }
 
-    let movementComponent = selectedEntity.getAttribute('movement');
+    
     if(movementComponent.types[i] == 'Rubberband'){
         // need to remove this and also and rebound entry
         movementComponent.types.splice(i,2)

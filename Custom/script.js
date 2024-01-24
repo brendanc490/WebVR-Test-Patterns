@@ -423,7 +423,6 @@ function updateAnimationUI(entity, ind) {
   let mov = entity.getAttribute('movement')
   let i = 0;
   let counter = -1;
-  console.log(mov)
 
   // have to take into account rebounds from rubberband
   while(i < mov.types.length){
@@ -435,7 +434,6 @@ function updateAnimationUI(entity, ind) {
     }
     i++;
   }
-  console.log(i)
 
   if(entity.getAttribute('advanced').val){
     startX.value = mov.startPoints[i].x
@@ -472,7 +470,39 @@ function droppedAnim (e) {
   let oldIndex = e.dataTransfer.getData('text/plain')
   let target = $(e.target)
   let newIndex = target.index()
-  
+
+  // find oldIndex equivalent and newIndex equivalent in types
+  let i = 0;
+  let oldI = -1;
+  let newI = -1;
+  let counterOld = -1;
+  let counterNew = -1;
+
+  let movementComponent = selectedEntity.getAttribute('movement')
+  // have to take into account rebounds from rubberband
+  while(i < movementComponent.types.length){
+    if(movementComponent.types[i] != 'Rebound'){
+      if(counterOld == oldIndex && counterNew == newIndex){
+        break
+      } 
+      
+      if(counterOld != oldIndex){
+        counterOld++;
+        if(counterOld == oldIndex){
+          oldI = i
+        }
+      }
+      if(counterNew != newIndex){
+        counterNew++;
+        if(counterNew == newIndex){
+          newI = i
+        }
+      }
+    }
+    i++;
+  }
+
+
   // remove dropped items at old place
   if(newIndex != oldIndex){
     let dropped = $(this).parent().children().eq(oldIndex).remove()
@@ -487,13 +517,92 @@ function droppedAnim (e) {
       animationList.setAttribute('selectedIndex',newIndex);
     }
   } 
-  let movementComponent = selectedEntity.getAttribute('movement')
+
   if(movementComponent.types[newIndex] == 'Rubberband'){
     // insert at newIndex+2
     newIndex += 1;
   }
 
-  if(oldIndex < movementComponent.types.length-1 && movementComponent.types[oldIndex+1] == 'Rebound'){
+  if(oldI > newI){
+    if(movementComponent.types[oldI] == 'Rubberband'){
+      // remove both oldI and oldI+1
+      let points = movementComponent.startPoints.splice(oldI,2);
+      let points2 = movementComponent.endPoints.splice(oldI,2);
+      let vels = movementComponent.initialVelocities.splice(oldI,2);
+      let accelerations = movementComponent.accelerations.splice(oldI,2);
+      let types = movementComponent.types.splice(oldI,2);
+
+      movementComponent.startPoints.splice(newI,0,...points)
+      movementComponent.endPoints.splice(newI,0,...points2)
+      movementComponent.initialVelocities.splice(newI,0,...vels)
+      movementComponent.accelerations.splice(newI,0,...accelerations)
+      movementComponent.types.splice(newI,0,...types)
+
+    } else {
+      // remove oldI
+      let points = movementComponent.startPoints.splice(oldI,1);
+      let points2 = movementComponent.endPoints.splice(oldI,1);
+      let vels = movementComponent.initialVelocities.splice(oldI,1);
+      let accelerations = movementComponent.accelerations.splice(oldI,1);
+      let types = movementComponent.types.splice(oldI,1);
+
+      movementComponent.startPoints.splice(newI,0,...points)
+      movementComponent.endPoints.splice(newI,0,...points2)
+      movementComponent.initialVelocities.splice(newI,0,...vels)
+      movementComponent.accelerations.splice(newI,0,...accelerations)
+      movementComponent.types.splice(newI,0,...types)
+    }
+
+  } else if(newI > oldI) {
+    // remove then insert at newI - 1 or - 2 if newI
+    if(movementComponent.types[oldI] == 'Rubberband'){
+      // remove both oldI and oldI+1
+      let points = movementComponent.startPoints.splice(oldI,2);
+      let points2 = movementComponent.endPoints.splice(oldI,2);
+      let vels = movementComponent.initialVelocities.splice(oldI,2);
+      let accelerations = movementComponent.accelerations.splice(oldI,2);
+      let types = movementComponent.types.splice(oldI,2);
+
+      if(movementComponent.types[newI-1] == 'Rubberband'){
+        movementComponent.startPoints.splice(newI,0,...points)
+        movementComponent.endPoints.splice(newI,0,...points2)
+        movementComponent.initialVelocities.splice(newI,0,...vels)
+        movementComponent.accelerations.splice(newI,0,...accelerations)
+        movementComponent.types.splice(newI,0,...types)
+      } else { 
+        movementComponent.startPoints.splice(newI-1,0,...points)
+        movementComponent.endPoints.splice(newI-1,0,...points2)
+        movementComponent.initialVelocities.splice(newI-1,0,...vels)
+        movementComponent.accelerations.splice(newI-1,0,...accelerations)
+        movementComponent.types.splice(newI-1,0,...types)
+      }
+
+    } else {
+      // remove oldI
+      let points = movementComponent.startPoints.splice(oldI,1);
+      let points2 = movementComponent.endPoints.splice(oldI,1);
+      let vels = movementComponent.initialVelocities.splice(oldI,1);
+      let accelerations = movementComponent.accelerations.splice(oldI,1);
+      let types = movementComponent.types.splice(oldI,1);
+
+      if(movementComponent.types[newI-1] == 'Rubberband'){
+        movementComponent.startPoints.splice(newI+1,0,...points)
+        movementComponent.endPoints.splice(newI+1,0,...points2)
+        movementComponent.initialVelocities.splice(newI+1,0,...vels)
+        movementComponent.accelerations.splice(newI+1,0,...accelerations)
+        movementComponent.types.splice(newI+1,0,...types)
+      } else { 
+        movementComponent.startPoints.splice(newI,0,...points)
+        movementComponent.endPoints.splice(newI,0,...points2)
+        movementComponent.initialVelocities.splice(newI,0,...vels)
+        movementComponent.accelerations.splice(newI,0,...accelerations)
+        movementComponent.types.splice(newI,0,...types)
+      }
+    }
+
+  }
+
+  /*if(oldIndex < movementComponent.types.length-1 && movementComponent.types[oldIndex+1] == 'Rebound'){
     // remove both oldIndex and oldIndex+1
     let points = movementComponent.startPoints.splice(oldIndex,2);
     let points2 = movementComponent.endPoints.splice(oldIndex,2);
@@ -520,7 +629,7 @@ function droppedAnim (e) {
     movementComponent.accelerations.splice(newIndex,0,...accelerations)
     movementComponent.types.splice(newIndex,0,...types)
 
-  }
+  }*/
 
 
 
