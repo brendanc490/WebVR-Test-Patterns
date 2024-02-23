@@ -20,7 +20,7 @@
 				"geometry": {
 					"primitive": "plane",
 					"width": 0,
-					"height": 15
+					"height": 1000
 				},
 				"position": {
 					"x": 0,
@@ -67,7 +67,7 @@
 				"geometry": {
 					"primitive": "plane",
 					"width": 0,
-					"height": 15
+					"height": 1000
 				},
 				"position": {
 					"x": 0,
