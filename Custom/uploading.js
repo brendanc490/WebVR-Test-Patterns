@@ -185,6 +185,13 @@ function addEntitiesFromScene(scene){
             }  else if (key.includes("bullseye")){
                 el.setAttribute("id", "bullseye"+bullseyeNum++);
                 drawBullseye(scene[key].ringPitch,scene[key].numRings,scene[key].material.color,el);
+            } else if (key.includes("text")){
+                el.setAttribute("id", "text"+textNum++);
+                el.setAttribute("text",scene[key].text)
+            } else if (key.includes("timer")){
+                el.setAttribute("id", "timer"+timerNum++);
+                console.log(timerNum)
+                el.setAttribute("text",scene[key].text)
             }
             /* sets stats */
             el.setAttribute("angle", scene[key].angle);

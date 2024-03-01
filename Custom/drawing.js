@@ -63,6 +63,20 @@ function addEntity(){
         el.setAttribute("id","bullseye"+bullseyeNum++);
         drawBullseye(5,5,"#"+R+G+B,el);
         el.setAttribute("material",{shader: "flat", color: "#"+R+G+B});
+    }   else if ($("#entity :selected").text() == "text"){
+        el.setAttribute("id","text"+textNum++);
+        el.setAttribute("text",{"value": "Default Text", "color": "#FFFFFF",  width: .25*250, height: .125*250, align:"center", "wrapCount": 12});
+        /*el.setAttribute("value","Default Text")
+        el.setAttribute("color","#FFFFFF")
+        el.setAttribute("height", .25*2000)
+        el.setAttribute("width", .125*2000)*/
+    } else if ($("#entity :selected").text() == "timer"){
+        if(timerNum > 0){
+            alert("A timer already exists")
+            return
+        }
+        el.setAttribute("id","timer"+timerNum++);
+        el.setAttribute("text",{"value": "00:00.000", "color": "#FFFFFF",  width: .25*250, height: .125*250, align:"center", "wrapCount": 10});
     }
     /* Set default universal stats */
 
@@ -252,6 +266,7 @@ function drawDotArray(rows,cols,size,spacing,color1,toggle,parent){
 }
 
 function drawCircularDotArray(radius,circles,dots,size,color1,toggle,parent){
+    console.log(parent)
     let c = 1;
     let middleDot = document.createElement("a-entity");
     middleDot.setAttribute("id",parent.id+"-center");
@@ -330,6 +345,12 @@ function updateJSON(){
             jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, toggleCenterDot: element.components.toggleCenterDot.attrValue, rows: element.children.length, cols: element.children[0].children.length, circleSize: element.children[0].children[0].components.geometry.attrValue.radiusOuter, spacing: element.components.arraySpacing.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: element.components.material.attrValue, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         } else if(element.id.includes("bullseye")){
             jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, numRings: element.children.length-1, ringPitch: element.children[0].components.geometry.attrValue.radiusOuter*2, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: element.components.material.attrValue, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
+        } else if(element.id.includes("text")){
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, text: element.components.text.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
+        }  else if(element.id.includes("timer")){
+            text = JSON.parse(JSON.stringify(element.components.text.attrValue))
+            text.value = "00:00.000"
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, text: element.components.text.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         }});
         scenes[packageSelect.value][patternList.children[parseFloat(patternList.getAttribute('selectedIndex'))].textContent] = jsonData
 }

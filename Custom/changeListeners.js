@@ -381,6 +381,10 @@ $("#ringPitchIn").change(function() {
     editEntity();
 });
 
+$("#text").change(function() {
+    editEntity();
+});
+
 /* sends entity back or forward one layer */
 /*function sendBack(isback){
     let tmp = null;

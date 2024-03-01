@@ -112,7 +112,7 @@ function duplicateEntity(){
         el.setAttribute('color2',scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].color2)
     } else if (key.includes("circularDotarray")){
         el.setAttribute("id", "circularDotarray"+circularDotarrayNum++);
-        drawCircularDotArray(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].arraySpacing.val,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].circles,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].dots,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].circleSize,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material.color,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].circleSize,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].spacing.val,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material.color,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].toggleCenterDot.val,el);
+        drawCircularDotArray(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].arraySpacing.val,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].circles,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].dots,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].circleSize,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material.color,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].toggleCenterDot.val,el);
         el.setAttribute("arraySpacing",scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].arraySpacing);
         el.setAttribute("toggleCenterDot",scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].toggleCenterDot);
     } else if (key.includes("dotarray")){
@@ -123,6 +123,12 @@ function duplicateEntity(){
     } else if (key.includes("bullseye")){
         el.setAttribute("id", "bullseye"+bullseyeNum++);
         drawBullseye(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].ringPitch,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].numRings,scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].material.color,el);
+    } else if(key.includes("text")){
+        el.setAttribute("id", "text"+textNum++);
+        el.setAttribute("text",scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].text);
+    } else if(key.includes("timer")){
+        el.setAttribute("id", "timer"+timerNum++);
+        el.setAttribute("text",scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent][key].text);
     }
 
     /* sets stats */
@@ -459,7 +465,7 @@ function revertChanges(){
         movementKeyBinds = {}
 }
 
-names = {'default' : {'red':1,'green':1,'blue':1,'white':1,'grille':1,'crosshair':1,'line':1,'circular dot array':1,'dot array':1,'checkerboard (w)':1,'checkerboard (b)':1,'ring_w5':1,'ring_w10':1,'ring_w20':1,'bullseye':1}}
+
 var colorChange = true;
 
 /* handles switches to advanced mode */
@@ -546,7 +552,13 @@ async function highlightSelection(ent){
         colNum = ent.children[0].children.length;
         //tileSizeNum = ent.children[0].children[0].components.geometry.attrValue.width;
         newGeom = {primitive: 'ring', radiusOuter: ent.children[0].components.geometry.attrValue.radiusOuter*1.5, radiusInner: 0};
-    } 
+    } else if(selectedEntity.id.includes("text") || selectedEntity.id.includes("timer")){
+        console.log(ent.components.text.attrValue.wrapCount)
+        let width = ent.components.text.attrValue.value.length * (ent.components.text.attrValue.width / ent.components.text.attrValue.wrapCount);
+        let height = ent.components.text.attrValue.height;
+        newGeom = {primitive: 'plane', width: width, height: height};
+    }
+    
     tmp = document.createElement('a-entity');
     tmp.setAttribute('id','tmp')
     tmp.setAttribute("geometry",newGeom);
@@ -821,3 +833,41 @@ function cutPattern(){
     removePattern()
 }
 
+
+var time;
+var timeElapsed = 0;
+function startTimer(){
+    time = setInterval(() => {
+        timeElapsed += 10;
+        let timer = document.getElementById('timer0')
+        let textVal = timer.getAttribute('text')
+        let time = Math.floor(timeElapsed)
+        let minutes = Math.floor(time/1000/60)
+        time -= minutes*1000*60
+        if(minutes < 10){
+            minutes = "0"+minutes
+        } else {
+            minutes = ""+minutes
+        }
+        
+        let seconds = Math.floor(time/1000)
+        time -= seconds*1000
+        if(seconds < 10){
+            seconds = "0"+seconds
+        } else {
+            seconds = ""+seconds
+        }
+        if(time < 10){
+            time = "00"+time
+        } else if(time < 100){
+            time = "0"+time
+        } else {
+            time = ""+time
+        }
+        //console.log(time)
+        //textVal.value = minutes+":"+seconds+":"+time
+        textVal.value = minutes+":"+seconds+":"+time
+        timer.setAttribute('text',textVal)
+
+    },10)
+}
