@@ -12,6 +12,9 @@ scenes['default']['blue'] = blue['scenes']['default']
 import white from './patterns/white.JSON' assert { type: "json" };
 scenes['default']['white'] = white['scenes']['default']
 
+import black from './patterns/black.JSON' assert { type: "json" };
+scenes['default']['black'] = black['scenes']['default']
+
 import grille from './patterns/grille.JSON' assert { type: "json" };
 scenes['default']['grille'] = grille['scenes']['default']
 
