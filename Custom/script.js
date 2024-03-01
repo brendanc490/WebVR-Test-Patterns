@@ -146,6 +146,8 @@ const numRingsIn = document.getElementById("numRingsIn"); /* number of rings inp
 const ringPitch = document.getElementById("ringPitch"); /* ring pitch container paragraph */
 const ringPitchIn = document.getElementById("ringPitchIn"); /* ring pitch input */
 
+const textIn = document.getElementById("text");
+
 const settingsButtonContainer = document.getElementById("settingsButtonContainer");
 const settingsButton = document.getElementById("settingsButton");
 const settingsIcon = document.getElementById("settingsIcon");
@@ -203,10 +205,10 @@ const endY = document.getElementById('endY');
 const endZ = document.getElementById('endZ');
 const speedHeader = document.getElementById('speedHeader');
 const accelerationHeader = document.getElementById('accelerationHeader');
-const keyHeader = document.getElementById('keyHeader');
+//const keyHeader = document.getElementById('keyHeader');
 const speed = document.getElementById('speed');
 const acceleration = document.getElementById('acceleration');
-const keyBind = document.getElementById('key');
+//const keyBind = document.getElementById('key');
 
 const animationButton = document.getElementById('animationButton')
 const animationList = document.getElementById('movementAnims-list')
@@ -234,6 +236,8 @@ var grilleNum = 0;
 var dotarrayNum = 0;
 var circularDotarrayNum = 0;
 var bullseyeNum = 0;
+var textNum = 0;
+var timerNum = 0;
 var textureNum = 0;
 var numAdded = 0; /* total entities added */
 
@@ -244,6 +248,9 @@ var fileContent = null; /* contents of uploaded JSON file */
 
 var uploadedTextureFormat = {};
 var scenes = {default: {}};
+
+const packages = {default: ''} // dictionary of packages and their respective links
+const names = {default: {}} // list of packages and the names and count of names of each pattern within
 
 
 patternList.setAttribute('multi-select',false);

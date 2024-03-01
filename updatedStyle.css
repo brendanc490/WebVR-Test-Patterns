@@ -368,10 +368,10 @@ input[type=number]{
 .endZ {grid-area: endZ; text-align: center;}
 .speedHeader {grid-area: speedHeader; text-align: center;width: 110%;}
 .accelerationHeader {grid-area: accelerationHeader; text-align: center; left: -5%; position: relative;}
-.keyHeader {grid-area: keyHeader; text-align: center;}
+.keyHeader {grid-area: keyHeader; text-align: center; display: 'none'}
 .speed {grid-area: speed; text-align: center; padding-top: 13px;}
 .acceleration {grid-area: acceleration; text-align: center; padding-top: 13px;}
-.key {grid-area: key; text-align: center; padding-top: 13px;}
+.key {grid-area: key; text-align: center; padding-top: 13px; display: 'none'}
 
 .movement {grid-area: Movement;
   text-align: center;

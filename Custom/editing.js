@@ -422,6 +422,50 @@ function editEntity(){
         }
         // draw new boxes
         drawBullseye(parseFloat($("#ringPitchIn").val()),parseFloat($("#numRingsIn").val()),$("#color").val(),selectedEntity);
-    } 
+    } else if (selectedEntity.getAttribute("id").includes("text")){ /* text only changes */
+            
+        if(isNaN(parseFloat($("#width").val()))){
+            alert("Please enter a valid width");
+            return;
+        }
+        if(isNaN(parseFloat($("#height").val()))){
+            alert("Please enter a valid height");
+            return;
+        }
+        if(($("#text").val()) == ""){
+            alert("Please enter a valid text option");
+            return;
+        }
+        if(parseFloat($("#height").val()) < 0){
+            alert("Please enter a valid height ( >= 0 )");
+            return;
+        } else if(parseFloat($("#width").val()) < 0){
+            alert("Please enter a valid width ( >= 0 )");
+            return; 
+        }
+
+        selectedEntity.setAttribute('text', {value: $("#text").val(), width: parseFloat($("#width").val()), height: parseFloat($("#height").val()), color: $("#color").val(), wrapCount: $("#text").val().length})
+
+    } else if (selectedEntity.getAttribute("id").includes("timer")){ /* text only changes */
+                
+        if(isNaN(parseFloat($("#width").val()))){
+            alert("Please enter a valid width");
+            return;
+        }
+        if(isNaN(parseFloat($("#height").val()))){
+            alert("Please enter a valid height");
+            return;
+        }
+        if(parseFloat($("#height").val()) < 0){
+            alert("Please enter a valid height ( >= 0 )");
+            return;
+        } else if(parseFloat($("#width").val()) < 0){
+            alert("Please enter a valid width ( >= 0 )");
+            return; 
+        }
+
+        selectedEntity.setAttribute('text', {value: selectedEntity.getAttribute('text').value, width: parseFloat($("#width").val()), height: parseFloat($("#height").val()), color: $("#color").val(), wrapCount: selectedEntity.getAttribute('text').value.length})
+
+    }
     updateJSON() // update the json file of current scene
 }

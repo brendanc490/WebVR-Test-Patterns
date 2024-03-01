@@ -50,7 +50,7 @@ function hideEditStats(){
     ringPitch.style.display = "none";
     numRings.style.display = "none";
     toggleCenterDot.style.display = "none";
-
+    textIn.style.display = "none";
 }
 
 function updateMovementSettings(){
@@ -231,11 +231,17 @@ function updateStats(){
     rotationZ.value = (entity.components.rotation.attrValue.z).toFixed(3);
     rotationY.value = (entity.components.rotation.attrValue.y).toFixed(3);
     rotationX.value = (entity.components.rotation.attrValue.x).toFixed(3);
-    color.value = entity.components.material.attrValue.color;
     flag = true;
-    $('#color').minicolors("value",entity.components.material.attrValue.color);
+    if(selectedEntity.getAttribute("id").includes("text") || selectedEntity.getAttribute("id").includes("timer")){
+        color.value = entity.components.text.attrValue.color;
+        $('#color').minicolors("value",entity.components.text.attrValue.color);
+        console.log(entity)
+    } else {
+        color.value = entity.components.material.attrValue.color;
+        $('#color').minicolors("value",entity.components.material.attrValue.color);
+    }
     flag = false;
-    if (entity.components.material.attrValue.src == "" || entity.components.material.attrValue.src == null){
+    if (entity.components.text || entity.components.material.attrValue.src == "" || entity.components.material.attrValue.src == null){
         texture.selectedIndex = 0;
         texture.options[0].selected = true;
     } else {
@@ -294,6 +300,13 @@ function updateStats(){
     } else if(selectedEntity.getAttribute("id").includes("bullseye")){
         numRingsIn.value = (selectedEntity.children.length-1);
         ringPitchIn.value = selectedEntity.children[0].components.geometry.attrValue.radiusOuter*2;
+    }  else if(selectedEntity.getAttribute("id").includes("text")){
+        width.value = entity.components.text.attrValue.width;
+        height.value = entity.components.text.attrValue.height;
+        textIn.value = entity.components.text.attrValue.value;
+    } else if(selectedEntity.getAttribute("id").includes("timer")){
+        width.value = entity.components.text.attrValue.width;
+        height.value = entity.components.text.attrValue.height;
     }
 
 }
@@ -448,6 +461,18 @@ function toggleAddEdit(swap){
             numRings.style.display = "flex";
             area2.style.display = "block";
             ringPitch.style.display = "flex";
+        } else if (selectedEntity.getAttribute("id").includes("text")){
+            area1.style.display = "block";
+            heightIn.style.display = "flex";
+            area2.style.display = "block";
+            widthIn.style.display = "flex";
+            area3.style.display = "block";
+            textIn.style.display = "flex";
+        }  else if (selectedEntity.getAttribute("id").includes("timer")){
+            area1.style.display = "block";
+            heightIn.style.display = "flex";
+            area2.style.display = "block";
+            widthIn.style.display = "flex";
         }
         updateAnimationList(entity)
         if(animationList.childElementCount == 0){

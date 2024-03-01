@@ -20,13 +20,11 @@ AFRAME.registerComponent('movement', {
 
     update: function (oldData) {
     // Do something when component's data is updated.
-    console.log('test update')
         if(oldData.status != -1 && this.data.status == -1){
             // then we have been moved to the stopped status
             // restore position to origin and rotation to rotationOrigin
             this.el.setAttribute('position',this.data.origin)
             this.el.setAttribute('rotation',this.data.rotationOrigin)
-            console.log('test 3')
         }
 
     },
@@ -43,6 +41,38 @@ AFRAME.registerComponent('movement', {
                 
             } else {
                 this.data.timeElapsed = this.data.timeElapsed + timeDelta
+                /*if(timerNum > 0){
+                    console.log(this.data.timeElapsed)
+                    let timer = document.getElementById('timer0')
+                    let textVal = timer.getAttribute('text')
+                    let time = Math.floor(this.data.timeElapsed)
+                    let minutes = Math.floor(time/1000/60)
+                    time -= minutes*1000*60
+                    if(minutes < 10){
+                        minutes = "0"+minutes
+                    } else {
+                        minutes = ""+minutes
+                    }
+                    
+                    let seconds = Math.floor(time/1000)
+                    time -= seconds*1000
+                    if(seconds < 10){
+                        seconds = "0"+seconds
+                    } else {
+                        seconds = ""+seconds
+                    }
+                    if(time < 10){
+                        time = "00"+time
+                    } else if(time < 100){
+                        time = "0"+time
+                    } else {
+                        time = ""+time
+                    }
+                    //console.log(time)
+                    //textVal.value = minutes+":"+seconds+":"+time
+                    textVal.value = minutes+":"+seconds+":"+time[0]
+                    timer.setAttribute('text',textVal)
+                }*/
             }  
             this.updatePosition()  
             
@@ -162,7 +192,7 @@ AFRAME.registerComponent('movement', {
                 distanceCovered = (data.initialVelocities[data.index])*(data.timeElapsed/1000) + 0.5*(data.accelerations[data.index])*((data.timeElapsed/1000)**2)
 
                 amtCovered = d ? (distanceCovered/d) : 0
-                console.log(amtCovered)
+                //console.log(amtCovered)
 
 
                 if(amtCovered > 1){
