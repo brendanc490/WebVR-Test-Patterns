@@ -19,5 +19,8 @@
         }else if(event.key === "6"){
             patternList.children[5].dispatchEvent(new Event('click',{target: patternList.children[5]}));
             $('#patternDisplay').trigger('change')
+        }else if(event.key === "7"){
+            patternList.children[6].dispatchEvent(new Event('click',{target: patternList.children[6]}));
+            $('#patternDisplay').trigger('change')
         }
     })
