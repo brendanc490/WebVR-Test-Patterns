@@ -12,7 +12,7 @@
 					"x": 0,
 					"z": -250
 				},
-				"widthReal": 1,
+				"widthReal": 0.1,
 				"fill": {
 					"val": 1,
 					"isFull": true
@@ -59,7 +59,7 @@
 					"x": 0,
 					"z": -250
 				},
-				"widthReal": 1,
+				"widthReal": 0.1,
 				"fill": {
 					"val": 1,
 					"isFull": true
