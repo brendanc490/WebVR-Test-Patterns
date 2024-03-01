@@ -127,6 +127,7 @@ function entityLoader(fileContent,name,def,isSingle){
 /* adds entities from json to current scene */
 function addEntitiesFromScene(scene){
     // go through each key in the scene
+    console.log(scenes)
     Object.keys(scene).forEach(key => {
         // handle adding entity similar to drawing entity
         if(key.includes("sky")){
