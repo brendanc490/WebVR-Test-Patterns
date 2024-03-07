@@ -93,7 +93,7 @@ var leftModel, rightModel
 function findControls(){
     isRight = !(conRight.getAttribute("position").x == 0 && conRight.getAttribute("position").y == 0 && conRight.getAttribute("position").z == 0);
     isLeft = !(conLeft.getAttribute("position").x == 0 && conLeft.getAttribute("position").y == 0 && conLeft.getAttribute("position").z == 0);
-    queryPrefix = ""
+    queryPrefix = "gen-"
     if(isRight){
         right.setAttribute("value", "Right Controller Connected: Yes"); right.setAttribute("color","green")
     }
@@ -239,6 +239,7 @@ function findControls(){
             } else {
                 queryPrefix = "gen-"
             }
+           
             document.querySelector("#"+queryPrefix+"interface").setAttribute("visible", true)
             executeQueries(queryPrefix)
             clearInterval(controlsInterval)
