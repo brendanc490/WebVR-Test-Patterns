@@ -9,7 +9,7 @@ const generic = data[0]['generic']
 
 conLeft.addEventListener('buttondown', function (evt) {
     console.log("left")
-    console.log(evt.detail)
+    console.log(evt.detail.id)
     if(scheme == 'windows-mixed-reality'){
         conLeft.dispatchEvent(new CustomEvent(windows['left'][evt.detail.id]+'down', {detail: true}))
     }  else if(scheme == 'oculus-touch' || scheme == 'oculus-touch-v2' || scheme == 'oculus-touch-v3' || scheme == 'meta-quest-touch-pro') {
