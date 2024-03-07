@@ -76,7 +76,7 @@ function addEntity(){
             return
         }
         el.setAttribute("id","timer"+timerNum++);
-        el.setAttribute("text",{"value": "00:00.000", "color": "#FFFFFF",  width: .25*250, height: .125*250, align:"center", "wrapCount": 10});
+        el.setAttribute("text",{"value": "00:00.00 ", "color": "#FFFFFF",  width: .25*250, height: .125*250, align:"center", "wrapCount": 9});
     }
     /* Set default universal stats */
 
