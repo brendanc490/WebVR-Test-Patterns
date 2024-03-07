@@ -165,7 +165,7 @@ function findControls(){
             console.log(conRight.components['tracked-controls'].attrValue)
 
             for([k,v] in Object.entries(conRight.components['tracked-controls'].attrValue)){
-                console.log(`Key: ${k} and Value: ${v}`)
+                console.log(`Key: ${k} and Value: ${conRight.components['tracked-controls'].attrValue[k]}`)
             }
             document.querySelector("#"+queryPrefix+"interface").setAttribute("visible", true)
             executeQueries(queryPrefix)
