@@ -160,6 +160,9 @@ function findControls(){
             }
             console.log("made it to 2")
             console.log(queryPrefix)
+            for( [k,v] in Object.entries(conRight.components['tracked-controls'].attrValue)){
+                console.log(`Key: ${k} and Value: ${v}`)
+            }
             document.querySelector("#"+queryPrefix+"interface").setAttribute("visible", true)
             executeQueries(queryPrefix)
             clearInterval(controlsInterval)
