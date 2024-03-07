@@ -191,6 +191,8 @@ const recentPackages = document.getElementById('recentPackages')
 
 const movement = document.getElementById('movementSettings');
 const movementButton = document.getElementById('movementButton');
+const movementButtonContainer = document.getElementById('movementButtonContainer');
+const stopIndividualButton = document.getElementById('stopIndividualButton');
 const movementIcon = document.getElementById('movementIcon');
 const movementType = document.getElementById('movementType');
 const movementTypeIn = document.getElementById('movementTypeIn');
@@ -216,6 +218,10 @@ const animationListIcon = document.getElementById('animationListIcon')
 const animationListButton = document.getElementById('animationListButton')
 const animationListButtonContainer = document.getElementById('animationListButtonContainer')
 const settingsLayout = document.getElementById('settingsLayout')
+
+const startAllButton = document.getElementById('startAllButton')
+const pauseAllButton = document.getElementById('pauseAllButton')
+const stopAllButton = document.getElementById('stopAllButton')
 
 
 /* Local Variables */

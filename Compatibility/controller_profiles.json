@@ -43,6 +43,7 @@
         "right": {
             "0": "trigger", "1": null, "2": "touchpad", "3": null, "4": "menu", "5": null, "6": null}
     },
+    
     "generic" : {
         "axis": {
             "0": "touchpad", "1": "touchpad", "2": "thumbstick", "3": "thumbstick"},

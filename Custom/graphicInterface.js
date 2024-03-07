@@ -71,8 +71,8 @@ function updateMovementSettings(){
         keyHeader.style.display = "none"
         speed.style.display = "none"
         acceleration.style.display = "none"
-        keyBind.style.display = "none"
-        movementButton.style.display = "none"
+        //keyBind.style.display = "none"
+        movementButtonContainer.style.display = "none"
     } else if(movementTypeIn.value == "None"){
         if(selectedEntity.getAttribute('advanced').val){
             startHeader.innerHTML = 'Start Point (x: m, y: m, z: m)'
@@ -92,8 +92,8 @@ function updateMovementSettings(){
         keyHeader.style.display = "none"
         speed.style.display = "none"
         acceleration.style.display = "none"
-        keyBind.style.display = "none"
-        movementButton.style.display = "none"
+        //keyBind.style.display = "none"
+        movementButtonContainer.style.display = "none"
     } else if(movementTypeIn.value == "Start" || movementTypeIn.value == "Rubberband"){
         if(selectedEntity.getAttribute('advanced').val){
             startHeader.innerHTML = 'Start Point (x: m, y: m, z: m)'
@@ -115,7 +115,7 @@ function updateMovementSettings(){
         speed.style.display = "block"
         acceleration.style.display = "block"
         //key.style.display = "block"
-        movementButton.style.display = "block"
+        movementButtonContainer.style.display = "inline"
     } else {
         if(selectedEntity.getAttribute('advanced').val){
             startHeader.innerHTML = 'Start Point (x: m, y: m, z: m)'
@@ -137,7 +137,7 @@ function updateMovementSettings(){
         speed.style.display = "block"
         acceleration.style.display = "none"
         //key.style.display = "block"
-        movementButton.style.display = "block"
+        movementButtonContainer.style.display = "inline"
     }
 }
 
@@ -313,8 +313,10 @@ function updateStats(){
 
 /* switches between add or edit mode or refreshes current mode display */
 function toggleDisplayEdit(swap){
+    
     /* check if swapping modes or refreshing display */
     if(swap){ /* if the button to swap was pressed */
+        stopAll()
         boolDisplayEdit = !boolDisplayEdit; /* change current mode */
     } 
     utility.checked = false;
@@ -332,6 +334,7 @@ function toggleDisplayEdit(swap){
         //scene_input.value = ""
         //toggleAddEdit(false);
     } else { /* if add */
+        
         if(!isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
             if(coreLayout.style.gridTemplateColumns != "100% 0%"){
                 openSettings()
@@ -355,6 +358,7 @@ function toggleDisplayEdit(swap){
             swapContainer.style.textAlign = ""
             animationListButtonContainer.style.display = "none"
         }
+
     }
 }
 
@@ -362,6 +366,7 @@ function toggleDisplayEdit(swap){
 function toggleAddEdit(swap){
     /* check if swapping modes or refreshing display */
     if(swap){ /* if the button to swap was pressed */
+        stopAll()
         if(numAdded == 0){
             alert("You must add an entity before editing the scene");
             utility.checked = false;
@@ -380,6 +385,7 @@ function toggleAddEdit(swap){
     }
     /* check if current mode is add or edit */
     if(boolAddEdit){ /* if edit */
+        
         editContent.style.display = 'grid';
         addContent.style.display = 'none';
         background.style.display = "none";
@@ -685,8 +691,8 @@ function hideMovement(){
         keyHeader.style.display = "none"
         speed.style.display = "none"
         acceleration.style.display = "none"
-        keyBind.style.display = "none"
-        movementButton.style.display = "none"
+        //keyBind.style.display = "none"
+        movementButtonContainer.style.display = "none"
         //universalHeader.style.display = "none";
         //uni.style.borderBottom = "0px solid #999";
         movement.style.gridTemplateRows = "100% 0% 0% 0% 0% 0% 0% 0%"
@@ -718,7 +724,7 @@ function hideMovement(){
         speed.style.display = "block"
         acceleration.style.display = "block"
         //key.style.display = "block"
-        movementButton.style.display = "block"
+        movementButtonContainer.style.display = "inline"
         //universalHeader.style.display = "block";
         //uni.style.borderBottom = "1px solid #999";
         movement.style.gridTemplateRows = "11% 13% 11% 13% 11% 13% 12% 12%"

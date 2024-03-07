@@ -219,6 +219,8 @@ function resetScene(){
     dotarrayNum = 0;
     circularDotarrayNum = 0;
     bullseyeNum = 0;
+    timerNum = 0;
+    textNum = 0;
     stopAllMovement();
     movementKeyBinds = {}
     while(entityCanvas.childElementCount != 0){
@@ -460,6 +462,8 @@ function revertChanges(){
         circularDotarrayNum = 0;
         bullseyeNum = 0;
         textureNum = 0;
+        timerNum = 0;
+        textNum = 0;
         numAdded = 0;
         selectedEntity = null;
         movementKeyBinds = {}
@@ -866,7 +870,7 @@ function startTimer(){
         }
         //console.log(time)
         //textVal.value = minutes+":"+seconds+":"+time
-        textVal.value = minutes+":"+seconds+":"+time
+        textVal.value = minutes+":"+seconds+":"+time[0]+time[1]+" "
         timer.setAttribute('text',textVal)
 
     },10)
