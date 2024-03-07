@@ -159,8 +159,12 @@ function findControls(){
                 queryPrefix = "gen-"
             }
             console.log("made it to 2")
-            console.log(queryPrefix)
-            for( [k,v] in Object.entries(conRight.components['tracked-controls'].attrValue)){
+
+            console.log(conRight.components['tracked-controls'].idPrefix)
+
+            console.log(conRight.components['tracked-controls'].attrValue)
+
+            for([k,v] in Object.entries(conRight.components['tracked-controls'].attrValue)){
                 console.log(`Key: ${k} and Value: ${v}`)
             }
             document.querySelector("#"+queryPrefix+"interface").setAttribute("visible", true)
