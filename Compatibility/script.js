@@ -102,7 +102,6 @@ function findControls(){
     }
     if(isRight){
         if(conRight.components['tracked-controls'].attrValue.hasOwnProperty("id") && conRight.components['tracked-controls'].attrValue.id != ""){
-            console.log("test")
             scheme = conRight.components['tracked-controls-webxr'].attrValue.id
             controlScheme.setAttribute("value", "Detected Control Scheme: " + scheme)
             if(scheme.includes("touch")){
@@ -128,11 +127,12 @@ function findControls(){
             } else {
                 queryPrefix = "gen-"
             }
+            console.log("made it to 1")
+            console.log(queryPrefix)
             document.querySelector("#"+queryPrefix+"interface").setAttribute("visible", true)
             executeQueries(queryPrefix)
             clearInterval(controlsInterval)
         } else if(conRight.components['tracked-controls'].attrValue.hasOwnProperty("idPrefix") && conRight.components['tracked-controls'].attrValue.idPrefix != ""){
-            console.log("test")
             scheme = conRight.getAttribute("tracked-controls").idPrefix;
             controlScheme.setAttribute("value", "Detected Control Scheme: " + scheme)
             if(scheme.includes("touch")){
@@ -158,6 +158,8 @@ function findControls(){
             } else {
                 queryPrefix = "gen-"
             }
+            console.log("made it to 2")
+            console.log(queryPrefix)
             document.querySelector("#"+queryPrefix+"interface").setAttribute("visible", true)
             executeQueries(queryPrefix)
             clearInterval(controlsInterval)
@@ -183,7 +185,6 @@ function findControls(){
         
     } else if(isLeft) {
         if(conLeft.components['tracked-controls'].attrValue.hasOwnProperty("id") && conLeft.components['tracked-controls'].attrValue.id != ""){
-            console.log("test3")
             scheme = conLeft.components['tracked-controls-webxr'].attrValue.id
             controlScheme.setAttribute("value", "Detected Control Scheme: " + scheme)
             if(scheme.includes("touch")){
@@ -209,11 +210,12 @@ function findControls(){
             } else {
                 queryPrefix = "gen-"
             }
+            console.log("made it to 3")
+            console.log(queryPrefix)
             document.querySelector("#"+queryPrefix+"interface").setAttribute("visible", true)
             executeQueries(queryPrefix)
             clearInterval(controlsInterval)
         } else if(conLeft.components['tracked-controls'].attrValue.hasOwnProperty("idPrefix") && conLeft.components['tracked-controls'].attrValue.idPrefix != ""){
-            console.log("test2")
             scheme = conLeft.getAttribute("tracked-controls").idPrefix;
             controlScheme.setAttribute("value", "Detected Control Scheme: " + scheme)
             if(scheme.includes("touch")){
@@ -239,7 +241,8 @@ function findControls(){
             } else {
                 queryPrefix = "gen-"
             }
-           
+            console.log("made it to 4")
+            console.log(queryPrefix)
             document.querySelector("#"+queryPrefix+"interface").setAttribute("visible", true)
             executeQueries(queryPrefix)
             clearInterval(controlsInterval)
