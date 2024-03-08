@@ -224,8 +224,10 @@ function updateStats(){
 
     if(entity.components.movement.attrValue.status == -1){
         movementIcon.className = "fa-solid fa-play"
+        stopIndividualButton.disabled = true
     } else {
         movementIcon.className = "fa-solid fa-pause"
+        stopIndividualButton.disabled = false
     }
 
     rotationZ.value = (entity.components.rotation.attrValue.z).toFixed(3);
