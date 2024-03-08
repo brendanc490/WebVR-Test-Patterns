@@ -115,7 +115,6 @@ function stopAll(){
     stopAllButton.disabled = true
 
     movementIcon.className = "fa-solid fa-play"
-    stopIndividualButton.disabled = true
 }
 
 
@@ -126,13 +125,12 @@ function handleMovementToggle(e){
         data.status = 1
         selectedEntity.setAttribute('movement',data)
         movementIcon.className = "fa-solid fa-pause"
-        stopIndividualButton.disabled = false
     } else {
         let data = selectedEntity.getAttribute('movement')
         data.status = 0
         selectedEntity.setAttribute('movement',data)
         movementIcon.className = "fa-solid fa-play"
-        stopIndividualButton.disabled = true
+
     }
 }
 
@@ -142,6 +140,6 @@ function stopIndividual(e){
     data.status = -1
     selectedEntity.setAttribute('movement',data)
     movementIcon.className = "fa-solid fa-play"
-    stopIndividualButton.disabled = true
+
 
 }
