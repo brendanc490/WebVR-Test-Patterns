@@ -262,6 +262,10 @@ init: function () {
     el.addEventListener('trackpadtouchend', function (evt) {
         rightTrackInd.setAttribute("visible", false)
     });
+    el.addEventListener('buttondown', function (evt) {
+        console.log('Evt id: '+evt.detail.id);
+        console.log('Controllers found '+JSON.stringify(this.el.sceneEl.systems['tracked-controls-webxr'].controllers))
+    })
 }
 });
 
@@ -360,5 +364,9 @@ init: function () {
     el.addEventListener('trackpadtouchend', function (evt) {
         leftTrackInd.setAttribute("visible", false)
     });
+    el.addEventListener('buttondown', function (evt) {
+        console.log('Evt id: '+evt.detail.id);
+        console.log('Controllers found '+JSON.stringify(this.el.sceneEl.systems['tracked-controls-webxr'].controllers))
+    })
 }
 });
