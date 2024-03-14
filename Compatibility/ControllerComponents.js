@@ -264,7 +264,7 @@ init: function () {
     });
     el.addEventListener('buttondown', function (evt) {
         console.log('Evt id: '+evt.detail.id);
-        console.log('Controllers found '+JSON.stringify(el.sceneEl.systems['tracked-controls-webxr'].controllers))
+        console.log('Controllers found '+JSON.stringify(el.sceneEl.systems['tracked-controls-webxr'].controllers[0].buttons))
     })
     el.addEventListener('gamepadbuttondown:0', function () {
         console.log('button 0 pressed!');
@@ -384,7 +384,7 @@ init: function () {
     });
     el.addEventListener('buttondown', function (evt) {
         console.log('Evt id: '+evt.detail.id);
-        console.log('Controllers found '+JSON.stringify(el.sceneEl.systems['tracked-controls-webxr'].controllers))
+        console.log('Controllers found '+JSON.stringify(el.sceneEl.systems['tracked-controls-webxr'].controllers[0].buttons))
     })
     el.addEventListener('gamepadbuttondown:0', function () {
         console.log('button 0 pressed!');
