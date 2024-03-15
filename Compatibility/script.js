@@ -76,12 +76,14 @@ scene.addEventListener('enter-vr',function(){
             return prev}}, 0);
     console.log(result)*/
     console.log('Entering VR');
+    
     controlsInterval = setInterval(findControls,10);
 });
 
 
 /* When VR is exited */
 scene.addEventListener('exit-vr',function(){
+    console.log(JSON.stringify(scene.xrSession));
     jsonOut = {device: {detected: isDeviceCon, scheme: scheme, controllers:{ leftController: {detected: isLeft, model: leftModel, functionality: {stickAxis: isLeftStick, grip: gripLeftPressed, trigger: triggerLeftPressed, a: aPressed, b: bPressed, menu: menuLeftPressed, stickPress: thumbLeftPressed}}, rightController: {detected: isRight, model: rightModel, functionality: {stickAxis: isRightStick, grip: gripRightPressed, trigger: triggerRightPressed, x: xPressed, y: yPressed, menu: menuRightPressed, stickPress: thumbRightPressed}}}}}
     console.log(jsonOut)
     console.log('Exiting VR');
