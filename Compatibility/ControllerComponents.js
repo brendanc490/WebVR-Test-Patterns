@@ -264,7 +264,7 @@ init: function () {
     });
     el.addEventListener('buttondown', function (evt) {
         console.log('Evt id: '+evt.detail.id);
-        console.log(JSON.stringify(scene.xrSession));
+        console.log("xrSession: "+JSON.stringify(scene.xrSession));
     })
     el.addEventListener('gamepadbuttondown:0', function () {
         console.log('button 0 pressed!');
@@ -384,7 +384,7 @@ init: function () {
     });
     el.addEventListener('buttondown', function (evt) {
         console.log('Evt id: '+evt.detail.id);
-        console.log(JSON.stringify(scene.xrSession));
+        console.log("xrSession: "+JSON.stringify(scene.xrSession));
     })
     el.addEventListener('gamepadbuttondown:0', function () {
         console.log('button 0 pressed!');
