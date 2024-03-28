@@ -350,10 +350,10 @@ function manageLocalStorage(key, value){
     let ind = null;
     let j = 0;
     localScenes.forEach((package) => {
-        let name = Object.keys(package)[0]
-        if(key.includes('(upload)')){
+        let name = Object.keys(package)[j]
+        if(encodeURIComponent(key) == key){
             // check for exact name match
-            if(name === key){
+            if(name.split(' (')[0] === key.split(' (')[0]){
                 ind = j
             }
         } else {
