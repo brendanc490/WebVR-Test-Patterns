@@ -355,7 +355,7 @@ function manageLocalStorage(key, value){
         let name = Object.keys(package)[0]
         if(encodeURIComponent(key) == key){
             // check for exact name match
-            if(name != key && name.split(' (')[0] === key.split(' (')[0]){
+            if(name.split(' (')[0] === key.split(' (')[0]){
                 ind = j
             }
         } else {
