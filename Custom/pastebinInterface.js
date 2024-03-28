@@ -16,7 +16,7 @@ window.onload = async function() {
             //if the parameter is a pastebin id
 
             if(encodeURIComponent(id) == id){
-                const res = await pastebinFetch('https://pastebin.run/'+id+'.txt',true);
+                const res = await pastebinFetch('https://didsr.pythonanywhere.com/webxrtools/get?id='+id,true);
             } else {
                 // otherwise the id is an uploaded link
                 const res = await pastebinFetch(decodeURIComponent(id),true);
@@ -159,13 +159,13 @@ async function pastebinFetch(url,onload){
     }
 
     // handle local storage updates
-    if(url.split("https://pastebin.run/").length > 1){
+    if(url.split("https://didsr.pythonanywhere.com/webxrtools/get?id=").length > 1){
         // if link came from pastebin, then only save pastebin id
-        let out = manageLocalStorage(fileContent['filename'] + " ("+url.split("https://pastebin.run/")[1].split(".txt")[0]+")", fileContent['scenes'])
+        let out = manageLocalStorage(fileContent['filename'] + " ("+url.split("https://didsr.pythonanywhere.com/webxrtools/get?id=")[1]+")", fileContent['scenes'])
         if(out == false){
             return false;
         }
-        packages[fileContent['filename']] = url.split("https://pastebin.run/")[1].split(".txt")[0] // save id in packages
+        packages[fileContent['filename']] = url.split("https://didsr.pythonanywhere.com/webxrtools/get?id=")[1]// save id in packages
     } else {
         // if link is not from pastebin, save entire link address
         let out = manageLocalStorage(fileContent['filename'] + " ("+encodeURIComponent(decodeURIComponent(url))+")", fileContent['scenes'])
@@ -288,20 +288,19 @@ async function pastebinPost(useTextures){
 
     // check size of package to ensure it can be posted
     const size = new TextEncoder().encode(JSON.stringify(code)).length;
-    if(size >= 9995){
+    if(size > 100000){
         // if too large then alert and abort
         alert('Package is too large, no link can be generated');
         return false
     }
 
     // attempt to post package
-    await fetch('https://pastebin.run/api/v1/pastes', {
+    await fetch('https://didsr.pythonanywhere.com/webxrtools/share', {
     method: 'POST',
     headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        'Content-Type': 'application/json'
     },
-    body: "code="+JSON.stringify(code)
+    body: JSON.stringify(code)
 })
    .then(response => {return response.text()}).then( async function (text) {
     try {
