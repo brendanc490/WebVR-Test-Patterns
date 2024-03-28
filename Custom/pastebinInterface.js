@@ -288,9 +288,11 @@ async function pastebinPost(useTextures){
 
     // check size of package to ensure it can be posted
     const size = new TextEncoder().encode(JSON.stringify(code)).length;
+    console.log('Package size: '+size)
     if(size > 100000){
         // if too large then alert and abort
         alert('Package is too large, no link can be generated');
+        
         return false
     }
 
