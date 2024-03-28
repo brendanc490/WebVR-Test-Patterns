@@ -340,6 +340,8 @@ async function pastebinPost(useTextures){
  */
 function manageLocalStorage(key, value){
 
+    console.log(key)
+
     // compress the package content
     value = LZString.compressToBase64(JSON.stringify(value))
 
