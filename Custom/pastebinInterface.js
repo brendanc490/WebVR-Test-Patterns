@@ -350,7 +350,7 @@ function manageLocalStorage(key, value){
     let ind = null;
     let j = 0;
     localScenes.forEach((package) => {
-        let name = Object.keys(package)[j]
+        let name = Object.keys(package)[0]
         if(encodeURIComponent(key) == key){
             // check for exact name match
             if(name.split(' (')[0] === key.split(' (')[0]){
@@ -396,11 +396,13 @@ function manageLocalStorage(key, value){
     // check if we are replacing an existing package with a new one
     if(ind != null){
         // prompt if this is ok
+        console.log(ind)
         let allowDelete = confirm('This process will replace the saved package: \n'+ Object.keys(localScenes[ind])[0]+'\nPress OK to confirm.')
         if(!allowDelete){
             return true
         }
         localScenes.splice(ind,1)
+        console.log(localScenes)
         max--;
     } else {
         let deleteCount = 0
