@@ -8,6 +8,11 @@ window.onload = async function() {
     // on page load get rid of the aframe cursor
     scene.canvas.classList.remove("a-grab-cursor")
 
+    // if there is nothing in localStorage, instantiate an empty packages array
+       if(localStorage.getItem('packages') == null){
+        localStorage.setItem('packages',JSON.stringify([]))
+    }
+
     // go through url and fetch desired packages
     let thisPage = new URL(window.location);
     if(thisPage.searchParams.size != 0){
@@ -25,10 +30,7 @@ window.onload = async function() {
     }
 
 
-   // if there is nothing in localStorage, instantiate an empty packages array
-    if(localStorage.getItem('packages') == null){
-        localStorage.setItem('packages',JSON.stringify([]))
-    }
+
 
     // fetch the packages array from localStorage
     let localArr = JSON.parse(localStorage.getItem('packages'))
@@ -339,8 +341,7 @@ async function pastebinPost(useTextures){
    Returns true on success and throws an error on failure.
  */
 function manageLocalStorage(key, value){
-
-    console.log(key)
+    console.log('key '+key)
 
     // compress the package content
     value = LZString.compressToBase64(JSON.stringify(value))
@@ -353,7 +354,8 @@ function manageLocalStorage(key, value){
     let j = 0;
     localScenes.forEach((package) => {
         let name = Object.keys(package)[0]
-        if(encodeURIComponent(key) == key){
+        console.log(name)
+        if(encodeURIComponent(key.split(' (')[0]) == key.split(' (')[0]){
             // check for exact name match
             if(name.split(' (')[0] === key.split(' (')[0]){
                 ind = j
@@ -403,6 +405,7 @@ function manageLocalStorage(key, value){
             return true
         }
         localScenes.splice(ind,1)
+        console.log("Local Scenes")
         console.log(localScenes)
         max--;
     } else {
