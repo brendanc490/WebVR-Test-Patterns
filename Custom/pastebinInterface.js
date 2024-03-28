@@ -353,7 +353,7 @@ function manageLocalStorage(key, value){
         let name = Object.keys(package)[0]
         if(encodeURIComponent(key) == key){
             // check for exact name match
-            if(name.split(' (')[0] === key.split(' (')[0]){
+            if(name != key && name.split(' (')[0] === key.split(' (')[0]){
                 ind = j
             }
         } else {
@@ -380,7 +380,6 @@ function manageLocalStorage(key, value){
     // create the object
     let packageToInsert = {}
     packageToInsert[key] = value
-    console.log(packageToInsert)
     // strinify the object 
     let stringified = JSON.stringify(packageToInsert)
 
