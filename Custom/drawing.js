@@ -352,7 +352,7 @@ function updateJSON(){
             text.value = "00:00.000"
             jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, text: element.components.text.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         }});
-        scenes[packageSelect.value][patternList.children[parseFloat(patternList.getAttribute('selectedIndex'))].textContent] = jsonData
+        scenes[packageSelect.value][patternList.children[parseFloat(patternList.getAttribute('selectedIndex'))].id] = jsonData
 }
 
 /* converts hex to RGB values */

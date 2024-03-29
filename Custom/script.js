@@ -276,7 +276,7 @@ items.forEach(item => {
 let i = 0;
 let reorderedScene = {}
 while(i < patternList.children.length){
-  reorderedScene[patternList.children[i].innerHTML] = scenes[packageSelect.value][patternList.children[i].innerHTML]
+  reorderedScene[patternList.children[i].id] = scenes[packageSelect.value][patternList.children[i].id]
   i++;
 }
 scenes[packageSelect.value] = reorderedScene
@@ -284,14 +284,34 @@ scenes[packageSelect.value] = reorderedScene
 // handles a pattern being selected from the pattern list
 function selectPattern (e){
   stopAllMovement()
-  if(e.target.style.background == 'rgb(243, 152, 20)'){ // if selected pattern is highlighted, unselect it
+  if(e.target.style.background == 'rgb(243, 152, 20)' && patternList.getAttribute("multi-select") == false){ // if selected pattern is highlighted, unselect it
     e.target.style.background = '#FFF'
     patternList.setAttribute("selectedIndex","")
     patternList.setAttribute("multi-select",false);
     revertChanges()
     //nameIn.value = packageSelect.value;
     return;
+  } else if(e.target.style.background == 'rgb(243, 152, 20)' && patternList.getAttribute("multi-select") == 'true'){
+    e.target.style.background = '#FFF';
+    first = true;
+    items.forEach(item => { // changes displayed pattern to selected pattern
+      if(item.style.background == 'rgb(243, 152, 20)' && first) {
+        first = false;
+        patternList.setAttribute("selectedIndex",$(item).index())
+        
+        revertChanges()
+        addEntitiesFromScene(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].id])
+        //nameIn.value = patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent;
+        if(els.length > 0){
+          selectedEntity = els[0]
+        }
+      } else if(item.style.background == 'rgb(243, 152, 20)' && !first){
+        patternList.setAttribute("multi-select",true);
+      }
+    })
+    return;
   }
+
   e.target.style.background = '#F39814' // highlights selected pattern
   items = document.querySelectorAll('#items-list > li');
   if(keysPressed['ctrl'] && !isNaN(parseInt(patternList.getAttribute('selectedIndex')))){ // checks for multiselect
@@ -305,7 +325,7 @@ function selectPattern (e){
       patternList.setAttribute("selectedIndex",$(item).index())
       patternList.setAttribute("multi-select",false);
       revertChanges()
-      addEntitiesFromScene(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent])
+      addEntitiesFromScene(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].id])
       //nameIn.value = patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].textContent;
       if(els.length > 0){
         selectedEntity = els[0]
@@ -367,7 +387,7 @@ function dropped (e) {
   let i = 0;
   let reorderedScene = {}
   while(i < patternList.children.length){
-    reorderedScene[patternList.children[i].innerHTML] = scenes[packageSelect.value][patternList.children[i].innerHTML]
+    reorderedScene[patternList.children[i].id] = scenes[packageSelect.value][patternList.children[i].id]
     i++;
   }
   scenes[packageSelect.value] = reorderedScene
