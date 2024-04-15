@@ -266,7 +266,6 @@ function drawDotArray(rows,cols,size,spacing,color1,toggle,parent){
 }
 
 function drawCircularDotArray(radius,circles,dots,size,color1,toggle,parent){
-    console.log(parent)
     let c = 1;
     let middleDot = document.createElement("a-entity");
     middleDot.setAttribute("id",parent.id+"-center");
@@ -328,7 +327,6 @@ function updateJSON(){
     els.forEach(element => { 
         mov = JSON.parse(JSON.stringify(element.components.movement.attrValue))
         mov.status = -1;
-        console.log(mov)
         if(element.id.includes("gradient") || element.id.includes("grille")){
             jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, numBars: element.children.length, color2: element.components.color2.attrValue, childGeometry: element.children[0].components.geometry.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: element.components.material.attrValue, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         } else if(element.id.includes("checkerboard")){
@@ -341,7 +339,6 @@ function updateJSON(){
                     break;
                 }
             }
-            console.log(mat)
             jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, widthReal: (element.children.length == 0 ? element.components.geometry.attrValue.width : element.children[2].components.geometry.attrValue.width),fill: element.components.fill.attrValue, geometry: element.components.geometry.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: mat, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         } else if(element.id.includes("circle")){
             jsonData[element.id]={advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, geometry: element.components.geometry.attrValue, fill: element.components.fill.attrValue, position: {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: element.components.material.attrValue, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};

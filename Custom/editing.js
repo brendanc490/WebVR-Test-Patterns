@@ -75,7 +75,6 @@ function editEntity(){
     let selectedIndex = parseFloat(animationList.getAttribute('selectedIndex'))
     let i = 0;
     let counter = -1;
-    console.log("Value of selected index: "+selectedIndex)
     // have to take into account rebounds from rubberband
     while(i < animationComponent.types.length){
       if(animationComponent.types[i] != 'Rebound'){
@@ -87,9 +86,6 @@ function editEntity(){
       i++;
     }
 
-    
-    console.log("Value of i: "+i)
-
     if(i < animationComponent.types.length-1 && animationComponent.types[i+1] == 'Rebound'){
         animationComponent.startPoints.splice(i+1,1);
         animationComponent.endPoints.splice(i+1,1);
@@ -99,7 +95,6 @@ function editEntity(){
     }
     if($('#movementTypeIn').val() == 'Pause'){
         animationComponent.types[i] = 'Pause'
-        console.log(parseFloat($("#speed").val()))
         animationComponent.initialVelocities[i] = parseFloat($("#startY").val());
         animationComponent.accelerations[i] = 0;
         animationComponent.status = -1

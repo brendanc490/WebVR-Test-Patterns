@@ -27,7 +27,6 @@ async function handleImport(){
                     window.history.pushState('object', document.title, newURL);
                 }
                 
-                console.log(url.split("?")[1])
                 alert('Success')
                 return true;
             } else {
@@ -64,7 +63,7 @@ async function handleImport(){
                     alert('Success')
                     return true;
                 }
-                console.log('Handling failed')
+                alert.log('Handling failed')
                 return false;
             } else {
                 alert('Invalid link');
@@ -82,7 +81,6 @@ async function localLinkImport(url){
     ids = url.split('?id=')[1].split(',');
     let i = 0;
     while(i < ids.length){
-        console.log(ids[i])
         var res = pastebinFetch("https://didsr.pythonanywhere.com/webxrtools/get?id="+ids[i]).then((result) => {
             return result
         });
@@ -102,7 +100,6 @@ async function validateLink(url){
             return null
             
         } else {
-            console.log(url)
            return res.json()
         }
     }).catch((error) => alert('Failed to fetch from: '+url+' with error '+error));
