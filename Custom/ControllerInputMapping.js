@@ -14,7 +14,10 @@ const vive_focus = data[0]['vive_focus']
 // contains all possible buttons and axes
 const generic = data[0]['generic']
 
+let isRight, isLeft;
 function findControls(){
+    isRight = !(conRight.getAttribute("position").x == 0 && conRight.getAttribute("position").y == 0 && conRight.getAttribute("position").z == 0);
+    isLeft = !(conLeft.getAttribute("position").x == 0 && conLeft.getAttribute("position").y == 0 && conLeft.getAttribute("position").z == 0);
     if(isRight){
         if(conRight.components['tracked-controls'].attrValue.hasOwnProperty("id") && conRight.components['tracked-controls'].attrValue.id != ""){
             scheme = conRight.components['tracked-controls-webxr'].attrValue.id
