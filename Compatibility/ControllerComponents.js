@@ -283,7 +283,7 @@ init: function () {
         rightTrackInd.setAttribute("visible", false)
     });
     el.addEventListener('buttondown', function (evt) {
-        console.log('Evt id: '+evt.detail.id);
+        console.log('Evt id: '+generic['right'][evt.detail.id]+'down');
         console.log("xrSession: "+JSON.stringify(scene.xrSession));
     })
     el.addEventListener('gamepadbuttondown:0', function () {
@@ -414,7 +414,7 @@ init: function () {
         leftTrackInd.setAttribute("visible", false)
     });
     el.addEventListener('buttondown', function (evt) {
-        console.log('Evt id: '+evt.detail.id);
+        console.log('Evt id: '+generic['left'][evt.detail.id]+'down');
         console.log("xrSession: "+JSON.stringify(scene.xrSession));
     })
     el.addEventListener('gamepadbuttondown:0', function () {
