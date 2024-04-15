@@ -117,7 +117,11 @@ AFRAME.registerComponent('trackpad-left',{
                 leftTrackpad.setAttribute("value", "Left Trackpad: Yes"); 
                 leftTrackpad.setAttribute("color","green")
             }
-            leftTrackInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
+            if(leftTrackInd){
+                leftTrackInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
+            } else {
+                leftTrackInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
+            }
             
             /*isLeft = !(conLeft.getAttribute("position").x == 0 && conLeft.getAttribute("position").y == 0 && conLeft.getAttribute("position").z == 0);
             if(isLeft){
@@ -159,7 +163,12 @@ AFRAME.registerComponent('trackpad-left',{
                 rightTrackpad.setAttribute("value", "Right Trackpad: Yes"); 
                 rightTrackpad.setAttribute("color","green")
             }
-            rightTrackInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
+            if(rightTrackInd){
+                rightTrackInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
+            } else {
+                rightThumbInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
+            }
+            
             /*isRight = !(conRight.getAttribute("position").x == 0 && conRight.getAttribute("position").y == 0 && conRight.getAttribute("position").z == 0);
             if(isRight){
                 right.setAttribute("value", "Right Controller Connected: Yes"); right.setAttribute("color","green")
@@ -247,12 +256,23 @@ init: function () {
 
     el.addEventListener('trackpaddown', function (evt) {
         trackRightPressed = true
-        rightTrackPress.setAttribute("value", "Right Trackpad Pressed: Yes"); rightTrackPress.setAttribute("color","green")
-        rightTrackInd.setAttribute("button", {isPressed: true})
+        if(rightTrackInd){
+            rightTrackPress.setAttribute("value", "Right Trackpad Pressed: Yes"); rightTrackPress.setAttribute("color","green")
+            rightTrackInd.setAttribute("button", {isPressed: true})
+        } else {
+            rightStickPress.setAttribute("value", "Right Thumbstick Pressed: Yes"); rightStickPress.setAttribute("color","green")
+            rightThumbInd.setAttribute("button", {isPressed: true}) 
+        }
+
     });
 
     el.addEventListener('trackpadup', function (evt) {
-        rightTrackInd.setAttribute("button", {isPressed: false})
+        if(rightTrackInd){
+            rightTrackInd.setAttribute("button", {isPressed: false})
+        } else {
+            rightThumbInd.setAttribute("button", {isPressed: false})
+        }
+        
     });
 
     el.addEventListener('trackpadtouchstart', function (evt) {
@@ -367,12 +387,23 @@ init: function () {
 
     el.addEventListener('trackpaddown', function (evt) {
         trackLeftPressed = true
-        leftTrackPress.setAttribute("value", "Left Trackpad Pressed: Yes"); leftTrackPress.setAttribute("color","green")
-        leftTrackInd.setAttribute("button", {isPressed: true})
+        if(leftTrackInd){
+            leftTrackPress.setAttribute("value", "Left Trackpad Pressed: Yes"); leftTrackPress.setAttribute("color","green")
+            leftTrackInd.setAttribute("button", {isPressed: true})
+        } else {
+            leftStickPress.setAttribute("value", "Left Thumbstick Pressed: Yes"); leftStickPress.setAttribute("color","green")
+            leftThumbInd.setAttribute("button", {isPressed: true})
+        }
+        
     });
 
     el.addEventListener('trackpadup', function (evt) {
-        leftTrackInd.setAttribute("button", {isPressed: false})
+        if(leftTrackInd){
+            leftTrackInd.setAttribute("button", {isPressed: false})
+        } else {
+            leftThumbInd.setAttribute("button", {isPressed: false})
+        }
+        
     });
 
     el.addEventListener('trackpadtouchstart', function (evt) {
