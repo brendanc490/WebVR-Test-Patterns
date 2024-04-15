@@ -103,9 +103,9 @@ init: function () {
 
     el.addEventListener('thumbstickdown', function (evt) {
         buttonsDownR['thumbstick'] = true;
-        if(thumbstickDetailR.y <= -.95){
+        if(trackpadDetailR.y <= -.95 || thumbstickDetailR.y <= -.95 ){
             stopAll()
-        } else if(thumbstickDetailR.x >= .95){
+        } else if(trackpadDetailR.x >= .95 || thumbstickDetailR.x >= -.95 ){
             if(startAllButton.disabled){
                 pauseAll();
             } else {
@@ -119,12 +119,9 @@ init: function () {
 
     el.addEventListener('trackpaddown', function (evt) {
         buttonsDownR['trackpad'] = true;
-        console.log('trackpad pressed')
-        console.log("Trackpad "+ JSON.stringify(trackpadDetailR))
-        console.log("Thumbstick "+ JSON.stringify(thumbstickDetailR))
-        if(trackpadDetailR.y <= -.95){
+        if(trackpadDetailR.y <= -.95 || thumbstickDetailR.y <= -.95 ){
             stopAll()
-        } else if(trackpadDetailR.x >= .95){
+        } else if(trackpadDetailR.x >= .95 || thumbstickDetailR.x >= -.95 ){
             if(startAllButton.disabled){
                 pauseAll();
             } else {
@@ -187,9 +184,9 @@ init: function () {
 
     el.addEventListener('thumbstickdown', function (evt) {
         buttonsDownL['thumbstick'] = true;
-        if(thumbstickDetailL.y <= -.95){
+        if(trackpadDetailL.y <= -.95 || thumbstickDetailL.y <= -.95){
             stopAll()
-        } else if(thumbstickDetailL.x >= .95){
+        } else if(trackpadDetailL.x >= .95 || thumbstickDetailL.x >= .95){
             if(startAllButton.disabled){
                 pauseAll();
             } else {
@@ -203,9 +200,9 @@ init: function () {
 
     el.addEventListener('trackpaddown', function (evt) {
         buttonsDownL['trackpad'] = true;
-        if(trackpadDetailL.y <= -.95){
+        if(trackpadDetailL.y <= -.95 || thumbstickDetailL.y <= -.95){
             stopAll()
-        } else if(trackpadDetailL.x >= .95){
+        } else if(trackpadDetailL.x >= .95 || thumbstickDetailL.x >= .95){
             if(startAllButton.disabled){
                 pauseAll();
             } else {
