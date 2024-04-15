@@ -21,8 +21,7 @@ var bullseye = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,

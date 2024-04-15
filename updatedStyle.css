@@ -388,6 +388,7 @@ input[type=number]{
   'speed key acceleration';
   grid-template-rows: 11% 13% 11% 13% 11% 13% 12% 12%;
   grid-template-columns: 33% 34% 33%;
+  font-size: 15px;
 }
 
 .animation {grid-area: Animation;

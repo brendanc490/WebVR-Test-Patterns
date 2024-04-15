@@ -38,7 +38,7 @@ function editEntity(){
         selectedEntity.setAttribute("position",{x: parseFloat($("#x").val()), y: parseFloat($("#y").val()), z: -parseFloat($("#z").val())});
         
         p1 = {x: parseFloat($("#startX").val()), y: parseFloat($("#startY").val()), z: -parseFloat($("#startZ").val())}
-        p2 = {z: parseFloat($("#endX").val()), y: parseFloat($("#endY").val()), z: -parseFloat($("#endZ").val())}
+        p2 = {x: parseFloat($("#endX").val()), y: parseFloat($("#endY").val()), z: -parseFloat($("#endZ").val())}
 
         let xDelta = p2.x-p1.x
         let yDelta = p2.y-p1.y
@@ -145,13 +145,18 @@ function editEntity(){
     if(animationList.childElementCount != 0){
         animationList.children[selectedIndex].innerText = $('#movementTypeIn').val()
     }
-    
-    /* Adds a texture if a texture input is selected */
-    if($("#texture").val() == "none"){
+
+    if(!selectedEntity.getAttribute('id').includes("plane")){
         selectedEntity.setAttribute("material",{shader: "flat", src: "", color: $("#color").val()});
     } else {
-        selectedEntity.setAttribute("material",{shader: "flat", src: "#"+$("#texture").val(), color: $("#color").val()});
-    }
+        /* Adds a texture if a texture input is selected */
+        if($("#texture").val() == "none"){
+            selectedEntity.setAttribute("material",{shader: "flat", src: "", color: $("#color").val()});
+        } else {
+            selectedEntity.setAttribute("material",{shader: "flat", src: "#"+texture.selectedOptions[0].value, color: $("#color").val()});
+        }
+    } 
+    
 
     if(selectedEntity.getAttribute("id").includes("circle")){  /* circle only changes */
         /* check for valid inputs */

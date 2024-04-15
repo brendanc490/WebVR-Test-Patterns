@@ -84,6 +84,11 @@ async function pastebinFetch(url,onload){
         alert('No package found')
         return false;
     }
+
+    if(!validateJSON(fileContent)){
+        alert('Invalid Package')
+        return false;
+    }
     
     // Begin name validation
 
@@ -291,22 +296,30 @@ async function pastebinPost(useTextures){
     // check size of package to ensure it can be posted
     const size = new TextEncoder().encode(JSON.stringify(code)).length;
     console.log('Package size: '+size)
-    if(size > 100000){
+    /*if(size > 100000){
         // if too large then alert and abort
         alert('Package is too large, no link can be generated');
         
         return false
-    }
+    }*/
 
     // attempt to post package
-    await fetch('https://didsr.pythonanywhere.com/webxrtools/share', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(code)
-})
-   .then(response => {return response.text()}).then( async function (text) {
+    let response = await fetch('https://didsr.pythonanywhere.com/webxrtools/share', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(code)
+    }).catch((error) => alert('Failed to post with error:\n '+error));
+
+    if(!response.ok){
+        console.log(response)
+        alert('Failed to post with error:\n '+response.status+"\n"+response.statusText)
+        return
+    } 
+
+    let text = await response.text();
+
     try {
         // update the link and copy the code to the clipboard
         let thisPage = new URL(window.location);
@@ -334,8 +347,8 @@ async function pastebinPost(useTextures){
         console.error('Failed to copy: ', err);
         return false
       }
-   }).catch((error) => alert('Failed to post with error '+error))
-}
+   }
+
 
 /* Adds packages to local storage.
    Returns true on success and throws an error on failure.

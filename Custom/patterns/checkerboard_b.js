@@ -25,8 +25,7 @@ var checkerboard_b = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#000000",
-					"src": ""
+					"color": "#000000"
 				},
 				"rotation": {
 					"x": 0,

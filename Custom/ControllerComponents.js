@@ -11,18 +11,8 @@ init: function () {
     this.el.addEventListener('thumbstickmoved', this.logThumbstick);
 },
     logThumbstick: function (evt) {
-        if (evt.detail.y > 0.95) {
-
-        }
-        if (evt.detail.y < -0.95) { 
-
-        }
-        if (evt.detail.x < -0.95) { 
-
-        }
-        if (evt.detail.x > 0.95) {
-
-        }
+        thumbstickDetailL.x = evt.detail.x
+        thumbstickDetailL.y = evt.detail.y
     }
 });
 
@@ -32,19 +22,8 @@ init: function () {
     this.el.addEventListener('thumbstickmoved', this.logThumbstick);
 },
     logThumbstick: function (evt) {
-        if (evt.detail.y > 0.95) {
-            
-        }
-        if (evt.detail.y < -0.95) { 
-            
-        }
-        if (evt.detail.x < -0.95) { 
-
-        }
-        if (evt.detail.x > 0.95) {
-
-            
-        }
+        thumbstickDetailR.x = evt.detail.x
+        thumbstickDetailR.y = evt.detail.y
 
     }
 });
@@ -54,18 +33,8 @@ AFRAME.registerComponent('trackpad-left',{
         this.el.addEventListener('trackpadmoved', this.logTrackpad);
     },
         logTrackpad: function (evt) {
-            if (evt.detail.y > 0.2) {
-
-            }
-            if (evt.detail.y < -0.2) { 
-
-            }
-            if (evt.detail.x < -0.2) { 
-
-            }
-            if (evt.detail.x > 0.2) {
-
-            }
+            trackpadDetailL.x = evt.detail.x;
+            trackpadDetailL.y = evt.detail.y;
 
         }
     });
@@ -76,20 +45,8 @@ AFRAME.registerComponent('trackpad-left',{
         this.el.addEventListener('trackpadmoved', this.logTrackpad);
     },
         logTrackpad: function (evt) {
-            trackpadDetail.x = evt.detail.x
-            trackpadDetail.y = evt.detail.y
-            if (evt.detail.y > 0.5) {
-
-            }
-            if (evt.detail.y < -0.5) { 
-
-            }
-            if (evt.detail.x < -0.2) { 
-
-            }
-            if (evt.detail.x > 0.2) {
-
-            }
+            trackpadDetailR.x = evt.detail.x;
+            trackpadDetailR.y = evt.detail.y;
 
         }
     });
@@ -99,8 +56,13 @@ init: function () {
     var el = this.el;
 
     el.addEventListener('gripdown', function (evt) {
-        displayNext(true);
         buttonsDownR['grip'] = true;
+        if(thumbstickDetailR.y <= -.95 || trackpadDetailR.y <= -.95){
+            displayNext(false)
+        } else if(thumbstickDetailR.y >= .95 || trackpadDetailR.y >= .95){
+            displayNext(true);
+        }
+        
     });
     
     el.addEventListener('gripup', function (evt) {
@@ -109,12 +71,10 @@ init: function () {
 
     el.addEventListener('triggerdown', function (evt) {
         buttonsDownR['trigger'] = true;
-        if(buttonsDownR['trigger'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y > .5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y > .5))){
-            handleAll()
-        } else if(buttonsDownR['trigger'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y < -.5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y < -.5))){
-            stopAll()
-        }  else {
-            displayNext(false);
+        if(thumbstickDetailR.y <= -.95 || trackpadDetailR.y <= -.95){
+            displayNext(false)
+        } else if(thumbstickDetailR.y >= .95 || trackpadDetailR.y >= .95){
+            displayNext(true);
         }
     });
     
@@ -123,7 +83,6 @@ init: function () {
     });
 
     el.addEventListener('abuttondown', function (evt) {
-        displayNext(true);
         buttonsDownR['abutton'] = true;
     });
     el.addEventListener('abuttonup', function (evt) {
@@ -131,7 +90,6 @@ init: function () {
     });
 
     el.addEventListener('bbuttondown', function (evt) {
-        displayNext(true);
         buttonsDownR['bbutton'] = true;
     });
     el.addEventListener('bbuttonup', function (evt) {
@@ -145,12 +103,10 @@ init: function () {
 
     el.addEventListener('thumbstickdown', function (evt) {
         buttonsDownR['thumbstick'] = true;
-        if(buttonsDownR['thumbstick'] && ((buttonsDownR['thumbstick'] && trackpadDetailR.y > .5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y > .5))){
-            handleAll()
-        } else if(buttonsDownR['thumbstick'] && ((buttonsDownR['thumbstick'] && trackpadDetailR.y < -.5) || (buttonsDownR['thumbstick'] && thumbstickDetailR.y < -.5))){
+        if(thumbstickDetailR.y <= -.95){
             stopAll()
-        }  else {
-            displayNext(false);
+        } else if(thumbstickDetailR.x >= .95){
+            handleAll();
         }
     });
     el.addEventListener('thumbstickup', function (evt) {
@@ -159,25 +115,16 @@ init: function () {
 
     el.addEventListener('trackpaddown', function (evt) {
         buttonsDownR['trackpad'] = true;
-        if(buttonsDownR['trackpad'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y > .5) || (buttonsDownR['trackpad'] && thumbstickDetailR.y > .5))){
-            handleAll()
-        } else if(buttonsDownR['trackpad'] && ((buttonsDownR['trackpad'] && trackpadDetailR.y < -.5) || (buttonsDownR['trackpad'] && thumbstickDetailR.y < -.5))){
+        if(trackpadDetailR.y <= -.95){
             stopAll()
-        }  else {
-            displayNext(false);
+        } else if(trackpadDetailR.x >= .95){
+            handleAll();
         }
     });
 
     el.addEventListener('trackpadup', function (evt) {
         buttonsDownR['trackpad'] = false;
     });
-    /*el.addEventListener('trackpadtouchstart', function (evt) {
-        
-    });
-
-    el.addEventListener('trackpadtouchend', function (evt) {
-        
-    });*/
 }
 });
 
@@ -186,8 +133,12 @@ init: function () {
     var el = this.el;
 
     el.addEventListener('gripdown', function (evt) {
-        displayNext(false);
         buttonsDownL['grip'] = true;
+        if(thumbstickDetailL.y <= -.95 || trackpadDetailL.y <= -.95){
+            displayNext(false)
+        } else if(thumbstickDetailL.y >= .95 || trackpadDetailL.y >= .95){
+            displayNext(true);
+        }
     });
     
     el.addEventListener('gripup', function (evt) {
@@ -196,12 +147,10 @@ init: function () {
 
     el.addEventListener('triggerdown', function (evt) {
         buttonsDownL['trigger'] = true;
-        if(buttonsDownL['trigger'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y > .5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y > .5))){
-            handleAll()
-        } else if(buttonsDownL['trigger'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y < -.5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y < -.5))){
-            stopAll()
-        }  else {
-            displayNext(false);
+        if(thumbstickDetailL.y <= -.95 || trackpadDetailL.y <= -.95){
+            displayNext(false)
+        } else if(thumbstickDetailL.y >= .95 || trackpadDetailL.y >= .95){
+            displayNext(true);
         }
     });
     
@@ -229,19 +178,12 @@ init: function () {
         buttonsDownL['ybutton'] = false;
     });
 
-    /*el.addEventListener('menudown', function (evt) {
-        menuLeftPressed = true;
-        leftMenu.setAttribute("value", "Left Menu: Yes"); leftMenu.setAttribute("color","green")
-    });*/
-
     el.addEventListener('thumbstickdown', function (evt) {
         buttonsDownL['thumbstick'] = true;
-        if(buttonsDownL['thumbstick'] && ((buttonsDownL['thumbstick'] && trackpadDetailL.y > .5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y > .5))){
-            handleAll()
-        } else if(buttonsDownL['thumbstick'] && ((buttonsDownL['thumbstick'] && trackpadDetailL.y < -.5) || (buttonsDownL['thumbstick'] && thumbstickDetailL.y < -.5))){
+        if(thumbstickDetailL.y <= -.95){
             stopAll()
-        }  else {
-            displayNext(false);
+        } else if(thumbstickDetailL.x >= .95){
+            handleAll();
         }
     });
     el.addEventListener('thumbstickup', function (evt) {
@@ -250,12 +192,10 @@ init: function () {
 
     el.addEventListener('trackpaddown', function (evt) {
         buttonsDownL['trackpad'] = true;
-        if(buttonsDownL['trackpad'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y > .5) || (buttonsDownL['trackpad'] && thumbstickDetailL.y > .5))){
-            handleAll()
-        } else if(buttonsDownL['trackpad'] && ((buttonsDownL['trackpad'] && trackpadDetailL.y < -.5) || (buttonsDownL['trackpad'] && thumbstickDetailL.y < -.5))){
+        if(trackpadDetailL.y <= -.95){
             stopAll()
-        }  else {
-            displayNext(false);
+        } else if(trackpadDetailL.x >= .95){
+            handleAll();
         }
     });
 
@@ -280,3 +220,14 @@ buttonsDownL = {trigger: false, grip: false, trackpad: false, thumbstick: false,
 thumbstickDetailR = {x: 0, y: 0}
 trackpadDetailR = {x: 0, y: 0}
 buttonsDownR = {trigger: false, grip: false, trackpad: false, thumbstick: false, xbutton: false, ybutton: false}
+
+
+
+// trigger controls scenes
+    // trigger neutral - go to next scene
+    // trigger while holding left- stop animations
+    // trigger while holding right- start animations
+
+// everything else can be used to control animations
+
+// grip controls

@@ -135,7 +135,21 @@ function duplicateEntity(){
     el.setAttribute("angle", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].id][key].angle);
     el.setAttribute("advanced", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].id][key].advanced);
     el.setAttribute("position", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].id][key].movement.origin);
-    el.setAttribute("material", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].id][key].material);
+    let mat = null;
+    if(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].id][key].material){
+        mat = JSON.parse(JSON.stringify(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].id][key].material))
+
+        for(let i = 0; i < texture.options.length; i++){
+            if(texture.options[i].text == mat.src){
+                mat.src = "#"+texture.options[i].value;
+                break;
+            }
+        }
+    }
+    //let mat = JSON.parse(JSON.stringify(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].id][key].material))
+    
+    
+    el.setAttribute("material", mat);
     el.setAttribute("rotation", scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].id][key].rotation);
 
     el.setAttribute("movement", JSON.parse(JSON.stringify(scenes[packageSelect.value][patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].id][key].movement)));
@@ -409,6 +423,8 @@ function removeMovementAnim(){
     animationList.setAttribute('selectedIndex',"")
     updateAnimationUI(selectedEntity,-1)
     movementTypeIn.disabled = true
+
+    updateJSON();
 }
 
 /* removes current pattern from pattern list */
@@ -491,7 +507,7 @@ function switchToAdvanced(e){
                 mov.startPoints[i] = {x: -mov.startPoints[i].r*Math.sin((mov.startPoints[i].theta*Math.PI)/180), y: mov.startPoints[i].y, z: mov.startPoints[i].r * Math.cos((mov.startPoints[i].theta*Math.PI)/180)}
             }
         } else {
-            if(mov.endPoint.r == null){
+            if(mov.endPoints[i].r == null){
                 mov.endPoints[i] = {r: Math.sqrt(mov.endPoints[i].x*mov.endPoints[i].x+mov.endPoints[i].z*mov.endPoints[i].z), theta: Math.atan(mov.endPoints[i].z/mov.endPoints[i].x), y: mov.endPoints[i].y}
                 mov.startPoints[i] = {r: Math.sqrt(mov.startPoints[i].x*mov.startPoints[i].x+mov.startPoints[i].z*mov.startPoints[i].z), theta: Math.atan(mov.startPoints[i].z/mov.startPoints[i].x), y: mov.startPoints[i].y}
             }
