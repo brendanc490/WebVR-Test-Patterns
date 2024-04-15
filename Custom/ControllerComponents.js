@@ -103,13 +103,12 @@ init: function () {
 
     el.addEventListener('thumbstickdown', function (evt) {
         buttonsDownR['thumbstick'] = true;
-        if(trackpadDetailR.y <= -.95 || thumbstickDetailR.y <= -.95 ){
+        if(trackpadDetailR.y >= .95 || thumbstickDetailR.y >= .95 ){
             stopAll()
         } else if(trackpadDetailR.x >= .95 || thumbstickDetailR.x >= -.95 ){
             if(startAllButton.disabled){
                 pauseAll();
             } else {
-                console.log('Starting')
                 startAll();
             }
         }
@@ -120,13 +119,12 @@ init: function () {
 
     el.addEventListener('trackpaddown', function (evt) {
         buttonsDownR['trackpad'] = true;
-        if(trackpadDetailR.y <= -.95 || thumbstickDetailR.y <= -.95 ){
+        if(trackpadDetailR.y >= .95 || thumbstickDetailR.y >= .95 ){
             stopAll()
         } else if(trackpadDetailR.x >= .95 || thumbstickDetailR.x >= -.95 ){
             if(startAllButton.disabled){
                 pauseAll();
             } else {
-                console.log('Starting')
                 startAll();
             }
         }
@@ -186,7 +184,7 @@ init: function () {
 
     el.addEventListener('thumbstickdown', function (evt) {
         buttonsDownL['thumbstick'] = true;
-        if(trackpadDetailL.y <= -.95 || thumbstickDetailL.y <= -.95){
+        if(trackpadDetailL.y >= .95 || thumbstickDetailL.y >= .95){
             stopAll()
         } else if(trackpadDetailL.x >= .95 || thumbstickDetailL.x >= .95){
             if(startAllButton.disabled){
@@ -202,13 +200,12 @@ init: function () {
 
     el.addEventListener('trackpaddown', function (evt) {
         buttonsDownL['trackpad'] = true;
-        if(trackpadDetailL.y <= -.95 || thumbstickDetailL.y <= -.95){
+        if(trackpadDetailL.y >= .95 || thumbstickDetailL.y >= .95){
             stopAll()
         } else if(trackpadDetailL.x >= .95 || thumbstickDetailL.x >= .95){
             if(startAllButton.disabled){
                 pauseAll();
             } else {
-                console.log('Starting')
                 startAll();
             }
         }
