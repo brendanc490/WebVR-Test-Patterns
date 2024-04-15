@@ -120,7 +120,8 @@ init: function () {
     el.addEventListener('trackpaddown', function (evt) {
         buttonsDownR['trackpad'] = true;
         console.log('trackpad pressed')
-        console.log(trackpadDetailR)
+        console.log("Trackpad "+ JSON.stringify(trackpadDetailR))
+        console.log("Thumbstick "+ JSON.stringify(thumbstickDetailR))
         if(trackpadDetailR.y <= -.95){
             stopAll()
         } else if(trackpadDetailR.x >= .95){
