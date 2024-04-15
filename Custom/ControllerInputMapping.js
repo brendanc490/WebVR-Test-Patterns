@@ -14,6 +14,47 @@ const vive_focus = data[0]['vive_focus']
 // contains all possible buttons and axes
 const generic = data[0]['generic']
 
+function findControls(){
+    if(isRight){
+        if(conRight.components['tracked-controls'].attrValue.hasOwnProperty("id") && conRight.components['tracked-controls'].attrValue.id != ""){
+            scheme = conRight.components['tracked-controls-webxr'].attrValue.id
+            clearInterval(controlsInterval)
+        } else if(conRight.components['tracked-controls'].attrValue.hasOwnProperty("idPrefix") && conRight.components['tracked-controls'].attrValue.idPrefix != ""){
+            scheme = conRight.getAttribute("tracked-controls").idPrefix;
+            clearInterval(controlsInterval)
+        } else {
+            //executeQueries(queryPrefix)
+            scheme = null
+        }
+        
+    } else if(isLeft) {
+        if(conLeft.components['tracked-controls'].attrValue.hasOwnProperty("id") && conLeft.components['tracked-controls'].attrValue.id != ""){
+            scheme = conLeft.components['tracked-controls-webxr'].attrValue.id
+            clearInterval(controlsInterval)
+        } else if(conLeft.components['tracked-controls'].attrValue.hasOwnProperty("idPrefix") && conLeft.components['tracked-controls'].attrValue.idPrefix != ""){
+            scheme = conLeft.getAttribute("tracked-controls").idPrefix;
+            clearInterval(controlsInterval)
+            
+        } else {
+            scheme = null
+        }
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 conLeft.addEventListener('buttondown', function (evt) {
     console.log(evt.detail.id)
     if(scheme == 'windows-mixed-reality'){
