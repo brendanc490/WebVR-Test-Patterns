@@ -184,6 +184,7 @@ init: function () {
         if(queriesFound == false){
             return
         }
+        console.log('grip was definitely pressed')
         gripRightPressed = true;
         rightGrip.setAttribute("value", "Right Grip: Yes"); rightGrip.setAttribute("color","green")
         gripRightButtonAnimation.setAttribute("button", {isPressed: true})
