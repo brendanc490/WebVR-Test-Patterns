@@ -15,6 +15,7 @@ const vive_focus = data[0]['vive_focus']
 const generic = data[0]['generic']
 
 conLeft.addEventListener('buttondown', function (evt) {
+    console.log(evt.detail.id)
     if(scheme == 'windows-mixed-reality'){
         conLeft.dispatchEvent(new CustomEvent(windows['left'][evt.detail.id]+'down', {detail: true}))
     }  else if(scheme == 'oculus-touch' || scheme == 'oculus-touch-v2' || scheme == 'oculus-touch-v3' || scheme == 'meta-quest-touch-pro') {
@@ -31,6 +32,7 @@ conLeft.addEventListener('buttondown', function (evt) {
 });
 
 conRight.addEventListener('buttondown', function (evt) {
+    console.log(evt.detail.id)
     if(scheme == 'windows-mixed-reality'){
         conRight.dispatchEvent(new CustomEvent(windows['right'][evt.detail.id]+'down', {detail: true}))
     }  else if(scheme == 'oculus-touch' || scheme == 'oculus-touch-v2' || scheme == 'oculus-touch-v3' || scheme == 'meta-quest-touch-pro') {
