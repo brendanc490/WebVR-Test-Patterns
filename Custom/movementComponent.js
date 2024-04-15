@@ -135,6 +135,7 @@ AFRAME.registerComponent('movement', {
                 d = Math.sqrt((xDelta)*(xDelta) + (yDelta)*(yDelta) + (zDelta)*(zDelta))
                 distanceCovered = (data.initialVelocities[data.index])*(data.timeElapsed/1000) + 0.5*(data.accelerations[data.index])*((data.timeElapsed/1000)**2)
                 amtCovered = (distanceCovered/d)
+                amtCovered = d ? (distanceCovered/d) : 0
                 if(amtCovered > 1){
                     this.data.timeElapsed = 0
                     amtCovered = 0
@@ -143,11 +144,33 @@ AFRAME.registerComponent('movement', {
                     } else {
                         this.data.index = 0;
                     }
-                    
+                    startPoint = data.startPoints[data.index]
+
+                    // get endPoint
+                    xDelta = endPoint.x-startPoint.x
+                    yDelta = endPoint.y-startPoint.y
+                    zDelta = endPoint.z-startPoint.z
+                    d = Math.sqrt((xDelta)*(xDelta) + (yDelta)*(yDelta) + (zDelta)*(zDelta))
+                    distanceCovered = (data.initialVelocities[data.index])*(data.timeElapsed/1000) + 0.5*(data.accelerations[data.index])*((data.timeElapsed/1000)**2)
+                    amtCovered = (distanceCovered/d)
+                    amtCovered = d ? (distanceCovered/d) : 0
+
+                    console.log({x: startPoint.x+(xDelta*amtCovered), y: startPoint.y+(yDelta*amtCovered), z: startPoint.z+(zDelta*amtCovered)})
+
+
+                }
+                
+                
+
+                if(this.data.types[this.data.index] != 'Pause'){
+                    xDelta = endPoint.x-startPoint.x
+                    yDelta = endPoint.y-startPoint.y
+                    zDelta = endPoint.z-startPoint.z
+                    res = {x: startPoint.x+(xDelta*amtCovered), y: startPoint.y+(yDelta*amtCovered), z: startPoint.z+(zDelta*amtCovered)}
+                    this.el.setAttribute('position',{x: res.x, y: res.y, z: res.z})
                 }
 
-                res = {x: startPoint.x+(xDelta*amtCovered), y: startPoint.y+(yDelta*amtCovered), z: startPoint.z+(zDelta*amtCovered)}
-                this.el.setAttribute('position',{x: res.x, y: res.y, z: res.z})
+
             }
         } else {
 

@@ -122,7 +122,7 @@ $('#color2').minicolors({
     },
 });
 
-/* If the textbox for x value is changed */
+/* If the textbox for texture value is changed */
 $("#texture").change(function() {
     if(texture.value == "none"){
         selectedEntity.setAttribute("material",{color: selectedEntity.getAttribute("material").color, shader: "flat", src: ""});
@@ -151,7 +151,10 @@ $("#texture").change(function() {
         height.value = selectedEntity.getAttribute("geometry").height;
         fill.value = selectedEntity.getAttribute("fill").val;
         fillIn.style.display = "none";
+        updateJSON();
     }
+    
+
   });
   
 
@@ -471,6 +474,10 @@ scene_display_input.addEventListener("change", function() {
 
             reader.onload = function() {
                 fileContent = JSON.parse(reader.result);
+                if(!validateJSON(fileContent)){
+                    alert('Invalid package');
+                    return
+                }
                 names[fileName] = ""
                 for (const [name, value] of Object.entries(fileContent['scenes'])) {
                     const re = /^[a-zA-Z0-9-_ ]+( \([0-9]+\))?$/
@@ -532,7 +539,6 @@ scene_display_input.addEventListener("change", function() {
                 return false;
             }
             reader.readAsText(itm);
-            console.log(fileName)
             
             
             // call cb when finished
@@ -547,7 +553,6 @@ scene_display_input.addEventListener("change", function() {
     // when it's done....
     myLoop.then(()=>{
         //patternList.innerHTML = ''
-        console.log('then');
         packages[fileName] = ''
         let arr = Object.keys(scenes)
         let len = arr.length
@@ -765,7 +770,6 @@ document.addEventListener('keydown', (e) => {
             return
         }
         for(const i of movementKeyBinds[e.key]){
-            console.log('i')
             if(entityCanvas.children[i].getAttribute('mov').status != 0){
                 stopMovement(entityCanvas.children[i])
             } else {

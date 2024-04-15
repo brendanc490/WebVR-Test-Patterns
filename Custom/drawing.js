@@ -334,7 +334,15 @@ function updateJSON(){
         } else if(element.id.includes("checkerboard")){
             jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, rows: element.children.length, cols: element.children[0].children.length, tileSize: element.children[0].children[0].components.geometry.attrValue.width,  color2: element.components.color2.attrValue, position: {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: element.components.material.attrValue, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         } else if(element.id.includes("plane")){
-            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, widthReal: (element.children.length == 0 ? element.components.geometry.attrValue.width : element.children[2].components.geometry.attrValue.width),fill: element.components.fill.attrValue, geometry: element.components.geometry.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: element.components.material.attrValue, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
+            let mat = JSON.parse(JSON.stringify(element.components.material.attrValue));
+            for(let i = 0; i < texture.options.length; i++){
+                if("#"+texture.options[i].value == mat.src){
+                    mat.src = texture.options[i].text;
+                    break;
+                }
+            }
+            console.log(mat)
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, widthReal: (element.children.length == 0 ? element.components.geometry.attrValue.width : element.children[2].components.geometry.attrValue.width),fill: element.components.fill.attrValue, geometry: element.components.geometry.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: mat, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         } else if(element.id.includes("circle")){
             jsonData[element.id]={advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, geometry: element.components.geometry.attrValue, fill: element.components.fill.attrValue, position: {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: element.components.material.attrValue, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         } else if(element.id.includes("triangle")){

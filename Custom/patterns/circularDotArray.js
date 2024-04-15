@@ -26,8 +26,7 @@ var circular_dot_array = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,

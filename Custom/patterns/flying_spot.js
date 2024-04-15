@@ -31,8 +31,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -86,8 +85,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -141,8 +139,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -196,8 +193,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -251,8 +247,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -306,8 +301,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -361,8 +355,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -416,8 +409,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -471,8 +463,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -526,8 +517,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -581,8 +571,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -667,8 +656,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -753,8 +741,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -839,8 +826,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -925,8 +911,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -1011,8 +996,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -1097,8 +1081,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -1183,8 +1166,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -1269,8 +1251,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -1355,8 +1336,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -1441,8 +1421,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -1527,8 +1506,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -1613,8 +1591,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -1699,8 +1676,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -1785,8 +1761,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -1871,8 +1846,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -1926,8 +1900,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -2012,8 +1985,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -2098,8 +2070,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -2184,8 +2155,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -2239,8 +2209,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -2294,8 +2263,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -2380,8 +2348,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -2466,8 +2433,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -2552,8 +2518,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -2607,8 +2572,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -2662,8 +2626,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -2748,8 +2711,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -2834,8 +2796,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -2920,8 +2881,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -2975,8 +2935,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -3030,8 +2989,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -3116,8 +3074,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -3202,8 +3159,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
@@ -3288,8 +3244,7 @@ var flying_spot = {
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
