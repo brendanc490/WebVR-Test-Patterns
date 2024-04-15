@@ -105,13 +105,13 @@ conLeft.addEventListener('axismove', function (evt) {
         })
         conLeft.dispatchEvent(thumbstickmove)
     } else if (scheme = 'oculus-go'){
-        let touchpadmove = new CustomEvent('touchpadmoved', {
+        let trackpadmove = new CustomEvent('trackpadmoved', {
             detail: {
                 x: evt.detail.axis[0],
                 y: evt.detail.axis[1]
             }
         })
-        conLeft.dispatchEvent(touchpadmove)
+        conLeft.dispatchEvent(trackpadmove)
     }  else if(scheme == 'htc-vive' || scheme == 'htc-vive-focus-plus' || scheme == 'htc-vive-focus') {
         let trackpadmove = new CustomEvent('trackpadmoved', {
             detail: {
@@ -121,13 +121,13 @@ conLeft.addEventListener('axismove', function (evt) {
         })
         conLeft.dispatchEvent(trackpadmove)
     } else {
-        let touchpadmove = new CustomEvent('touchpadmoved', {
+        let trackpadmove = new CustomEvent('trackpadmoved', {
             detail: {
                 x: evt.detail.axis[0],
                 y: evt.detail.axis[1]
             }
         })
-        conLeft.dispatchEvent(touchpadmove)
+        conLeft.dispatchEvent(trackpadmove)
         let thumbstickmove = new CustomEvent('thumbstickmoved', {
             detail: {
                 x: evt.detail.axis[2],
@@ -163,13 +163,13 @@ conRight.addEventListener('axismove', function (evt) {
         })
         conRight.dispatchEvent(thumbstickmove)
     } else if (scheme = 'oculus-go'){
-        let touchpadmove = new CustomEvent('touchpadmoved', {
+        let trackpadmove = new CustomEvent('trackpadmoved', {
             detail: {
                 x: evt.detail.axis[0],
                 y: evt.detail.axis[1]
             }
         })
-        conRight.dispatchEvent(touchpadmove)
+        conRight.dispatchEvent(trackpadmove)
     }  else if(scheme == 'htc-vive' || scheme == 'htc-vive-focus-plus' || scheme == 'htc-vive-focus') {
         let trackpadmove = new CustomEvent('trackpadmoved', {
             detail: {
@@ -179,13 +179,13 @@ conRight.addEventListener('axismove', function (evt) {
         })
         conRight.dispatchEvent(trackpadmove)
     } else {
-        let touchpadmove = new CustomEvent('touchpadmoved', {
+        let trackpadmove = new CustomEvent('trackpadmoved', {
             detail: {
                 x: evt.detail.axis[0],
                 y: evt.detail.axis[1]
             }
         })
-        conRight.dispatchEvent(touchpadmove)
+        conRight.dispatchEvent(trackpadmove)
         let thumbstickmove = new CustomEvent('thumbstickmoved', {
             detail: {
                 x: evt.detail.axis[2],
