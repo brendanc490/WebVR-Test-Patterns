@@ -151,7 +151,6 @@ function updateStats(){
     if(selectedEntity.getAttribute('advanced').val){
         endZ.disabled = false
         advanced.style.backgroundColor = '#00FF00'
-        console.log('advanced')
         posIn.innerHTML = 'Position (x: m, y: m, z: m):'
         startHeader.innerHTML = 'Start Point (x: m, y: m, z: m)'
         endHeader.innerHTML = 'End Point (x: m, y: m, z: m)'
@@ -199,7 +198,6 @@ function updateStats(){
         zIn.value = (-entity.components.angle.attrValue.z).toFixed(3);
 
         if(animationList.getAttribute('selectedIndex') == ""){
-            console.log('test 2')
             movementTypeIn.value = 'None'
         } else {  
             movementTypeIn.value = entity.components.movement.attrValue.types[0]
@@ -235,7 +233,6 @@ function updateStats(){
     if(selectedEntity.getAttribute("id").includes("text") || selectedEntity.getAttribute("id").includes("timer")){
         color.value = entity.components.text.attrValue.color;
         $('#color').minicolors("value",entity.components.text.attrValue.color);
-        console.log(entity)
     } else {
         color.value = entity.components.material.attrValue.color;
         $('#color').minicolors("value",entity.components.material.attrValue.color);
@@ -784,7 +781,6 @@ let list;
         return
     }
 
-    console.log(entity)
     let anims = entity.getAttribute('movement').types;
     out = []
     let i = 0;

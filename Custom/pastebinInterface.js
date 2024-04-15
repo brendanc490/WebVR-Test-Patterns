@@ -280,7 +280,6 @@ async function pastebinPost(useTextures){
         code['textures']['uploadedTextureFormats'] = uploadedTextureFormat
     } else {
         // clear all textures
-        console.log(code)
         for (const pattern of Object.keys(code['scenes'])){
             for (const ent of Object.keys(code['scenes'][pattern])){
                 if(ent.includes('plane')){
@@ -295,7 +294,6 @@ async function pastebinPost(useTextures){
 
     // check size of package to ensure it can be posted
     const size = new TextEncoder().encode(JSON.stringify(code)).length;
-    console.log('Package size: '+size)
     /*if(size > 100000){
         // if too large then alert and abort
         alert('Package is too large, no link can be generated');
@@ -313,7 +311,6 @@ async function pastebinPost(useTextures){
     }).catch((error) => alert('Failed to post with error:\n '+error));
 
     if(!response.ok){
-        console.log(response)
         alert('Failed to post with error:\n '+response.status+"\n"+response.statusText)
         return
     } 
@@ -340,7 +337,6 @@ async function pastebinPost(useTextures){
             } else {
                 newURL = window.location.href + "," +text
             }
-            console.log(newURL)
             window.history.pushState('object', document.title, newURL);
         }
       } catch (err) {
@@ -354,7 +350,6 @@ async function pastebinPost(useTextures){
    Returns true on success and throws an error on failure.
  */
 function manageLocalStorage(key, value){
-    console.log('key '+key)
 
     // compress the package content
     value = LZString.compressToBase64(JSON.stringify(value))
@@ -367,7 +362,6 @@ function manageLocalStorage(key, value){
     let j = 0;
     localScenes.forEach((package) => {
         let name = Object.keys(package)[0]
-        console.log(name)
         if(encodeURIComponent(key.split(' (')[0]) == key.split(' (')[0]){
             // check for exact name match
             if(name.split(' (')[0] === key.split(' (')[0]){
@@ -412,14 +406,11 @@ function manageLocalStorage(key, value){
     // check if we are replacing an existing package with a new one
     if(ind != null){
         // prompt if this is ok
-        console.log(ind)
         let allowDelete = confirm('This process will replace the saved package: \n'+ Object.keys(localScenes[ind])[0]+'\nPress OK to confirm.')
         if(!allowDelete){
             return true
         }
         localScenes.splice(ind,1)
-        console.log("Local Scenes")
-        console.log(localScenes)
         max--;
     } else {
         let deleteCount = 0

@@ -159,8 +159,6 @@ init: function () {
     });
 
     el.addEventListener('xbuttondown', function (evt) {
-        displayNext(false);
-        //handleAll()
         buttonsDownL['xbutton'] = true;
     });
     
@@ -169,8 +167,6 @@ init: function () {
     });
 
     el.addEventListener('ybuttondown', function (evt) {
-        displayNext(false);
-        //stopAll()
         buttonsDownL['ybutton'] = true;
     });
     
@@ -202,14 +198,7 @@ init: function () {
     el.addEventListener('trackpadup', function (evt) {
         buttonsDownL['trackpad'] = false;
     });
-    /*
-    el.addEventListener('trackpadtouchstart', function (evt) {
 
-    });
-
-    el.addEventListener('trackpadtouchend', function (evt) {
-
-    });*/
 }
 });
 
@@ -223,11 +212,10 @@ buttonsDownR = {trigger: false, grip: false, trackpad: false, thumbstick: false,
 
 
 
-// trigger controls scenes
-    // trigger neutral - go to next scene
-    // trigger while holding left- stop animations
-    // trigger while holding right- start animations
+// trigger/grip controls pattern selection
+    // trigger while holding up- go to previous pattern
+    // trigger while holding down- go to next pattern
 
-// everything else can be used to control animations
-
-// grip controls
+// thumbstick/trackpad controls animations
+    // thumbstick while holding right- start/pause
+    // thumbstick while holding down- stop animation

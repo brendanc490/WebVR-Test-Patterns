@@ -11,7 +11,6 @@ function selectNew(clickedEntity){
         entitySelector.value = clickedEntity.getAttribute("id"); /* update dropdown */
     } else { /* if selected via dropdown */
         selectedEntity = scene.querySelector("#"+$("#entityId :selected").text()); /* update selected entity */
-        console.log(selectedEntity)
 
     }
     /* Update stats in edit section */
@@ -577,7 +576,6 @@ async function highlightSelection(ent){
         //tileSizeNum = ent.children[0].children[0].components.geometry.attrValue.width;
         newGeom = {primitive: 'ring', radiusOuter: ent.children[0].components.geometry.attrValue.radiusOuter*1.5, radiusInner: 0};
     } else if(selectedEntity.id.includes("text") || selectedEntity.id.includes("timer")){
-        console.log(ent.components.text.attrValue.wrapCount)
         let width = ent.components.text.attrValue.value.length * (ent.components.text.attrValue.width / ent.components.text.attrValue.wrapCount);
         let height = ent.components.text.attrValue.height;
         newGeom = {primitive: 'plane', width: width, height: height};
@@ -801,7 +799,6 @@ function renamePackage(){
     while(packageName == ""){
         packageName = prompt('Please enter a valid package name');
     }
-    console.log(packageName)
     const re = /^[a-zA-Z0-9-_ ]+$/
     if(!re.test(packageName)){
         alert('Package name is invalid. '+ packageName +' Limit names to only alphanumerics, -, _, or spaces.')
@@ -840,9 +837,6 @@ function pastePattern(){
         } else {
             names[packageSelect.value][currName] = 1
         }
-
-        console.log(currName)
-        console.log(clipboard[name])
 
         scenes[packageSelect.value][currName] = clipboard[name]
         let textContent = currName;
@@ -912,8 +906,7 @@ function startTimer(){
         } else {
             time = ""+time
         }
-        //console.log(time)
-        //textVal.value = minutes+":"+seconds+":"+time
+
         textVal.value = minutes+":"+seconds+":"+time[0]+time[1]+" "
         timer.setAttribute('text',textVal)
 
