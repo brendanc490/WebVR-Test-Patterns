@@ -105,7 +105,7 @@ init: function () {
         buttonsDownR['thumbstick'] = true;
         if(trackpadDetailR.y >= .95 || thumbstickDetailR.y >= .95 ){
             stopAll()
-        } else if(trackpadDetailR.x >= .95 || thumbstickDetailR.x >= -.95 ){
+        } else if(trackpadDetailR.x >= .95 || thumbstickDetailR.x >= .95 ){
             if(startAllButton.disabled){
                 pauseAll();
             } else {
@@ -121,7 +121,7 @@ init: function () {
         buttonsDownR['trackpad'] = true;
         if(trackpadDetailR.y >= .95 || thumbstickDetailR.y >= .95 ){
             stopAll()
-        } else if(trackpadDetailR.x >= .95 || thumbstickDetailR.x >= -.95 ){
+        } else if(trackpadDetailR.x >= .95 || thumbstickDetailR.x >= .95 ){
             if(startAllButton.disabled){
                 pauseAll();
             } else {
