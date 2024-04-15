@@ -106,7 +106,11 @@ init: function () {
         if(thumbstickDetailR.y <= -.95){
             stopAll()
         } else if(thumbstickDetailR.x >= .95){
-            handleAll();
+            if(startAllButton.disabled){
+                pauseAll();
+            } else {
+                startAll();
+            }
         }
     });
     el.addEventListener('thumbstickup', function (evt) {
@@ -118,7 +122,11 @@ init: function () {
         if(trackpadDetailR.y <= -.95){
             stopAll()
         } else if(trackpadDetailR.x >= .95){
-            handleAll();
+            if(startAllButton.disabled){
+                pauseAll();
+            } else {
+                startAll();
+            }
         }
     });
 
@@ -179,7 +187,11 @@ init: function () {
         if(thumbstickDetailL.y <= -.95){
             stopAll()
         } else if(thumbstickDetailL.x >= .95){
-            handleAll();
+            if(startAllButton.disabled){
+                pauseAll();
+            } else {
+                startAll();
+            }
         }
     });
     el.addEventListener('thumbstickup', function (evt) {
@@ -191,7 +203,11 @@ init: function () {
         if(trackpadDetailL.y <= -.95){
             stopAll()
         } else if(trackpadDetailL.x >= .95){
-            handleAll();
+            if(startAllButton.disabled){
+                pauseAll();
+            } else {
+                startAll();
+            }
         }
     });
 
