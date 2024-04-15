@@ -109,6 +109,7 @@ init: function () {
             if(startAllButton.disabled){
                 pauseAll();
             } else {
+                console.log('Starting')
                 startAll();
             }
         }
@@ -125,6 +126,7 @@ init: function () {
             if(startAllButton.disabled){
                 pauseAll();
             } else {
+                console.log('Starting')
                 startAll();
             }
         }
@@ -206,6 +208,7 @@ init: function () {
             if(startAllButton.disabled){
                 pauseAll();
             } else {
+                console.log('Starting')
                 startAll();
             }
         }
