@@ -14,7 +14,7 @@ const vive_focus = data[0]['vive_focus']
 // contains all possible buttons and axes
 const generic = data[0]['generic']
 
-let isRight, isLeft;
+let isRight, isLeft, scheme;
 function findControls(){
     isRight = !(conRight.getAttribute("position").x == 0 && conRight.getAttribute("position").y == 0 && conRight.getAttribute("position").z == 0);
     isLeft = !(conLeft.getAttribute("position").x == 0 && conLeft.getAttribute("position").y == 0 && conLeft.getAttribute("position").z == 0);
