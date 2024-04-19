@@ -28,6 +28,8 @@ conLeft.addEventListener('buttondown', function (evt) {
 conRight.addEventListener('buttondown', function (evt) {
     console.log("right")
     console.log(JSON.stringify(evt.detail.id))
+    console.log(scheme)
+    console.log(queriesFound)
     if(scheme == 'windows-mixed-reality'){
         conRight.dispatchEvent(new CustomEvent(windows['right'][evt.detail.id]+'down', {detail: true}))
     }  else if(scheme == 'oculus-touch' || scheme == 'oculus-touch-v2' || scheme == 'oculus-touch-v3' || scheme == 'meta-quest-touch-pro') {
