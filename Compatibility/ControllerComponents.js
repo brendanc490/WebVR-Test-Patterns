@@ -320,6 +320,7 @@ init: function () {
         leftGrip.setAttribute("value", "Left Grip: Yes"); leftGrip.setAttribute("color","green")
         gripLeftButtonAnimation.setAttribute("button", {isPressed: true})
     });
+    
     el.addEventListener('gripup', function (evt) {
         if(queriesFound == false){
             return

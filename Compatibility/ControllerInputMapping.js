@@ -40,6 +40,7 @@ conRight.addEventListener('buttondown', function (evt) {
         conRight.dispatchEvent(new CustomEvent(vive_focus['right'][evt.detail.id]+'down', {detail: true}))
     } else {
         console.log(JSON.stringify(generic['right'][evt.detail.id]+'down'))
+        console.log(queriesFound)
         conRight.dispatchEvent(new CustomEvent(generic['right'][evt.detail.id]+'down', {detail: true}))
     }
 });
