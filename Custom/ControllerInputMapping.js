@@ -64,7 +64,7 @@ conLeft.addEventListener('buttondown', function (evt) {
         conLeft.dispatchEvent(new CustomEvent(windows['left'][evt.detail.id]+'down', {detail: true}))
     }  else if(scheme == 'oculus-touch' || scheme == 'oculus-touch-v2' || scheme == 'oculus-touch-v3' || scheme == 'meta-quest-touch-pro') {
         conLeft.dispatchEvent(new CustomEvent(oc_touch['left'][evt.detail.id]+'down', {detail: true}))
-    } else if (scheme = 'oculus-go'){
+    } else if (scheme == 'oculus-go'){
         conLeft.dispatchEvent(new CustomEvent(oc_go['left'][evt.detail.id]+'down', {detail: true}))
     } else if(scheme == 'htc-vive' || scheme == 'htc-vive-focus-plus') {
         conLeft.dispatchEvent(new CustomEvent(vive['left'][evt.detail.id]+'down', {detail: true}))
@@ -81,7 +81,7 @@ conRight.addEventListener('buttondown', function (evt) {
         conRight.dispatchEvent(new CustomEvent(windows['right'][evt.detail.id]+'down', {detail: true}))
     }  else if(scheme == 'oculus-touch' || scheme == 'oculus-touch-v2' || scheme == 'oculus-touch-v3' || scheme == 'meta-quest-touch-pro') {
         conRight.dispatchEvent(new CustomEvent(oc_touch['right'][evt.detail.id]+'down', {detail: true}))
-    } else if (scheme = 'oculus-go'){
+    } else if (scheme == 'oculus-go'){
         conRight.dispatchEvent(new CustomEvent(oc_go['right'][evt.detail.id]+'down', {detail: true}))
     } else if(scheme == 'htc-vive' || scheme == 'htc-vive-focus-plus') {
         conRight.dispatchEvent(new CustomEvent(vive['right'][evt.detail.id]+'down', {detail: true}))
@@ -97,7 +97,7 @@ conLeft.addEventListener('buttonup', function (evt) {
         conLeft.dispatchEvent(new CustomEvent(windows['left'][evt.detail.id]+'up', {detail: true}))
     }  else if(scheme == 'oculus-touch' || scheme == 'oculus-touch-v2' || scheme == 'oculus-touch-v3' || scheme == 'meta-quest-touch-pro') {
         conLeft.dispatchEvent(new CustomEvent(oc_touch['left'][evt.detail.id]+'up', {detail: true}))
-    } else if (scheme = 'oculus-go'){
+    } else if (scheme == 'oculus-go'){
         conLeft.dispatchEvent(new CustomEvent(oc_go['left'][evt.detail.id]+'up', {detail: true}))
     }   else if(scheme == 'htc-vive' || scheme == 'htc-vive-focus-plus') {
         conLeft.dispatchEvent(new CustomEvent(vive['left'][evt.detail.id]+'up', {detail: true}))
@@ -113,7 +113,7 @@ conRight.addEventListener('buttonup', function (evt) {
         conRight.dispatchEvent(new CustomEvent(windows['right'][evt.detail.id]+'up', {detail: true}))
     }  else if(scheme == 'oculus-touch' || scheme == 'oculus-touch-v2' || scheme == 'oculus-touch-v3' || scheme == 'meta-quest-touch-pro') {
         conRight.dispatchEvent(new CustomEvent(oc_touch['right'][evt.detail.id]+'up', {detail: true}))
-    } else if (scheme = 'oculus-go'){
+    } else if (scheme == 'oculus-go'){
         conRight.dispatchEvent(new CustomEvent(oc_go['right'][evt.detail.id]+'up', {detail: true}))
     }   else if(scheme == 'htc-vive' || scheme == 'htc-vive-focus-plus') {
         conRight.dispatchEvent(new CustomEvent(vive['right'][evt.detail.id]+'up', {detail: true}))
@@ -148,7 +148,7 @@ conLeft.addEventListener('axismove', function (evt) {
             }
         })
         conLeft.dispatchEvent(thumbstickmove)
-    } else if (scheme = 'oculus-go'){
+    } else if (scheme == 'oculus-go'){
         let trackpadmove = new CustomEvent('trackpadmoved', {
             detail: {
                 x: evt.detail.axis[0],
@@ -206,7 +206,7 @@ conRight.addEventListener('axismove', function (evt) {
             }
         })
         conRight.dispatchEvent(thumbstickmove)
-    } else if (scheme = 'oculus-go'){
+    } else if (scheme == 'oculus-go'){
         let trackpadmove = new CustomEvent('trackpadmoved', {
             detail: {
                 x: evt.detail.axis[0],
