@@ -181,6 +181,7 @@ init: function () {
     var el = this.el;
 
     el.addEventListener('gripdown', function (evt) {
+        console.log('test grip')
         if(queriesFound == false){
             return
         }
@@ -285,7 +286,6 @@ init: function () {
     });
     el.addEventListener('buttondown', function (evt) {
         console.log('Evt id: '+generic['right'][evt.detail.id]+'down');
-        console.log("xrSession: "+JSON.stringify(scene.xrSession));
     })
     el.addEventListener('gamepadbuttondown:0', function () {
         console.log('button 0 pressed!');
