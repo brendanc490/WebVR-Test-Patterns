@@ -912,3 +912,12 @@ function startTimer(){
 
     },10)
 }
+
+function toggleConsole() {
+    if(debug.style.display == "block"){
+        debug.style.display = "none";
+    } else {
+        debug.style.display = "block";
+
+    }
+}

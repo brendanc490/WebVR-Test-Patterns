@@ -227,6 +227,7 @@
                                     <div id="numDots" style="justify-content: space-between;">Number of dots: <input type="number" class="input" id="numDotsIn" value="16"></div>
                                     <div id="numRings" style="justify-content: space-between;">Number of rings: <input type="number" class="input" id="numRingsIn" value=".1"></div>
                                     <div id="vertices">Vertices (x: m, y: m)</div>
+                                    <div id="sizeIn" style="justify-content: space-between;">Size (m): <input type="number" class="input" id="size" value="65"></div>
                                 </div>
                                 <div id="area2" class="area2">
                                     <div id="widthIn" style="justify-content: space-between;">Width (m): <input type="number" class="input" id="width" value=".125"></div>
@@ -234,6 +235,7 @@
                                     <div id="numCircles" style="justify-content: space-between;">Number of rings: <input type="number" class="input" id="numCirclesIn" value=".1"></div>
                                     <div id="ringPitch" style="justify-content: space-between;">Ring Pitch: <input type="number" class="input" id="ringPitchIn" value=".1"></div>
                                     <div id="va" style="justify-content: space-between;">Vertex A: <input type="number" class="input" id="vax" value="0"> <input type="number" class="input" id="vay" value="0.1875"></div>
+                                    <div id="textIn" style="justify-content: space-between;">Text Content: <textarea class="input" id="text" style="width: 100%;" value="Default Text"></textarea></div>
                                 </div>
                                 <div id="area3" class="area3">
                                     <div id="fillIn" style="justify-content: space-between;">Border Size (m): <input type="number" class="input" id="fill" value=".25"></div>
@@ -241,7 +243,6 @@
                                     <div id="tileSize" style="justify-content: space-between;">Tile size: <input type="number" class="input" id="tileSizeIn" value=".1"></div>
                                     <div id="circleSize" style="justify-content: space-between;">Radius of dots: <input type="number" class="input" id="circleSizeIn" value=".1"></div>
                                     <div id="vb" style="justify-content: space-between;">Vertex B:<input type="number" class="input" id="vbx" value="-0.25"> <input type="number" class="input" id="vby" value="-0.25"> </div>
-                                    <div id="textIn" style="justify-content: space-between;">Text Content: <textarea class="input" id="text" style="width: 100%;" value="Default Text"></textarea></div>
                                 </div>
                                 <div id="area4" class="area4">
                                     <div id="textureIn" style="justify-content: space-between;">Texture:                 <select class="select" name="texture" id="texture">
@@ -413,8 +414,10 @@
             </div>
         </div>
         <div id="directions">
-        <button type="button" class="collapsible" id="directionsCollapse" style="width:100%;height:100%;"  title="Click for help" onclick="window.open('https://didsr.github.io/WebXR-tools/Custom/doc/','_blank')"><i class="fa-solid fa-circle-info"></i></button>
-
+            <button type="button" class="collapsible" id="directionsCollapse" style="width:100%;height:100%;"  title="Click for help" onclick="window.open('https://didsr.github.io/WebXR-tools/Custom/doc/','_blank')"><i class="fa-solid fa-circle-info"></i></button>
+            <br>
+            <br>
+            <button id="consoleButton" onclick="toggleConsole()">Toggle Console</button>
         </div>
 
         <div id="debug" style="display:none;">

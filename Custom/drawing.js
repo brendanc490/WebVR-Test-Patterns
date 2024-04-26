@@ -65,7 +65,7 @@ function addEntity(){
         el.setAttribute("material",{shader: "flat", color: "#"+R+G+B});
     }   else if ($("#entity :selected").text() == "text"){
         el.setAttribute("id","text"+textNum++);
-        el.setAttribute("text",{"value": "Default Text", "color": "#FFFFFF",  width: .25*250, height: .125*250, align:"center", "wrapCount": 12});
+        el.setAttribute("text",{"value": "Default Text", "color": "#FFFFFF",  width: 65, height: 65, align:"center", "wrapCount": 12});
         /*el.setAttribute("value","Default Text")
         el.setAttribute("color","#FFFFFF")
         el.setAttribute("height", .25*2000)
@@ -76,7 +76,7 @@ function addEntity(){
             return
         }
         el.setAttribute("id","timer"+timerNum++);
-        el.setAttribute("text",{"value": "00:00.00 ", "color": "#FFFFFF",  width: .25*250, height: .125*250, align:"center", "wrapCount": 9});
+        el.setAttribute("text",{"value": "00:00.00 ", "color": "#FFFFFF",  width: 65, height: 65, align:"center", "wrapCount": 9});
     }
     /* Set default universal stats */
 
