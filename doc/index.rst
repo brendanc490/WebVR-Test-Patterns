@@ -15,6 +15,7 @@ The Pattern Generation Tool provides a user interface for creating, editing, and
    packages
    patterns
    entities
+   animation
    extra
 
 
