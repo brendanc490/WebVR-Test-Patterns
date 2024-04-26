@@ -291,6 +291,11 @@ $("#vax").change(function() {
     editEntity();
   });
 
+  /* If the textbox for vax value is changed */
+$("#size").change(function() {
+    editEntity();
+  });
+
 /* If the textbox for vay value is changed */
 $("#vay").change(function() {
     editEntity();

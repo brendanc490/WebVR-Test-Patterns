@@ -28,6 +28,7 @@ function hideEditStats(){
     //colIn.style.display = "none";
     colIn2.style.display = "none";
     heightIn.style.display = "none";
+    sizeIn.style.display = "none";
     widthIn.style.display = "none";
     radiusIn.style.display = "none";
     //rotIn.style.display = "none";
@@ -466,16 +467,12 @@ function toggleAddEdit(swap){
             ringPitch.style.display = "flex";
         } else if (selectedEntity.getAttribute("id").includes("text")){
             area1.style.display = "block";
-            heightIn.style.display = "flex";
+            sizeIn.style.display = "flex";
             area2.style.display = "block";
-            widthIn.style.display = "flex";
-            area3.style.display = "block";
             textIn.style.display = "flex";
         }  else if (selectedEntity.getAttribute("id").includes("timer")){
             area1.style.display = "block";
-            heightIn.style.display = "flex";
-            area2.style.display = "block";
-            widthIn.style.display = "flex";
+            sizeIn.style.display = "flex";
         }
         updateAnimationList(entity)
         if(animationList.childElementCount == 0){
