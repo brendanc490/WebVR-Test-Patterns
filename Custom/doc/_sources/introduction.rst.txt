@@ -37,3 +37,9 @@ Demo
            <video controls src="_static/demoVid.webm" width="620" height="620">
 
            </video>  
+
+Controls
+------------
+
+.. image:: ../Images/controllerFigure.PNG
+        :width: 600
