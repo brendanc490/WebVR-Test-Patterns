@@ -85,6 +85,11 @@ init: function () {
 
     el.addEventListener('abuttondown', function (evt) {
         buttonsDownR['abutton'] = true;
+        if(thumbstickDetailR.y <= -.75 || trackpadDetailR.y <= -.75){
+            displayNext(false)
+        } else if(thumbstickDetailR.y >= .75 || trackpadDetailR.y >= .75){
+            displayNext(true);
+        }
     });
     el.addEventListener('abuttonup', function (evt) {
         buttonsDownR['abutton'] = false;
@@ -92,6 +97,11 @@ init: function () {
 
     el.addEventListener('bbuttondown', function (evt) {
         buttonsDownR['bbutton'] = true;
+        if(thumbstickDetailR.y <= -.75 || trackpadDetailR.y <= -.75){
+            displayNext(false)
+        } else if(thumbstickDetailR.y >= .75 || trackpadDetailR.y >= .75){
+            displayNext(true);
+        }
     });
     el.addEventListener('bbuttonup', function (evt) {
         buttonsDownR['bbutton'] = false;
@@ -171,10 +181,20 @@ init: function () {
 
     el.addEventListener('xbuttondown', function (evt) {
         buttonsDownL['xbutton'] = true;
+        if(thumbstickDetailL.y <= -.75 || trackpadDetailL.y <= -.75){
+            displayNext(false)
+        } else if(thumbstickDetailL.y >= .75 || trackpadDetailL.y >= .75){
+            displayNext(true);
+        }
     });
     
     el.addEventListener('xbuttonup', function (evt) {
         buttonsDownL['xbutton'] = false;
+        if(thumbstickDetailL.y <= -.75 || trackpadDetailL.y <= -.75){
+            displayNext(false)
+        } else if(thumbstickDetailL.y >= .75 || trackpadDetailL.y >= .75){
+            displayNext(true);
+        }
     });
 
     el.addEventListener('ybuttondown', function (evt) {
