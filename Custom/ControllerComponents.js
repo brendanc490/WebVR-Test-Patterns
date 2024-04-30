@@ -57,9 +57,9 @@ init: function () {
 
     el.addEventListener('gripdown', function (evt) {
         buttonsDownR['grip'] = true;
-        if(thumbstickDetailR.y <= -.95 || trackpadDetailR.y <= -.95){
+        if(thumbstickDetailR.y <= -.75 || trackpadDetailR.y <= -.75){
             displayNext(false)
-        } else if(thumbstickDetailR.y >= .95 || trackpadDetailR.y >= .95){
+        } else if(thumbstickDetailR.y >= .75 || trackpadDetailR.y >= .75){
             displayNext(true);
         }
         
@@ -71,9 +71,9 @@ init: function () {
 
     el.addEventListener('triggerdown', function (evt) {
         buttonsDownR['trigger'] = true;
-        if(thumbstickDetailR.y <= -.95 || trackpadDetailR.y <= -.95){
+        if(thumbstickDetailR.y <= -.75 || trackpadDetailR.y <= -.75){
             displayNext(false)
-        } else if(thumbstickDetailR.y >= .95 || trackpadDetailR.y >= .95){
+        } else if(thumbstickDetailR.y >= .75 || trackpadDetailR.y >= .75){
             displayNext(true);
         }
     });
@@ -103,9 +103,9 @@ init: function () {
 
     el.addEventListener('thumbstickdown', function (evt) {
         buttonsDownR['thumbstick'] = true;
-        if(trackpadDetailR.y >= .95 || thumbstickDetailR.y >= .95 ){
+        if(trackpadDetailR.y >= .75 || thumbstickDetailR.y >= .75 ){
             stopAll()
-        } else if(trackpadDetailR.x >= .95 || thumbstickDetailR.x >= .95 ){
+        } else if(trackpadDetailR.x >= .75 || thumbstickDetailR.x >= .75 ){
             if(startAllButton.disabled){
                 pauseAll();
             } else {
@@ -119,9 +119,9 @@ init: function () {
 
     el.addEventListener('trackpaddown', function (evt) {
         buttonsDownR['trackpad'] = true;
-        if(trackpadDetailR.y >= .95 || thumbstickDetailR.y >= .95 ){
+        if(trackpadDetailR.y >= .75 || thumbstickDetailR.y >= .75 ){
             stopAll()
-        } else if(trackpadDetailR.x >= .95 || thumbstickDetailR.x >= .95 ){
+        } else if(trackpadDetailR.x >= .75 || thumbstickDetailR.x >= .75 ){
             if(startAllButton.disabled){
                 pauseAll();
             } else {
@@ -142,9 +142,9 @@ init: function () {
 
     el.addEventListener('gripdown', function (evt) {
         buttonsDownL['grip'] = true;
-        if(thumbstickDetailL.y <= -.95 || trackpadDetailL.y <= -.95){
+        if(thumbstickDetailL.y <= -.75 || trackpadDetailL.y <= -.75){
             displayNext(false)
-        } else if(thumbstickDetailL.y >= .95 || trackpadDetailL.y >= .95){
+        } else if(thumbstickDetailL.y >= .75 || trackpadDetailL.y >= .75){
             displayNext(true);
         }
     });
@@ -155,9 +155,9 @@ init: function () {
 
     el.addEventListener('triggerdown', function (evt) {
         buttonsDownL['trigger'] = true;
-        if(thumbstickDetailL.y <= -.95 || trackpadDetailL.y <= -.95){
+        if(thumbstickDetailL.y <= -.75 || trackpadDetailL.y <= -.75){
             displayNext(false)
-        } else if(thumbstickDetailL.y >= .95 || trackpadDetailL.y >= .95){
+        } else if(thumbstickDetailL.y >= .75 || trackpadDetailL.y >= .75){
             displayNext(true);
         }
     });
@@ -184,9 +184,9 @@ init: function () {
 
     el.addEventListener('thumbstickdown', function (evt) {
         buttonsDownL['thumbstick'] = true;
-        if(trackpadDetailL.y >= .95 || thumbstickDetailL.y >= .95){
+        if(trackpadDetailL.y >= .75 || thumbstickDetailL.y >= .75){
             stopAll()
-        } else if(trackpadDetailL.x >= .95 || thumbstickDetailL.x >= .95){
+        } else if(trackpadDetailL.x >= .75 || thumbstickDetailL.x >= .75){
             if(startAllButton.disabled){
                 pauseAll();
             } else {
@@ -200,9 +200,9 @@ init: function () {
 
     el.addEventListener('trackpaddown', function (evt) {
         buttonsDownL['trackpad'] = true;
-        if(trackpadDetailL.y >= .95 || thumbstickDetailL.y >= .95){
+        if(trackpadDetailL.y >= .75 || thumbstickDetailL.y >= .75){
             stopAll()
-        } else if(trackpadDetailL.x >= .95 || thumbstickDetailL.x >= .95){
+        } else if(trackpadDetailL.x >= .75 || thumbstickDetailL.x >= .75){
             if(startAllButton.disabled){
                 pauseAll();
             } else {
