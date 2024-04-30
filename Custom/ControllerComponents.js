@@ -130,7 +130,8 @@ init: function () {
         if(buttonsDownR['trackpad'] == true){
             return;
         }
-        console.log(trackpadDetailR)
+        console.log("Trackpad detail: "+JSON.stringify(trackpadDetailR))
+        console.log("Thumbstick detail: "+JSON.stringify(thumbstickDetailR))
         buttonsDownR['trackpad'] = true;
         if(trackpadDetailR.y >= .75 || thumbstickDetailR.y >= .75 ){
             stopAll()
