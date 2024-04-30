@@ -1,12 +1,61 @@
-//import data from './controller_profiles.json' assert { type: "json" };
+/* 
+    Reads in controller input profiles and sets event listeners.
+    Event listeners will fire and dispatch correctly encoded event to controller button listeners
+    Controller schemes are windows, oculus touch, oculus go, vive, vive focus, and a catch all that contains all buttons
+    
+*/
+
+//import data from '../Compatibility/controller_profiles.json' assert { type: "json" };
 const windows = data[0]['windows']
 const oc_touch = data[0]['oc_touch']
 const oc_go = data[0]['oc_go']
 const vive = data[0]['vive']
 const vive_focus = data[0]['vive_focus']
-const magic = data[0]['magic']
 // contains all possible buttons and axes
 const generic = data[0]['generic']
+
+let isRight, isLeft, scheme;
+function findControls(){
+    isRight = !(conRight.getAttribute("position").x == 0 && conRight.getAttribute("position").y == 0 && conRight.getAttribute("position").z == 0);
+    isLeft = !(conLeft.getAttribute("position").x == 0 && conLeft.getAttribute("position").y == 0 && conLeft.getAttribute("position").z == 0);
+    if(isRight){
+        if(conRight.components['tracked-controls'].attrValue.hasOwnProperty("id") && conRight.components['tracked-controls'].attrValue.id != ""){
+            scheme = conRight.components['tracked-controls-webxr'].attrValue.id
+            clearInterval(controlsInterval)
+        } else if(conRight.components['tracked-controls'].attrValue.hasOwnProperty("idPrefix") && conRight.components['tracked-controls'].attrValue.idPrefix != ""){
+            scheme = conRight.getAttribute("tracked-controls").idPrefix;
+            clearInterval(controlsInterval)
+        } else {
+            //executeQueries(queryPrefix)
+            scheme = null
+        }
+        
+    } else if(isLeft) {
+        if(conLeft.components['tracked-controls'].attrValue.hasOwnProperty("id") && conLeft.components['tracked-controls'].attrValue.id != ""){
+            scheme = conLeft.components['tracked-controls-webxr'].attrValue.id
+            clearInterval(controlsInterval)
+        } else if(conLeft.components['tracked-controls'].attrValue.hasOwnProperty("idPrefix") && conLeft.components['tracked-controls'].attrValue.idPrefix != ""){
+            scheme = conLeft.getAttribute("tracked-controls").idPrefix;
+            clearInterval(controlsInterval)
+            
+        } else {
+            scheme = null
+        }
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 conLeft.addEventListener('buttondown', function (evt) {
     console.log("left")
