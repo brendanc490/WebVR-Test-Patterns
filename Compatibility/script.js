@@ -126,6 +126,10 @@ function findControls(){
                 conLeft.removeAttribute("windows-motion-controls")
                 conRight.removeAttribute("windows-motion-controls")
                 queryPrefix = "win-"
+            } else if(scheme.includes("magicleap")) {
+                conLeft.removeAttribute("magicleap-controls")
+                conRight.removeAttribute("magicleap-controls")
+                queryPrefix = "magic-"
             } else {
                 queryPrefix = "gen-"
             }
@@ -157,6 +161,10 @@ function findControls(){
                 conLeft.removeAttribute("windows-motion-controls")
                 conRight.removeAttribute("windows-motion-controls")
                 queryPrefix = "win-"
+            }  else if(scheme.includes("magicleap")) {
+                conLeft.removeAttribute("magicleap-controls")
+                conRight.removeAttribute("magicleap-controls")
+                queryPrefix = "magic-"
             } else {
                 queryPrefix = "gen-"
             }
@@ -216,6 +224,10 @@ function findControls(){
                 conLeft.removeAttribute("windows-motion-controls")
                 conRight.removeAttribute("windows-motion-controls")
                 queryPrefix = "win-"
+            }  else if(scheme.includes("magicleap")) {
+                conLeft.removeAttribute("magicleap-controls")
+                conRight.removeAttribute("magicleap-controls")
+                queryPrefix = "magic-"
             } else {
                 queryPrefix = "gen-"
             }
@@ -247,6 +259,10 @@ function findControls(){
                 conLeft.removeAttribute("windows-motion-controls")
                 conRight.removeAttribute("windows-motion-controls")
                 queryPrefix = "win-"
+            }  else if(scheme.includes("magicleap")) {
+                conLeft.removeAttribute("magicleap-controls")
+                conRight.removeAttribute("magicleap-controls")
+                queryPrefix = "magic-"
             } else {
                 queryPrefix = "gen-"
             }

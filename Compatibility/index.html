@@ -90,7 +90,7 @@
                    <a-entity id="oc-go-leftTrackpadIndicator" position ="0 0 .001" geometry="primitive:circle; radius: 0.2" material="shader: flat; color: #797979; side:double"></a-entity>
                 </a-entity>
                 <a-entity id="oc-go-gripLeftButtonAnimation" position ="-1.5 .3 -5" geometry="primitive:plane; height: .8; width: .25" material="shader: flat; color: #797979; side:double"></a-entity>
-                <a-entity id="vive-triggerLeftButtonAnimation" position ="-1.5 2.25 -5" geometry="primitive:plane; height: .5; width: .5" material="shader: flat; color: #797979; side:double"></a-entity>
+                <a-entity id="oc-go-triggerLeftButtonAnimation" position ="-1.5 2.25 -5" geometry="primitive:plane; height: .5; width: .5" material="shader: flat; color: #797979; side:double"></a-entity>
 
                 <!-- Oculus Go Button Layout Right Hand -->
                 <a-text id="oc-go-rightTrackpad" value="Right Trackpad: No" position="3 2 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" side="double"></a-text>
@@ -236,7 +236,34 @@
                 </a-entity>
                 <a-entity id="win-gripRightButtonAnimation" position ="1.5 .3 -5" geometry="primitive:plane; height: .8; width: .25" material="shader: flat; color: #797979; side:double"></a-entity>
                 <a-entity id="win-triggerRightButtonAnimation" position ="1.5 2.25 -5" geometry="primitive:plane; height: .5; width: .5" material="shader: flat; color: #797979; side:double"></a-entity>
-            </a-entity>         
+            </a-entity>    
+            
+            <a-entity id="magic-interface" position="0 0 0" visible="false"> 
+                <!-- Vive Button Layout Left Hand -->
+                <a-text id="magic-leftTrackpad" value="Left Trackpad: No" position="-3 2 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="right" side="double"></a-text>
+                <a-text id="magic-leftTrackpadPress" value="Left Trackpad Pressed: No" position="-3 1.75 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="right" side="double"></a-text>
+                <a-text id="magic-leftTrigger" value="Left Trigger: No" position="-3 1.25 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" align="right" side="double"></a-text>
+            
+                <!-- Left Hand Animations -->
+                <a-entity position ="-1.5 1.4 -5" geometry="primitive:circle; radius: .5" material="shader: flat; color: #797979; side:double">
+                   <a-entity id="magic-leftTrackpadIndicator" position ="0 0 .001" geometry="primitive:circle; radius: 0.2" material="shader: flat; color: #797979; side:double"></a-entity>
+                </a-entity>
+                <a-entity id="magic-gripLeftButtonAnimation" position ="-1.5 .3 -5" geometry="primitive:plane; height: .8; width: .25" material="shader: flat; color: #797979; side:double"></a-entity>
+                <a-entity id="magic-triggerLeftButtonAnimation" position ="-1.5 2.25 -5" geometry="primitive:plane; height: .5; width: .5" material="shader: flat; color: #797979; side:double"></a-entity>
+
+                <!-- Oculus Go Button Layout Right Hand -->
+                <a-text id="magic-rightTrackpad" value="Right Trackpad: No" position="3 2 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" side="double"></a-text>
+                <a-text id=magic-rightTrackpadPress" value="Right Trackpad Pressed: No" position="3 1.75 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" side="double"></a-text>
+                <a-text id="magic-rightGrip" value="Right Grip: No" position="3 1.5 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" side="double"></a-text>
+                <a-text id="magic-rightTrigger" value="Right Trigger: No" position="3 1.25 -5" color="red" font="../lib/Aileron-Semibold.fnt" font-image="../lib/Aileron-Semibold.png" side="double"></a-text>
+            
+                <!-- Right Hand Animations -->
+                <a-entity position ="1.5 1.4 -5" geometry="primitive:circle; radius: .5" material="shader: flat; color: #797979; side:double">
+                    <a-entity id="magic-rightTrackpadIndicator" position ="0 0 .001" geometry="primitive:circle; radius: 0.2" material="shader: flat; color: #797979; side:double"></a-entity>
+                </a-entity>
+                <a-entity id="magic-gripRightButtonAnimation" position ="1.5 .3 -5" geometry="primitive:plane; height: .8; width: .25" material="shader: flat; color: #797979; side:double"></a-entity>
+                <a-entity id="magic-triggerRightButtonAnimation" position ="1.5 2.25 -5" geometry="primitive:plane; height: .5; width: .5" material="shader: flat; color: #797979; side:double"></a-entity>                
+            </a-entity>
 
 
         </a-scene>
