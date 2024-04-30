@@ -4,6 +4,7 @@ const oc_touch = data[0]['oc_touch']
 const oc_go = data[0]['oc_go']
 const vive = data[0]['vive']
 const vive_focus = data[0]['vive_focus']
+const magic = data[0]['magic']
 // contains all possible buttons and axes
 const generic = data[0]['generic']
 
@@ -20,6 +21,8 @@ conLeft.addEventListener('buttondown', function (evt) {
         conLeft.dispatchEvent(new CustomEvent(vive['left'][evt.detail.id]+'down', {detail: true}))
     } else if(scheme == 'htc-vive-focus') {
         conLeft.dispatchEvent(new CustomEvent(vive_focus['left'][evt.detail.id]+'down', {detail: true}))
+    } else if(scheme == 'magicleap-one') {
+        conLeft.dispatchEvent(new CustomEvent(magic['left'][evt.detail.id]+'down', {detail: true}))
     } else {
         conLeft.dispatchEvent(new CustomEvent(generic['left'][evt.detail.id]+'down', {detail: true}))
     }
@@ -40,6 +43,8 @@ conRight.addEventListener('buttondown', function (evt) {
         conRight.dispatchEvent(new CustomEvent(vive['right'][evt.detail.id]+'down', {detail: true}))
     } else if(scheme == 'htc-vive-focus') {
         conRight.dispatchEvent(new CustomEvent(vive_focus['right'][evt.detail.id]+'down', {detail: true}))
+    } else if(scheme == 'magicleap-one') {
+        conLeft.dispatchEvent(new CustomEvent(magic['right'][evt.detail.id]+'down', {detail: true}))
     } else {
         console.log(JSON.stringify(generic['right'][evt.detail.id]+'down'))
         console.log(queriesFound)
@@ -58,6 +63,8 @@ conLeft.addEventListener('buttonup', function (evt) {
         conLeft.dispatchEvent(new CustomEvent(vive['left'][evt.detail.id]+'up', {detail: true}))
     } else if(scheme == 'htc-vive-focus') {
         conLeft.dispatchEvent(new CustomEvent(vive_focus['left'][evt.detail.id]+'up', {detail: true}))
+    } else if(scheme == 'magicleap-one') {
+        conLeft.dispatchEvent(new CustomEvent(magic['left'][evt.detail.id]+'up', {detail: true}))
     } else {
         conLeft.dispatchEvent(new CustomEvent(generic['left'][evt.detail.id]+'up', {detail: true}))
     }
@@ -74,6 +81,8 @@ conRight.addEventListener('buttonup', function (evt) {
         conRight.dispatchEvent(new CustomEvent(vive['right'][evt.detail.id]+'up', {detail: true}))
     } else if(scheme == 'htc-vive-focus') {
         conRight.dispatchEvent(new CustomEvent(vive_focus['right'][evt.detail.id]+'up', {detail: true}))
+    } else if(scheme == 'magicleap-one') {
+        conLeft.dispatchEvent(new CustomEvent(magic['right'][evt.detail.id]+'up', {detail: true}))
     } else {
         conRight.dispatchEvent(new CustomEvent(generic['right'][evt.detail.id]+'up', {detail: true}))
     }
@@ -112,6 +121,14 @@ conLeft.addEventListener('axismove', function (evt) {
         })
         conLeft.dispatchEvent(trackpadmove)
     }  else if(scheme == 'htc-vive' || scheme == 'htc-vive-focus-plus' || scheme == 'htc-vive-focus') {
+        let trackpadmove = new CustomEvent('trackpadmoved', {
+            detail: {
+                x: evt.detail.axis[0],
+                y: evt.detail.axis[1]
+            }
+        })
+        conLeft.dispatchEvent(trackpadmove)
+    } else if(scheme == "magicleap-one") {
         let trackpadmove = new CustomEvent('trackpadmoved', {
             detail: {
                 x: evt.detail.axis[0],
@@ -170,6 +187,14 @@ conRight.addEventListener('axismove', function (evt) {
         })
         conRight.dispatchEvent(trackpadmove)
     }  else if(scheme == 'htc-vive' || scheme == 'htc-vive-focus-plus' || scheme == 'htc-vive-focus') {
+        let trackpadmove = new CustomEvent('trackpadmoved', {
+            detail: {
+                x: evt.detail.axis[0],
+                y: evt.detail.axis[1]
+            }
+        })
+        conRight.dispatchEvent(trackpadmove)
+    } else if(scheme == "magicleap-one") {
         let trackpadmove = new CustomEvent('trackpadmoved', {
             detail: {
                 x: evt.detail.axis[0],
