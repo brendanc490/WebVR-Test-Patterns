@@ -45,6 +45,7 @@ AFRAME.registerComponent('trackpad-left',{
         this.el.addEventListener('trackpadmoved', this.logTrackpad);
     },
         logTrackpad: function (evt) {
+            console.log(JSON.stringify(evt.detail));
             trackpadDetailR.x = evt.detail.x;
             trackpadDetailR.y = evt.detail.y;
 
