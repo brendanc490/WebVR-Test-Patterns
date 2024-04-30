@@ -173,7 +173,6 @@ AFRAME.registerComponent('trackpad-left',{
                 rightTrackpad.setAttribute("color","green")
             }
             if(rightTrackInd){
-                console.log('track firing')
                 rightTrackInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
             } else {
                 rightThumbInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
