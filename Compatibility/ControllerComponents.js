@@ -31,7 +31,11 @@ init: function () {
             leftAxis.setAttribute("value", "Left Axis: Yes"); 
             leftAxis.setAttribute("color","green")
         }
-        leftThumbInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
+        if(leftTrackInd){
+            leftTrackInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
+        } else {
+            leftThumbInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
+        }
         
         isLeft = !(conLeft.getAttribute("position").x == 0 && conLeft.getAttribute("position").y == 0 && conLeft.getAttribute("position").z == 0);
         if(isLeft){
@@ -77,7 +81,12 @@ init: function () {
             rightAxis.setAttribute("color","green")
             
         }
-        rightThumbInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
+        if(rightTrackInd){
+            rightTrackInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
+        } else {
+            rightThumbInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
+        }
+        
         isRight = !(conRight.getAttribute("position").x == 0 && conRight.getAttribute("position").y == 0 && conRight.getAttribute("position").z == 0);
         if(isRight){
             right.setAttribute("value", "Right Controller Connected: Yes"); right.setAttribute("color","green")
@@ -120,7 +129,7 @@ AFRAME.registerComponent('trackpad-left',{
             if(leftTrackInd){
                 leftTrackInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
             } else {
-                leftTrackInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
+                leftThumbInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
             }
             
             /*isLeft = !(conLeft.getAttribute("position").x == 0 && conLeft.getAttribute("position").y == 0 && conLeft.getAttribute("position").z == 0);
@@ -164,6 +173,7 @@ AFRAME.registerComponent('trackpad-left',{
                 rightTrackpad.setAttribute("color","green")
             }
             if(rightTrackInd){
+                console.log('track firing')
                 rightTrackInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
             } else {
                 rightThumbInd.setAttribute("position",{x: 0.5*evt.detail.x, y: 0.5*-evt.detail.y, z: .001})
