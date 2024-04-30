@@ -11,6 +11,7 @@ const oc_touch = data[0]['oc_touch']
 const oc_go = data[0]['oc_go']
 const vive = data[0]['vive']
 const vive_focus = data[0]['vive_focus']
+const magic = data[0]['magic']
 // contains all possible buttons and axes
 const generic = data[0]['generic']
 
@@ -81,7 +82,6 @@ conRight.addEventListener('buttondown', function (evt) {
     console.log("right")
     console.log(JSON.stringify(evt.detail.id))
     console.log(scheme)
-    console.log(queriesFound)
     if(scheme == 'windows-mixed-reality'){
         conRight.dispatchEvent(new CustomEvent(windows['right'][evt.detail.id]+'down', {detail: true}))
     }  else if(scheme == 'oculus-touch' || scheme == 'oculus-touch-v2' || scheme == 'oculus-touch-v3' || scheme == 'meta-quest-touch-pro') {
@@ -97,7 +97,6 @@ conRight.addEventListener('buttondown', function (evt) {
         conRight.dispatchEvent(new CustomEvent(magic['right'][evt.detail.id]+'down', {detail: true}))
     } else {
         console.log(JSON.stringify(generic['right'][evt.detail.id]+'down'))
-        console.log(queriesFound)
         conRight.dispatchEvent(new CustomEvent(generic['right'][evt.detail.id]+'down', {detail: true}))
     }
 });
