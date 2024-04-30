@@ -20,14 +20,52 @@ function findControls(){
     isRight = !(conRight.getAttribute("position").x == 0 && conRight.getAttribute("position").y == 0 && conRight.getAttribute("position").z == 0);
     isLeft = !(conLeft.getAttribute("position").x == 0 && conLeft.getAttribute("position").y == 0 && conLeft.getAttribute("position").z == 0);
     if(isRight){
+        
         if(conRight.components['tracked-controls'].attrValue.hasOwnProperty("id") && conRight.components['tracked-controls'].attrValue.id != ""){
             scheme = conRight.components['tracked-controls-webxr'].attrValue.id
             clearInterval(controlsInterval)
+            if(scheme.includes("touch")){
+                conLeft.removeAttribute("oculus-touch-controls")
+                conRight.removeAttribute("oculus-touch-controls")
+            } else if(scheme.includes("go")){
+                conLeft.removeAttribute("oculus-go-controls")
+                conRight.removeAttribute("oculus-go-controls")
+            } else if(scheme.includes("focus")){
+                conLeft.removeAttribute("vive-focus-controls")
+                conRight.removeAttribute("vive-focus-controls")
+            } else if(scheme.includes("vive")){
+                conLeft.removeAttribute("vive-controls")
+                conRight.removeAttribute("vive-controls")
+            } else if(scheme.includes("windows")){
+                conLeft.removeAttribute("windows-motion-controls")
+                conRight.removeAttribute("windows-motion-controls")
+            } else if(scheme.includes("magicleap")) {
+                conLeft.removeAttribute("magicleap-controls")
+                conRight.removeAttribute("magicleap-controls")
+            }
         } else if(conRight.components['tracked-controls'].attrValue.hasOwnProperty("idPrefix") && conRight.components['tracked-controls'].attrValue.idPrefix != ""){
             scheme = conRight.getAttribute("tracked-controls").idPrefix;
             clearInterval(controlsInterval)
+            if(scheme.includes("touch")){
+                conLeft.removeAttribute("oculus-touch-controls")
+                conRight.removeAttribute("oculus-touch-controls")
+            } else if(scheme.includes("go")){
+                conLeft.removeAttribute("oculus-go-controls")
+                conRight.removeAttribute("oculus-go-controls")
+            } else if(scheme.includes("focus")){
+                conLeft.removeAttribute("vive-focus-controls")
+                conRight.removeAttribute("vive-focus-controls")
+            } else if(scheme.includes("vive")){
+                conLeft.removeAttribute("vive-controls")
+                conRight.removeAttribute("vive-controls")
+            } else if(scheme.includes("windows")){
+                conLeft.removeAttribute("windows-motion-controls")
+                conRight.removeAttribute("windows-motion-controls")
+            } else if(scheme.includes("magicleap")) {
+                conLeft.removeAttribute("magicleap-controls")
+                conRight.removeAttribute("magicleap-controls")
+            }
         } else {
-            //executeQueries(queryPrefix)
             scheme = null
         }
         
@@ -35,9 +73,47 @@ function findControls(){
         if(conLeft.components['tracked-controls'].attrValue.hasOwnProperty("id") && conLeft.components['tracked-controls'].attrValue.id != ""){
             scheme = conLeft.components['tracked-controls-webxr'].attrValue.id
             clearInterval(controlsInterval)
+            if(scheme.includes("touch")){
+                conLeft.removeAttribute("oculus-touch-controls")
+                conRight.removeAttribute("oculus-touch-controls")
+            } else if(scheme.includes("go")){
+                conLeft.removeAttribute("oculus-go-controls")
+                conRight.removeAttribute("oculus-go-controls")
+            } else if(scheme.includes("focus")){
+                conLeft.removeAttribute("vive-focus-controls")
+                conRight.removeAttribute("vive-focus-controls")
+            } else if(scheme.includes("vive")){
+                conLeft.removeAttribute("vive-controls")
+                conRight.removeAttribute("vive-controls")
+            } else if(scheme.includes("windows")){
+                conLeft.removeAttribute("windows-motion-controls")
+                conRight.removeAttribute("windows-motion-controls")
+            } else if(scheme.includes("magicleap")) {
+                conLeft.removeAttribute("magicleap-controls")
+                conRight.removeAttribute("magicleap-controls")
+            }
         } else if(conLeft.components['tracked-controls'].attrValue.hasOwnProperty("idPrefix") && conLeft.components['tracked-controls'].attrValue.idPrefix != ""){
             scheme = conLeft.getAttribute("tracked-controls").idPrefix;
             clearInterval(controlsInterval)
+            if(scheme.includes("touch")){
+                conLeft.removeAttribute("oculus-touch-controls")
+                conRight.removeAttribute("oculus-touch-controls")
+            } else if(scheme.includes("go")){
+                conLeft.removeAttribute("oculus-go-controls")
+                conRight.removeAttribute("oculus-go-controls")
+            } else if(scheme.includes("focus")){
+                conLeft.removeAttribute("vive-focus-controls")
+                conRight.removeAttribute("vive-focus-controls")
+            } else if(scheme.includes("vive")){
+                conLeft.removeAttribute("vive-controls")
+                conRight.removeAttribute("vive-controls")
+            } else if(scheme.includes("windows")){
+                conLeft.removeAttribute("windows-motion-controls")
+                conRight.removeAttribute("windows-motion-controls")
+            } else if(scheme.includes("magicleap")) {
+                conLeft.removeAttribute("magicleap-controls")
+                conRight.removeAttribute("magicleap-controls")
+            }
             
         } else {
             scheme = null
