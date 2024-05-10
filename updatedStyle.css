@@ -218,15 +218,17 @@ input[type=number]{
 .renamePackage { grid-area: RenamePackage; text-align: center;} 
 .export { grid-area: Export; text-align: center;}
 .import { grid-area: Import; text-align: center;}
+.clear { grid-area: Clear; text-align: center;}
 .package-settings-container{
   display: grid;
   grid-template-areas:
     'PackageSettingsHeader'
     'RenamePackage'
     'Export'
-    'Import';
+    'Import'
+    'Clear';
     grid-template-columns: 100%;
-    grid-template-rows: 25% 25% 25% 25%;
+    grid-template-rows: 20% 20% 20% 20% 20%;
     height: 100%;
     width: 100%;
     overflow-y: auto;
