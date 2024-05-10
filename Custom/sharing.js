@@ -104,26 +104,5 @@ async function validateLink(url){
         }
     }).catch((error) => alert('Failed to fetch from: '+url+' with error '+error));
     return validateJSON(fileContent)
-    /*if(fileContent == null || !fileContent.hasOwnProperty('filename') || !fileContent.hasOwnProperty('date') || !fileContent.hasOwnProperty('scenes') || !fileContent.hasOwnProperty('textures')){
-        return false;
-    }
-    return true;*/
 
 }
-
-
-
-    // go through each property
-        // if property is not filename, date, scenes, or textures JSON has been tampered with
-
-        
-
-        
-
-        // if scenes
-            
-
-        // if textures
-            // check that texture urls do not lead to dangerous place and image does not contain malicious code
-
-

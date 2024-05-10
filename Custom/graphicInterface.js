@@ -15,23 +15,15 @@ function hideEditStats(){
     area4.style.display = "none";
     area5.style.display = "none";
     specificSettings.style.gridTemplateRows = "13% 17% 16% 17% 16% 17%";
-
     removeButton.style.display = "none";
     duplicateButton.display = "none";
     background.style.display = "none";
     vertices.style.display = "none";
-    //entitySelectorText.style.display = "none";
-    //ent.style.display = "none";
-    //nonUni.style.display = "none";
-    //entitySelectorText.style.display = "none";
-    //posIn.style.display = "none";
-    //colIn.style.display = "none";
     colIn2.style.display = "none";
     heightIn.style.display = "none";
     sizeIn.style.display = "none";
     widthIn.style.display = "none";
     radiusIn.style.display = "none";
-    //rotIn.style.display = "none";
     va.style.display = "none";
     vb.style.display = "none";
     vc.style.display = "none";
@@ -42,7 +34,6 @@ function hideEditStats(){
     textureIn.style.display = "none";
     uploadTextureIn.style.display = "none";
     fillIn.style.display = "none";
-    //advanced.style.display = "none";
     circleSize.style.display = "none";
     spacing.style.display = "none";
     numDots.style.display = "none";
@@ -67,12 +58,10 @@ function updateMovementSettings(){
         endY.style.display = "none"
         endZ.style.display = "none"
         speedHeader.style.display = "none"
-        //speedHeader.textContent = 'Time (ms)'
         accelerationHeader.style.display = "none"
         keyHeader.style.display = "none"
         speed.style.display = "none"
         acceleration.style.display = "none"
-        //keyBind.style.display = "none"
         movementButtonContainer.style.display = "none"
     } else if(movementTypeIn.value == "None"){
         if(selectedEntity.getAttribute('advanced').val){
@@ -93,7 +82,6 @@ function updateMovementSettings(){
         keyHeader.style.display = "none"
         speed.style.display = "none"
         acceleration.style.display = "none"
-        //keyBind.style.display = "none"
         movementButtonContainer.style.display = "none"
     } else if(movementTypeIn.value == "Start" || movementTypeIn.value == "Rubberband"){
         if(selectedEntity.getAttribute('advanced').val){
@@ -112,10 +100,8 @@ function updateMovementSettings(){
         speedHeader.style.display = "block"
         speedHeader.innerText = "Speed (m/s)"
         accelerationHeader.style.display = "block"
-        //keyHeader.style.display = "block"
         speed.style.display = "block"
         acceleration.style.display = "block"
-        //key.style.display = "block"
         movementButtonContainer.style.display = "inline"
     } else {
         if(selectedEntity.getAttribute('advanced').val){
@@ -134,10 +120,8 @@ function updateMovementSettings(){
         speedHeader.style.display = "block"
         speedHeader.innerText = "Time (ms)"
         accelerationHeader.style.display = "none"
-        //keyHeader.style.display = "block"
         speed.style.display = "block"
         acceleration.style.display = "none"
-        //key.style.display = "block"
         movementButtonContainer.style.display = "inline"
     }
 }

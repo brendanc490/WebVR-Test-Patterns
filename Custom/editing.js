@@ -445,10 +445,6 @@ function editEntity(){
             alert("Please enter a valid size");
             return;
         }
-        if(($("#text").val()) == ""){
-            alert("Please enter a valid text option");
-            return;
-        }
         if(parseFloat($("#size").val()) < 0){
             alert("Please enter a valid size ( >= 0 )");
             return;

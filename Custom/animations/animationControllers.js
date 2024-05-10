@@ -1,20 +1,15 @@
-function handleAnimationToggle(){
-    if(animationButton.children[0].className.includes('fa-play')){
-        animationButton.children[0].className = "fa-solid fa-pause";
-        selectedEntity.emit('animLoopStart',null,false)
-    } else {
-        animationButton.children[0].className = "fa-solid fa-play";
-        selectedEntity.emit('animLoopPause',null,false)
-    }  
+/* Contains code related to starting or stopping animations*/
 
-}
-
-
+// starts all animations in the scene
+// called by start all button and controller input
 function startAll(){
+    // starts timer if present
     let status = 1;
     if(timerNum > 0){
         startTimer()
     }
+
+    // updates statuses of each element in scene
     let i = 0;
     while(i < els.length){
         let data = els[i].getAttribute('movement');
@@ -26,16 +21,21 @@ function startAll(){
         i++;
     }
 
+    // disables and enables appropiate buttons
     startAllButton.disabled = true
     pauseAllButton.disabled = false
     stopAllButton.disabled = false
 }
 
+// pauses all animations in the scene
+// called by pause all button and controller input
 function pauseAll(){
+    // pauses timer if present
     let status = 0;
     if(timerNum > 0){
         clearInterval(time)
     }
+    // updates status of each entity
     let i = 0;
     while(i < els.length){
         let data = els[i].getAttribute('movement');
@@ -47,28 +47,21 @@ function pauseAll(){
         i++;
     }
 
+    // disables and enables appropriate buttons
     startAllButton.disabled = false
     pauseAllButton.disabled = true
     stopAllButton.disabled = false
 }
 
+// stops all animations in the scene
+// called by stop all button and controller input
 function stopAll(){
     // if no entities then do nothing
     if(els.length <= 0){
         return
     }
-    // set start all button icon to play
-    //handleAllButton.children[0].className = "fa-solid fa-play";
-    // loop through each
-    let i = 0;
-    while(i < els.length){
-        let data = els[i].getAttribute('movement');
-        data.status = -1;
-        els[i].setAttribute('movement',data)
 
-        i++;
-    }
-    // timer pause
+    // stop and reset timer if present
     if(timerNum > 0){
         clearInterval(time)
         timeElapsed = 0;
@@ -78,6 +71,17 @@ function stopAll(){
         timer.setAttribute('text',textVal)
     }
 
+    // update status of each element
+    let i = 0;
+    while(i < els.length){
+        let data = els[i].getAttribute('movement');
+        data.status = -1;
+        els[i].setAttribute('movement',data)
+
+        i++;
+    }
+
+    // disables and enables appropriate buttons
     startAllButton.disabled = false
     pauseAllButton.disabled = true
     stopAllButton.disabled = true
@@ -85,15 +89,18 @@ function stopAll(){
     movementIcon.className = "fa-solid fa-play"
 }
 
-
+// handles movement of a single entity
 function handleMovementToggle(e){
-    e.stopPropagation()
+    e.stopPropagation() // prevents collapsing of movement section on button press
+    // if not currently playing
     if(movementIcon.className == "fa-solid fa-play"){
+        // start playing
         let data = selectedEntity.getAttribute('movement')
         data.status = 1
         selectedEntity.setAttribute('movement',data)
         movementIcon.className = "fa-solid fa-pause"
-    } else {
+    } else { 
+        // pause movement
         let data = selectedEntity.getAttribute('movement')
         data.status = 0
         selectedEntity.setAttribute('movement',data)
@@ -102,11 +109,21 @@ function handleMovementToggle(e){
     }
 }
 
+// stops movement of single entity
 function stopIndividual(e){
-    e.stopPropagation()
+    e.stopPropagation() // prevents collapsing of movement section on button press
     let data = selectedEntity.getAttribute('movement')
     data.status = -1
     selectedEntity.setAttribute('movement',data)
     movementIcon.className = "fa-solid fa-play"
 
+}
+
+// stops the movement of a single entity
+function stopMovement(el){
+    mov = el.getAttribute('movement')
+    clearInterval(mov.status)
+    mov.status = -1
+    el.setAttribute('movement',mov)
+    movementIcon.className = "fa-solid fa-play";
 }
