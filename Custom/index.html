@@ -329,6 +329,7 @@
                                 <div class="renamePackage"><button style="text-align:center;" class="button add" onclick="renamePackage()">Rename</button></div>
                                 <div class="export"><button style="text-align:center;" class="button add" onclick="pastebinPost(true)"  title="Pastebin Export"><i class="fa-solid fa-cloud-arrow-up"></i></button></div>
                                 <div class="import"><button style="text-align:center;" class="button add" onclick="handleImport()"  title="Pastebin Import"><i class="fa-solid fa-cloud-arrow-down"></i></button></div>
+                                <div class="clear"><button style="text-align:center;" class="button reset" onclick="clearLocal()"  title="Clear Local Storage">Clear Local</button></div>
                             </div>
                             <div id="patternSettingsContainer" class="pattern-settings-container">
                                 <b class="patternSettingsHeader">Pattern Settings:</b>
@@ -452,6 +453,7 @@
         <script src="utils/extra/vrEventHandler.js" type="text/javascript"></script>
 
         <!-- localStorage -->
+        <script src="utils/localStorage/clearLocal.js" type="text/javascript"></script>
         <script src="utils/localStorage/addPackage.js" type="text/javascript"></script>
         <script src="utils/localStorage/loadExisting.js" type="text/javascript"></script>
        
