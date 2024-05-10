@@ -26,6 +26,11 @@ Features
    - Ring_w2: A bullseye with a medium pitch
    - Ring_w5: A bullseye with a low pitch
 
+Controls
+------------
+
+.. image:: ../Images/controllerFigure.PNG
+        :width: 600
 
 Demo
 ------------
@@ -38,8 +43,4 @@ Demo
 
            </video>  
 
-Controls
-------------
 
-.. image:: ../Images/controllerFigure.PNG
-        :width: 600
