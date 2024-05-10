@@ -177,12 +177,13 @@ async function changeUrl(){
     newUploadedTextureFormats = []
     Object.keys(localArr[recentPackages.selectedIndex][key][1]).forEach((texture) => {
         uploadedTextures.push(texture)
-        newUploadedTextureFormat.push(texture)
+        newUploadedTextureFormats.push(texture)
     })
     newTextures = [...new Set([...uploadedTextures,...currTextures])]
     newTextures.forEach(text => {
-        var option = document.createElement("option"); 
+
         if(uploadedTextures.indexOf(text) != -1 && currTextures.indexOf(text) == -1){
+            var option = document.createElement("option"); 
             option.text = text
             option.value = localArr[recentPackages.selectedIndex][key][1][text][0]
             texture.add(option);
@@ -198,7 +199,7 @@ async function changeUrl(){
         if(Object.keys(uploadedTextureFormat).indexOf(texture) != -1){
             tmp[texture] = uploadedTextureFormat[texture]
         } else {
-            tmp[texture] = localArr[recentPackages.selectedIndex][key][1][text][1]
+            tmp[texture] = localArr[recentPackages.selectedIndex][key][1][texture][1]
         }
     });
     uploadedTextureFormat = tmp
