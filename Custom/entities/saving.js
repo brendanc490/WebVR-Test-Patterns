@@ -34,7 +34,7 @@ function updateJSON(){
         } else if(element.id.includes("text")){
             jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, text: element.components.text.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         }  else if(element.id.includes("timer")){
-            text = JSON.parse(JSON.stringify(element.components.text.attrValue))
+            let text = JSON.parse(JSON.stringify(element.components.text.attrValue))
             text.value = "00:00.000"
             jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, text: element.components.text.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         }});
