@@ -247,17 +247,20 @@ function validateScene(scene, name, textures){
                         console.log('error: plane8')
                         return false
                     }
-                    let test = false
-                    for(let j = 0; j < textures.length; j++){
-                        if(textures[j]['text'] == scene[key]['material']['src']){
-                            test = true;
-                            break
+                    if(scene[key]['material']['src'] != ''){
+                        let test = false
+                        for(let j = 0; j < textures.length; j++){
+                            if(textures[j]['text'] == scene[key]['material']['src']){
+                                test = true;
+                                break
+                            }
+                        }
+                        if(!test){
+                            console.log('error: plane9')
+                            return false;
                         }
                     }
-                    if(!test){
-                        console.log('error: plane9')
-                        return false;
-                    }
+
                 }
 
             }
