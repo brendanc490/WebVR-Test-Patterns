@@ -17,13 +17,11 @@ function toggleDisplayEdit(swap){
     swapContainer.style.width = ""
     animationListButtonContainer.style.display = "none"
     openAnimationList(true)
+    
 
     } else { /* if add */
         
         if(!isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
-            if(coreLayout.style.gridTemplateColumns != "100% 0%"){
-                openSettings()
-            }
             settingsButtonContainer.style.display = "none"
             addEditContent.style.display = "block"
             packageLayout.style.display = "none"
@@ -31,6 +29,15 @@ function toggleDisplayEdit(swap){
             swapContainer.style.paddingTop = "12px"
             swapContainer.style.paddingLeft = "18px"
             swapContainer.style.textAlign = ""
+            coreLayout.style.width = "260px"
+            coreLayout.style.gridTemplateColumns = "100% 0%"
+            settingsButtonContainer.style.paddingRight = "14px"
+            settingsButton.className = "button add"
+            settingsButton.title = "Open settings"
+            settingsIcon.className = "fa-solid fa-gear"
+            settingsButtonContainer.style.float = 'right'
+            settingsButtonContainer.style.right = ''
+            settingsButtonContainer.style.position = ''
 
         } else {
             alert("You must select a pattern");
@@ -41,6 +48,16 @@ function toggleDisplayEdit(swap){
             swapContainer.style.paddingLeft = "18px"
             swapContainer.style.textAlign = ""
             animationListButtonContainer.style.display = "none"
+            coreLayout.style.width = "260px"
+            coreLayout.style.gridTemplateColumns = "100% 0%"
+            settingsButtonContainer.style.paddingRight = "14px"
+            settingsButton.className = "button add"
+            settingsButton.title = "Open settings"
+            settingsIcon.className = "fa-solid fa-gear"
+            settingsButtonContainer.style.float = 'right'
+            settingsButtonContainer.style.right = ''
+            settingsButtonContainer.style.position = ''
+
         }
 
     }
