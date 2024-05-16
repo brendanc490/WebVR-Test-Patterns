@@ -6,6 +6,7 @@ var block = false
 var fileName;
 var myLoop;
 var test;
+var currVer;
 /* if JSON is uploaded */
 scene_display_input.addEventListener("change", function() {
 
@@ -21,7 +22,8 @@ scene_display_input.addEventListener("change", function() {
                     alert('Invalid package');
                     return
                 }
-                let currVer = fileContent['version'] ? fileContent['version'] : 1.0
+                console.log(fileContent['version'])
+                currVer = !Number.isNaN(fileContent['version']) ? fileContent['version'] : 1.0
                 if(currVer < version){
                     alert('Package is out of date. You might need to remake it.')
                 }
@@ -137,8 +139,17 @@ scene_display_input.addEventListener("change", function() {
     
         
         packageSelect.value = fileName
+
+        names[packageSelect.value] = {}
+        Object.keys(scenes[packageSelect.value]).forEach(currName =>{
+            if(currName.split('(').length > 1){
+                currName = currName.split(' (')[0]
+            } 
+            names[packageSelect.value][currName] = names[packageSelect.value][currName] ? names[packageSelect.value][currName] + 1 : 1;
+        });
+        
         changePackage()
-        manageLocalStorage(fileName+" (upload)",scenes[fileName])
+        manageLocalStorage(fileName+" (upload)",scenes[fileName], currVer)
         
     });
 

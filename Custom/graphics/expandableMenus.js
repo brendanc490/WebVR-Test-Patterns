@@ -1,5 +1,6 @@
 // opens/closes the settings tab
 function openSettings(){
+    console.log(coreLayout.style.gridTemplateColumns)
     if(coreLayout.style.gridTemplateColumns == "100% 0%"){
         coreLayout.style.width = "500px"
         coreLayout.style.gridTemplateColumns = "52% 48%"
