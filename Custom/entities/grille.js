@@ -21,7 +21,8 @@ function createGrille() {
 /* draws grille */
 function drawGrille(width,height,numBars,color1, color2,parent){
     /* creates evenly spaced planes that alternate between some color and black */
-
+    console.log(color1)
+    console.log(color2)
     var j = 0;
     var isBlack = false;
     while(j < numBars){
@@ -74,7 +75,7 @@ function editGrille(ent) {
             i--;
         }
     
-        drawGrille(parseFloat($("#width").val()),parseFloat($("#height").val()),parseFloat($("#numBarsIn").val()),hexToRgb($("#color").val()),hexToRgb($("#color2").val()),ent);
+        drawGrille(parseFloat($("#width").val()),parseFloat($("#height").val()),parseFloat($("#numBarsIn").val()),$("#color").val(),$("#color2").val(),ent);
     
         ent.setAttribute('color2',{val: $("#color2").val()})
     
