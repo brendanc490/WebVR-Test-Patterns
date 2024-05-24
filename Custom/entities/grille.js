@@ -2,7 +2,7 @@
 
 // creates a grille entity
 // called when entity is added to the scene
-function createGrill() {
+function createGrille() {
     let el = document.createElement('a-entity'); /* creates entity */
 
     /* get random colors */
